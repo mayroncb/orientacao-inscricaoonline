@@ -1,0 +1,104 @@
+
+[
+    {
+        "name": "AUTO ESPORTE",
+        "UF" : "PB",
+        "ADMIN": 1221123
+    },
+    {
+        "name": "CLUBE DE ORIENTAÇÃO DO EXTREMO LESTE",
+        "UF" : "PB"
+    },
+    {
+        "name": "BORBOREMA AZIMUTE",
+        "UF" : "PB"
+    },
+    {
+        "name": "LIMITE EXTREMO",
+        "UF" : "PB"
+    },
+    {
+        "name": "CLUBE DE ORIENTAÇÃO RUMOS E ROTAS",
+        "UF" : "PB"
+    },
+    {
+        "name": "CLUBE ORIENTAÇÃO AO EXTREMO (COAE)",
+        "UF" : "PB"
+    },
+    {
+        "name": "COMAR GATE",
+        "UF" : "PB"
+    },
+    {
+        "name": "NEBLINA",
+        "UF" : "PB"
+    },
+    {
+        "name": "NACAO ECOLOGICA (N.E.G.O)",
+        "UF" : "PB"
+    },
+    {
+        "name": "PB TREKKING",
+        "UF" : "PB"
+    },
+    {
+        "name": "CLUBE K2 - ORIENTAÇÃO E AVENTURA",
+        "UF" : "PB"
+    },
+    {
+        "name": "7° GAC/COLB",
+        "UF" : "PB"
+    },
+    {
+        "name": "CBMPB",
+        "UF" : "PB"
+    },
+    {
+        "name": "COYOTE AVENTURA",
+        "UF" : "PB"
+    },
+    {
+        "name": "SEM CLUBE",
+        "UF" : "PB"
+    },
+    {
+        "name": "COR DF",
+        "UF" : "PB"
+    },
+    {
+        "name": "16 REC MEC",
+        "UF" : "PB"
+    },
+    {
+        "name": "4 BPE",
+        "UF" : "PB"
+    },
+    {
+        "name": "COTROB",
+        "UF" : "PB"
+    },
+    {
+        "name": "NEGRITO = PRINCIPAIS CLUBES PARAIBANOS",
+        "UF" : "PB"
+    },
+    {
+        "name": "CLUBE DE ORIENTAÇÃO BRAVO",
+        "UF" : "PE"
+    },
+    {
+        "name": "ASSOCIAÇÃO DE ORIENTAÇÃO DOS ALUNOS DA UNIVERSIDADE FEDERAL DO RIO DE JANEIRO",
+        "UF" : "RJ"
+    },
+    {
+        "name": "CLUBE DE ORIENTAÇÃO FORTALEZA",
+        "UF" : "CE"
+    },
+    {
+        "name": "PRISMA ZERO",
+        "UF" : "RN"
+    },
+    {
+        "name": "CLUBE DE ORIENTAÇÃO POTIGUAR",
+        "UF" : "RN"
+    }
+]

@@ -1,0 +1,9 @@
+ <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>OPS</title>
+    </head>
+    <bady>
+        <h1>Bem vindos ao <%=nome%></h1>
+    </bady>
+ </html>

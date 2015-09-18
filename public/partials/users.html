@@ -1,0 +1,40 @@
+<div ng-controller="UsersController">
+<div class="jumbotron" >
+    <h1 chass="text-center">
+        Bem-Vindo ao Opps
+    </h1>
+</div>
+<p ng-show="mensagem.text">
+    {{mensagem.texto}}
+</p>
+<a ng-href="#/contato"  class="btn btn-primary" >
+    Novo
+</a>
+
+<a ng-href="/logout"  class="btn btn-primary" >
+    LogOut
+</a>
+<input ng-model="filtro" type="search" placeholder="nome">
+<p>Contatos Cadastrados {{contatos.length}}</p>
+<div  class="table-responsive">
+    <table class="table table-hover">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th class="text-center">Action</th>
+        </tr>
+        <tr ng-repeat="contato in contatos | filter: filtro">
+            <td>
+                <a ng-href="#/contato/{{contato._id}}">{{contato.nome}}</a>
+            </td>
+            <td>{{contato.email}}</td>
+            <td class="text-center">
+                <button ng-click='removerContato(contato)' class="btn btn-warning">
+                    Remover
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+</div>
