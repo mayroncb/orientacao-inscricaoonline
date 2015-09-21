@@ -31,13 +31,13 @@ module.exports = function(app) {
         contatos = contatos.filter(function(contato) {
             return contato._id != idContato;
         });
-        res.status(204).end();
+        res.redirect(204);
     }
 
     controller.updateContato = function(req, res) {
         var contato = req.body;
         contato = contato._id ? atualiza(contato) : adiciona(contato);
-        res.json(contato);
+        res.redirect('#/login');
     }
 
     function adiciona(contatoNovo){
@@ -62,46 +62,46 @@ module.exports = function(app) {
 
     // console.log(Club);
 
-    var categorias = require('../utils/categorias.json')
-    var clubes = require('../utils/clubes.json')
+    // var categorias = require('../utils/categorias.json')
+    // var clubes = require('../utils/clubes.json')
 
 
 
-    User.findOne({"name": "Paulo"}).exec()
-    .then(
-        function(user){
-            if(!user) {
-                console.log("!Não encontrado...");
-                var user = new User();
-                user.name = "Paulo"
-                user.surname = "Lira"
-                user.phone = "839996383330"
-                user.rg = "2783394"
-                user.cpf = "06387717493"
-                user.dateBirth = "20/07-1986"
-                user.siCard = false
-                user.email = "paulo.lira@gmail.com"
-                user.type = "ADMIN"
-                user.password = "ADMIN"
-
-                User.create(user);
-
-            } else {
-                // console.log(user);
-            }
-        },
-        function(erro){
-            console.log(erro)
-            res.status(404).json(erro);
-        }
-    );
-    Category.collection.insert(categorias, function(data, err) {
-        console.log(data);
-    });
-
-    Club.collection.insert(clubes, function(data, err) {
-        console.log(data);
-    })
+    // User.findOne({"name": "Paulo"}).exec()
+    // .then(
+    //     function(user){
+    //         if(!user) {
+    //             console.log("!Não encontrado...");
+    //             var user = new User();
+    //             user.name = "Paulo"
+    //             user.surname = "Lira"
+    //             user.phone = "839996383330"
+    //             user.rg = "2783394"
+    //             user.cpf = "06387717493"
+    //             user.dateBirth = "20/07-1986"
+    //             user.siCard = false
+    //             user.email = "paulo.lira@gmail.com"
+    //             user.type = "ADMIN"
+    //             user.password = "ADMIN"
+    //
+    //             User.create(user);
+    //
+    //         } else {
+    //             // console.log(user);
+    //         }
+    //     },
+    //     function(erro){
+    //         console.log(erro)
+    //         res.status(404).json(erro);
+    //     }
+    // );
+    // Category.collection.insert(categorias, function(data, err) {
+    //     console.log(data);
+    // });
+    //
+    // Club.collection.insert(clubes, function(data, err) {
+    //     console.log(data);
+    // })
 
     return controller;
 }

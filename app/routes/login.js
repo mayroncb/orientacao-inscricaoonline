@@ -1,5 +1,7 @@
 var passport = require('passport');
 module.exports = function(app){
+    var controller = app.controllers.CategoryController;
+
     app.post("/login/process", passport.authenticate('local', {
         successRedirect : '/'
     }));
@@ -8,4 +10,6 @@ module.exports = function(app){
         req.logOut(); // exposto pelo passport
         res.redirect('/');
     });
+
+
 }

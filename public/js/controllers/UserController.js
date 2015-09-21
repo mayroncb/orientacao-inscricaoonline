@@ -1,5 +1,14 @@
 angular.module('app').controller('UserController',
-    function($scope, $routeParams, User) {
+    function($scope, $routeParams, User, DataToSignUp) {
+
+        $scope.categories = DataToSignUp.categories.query();
+
+        $scope.clubs = DataToSignUp.clubs.query();
+
+        $scope.states = require('../utils/states.js');
+
+        $scope.clubSelected = {};
+        $scope.categorySelected = {};
 
         if($routeParams.id) {
             User.get({id: $routeParams.id},
