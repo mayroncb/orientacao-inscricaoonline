@@ -5,7 +5,9 @@ angular.module('app').controller('UserController',
 
         $scope.clubs = DataToSignUp.clubs.query();
 
-        $scope.states = require('../utils/states.js');
+        $scope.states = DataToSignUp.states.query(function(states){
+            // $scope.user['UF'] = $scope.states[0].UF;
+        });
 
         $scope.clubSelected = {};
         $scope.categorySelected = {};
@@ -20,6 +22,7 @@ angular.module('app').controller('UserController',
             })
         } else {
             $scope.user = new User();
+
         }
 
         $scope.salvar = function() {
@@ -33,6 +36,7 @@ angular.module('app').controller('UserController',
         }
 
         $scope.createUser = function() {
+            $scope.user.type = "USER";
             $scope.user.$save()
             .then(function(){
                 $scope.mensagem = {texto: "Salvo com sucesso!"};

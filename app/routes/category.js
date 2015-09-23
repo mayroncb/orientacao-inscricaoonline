@@ -4,4 +4,7 @@ module.exports = function(app){
     app.route('/categories')
         .get(controller.loadCategories);
 
+    app.route('/states')
+        .get(controller.loadStates);
+
 }

@@ -40,11 +40,14 @@ module.exports = function(app) {
         res.redirect('#/login');
     }
 
-    function adiciona(contatoNovo){
-        console.log(contatoNovo, "::: adiciona")
-        contatoNovo._id = ++SEQUENCE_CONTATO;
-        contatos.push(contatoNovo);
-        return contatoNovo;
+    function adiciona(newUser){
+        var user = new User(newUser);
+        user.save(function(err, u){
+            console.log("::: err :::  ", err);
+            console.log("::: u :::", u);
+
+        })
+        return user;
     };
 
     function atualiza(contatoAlterar){

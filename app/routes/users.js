@@ -7,7 +7,7 @@ function verifyCreds(req, res, next){
 }
 
 module.exports = function(app){
-    var controller = app.controllers.user;
+    var controller = app.controllers.UserController;
     app.route('/users')
         .get(verifyCreds, controller.listarContatos)
         .post(controller.updateContato);

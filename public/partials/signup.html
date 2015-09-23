@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <select class="form-control" ng-model="user.UF" ng-options="states.Sigla for state in states">
+                                            <select class="form-control" ng-model="user.UF"   ng-options="state.UF as state.UF for state in states">
                                             </select>
                                             <label for="uf" class="control-label">UF</label>
                                         </div>
@@ -67,8 +67,8 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <input type="text" id="cel" ng-model="user.cel" name="cel" class="form-control" data-inputmask="'mask': '(99) 9 9999-9999'" required>
-                                            <label for="cel" class="control-label">Telefone</label>
+                                            <input type="text" id="cel" ng-model="user.phone" name="phone" class="form-control" data-inputmask="'mask': '(99) 9 9999-9999'" required>
+                                            <label for="phone" class="control-label">Telefone</label>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <select class="form-control" ng-model="user.category" ng-options="category._id as category.name for category in categories">
+                                            <select class="form-control"  ng-model="user.category" ng-options="category._id as category.name for category in categories">
                                             </select>
                                             <label>Categoria</label>
                                         </div>
@@ -121,7 +121,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <input type="text" ng-model="user.alergia" multiple data-role="tagsinput" />
+                                            <input type="text" ng-model="user.allergy" multiple data-role="tagsinput" />
                                             <label>Possui alergia? Relacione.</label>
                                         </div>
                                     </div>
