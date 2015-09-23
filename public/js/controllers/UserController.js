@@ -1,12 +1,17 @@
 angular.module('app').controller('UserController',
     function($scope, $routeParams, User, DataToSignUp) {
 
-        $scope.categories = DataToSignUp.categories.query();
+        $scope.categories = DataToSignUp.categories.query(function(categories) {
+            $scope.user['category'] = $scope.categories[0]._id;
+        });
 
-        $scope.clubs = DataToSignUp.clubs.query();
+        $scope.clubs = DataToSignUp.clubs.query(function(clubs){
+            console.log($scope.clubs[0]._id);
+            $scope.user['club'] = $scope.clubs[0]._id;
+        });
 
         $scope.states = DataToSignUp.states.query(function(states){
-            // $scope.user['UF'] = $scope.states[0].UF;
+            $scope.user['UF'] = $scope.states[14].UF;
         });
 
         $scope.clubSelected = {};

@@ -1,6 +1,20 @@
 <script src="vendor/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
 
 <script>$(":input").inputmask();</script>
+
+
+<!-- // <script>
+//         $(document).ready(function () {
+//             $('#demo-date-format').datepicker({
+//                 format: 'dd/mm/yyyy',
+//                 language: 'pt-BR'
+//             });
+//         });
+//
+//     </script> -->
+
+
+
 <section class="section-account">
     <div class="spacer"></div>
     <div ng-controller="UserController" >
@@ -10,7 +24,7 @@
             </div>
             <div class="card-body">
                 <div id="rootwizard2" class="form-wizard form-wizard-horizontal">
-                    <form ng-submit="createUser()" class="form floating-label form-validation" role="form" novalidate="novalidate">
+                    <form ng-submit="createUser()" class="form   form-validation" role="form" novalidate="novalidate">
                         <div class="form-wizard-nav">
                             <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
                             <ul class="nav nav-justified">
@@ -50,10 +64,20 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <div class="form-group">
+                                        <div class="form-group control-width-normal">
+                                            <div class="input-group date" id="demo-date-format">
+                                                <div class="input-group-content">
+                                                    <input type="text" data-provide="datepicker" class="form-control">
+                                                    <label>Datepicker</label>
+
+                                                </div>
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div><!--end .form-group -->
+                                        <!-- <div class="form-group">
                                             <input type="text" id="date" name="date"  ng-model="user.dateBirth" class="form-control" data-inputmask="'alias': 'date'" required>
                                             <label for="date" class="control-label">Data Nascimento</label>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
@@ -104,15 +128,16 @@
                                             <label>Clube</label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
                                             <select class="form-control"  ng-model="user.category" ng-options="category._id as category.name for category in categories">
                                             </select>
                                             <label>Categoria</label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
+
+                                    <div class="col-sm-2">
+                                        <div ng-show="true" class="form-group">
                                             <input type="text" ng-model="user.cbo" name="cbo" id="cbo" class="form-control"  data-inputmask="'mask': '9999999'"  >
                                             <label for="cbo" class="control-label">Nº CBO</label>
                                         </div>
@@ -180,5 +205,7 @@
         <script src="vendor/js/core/source/AppForm.js"></script>
         <script src="vendor/js/core/source/AppForm.js"></script>
         <script src="vendor/js/core/demo/DemoFormWizard.js"></script>
+        <script src="vendor/js/libs/moment/moment.min.js"></script>
+        <script src="vendor/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 
         <!-- END JAVASCRIPT -->
