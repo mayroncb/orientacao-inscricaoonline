@@ -73,6 +73,10 @@ module.exports = function() {
             required: true
         },
 
+        club: { type: mongoose.Schema.ObjectId, ref: 'Club' },
+
+        category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
+
         allergy: []
 
     });

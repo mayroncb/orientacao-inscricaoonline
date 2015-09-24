@@ -35,20 +35,27 @@ module.exports = function(app) {
     }
 
     controller.updateContato = function(req, res) {
-        var contato = req.body;
-        contato = contato._id ? atualiza(contato) : adiciona(contato);
-        res.redirect('#/login');
+         var _id = req.body._id;
+         if(_id) {
+             User.findByIdAndUpdate(_id, req.body).exec()
+             .then(function(user) {
+                 res.json(user);
+             }, function(erro) {
+                 console.log(erro);
+                 res.status(500).json(erro);
+             })
+         } else {
+             User.create(req.body)
+             .then(function(user) {
+                 res.status(201).json(user);
+             }, function(erro){
+                 console.log(erro);
+                 res.status(500).json(erro);
+             })
+         }
     }
 
-    function adiciona(newUser){
-        var user = new User(newUser);
-        user.save(function(err, u){
-            console.log("::: err :::  ", err);
-            console.log("::: u :::", u);
 
-        })
-        return user;
-    };
 
     function atualiza(contatoAlterar){
         contatos = contatos.map(function(contato){

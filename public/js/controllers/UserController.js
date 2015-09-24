@@ -27,7 +27,6 @@ angular.module('app').controller('UserController',
             })
         } else {
             $scope.user = new User();
-
         }
 
         $scope.salvar = function() {
@@ -42,11 +41,14 @@ angular.module('app').controller('UserController',
 
         $scope.createUser = function() {
             $scope.user.type = "USER";
+            console.log("::::::::::: ", $scope.user);
             $scope.user.$save()
             .then(function(){
+                console.log("Success")
                 $scope.mensagem = {texto: "Salvo com sucesso!"};
-                $scope.user = new User();
+                // $scope.user = new User();
             }).catch(function(){
+                console.log("Erro")
                 $scope.mensagem = {texto: "Erro ao salvar!"};
             });
 

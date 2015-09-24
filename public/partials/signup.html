@@ -1,23 +1,23 @@
 <script src="vendor/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
-
+<script src="vendor/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="vendor/js/libs/moment/moment.min.js"></script>
 <script>$(":input").inputmask();</script>
 
+ <script>
+         $(document).ready(function () {
+             $('#demo-date-format').datepicker({
+                 format: 'dd/mm/yyyy',
+                 language: 'pt-BR'
+             });
+         });
 
-<!-- // <script>
-//         $(document).ready(function () {
-//             $('#demo-date-format').datepicker({
-//                 format: 'dd/mm/yyyy',
-//                 language: 'pt-BR'
-//             });
-//         });
-//
-//     </script> -->
+    </script>
 
 
 
 <section class="section-account">
     <div class="spacer"></div>
-    <div ng-controller="UserController" >
+    <div >
         <div  class="card contain-sm">
             <div class="card-head style-primary">
                 <header>Criar Conta</header>
@@ -65,11 +65,10 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group control-width-normal">
-                                            <div class="input-group date" id="demo-date-format">
+                                            <div class="input-group date" >
                                                 <div class="input-group-content">
-                                                    <input type="text" data-provide="datepicker" class="form-control">
-                                                    <label>Datepicker</label>
-
+                                                    <input type="text" id="demo-date-format" ng-model="user.dateBirth"  data-provide="datepicker" class="form-control">
+                                                    <label>Data Nascimento</label>
                                                 </div>
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
@@ -138,7 +137,7 @@
 
                                     <div class="col-sm-2">
                                         <div ng-show="true" class="form-group">
-                                            <input type="text" ng-model="user.cbo" name="cbo" id="cbo" class="form-control"  data-inputmask="'mask': '9999999'"  >
+                                            <input type="text" ng-model="user.cboNumber" name="cbo" id="cbo" class="form-control"  data-inputmask="'mask': '9999999'"  >
                                             <label for="cbo" class="control-label">Nº CBO</label>
                                         </div>
                                     </div>
@@ -205,7 +204,7 @@
         <script src="vendor/js/core/source/AppForm.js"></script>
         <script src="vendor/js/core/source/AppForm.js"></script>
         <script src="vendor/js/core/demo/DemoFormWizard.js"></script>
-        <script src="vendor/js/libs/moment/moment.min.js"></script>
-        <script src="vendor/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+
 
         <!-- END JAVASCRIPT -->

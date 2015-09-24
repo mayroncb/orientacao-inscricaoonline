@@ -1,6 +1,6 @@
 angular.module('app').controller('LoginController',
     function($scope, $routeParams, User, Login) {
-
+        console.log("LoginController");
         $scope.buttonCreateUser = false;
         $scope.user = new User();
 
@@ -16,5 +16,5 @@ angular.module('app').controller('LoginController',
             // });
         }
 
-    
+
 })
