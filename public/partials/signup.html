@@ -1,17 +1,14 @@
 <script src="vendor/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
-<script src="vendor/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-<script src="vendor/js/libs/moment/moment.min.js"></script>
-<script>$(":input").inputmask();</script>
+<script src="vendor/js/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<!-- <script src="vendor/js/libs/moment/moment.min.js"></script> -->
+ <script>$(":input").inputmask();</script>
 
- <script>
-         $(document).ready(function () {
-             $('#demo-date-format').datepicker({
-                 format: 'dd/mm/yyyy',
-                 language: 'pt-BR'
-             });
-         });
-
-    </script>
+<script>
+            $('#datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'pt-BR'
+            });
+   </script>
 
 
 
@@ -65,9 +62,9 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group control-width-normal">
-                                            <div class="input-group date" >
+                             <div   class="input-group date" >
                                                 <div class="input-group-content">
-                                                    <input type="text" id="demo-date-format" ng-model="user.dateBirth"  data-provide="datepicker" class="form-control">
+                                                    <input type="text" id="datepicker" ng-model="user.dateBirth"    class="form-control date">
                                                     <label>Data Nascimento</label>
                                                 </div>
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -201,7 +198,6 @@
 
         <!-- BEGIN JAVASCRIPT -->
         <script src="vendor/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-        <script src="vendor/js/core/source/AppForm.js"></script>
         <script src="vendor/js/core/source/AppForm.js"></script>
         <script src="vendor/js/core/demo/DemoFormWizard.js"></script>
 
