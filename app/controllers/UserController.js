@@ -1,10 +1,6 @@
-var contatos = [
-    {_id: 1, nome: 'Contato 1', email: 'contato1@email.com'},
-    {_id: 2, nome: 'Contato 2', email: 'contato2@email.com'},
-    {_id: 3, nome: 'Contato 3', email: 'contato3@email.com'},
-    {_id: 4, nome: 'Contato 4', email: 'contato4@email.com'}
-];
-var SEQUENCE_CONTATO = 5;
+
+var moment = require('moment');
+
 module.exports = function(app) {
     var controller = {}
 
@@ -36,6 +32,7 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
          var _id = req.body._id;
+         req.body.dateBirth = moment(req.body.dateBirth, "DD-MM-YYYY");
          if(_id) {
              User.findByIdAndUpdate(_id, req.body).exec()
              .then(function(user) {
