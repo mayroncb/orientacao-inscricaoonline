@@ -1,5 +1,5 @@
 angular.module('app').controller('UserController',
-    function($scope, $routeParams, User, DataToSignUp) {
+    function($scope, $routeParams, User, DataToSignUp, toastr, $location) {
 
         $scope.categories = DataToSignUp.categories.query(function(categories) {
             $scope.user['category'] = $scope.categories[0]._id;
@@ -41,16 +41,16 @@ angular.module('app').controller('UserController',
 
         $scope.createUser = function() {
             $scope.user.type = "USER";
-            console.log("::::::::::: ", $scope.user);
             $scope.user.$save()
-            .then(function(){
-                console.log("Success")
-                $scope.mensagem = {texto: "Salvo com sucesso!"};
-                // $scope.user = new User();
-            }).catch(function(){
+            .then(function(user){
+                toastr.success('Usuário cadastrado com sucesso', user.name);
+                $scope.user = new User();
+                $location.path("/login");
+            }).catch(function(erro){
+                console.log(erro);
                 console.log("Erro")
+                toastr.error("Já existe um usuário com esse " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
                 $scope.mensagem = {texto: "Erro ao salvar!"};
             });
-
         }
 })

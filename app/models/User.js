@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var findOrCreate = require('mongoose-findorcreate')
+var bcrypt   = require('bcrypt-nodejs');
 
 module.exports = function() {
 
@@ -7,9 +8,6 @@ module.exports = function() {
 
         cboNumber: {
             type: Number,
-            index: {
-                unique: true
-            }
         },
 
         name: {
@@ -80,6 +78,8 @@ module.exports = function() {
         allergy: []
 
     });
+
+
     schema.plugin(findOrCreate);
     return mongoose.model('User', schema);
 }

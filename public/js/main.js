@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngResource'])
+angular.module('app', ['ngRoute', 'ngResource', 'toastr'])
     .config(function($routeProvider, $httpProvider) {
 
         $httpProvider.interceptors.push('interceptor');
@@ -29,6 +29,5 @@ angular.module('app', ['ngRoute', 'ngResource'])
         });
 
         $routeProvider.otherwise({redirectTo: '/login'});
-
 
     }) ;

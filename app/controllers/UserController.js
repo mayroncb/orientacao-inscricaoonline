@@ -1,6 +1,6 @@
 
 var moment = require('moment');
-
+var errorHanler = require('../utils/errorHandler')
 module.exports = function(app) {
     var controller = {}
 
@@ -31,10 +31,13 @@ module.exports = function(app) {
     }
 
     controller.updateContato = function(req, res) {
-         var _id = req.body._id;
-         req.body.dateBirth = moment(req.body.dateBirth, "DD-MM-YYYY");
-         if(_id) {
-             User.findByIdAndUpdate(_id, req.body).exec()
+         var userTmp = req.body;
+         console.log(User);
+         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
+         userTmp.password = User.generateHash(userTmp.password);
+         console.log(userTmp);
+         if(userTmp._id) {
+             User.findByIdAndUpdate(userTmp._id, userTmp).exec()
              .then(function(user) {
                  res.json(user);
              }, function(erro) {
@@ -42,10 +45,11 @@ module.exports = function(app) {
                  res.status(500).json(erro);
              })
          } else {
-             User.create(req.body)
+             User.create(userTmp)
              .then(function(user) {
                  res.status(201).json(user);
              }, function(erro){
+                 erro = errorHanler.getKeyErro(erro);
                  console.log(erro);
                  res.status(500).json(erro);
              })
