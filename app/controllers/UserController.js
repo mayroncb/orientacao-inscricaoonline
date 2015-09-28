@@ -1,6 +1,7 @@
 
 var moment = require('moment');
 var errorHanler = require('../utils/errorHandler')
+var passHandler = require('../utils/passHandler')
 module.exports = function(app) {
     var controller = {}
 
@@ -34,7 +35,7 @@ module.exports = function(app) {
          var userTmp = req.body;
          console.log(User);
          userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-         userTmp.password = User.generateHash(userTmp.password);
+         userTmp.password = passHandler.generateHash(userTmp.password);
          console.log(userTmp);
          if(userTmp._id) {
              User.findByIdAndUpdate(userTmp._id, userTmp).exec()

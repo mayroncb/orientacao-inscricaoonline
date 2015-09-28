@@ -1,12 +1,11 @@
-
+var bcrypt   = require('bcrypt-nodejs');
 
 module.exports = {
     generateHash:    function (password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     },
-    validPassword:  function(password) {
-        return bcrypt.compareSync(password, this.password);
+    validPassword:  function(password, hash) {
+        return bcrypt.compareSync(password, hash);
     }
 
 }
- 

@@ -1,4 +1,4 @@
-function verifyCreds(req, res, next){
+function verifyCreds(req, res, next) {
     if(req.isAuthenticated()){
         return next();
     } else {
