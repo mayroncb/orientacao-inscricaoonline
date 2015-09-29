@@ -1,20 +1,17 @@
 angular.module('app').controller('LoginController',
-    function($scope, $routeParams, User, Login) {
+    function($scope, $routeParams, User, Login, dataService, $location) {
         console.log("LoginController");
         $scope.buttonCreateUser = false;
         $scope.user = new User();
 
         $scope.login = function(name, pass) {
-            console.log("Name::: ", name);
-            Login.login({'name': name, 'pass': pass })
-            // $scope.contato.$save()
-            // .then(function(){
-            //     $scope.mensagem = {texto: "Salvo com sucesso!"};
-            //     $scope.contato = new Contato();
-            // }).catch(function(){
-            //     $scope.mensagem = {texto: "Erro ao salvar!"};
-            // });
+
+            var promise = Login.login({'name': name, 'pass': pass }).$promise;
+
+            promise.then(function(data){
+                dataService.addData(data);
+                $location.path("/dashboard");
+            })
+
         }
-
-
 })

@@ -28,6 +28,12 @@ angular.module('app', ['ngRoute', 'ngResource', 'toastr'])
             controller: 'UserController'
         });
 
+        $routeProvider.when('/dashboard', {
+            templateUrl: 'partials/dashboard.html',
+            controller: 'DashboardController',
+            requireLogin: true
+        });
+
         $routeProvider.otherwise({redirectTo: '/login'});
 
     }) ;

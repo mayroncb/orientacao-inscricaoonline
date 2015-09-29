@@ -16,5 +16,4 @@ module.exports = function(app){
         .get(verifyCreds, controller.obterContato)
         .delete(verifyCreds, controller.removerContato);
 
-
 }
