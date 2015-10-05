@@ -1,5 +1,10 @@
 angular.module('app').controller('UserController',
     function($scope, $routeParams, User, DataToSignUp, toastr, $location) {
+        $scope.steps = this;
+
+        $scope.steps = ['one', 'two', 'three'];
+
+        $scope.step = $scope.steps[0];
 
         $scope.categories = DataToSignUp.categories.query(function(categories) {
             $scope.user['category'] = $scope.categories[0]._id;

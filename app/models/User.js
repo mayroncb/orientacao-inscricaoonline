@@ -54,6 +54,10 @@ module.exports = function() {
             default: Date.now
         },
 
+        siCardNumber: {
+            type: Number,
+        },
+
         dateSignup: {
             type: Date,
             required: true,
