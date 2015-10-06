@@ -1,10 +1,23 @@
 angular.module('app').controller('UserController',
-    function($scope, $routeParams, User, DataToSignUp, toastr, $location) {
-        $scope.steps = this;
+    function($scope, $routeParams, User, dataService,
+        DataToSignUp, toastr, $location, Login) {
 
-        $scope.steps = ['one', 'two', 'three'];
+        $scope.buttonCreateUser = false;
+        $scope.user = new User();
+        $scope.formControll = true;
+        $scope.login = function(name, pass) {
 
-        $scope.step = $scope.steps[0];
+            var promise = Login.login({'name': name, 'pass': pass }).$promise;
+
+            promise.then(function(data) {
+                console.log("askldaskldjaslkdjaldj")
+                dataService.addData(data);
+                $location.path("/dashboard");
+            }, function(erro){
+                toastr.error("Login ou senha inválido")
+                console.log("error")
+            })
+}
 
         $scope.categories = DataToSignUp.categories.query(function(categories) {
             $scope.user['category'] = $scope.categories[0]._id;
@@ -50,7 +63,7 @@ angular.module('app').controller('UserController',
             .then(function(user){
                 toastr.success('Usuário cadastrado com sucesso', user.name);
                 $scope.user = new User();
-                $location.path("/login");
+                $scope.formControll = true;
             }).catch(function(erro){
                 console.log(erro);
                 console.log("Erro")
