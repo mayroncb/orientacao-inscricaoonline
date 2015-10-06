@@ -1,7 +1,7 @@
 angular.module('app').controller('UserController',
     function($scope, $routeParams, User, dataService,
-        DataToSignUp, toastr, $location, Login) {
-
+        DataToSignUp, toastr, $location, Login, $state) {
+        console.log("UserController")
         $scope.buttonCreateUser = false;
         $scope.user = new User();
         $scope.formControll = true;
@@ -10,9 +10,9 @@ angular.module('app').controller('UserController',
             var promise = Login.login({'name': name, 'pass': pass }).$promise;
 
             promise.then(function(data) {
-                console.log("askldaskldjaslkdjaldj")
                 dataService.addData(data);
-                $location.path("/dashboard");
+                console.log("OKK", data);
+                $state.go('dashboard.index')
             }, function(erro){
                 toastr.error("Login ou senha inválido")
                 console.log("error")

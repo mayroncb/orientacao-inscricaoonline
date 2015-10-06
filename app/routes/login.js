@@ -22,11 +22,12 @@ function _login(req, res, next) {
             return res.status(401).send({message: "Not autorized"});
         }
         req.logIn(user, function (err) {
-            console.log(1231231231231);
+
             if (err) {
                 return next(err);
             }
-            return res.send(req.user);
+            console.log("_login")
+            return res.json(req.user);
         });
     })(req, res, next);
 }

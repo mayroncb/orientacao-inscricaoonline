@@ -1,6 +1,8 @@
 angular.module('app').controller('DashboardController',
     function($scope, $routeParams, User, dataService, $location) {
-        console.log("DashboardController");
+
+        console.log("DashboardController")
+
         $scope.buttonCreateUser = false;
         var data = dataService.getDatas();
         if (data.length == 0){

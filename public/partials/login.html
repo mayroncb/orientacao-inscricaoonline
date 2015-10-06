@@ -1,6 +1,6 @@
 
 <!-- BEGIN LOGIN SECTION -->
-		<section class="section-account">
+		<section ui-view class="section-account">
 			<div class="spacer"></div>
 
 			<div class="card contain-sm">
@@ -10,7 +10,7 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-sm-6">
-							<form ng-submit="login(user.name, user.pass)" class="form floating-label"  accept-charset="utf-8" method="post">
+							<form ng-submit="login(user.name, user.pass)" class="form  "  accept-charset="utf-8" method="post">
 								<div class="form-group">
 									<input type="email" ng-model="user.name" class="form-control" id="username" required name="username">
 									<label for="username">Email</label>
@@ -57,4 +57,3 @@
 					</div><!--end .card -->
 				</section>
 				<!-- END LOGIN SECTION -->
-				<script src="vendor/js/core/source/AppForm.js"></script>

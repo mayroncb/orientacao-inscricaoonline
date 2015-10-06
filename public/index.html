@@ -4,8 +4,8 @@
         <!-- BEGIN META -->
     		<meta charset="utf-8">
     		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    		<meta name="keywords" content="your,keywords">
-    		<meta name="description" content="Short explanation about this website">
+
+
 
             <!-- BEGIN STYLESHEETS -->
             <!-- <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/> -->
@@ -18,286 +18,47 @@
             <link type="text/css" rel="stylesheet" href="vendor/css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
             <link type="text/css" rel="stylesheet" href="vendor/js/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
             <link type="text/css" rel="stylesheet" href="vendor/angular-toastr/dist/angular-toastr.min.css">
+            <link type="text/css" rel="stylesheet" href="vendor/css/theme-default/libs/rickshaw/rickshaw.css?1422792967" />
+		    <link type="text/css" rel="stylesheet" href="vendor/css/theme-default/libs/morris/morris.core.css?1420463396" />
+
             <!-- END STYLESHEETS -->
 
 
     </head>
-    <body class="menubar-hoverable header-fixed " ng-controller="UserController" >
-        <!-- <div ng-view></div> -->
+    <body class="menubar-hoverable header-fixed "  >
+
+        <div ui-view="login"></div>
+        <div ui-view="dashboard"></div>
 
 
 
-         <!-- BEGIN LOGIN SECTION -->
-         		<section ng-show="formControll" class="section-account">
-         			<div class="spacer"></div>
-
-         			<div class="card contain-sm">
-         				<div class="card-head style-primary">
-         					<header>Entrar</header>
-         				</div>
-         				<div class="card-body">
-         					<div class="row">
-         						<div class="col-sm-6">
-         							<form ng-submit="login(user.name, user.pass)" class="form floating-label"  accept-charset="utf-8" method="post">
-         								<div class="form-group">
-         									<input type="email" ng-model="user.name" class="form-control" id="username" required name="username">
-         									<label for="username">Email</label>
-         								</div>
-         								<div class="form-group">
-         									<input type="password" ng-model="user.pass" class="form-control" id="password" required name="password">
-         									<label for="password">Senha</label>
-         									<p class="help-block"><a href="#">Esqueceu a senha?</a></p>
-         								</div>
-         								<br/>
-         								<div class="row">
-         									<div class="col-xs-6 text-left">
-         										<div class="checkbox checkbox-inline checkbox-styled">
-         											<label>
-         												<input type="checkbox"> <span>Permanecer Logado?</span>
-         											</label>
-         										</div>
-         									</div><!--end .col -->
-         									<div class="col-xs-6 text-right">
-         										<button  type="submit" class="btn btn-primary btn-raised" type="submit">Entrar</button>
-         									</div><!--end .col -->
-         								</div><!--end .row -->
-         							</form>
-         						</div><!--end .col -->
-         						<div class="col-sm-5 col-sm-offset-1 text-center">
-         							<br><br>
-         								<h3 class="text-light">
-                                             Não possui Cadastro ?
-         								</h3>
-                                        <a class="btn btn-block btn-raised btn-primary"  ng-click="formControll = !formControll ">Cadastre-se aqui</a>
-         									<h3 class="text-light">
-         										or
-         									</h3>
-                                             <br>
-         									<p>
-         										<a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-facebook pull-left"></i>Entrar com Facebook</a>
-         									</p>
-         									<!-- <p>
-         										<a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-twitter pull-left"></i>Login with Twitter</a>
-         									</p> -->
-         								</div><!--end .col -->
-         							</div><!--end .row -->
-         						</div><!--end .card-body -->
-         					</div><!--end .card -->
-         				</section>
-
-        <section ng-show="!formControll" class="section-account">
-            <div class="spacer"></div>
-            <div >
-                <div  class="card contain-sm">
-                    <div class="card-head style-primary">
-                        <header>Criar Conta</header>
-                    </div>
-                    <div class="card-body">
-                        <div id="rootwizard2" class="form-wizard form-wizard-horizontal">
-                            <form ng-submit="createUser()" class="form   form-validation" role="form" novalidate="novalidate">
-                                <div class="form-wizard-nav">
-                                    <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
-                                    <ul class="nav nav-justified">
-                                        <li class="active"><a href="#step1" target="_blank" data-toggle="tab"><span class="step">1</span> <span class="title">Pessoal</span></a></li>
-                                        <li><a href="#step2" target="_blank" data-toggle="tab"><span class="step">2</span> <span class="title">Login</span></a></li>
-                                        <li><a href="#step3" target="_blank" data-toggle="tab"><span class="step">3</span> <span class="title">Atleta</span></a></li>
-                                        <li><a href="#step4" target="_blank" data-toggle="tab"><span class="step">4</span> <span class="title">Confirmação</span></a></li>
-                                    </ul>
-                                </div><!--end .form-wizard-nav -->
-                                <div class="tab-content clearfix">
-                                    <div class="tab-pane active" id="step1">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" ng-model="user.name" name="firstname" id="firstname" class="form-control" data-rule-minlength="2" required>
-                                                    <label for="firstname" class="control-label">Nome</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" name="lastname" ng-model="user.surname" id="lastname" class="form-control" data-rule-minlength="2" required>
-                                                    <label for="lastname" class="control-label">Sobrenome</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <input type="text" name="rg" id="rg" ng-model="user.rg" class="form-control" data-inputmask="'mask': '99999-99'" required>
-                                                    <label for="rg" class="control-label">RG</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <input type="text" name="cpf" ng-model="user.cpf" data-inputmask="'mask': '999.999.999-99'" id="cpf" class="form-control" data-rule-minlength="2" required>
-                                                    <label for="cpf" class="control-label">CPF</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                 <div class="form-group">
-                                                    <input type="text" id="date" name="date"  ng-model="user.dateBirth" class="form-control" data-inputmask="'alias': 'date'" required>
-                                                    <label for="date" class="control-label">Data Nascimento</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <select class="form-control" ng-model="user.UF"   ng-options="state.UF as state.UF for state in states">
-                                                    </select>
-                                                    <label for="uf" class="control-label">UF</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <input type="text" id="cel" ng-model="user.phone" name="phone" class="form-control" data-inputmask="'mask': '(99) 9 9999-9999'" required>
-                                                    <label for="phone" class="control-label">Telefone</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--end #step1 -->
-                                    <div class="tab-pane" id="step2">
-                                        <br/><br/>
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" ng-model="user.email" class="form-control" data-rule-email="true" required>
-                                            <label for="email" class="control-label">Email</label>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="password" ng-model="user.password" name="password1" id="password1" class="form-control" required="" data-rule-minlength="5">
-                                                    <label for="password1" class="control-label">Senha</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="password" name="passwordrepeat" id="passwordrepeat" class="form-control" data-rule-equalto="#password1" required="">
-                                                    <label for="passwordrepeat" class="control-label">Confirmação de Senha</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--end #step2 -->
-                                    <div class="tab-pane" id="step3">
-                                        <br/><br/>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <select class="form-control" ng-model="user.club" ng-options="club._id as club.name group by club.UF for club in clubs">
-                                                    </select>
-                                                    <label>Clube</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <select class="form-control"  ng-model="user.category" ng-options="category._id as category.name for category in categories">
-                                                    </select>
-                                                    <label>Categoria</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div ng-show="true" class="form-group">
-                                                    <input type="text" ng-model="user.cboNumber" name="cbo" id="cbo" class="form-control"    >
-                                                    <label for="cbo" class="control-label">Nº CBO</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <input type="text" ng-model="user.allergy" multiple data-role="tagsinput" />
-                                                    <label>Possui alergia? Relacione.</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="checkbox checkbox-styled ">
-                                                    <label>
-                                                        <input ng-model="user.siCard"  id="sicard" type="checkbox">
-                                                        <span>Possui SI Card ?</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div ng-show="user.siCard" class="col-sm-3">
-                                                <div class="form-group">
-                                                        <input type="number" ng-model="user.siCardNumber" name="siCardNumber" id="siNumber" class="form-control" >
-                                                        <label>Numero do SI Card</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div><!--end #step3 -->
-                                    <div class="tab-pane" id="step4">
-                                        <br/><br/>
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <div class="form-group">
-                                                    <label class="checkbox-inline checkbox-styled checkbox-success">
-                                                        <input type="checkbox" ng-model="buttonCreateUser"  ><span>Declaro que li e estou de acordo com os termos da FOP</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <button type="submit" ng-disabled="!buttonCreateUser"  class="btn ink-reaction btn-raised btn-primary btn-loading-state" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Loading...">Registrar</button>
-                                            </div><!--end .col -->
-                                        </div>
-                                    </div><!--end #step4 -->
-                                </div><!--end .tab-content -->
-                                <ul class="pager wizard">
-                                    <!-- <li class="previous first"><a class="btn-raised" href="javascript:void(0);">First</a></li> -->
-                                    <li class="previous"><a class="btn-raised" href="javascript:void(0);">Anterior</a></li>
-                                    <!-- <li class="next last"><a class="btn-raised" href="javascript:void(0);">Last</a></li> -->
-                                    <li class="next"><a class="btn-raised" href="javascript:void(0);">Proximo</a></li>
-                                </ul>
-                            </form>
-                        </div><!--end #rootwizard -->
-                    </div><!--end .card-body -->
-                </section>
-                <!-- END LOGIN SECTION -->
-
-                <div  ng-show="!formControll" class="row">
-                    <div class="col-sm-3">
-                    </div>
-                    <div class="col-sm-4">
-                        <a class="btn btn-floating-action btn-lg " ng-click="formControll = !formControll" ><i class="fa fa-backward"></i></a> Voltar para o Login
-                    </div>
-                </div>
 
 
         <!-- BEGIN JAVASCRIPT -->
-    <script src="vendor/js/libs/jquery/jquery-1.11.2.min.js"></script>
-    <script src="vendor/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
-    <script src="vendor/angular/angular.js"></script>
-    <script src="vendor/js/libs/bootstrap/bootstrap.min.js"></script>
-    <script src="vendor/js/libs/spin.js/spin.min.js"></script>
-    <script src="vendor/js/libs/autosize/jquery.autosize.min.js"></script>
-    <script src="vendor/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-    <script src="vendor/js/libs/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="vendor/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="vendor/js/libs/wizard/jquery.bootstrap.wizard.min.js"></script>
-    <script src="vendor/js/core/source/App.js"></script>
-    <script src="vendor/js/core/source/AppNavigation.js"></script>
-    <script src="vendor/js/core/source/AppOffcanvas.js"></script>
-    <script src="vendor/js/core/source/AppCard.js"></script>
-    <script src="vendor/js/core/source/AppForm.js"></script>
-    <script src="vendor/js/core/source/AppNavSearch.js"></script>
-    <script src="vendor/js/core/source/AppVendor.js"></script>
-    <!-- // <script src="vendor/js/core/demo/Demo.js"></script>
-    // <script src="vendor/js/core/demo/DemoFormWizard.js"></script> -->
-    <!-- END JAVASCRIPT -->
-    <script src="vendor/js/libs/moment/moment.min.js"></script>
-    <script src="vendor/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
-    <script src="vendor/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-    <script src="vendor/js/core/source/AppForm.js"></script>
-    <script src="vendor/js/core/demo/DemoFormWizard.js"></script>
-    <script>
-       $(":input").inputmask();
-    </script>
+<script src="vendor/js/libs/jquery/jquery-1.11.2.min.js"></script>
+<script src="vendor/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="vendor/angular/angular.js"></script>
+<script src="vendor/js/libs/bootstrap/bootstrap.min.js"></script>
+<script src="vendor/js/libs/spin.js/spin.min.js"></script>
+<script src="vendor/js/libs/autosize/jquery.autosize.min.js"></script>
+<script src="vendor/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+<script src="vendor/js/libs/jquery-validation/dist/jquery.validate.js"></script>
+<script src="vendor/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="vendor/js/libs/wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="vendor/js/core/source/App.js"></script>
+<script src="vendor/js/core/source/AppNavigation.js"></script>
+<script src="vendor/js/core/source/AppOffcanvas.js"></script>
+<script src="vendor/js/core/source/AppCard.js"></script>
+<script src="vendor/js/core/source/AppForm.js"></script>
+<script src="vendor/js/core/source/AppNavSearch.js"></script>
+<script src="vendor/js/core/source/AppVendor.js"></script>
+     <!-- END JAVASCRIPT -->
+
+
         <!-- BEGIN APP -->
 
         <script src="vendor/angular-route/angular-route.js"></script>
+        <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="vendor/angular-resource/angular-resource.js"></script>
         <script src="vendor/angular-animate/angular-animate.js"></script>
         <script src="vendor/angular-toastr/dist/angular-toastr.tpls.js"></script>
