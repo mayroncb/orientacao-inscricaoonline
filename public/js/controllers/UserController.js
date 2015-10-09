@@ -66,9 +66,9 @@ angular.module('app').controller('UserController',
                 $scope.formControll = true;
             }).catch(function(erro){
                 console.log(erro);
-                console.log("Erro")
+
                 toastr.error("Já existe um usuário com esse " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
-                $scope.mensagem = {texto: "Erro ao salvar!"};
+
             });
         }
 })

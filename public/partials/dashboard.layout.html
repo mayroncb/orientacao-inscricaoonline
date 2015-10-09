@@ -37,12 +37,12 @@
             <ul class="header-nav header-nav-options">
                 <li class="header-nav-brand" >
                     <div class="brand-holder">
-                        <a href="../../html/dashboards/dashboard.html">
+                        <a ui-sref="dashboard.index">
                             <span class="text-lg text-bold text-primary">FOP</span>
                         </a>
                     </div>
                 </li>
-                 
+
             </ul>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,14 +65,14 @@
                         <li class="dropdown-header">Today's messages</li>
                         <li>
                             <a class="alert alert-callout alert-warning" href="javascript:void(0);">
-                                <img class="pull-right img-circle dropdown-avatar" src="../../vendor/img/avatar2.jpg?1404026449" alt="" />
+                                <img class="pull-right img-circle dropdown-avatar" src="vendor/img/avatar2.jpg?1404026449" alt="" />
                                 <strong>Alex Anistor</strong><br/>
                                 <small>Testing functionality...</small>
                             </a>
                         </li>
                         <li>
                             <a class="alert alert-callout alert-info" href="javascript:void(0);">
-                                <img class="pull-right img-circle dropdown-avatar" src="../../vendor/img/avatar3.jpg?1404026799" alt="" />
+                                <img class="pull-right img-circle dropdown-avatar" src="vendor/img/avatar3.jpg?1404026799" alt="" />
                                 <strong>Alicia Adell</strong><br/>
                                 <small>Reviewing last changes...</small>
                             </a>
@@ -121,18 +121,17 @@
             <ul class="header-nav header-nav-profile">
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                        <img src="../../vendor/img/avatar1.jpg?1403934956" alt="" />
+                        <img src="vendor/img/avatar1.jpg?1403934956" alt="" />
                         <span class="profile-info">
                             <small>{{user.name}}</small>
                         </span>
                     </a>
                     <ul class="dropdown-menu animation-dock">
                         <li class="dropdown-header">Config</li>
-                        <li><a href="../../html/pages/profile.html">My profile</a></li>
-                        <li><a href="../../html/pages/blog/post.html">My blog <span class="badge style-danger pull-right">16</span></a></li>
-                        <li><a href="../../html/pages/calendar.html">My appointments</a></li>
+                        <li><a ui-sref="dashboard.user">Perfil</a></li>
+
                         <li class="divider"></li>
-                        <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
+
                         <li><a ng-href="/logout" ><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                     </ul><!--end .dropdown-menu -->
                 </li><!--end .dropdown -->
@@ -178,7 +177,7 @@
                 </a>
             </div>
             <div class="expanded">
-                <a href="../../html/dashboards/dashboard.html">
+                <a ui-sref="dashboard.index">
                     <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
                 </a>
             </div>
@@ -190,9 +189,9 @@
 
                 <!-- BEGIN DASHBOARD -->
                 <li>
-                    <a href="#users" >
+                    <a ui-sref="dashboard.index" >
                         <div class="gui-icon"><i class="md md-home"></i></div>
-                        <span class="title">Dashboard</span>
+                        <span class="title">Principal</span>
                     </a>
                 </li><!--end /menu-li -->
                 <!-- END DASHBOARD -->
@@ -201,9 +200,9 @@
 
                 <!-- BEGIN DASHBOARD -->
                 <li>
-                    <a href="../../html/layouts/builder.html" >
+                    <a ui-sref="dashboard.index" >
                         <div class="gui-icon"><i class="md md-web"></i></div>
-                        <span class="title">Layouts</span>
+                        <span class="title">Etapas</span>
                     </a>
                 </li><!--end /menu-li -->
                 <!-- END DASHBOARD -->
@@ -246,7 +245,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar4.jpg?1404026791" alt="" />
+                                <img src="vendor/img/avatar4.jpg?1404026791" alt="" />
                             </div>
                             <div class="tile-text">
                                 Alex Nelson
@@ -257,7 +256,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar9.jpg?1404026744" alt="" />
+                                <img src="vendor/img/avatar9.jpg?1404026744" alt="" />
                             </div>
                             <div class="tile-text">
                                 Ann Laurens
@@ -273,7 +272,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar2.jpg?1404026449" alt="" />
+                                <img src="vendor/img/avatar2.jpg?1404026449" alt="" />
                             </div>
                             <div class="tile-text">
                                 Jessica Cruise
@@ -284,7 +283,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar8.jpg?1404026729" alt="" />
+                                <img src="vendor/img/avatar8.jpg?1404026729" alt="" />
                             </div>
                             <div class="tile-text">
                                 Jim Peters
@@ -300,7 +299,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar5.jpg?1404026513" alt="" />
+                                <img src="vendor/img/avatar5.jpg?1404026513" alt="" />
                             </div>
                             <div class="tile-text">
                                 Mabel Logan
@@ -311,7 +310,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar11.jpg?1404026774" alt="" />
+                                <img src="vendor/img/avatar11.jpg?1404026774" alt="" />
                             </div>
                             <div class="tile-text">
                                 Mary Peterson
@@ -322,7 +321,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar3.jpg?1404026799" alt="" />
+                                <img src="vendor/img/avatar3.jpg?1404026799" alt="" />
                             </div>
                             <div class="tile-text">
                                 Mike Alba
@@ -338,7 +337,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar6.jpg?1404026572" alt="" />
+                                <img src="vendor/img/avatar6.jpg?1404026572" alt="" />
                             </div>
                             <div class="tile-text">
                                 Nathan Peterson
@@ -354,7 +353,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar7.jpg?1404026721" alt="" />
+                                <img src="vendor/img/avatar7.jpg?1404026721" alt="" />
                             </div>
                             <div class="tile-text">
                                 Philip Ericsson
@@ -370,7 +369,7 @@
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../vendor/img/avatar10.jpg?1404026762" alt="" />
+                                <img src="vendor/img/avatar10.jpg?1404026762" alt="" />
                             </div>
                             <div class="tile-text">
                                 Samuel Parsons
@@ -406,7 +405,7 @@
                 <ul class="list-chats">
                     <li>
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../vendor/img/avatar1.jpg?1403934956" alt="" /></div>
+                            <div class="chat-avatar"><img class="img-circle" src="vendor/img/avatar1.jpg?1403934956" alt="" /></div>
                             <div class="chat-body">
                                 Yes, it is indeed very beautiful.
                                 <small>10:03 pm</small>
@@ -415,7 +414,7 @@
                     </li>
                     <li class="chat-left">
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../vendor/img/avatar9.jpg?1404026744" alt="" /></div>
+                            <div class="chat-avatar"><img class="img-circle" src="vendor/img/avatar9.jpg?1404026744" alt="" /></div>
                             <div class="chat-body">
                                 Did you see the changes?
                                 <small>10:02 pm</small>
@@ -424,7 +423,7 @@
                     </li>
                     <li>
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../vendor/img/avatar1.jpg?1403934956" alt="" /></div>
+                            <div class="chat-avatar"><img class="img-circle" src="vendor/img/avatar1.jpg?1403934956" alt="" /></div>
                             <div class="chat-body">
                                 I just arrived at work, it was quite busy.
                                 <small>06:44pm</small>
@@ -437,7 +436,7 @@
                     </li>
                     <li class="chat-left">
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../vendor/img/avatar9.jpg?1404026744" alt="" /></div>
+                            <div class="chat-avatar"><img class="img-circle" src="vendor/img/avatar9.jpg?1404026744" alt="" /></div>
                             <div class="chat-body">
                                 The colors are much better now.
                             </div>
@@ -451,7 +450,7 @@
                     </li>
                     <li>
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../vendor/img/avatar1.jpg?1403934956" alt="" /></div>
+                            <div class="chat-avatar"><img class="img-circle" src="vendor/img/avatar1.jpg?1403934956" alt="" /></div>
                             <div class="chat-body">
                                 Are the colors of the logo already adapted?
                                 <small>Last week</small>
