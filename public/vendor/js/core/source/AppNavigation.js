@@ -30,7 +30,7 @@
 
 	p.initialize = function () {
 		this._enableEvents();
-		
+
 		this._invalidateMenu();
 		this._evalMenuScrollbar();
 	};
@@ -47,7 +47,7 @@
 		$(window).on('resize', function (e) {
 			o._handleScreenSize(e);
 		});
-		
+
 		// Menu events
 		$('[data-toggle="menubar"]').on('click', function (e) {
 			o._handleMenuToggleClick(e);
@@ -108,10 +108,10 @@
 		var parentmenu = item.closest('ul');
 
 		this._handleMenubarEnter(item);
-		
+
 		if (submenu.children().length !== 0) {
 			this._closeSubMenu(parentmenu);
-			
+
 			var menuIsCollapsed = this.getMenuState() === AppNavigation.MENU_COLLAPSED;
 			if(menuIsCollapsed || item.hasClass('expanded') === false) {
 				this._openSubMenu(item);
@@ -160,7 +160,7 @@
 
 	p._handleMenubarLeave = function () {
 		$('body').removeClass('menubar-visible');
-		
+
 		// Don't close the menus when it is pinned on large viewports
 		if (materialadmin.App.minBreakpoint('md')) {
 			if ($('body').hasClass('menubar-pin')) {
@@ -201,7 +201,7 @@
 		if (typeof (duration) === 'undefined') {
 			duration = 170;
 		}
-		
+
 		// Remember the last opened item
 		this._lastOpened = item;
 
@@ -249,17 +249,17 @@
 		$('#main-menu').triggerHandler('ready');
 
 		// Add the animate class for CSS transitions.
-		// It solves the slow initiation bug in IE, 
+		// It solves the slow initiation bug in IE,
 		// wich makes the collapse visible on startup
 		$('#menubar').addClass('animate');
 	};
 
 	p.getMenuState = function () {
-		// By using the CSS properties, we can attach 
+		// By using the CSS properties, we can attach
 		// states to CSS properties and therefor control states in CSS
 		var matrix = $('#menubar').css("transform");
 		var values = (matrix) ? matrix.match(/-?[\d\.]+/g) : null;
-			
+
 		var menuState = AppNavigation.MENU_MAXIMIZED;
 		if (values === null) {
 			if ($('#menubar').width() <= 100) {
@@ -285,18 +285,18 @@
 		if (!$.isFunction($.fn.nanoScroller)) {
 			return;
 		}
-		
+
 		// First calculate the footer height
 		var footerHeight = $('#menubar .menubar-foot-panel').outerHeight();
 		footerHeight = Math.max(footerHeight, 1);
 		$('.menubar-scroll-panel').css({'padding-bottom': footerHeight});
-		
-		
+
+
 		// Check if there is a menu
 		var menu = $('#menubar');
 		if (menu.length === 0)
 			return;
-		
+
 		// Get scrollbar elements
 		var menuScroller = $('.menubar-scroll-panel');
 		var parent = menuScroller.parent();
@@ -307,7 +307,7 @@
 		}
 
 		// Set the correct height
-		var height = $(window).height() - menu.position().top - menu.find('.nano').position().top;
+		var height = $(window).height() - menu.position().top - menu.find('.nano').position();
 		var scroller = menuScroller.closest('.nano');
 		scroller.css({height: height});
 

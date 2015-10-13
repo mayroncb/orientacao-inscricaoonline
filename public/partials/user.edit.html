@@ -1,70 +1,183 @@
- 			<!-- BEGIN CONTENT-->
-			<div id="content">
 
-				<section>
-					<div class="section-body no-margin">
-						<div class="row">
-							<!-- BEGIN PROFILE MENUBAR -->
-								<div class="card card-underline style-default-dark">
-									<div class="card-head">
-										<header class="opacity-75"><small>Dados Pessoais</small></header>
-										<div class="tools">
-											<a class="btn btn-icon-toggle ink-reaction"><i class="md md-edit"></i></a>
-										</div><!--end .tools -->
-									</div><!--end .card-head -->
-									<div class="card-body no-padding">
-										<ul class="list">
-											<li class="tile">
-												<a class="tile-content ink-reaction">
-													<div class="tile-icon">
-														<i class="md md-location-on"></i>
-													</div>
-													<div class="tile-text">
-														621 Johnson Ave, Suite 600
-														<small>Street</small>
-													</div>
-												</a>
-											</li>
-											<li class="tile">
-												<a class="tile-content ink-reaction">
-													<div class="tile-icon"></div>
-													<div class="tile-text">
-														San Francisco, CA 54321
-														<small>City</small>
-													</div>
-												</a>
-											</li>
-											<li class="divider-inset"></li>
-											<li class="tile">
-												<a class="tile-content ink-reaction">
-													<div class="tile-icon">
-														<i class="fa fa-phone"></i>
-													</div>
-													<div class="tile-text">
-														(123) 456-7890
-														<small>Mobile</small>
-													</div>
-												</a>
-											</li>
-											<li class="tile">
-												<a class="tile-content ink-reaction">
-													<div class="tile-icon"></div>
-													<div class="tile-text">
-														(323) 555-6789
-														<small>Work</small>
-													</div>
-												</a>
-											</li>
-										</ul>
-									</div><!--end .card-body -->
-								</div><!--end .card -->
-							 
-							<!-- END PROFILE MENUBAR -->
+<!-- <script src="vendor/js/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="vendor/js/libs/moment/moment.min.js"></script> -->
+ <script>$(":input").inputmask();</script>
+<!-- BEGIN INVERSED FORM -->
 
-						</div><!--end .row -->
-					</div><!--end .section-body -->
-				</section>
-			</div><!--end #content-->
-			<!-- END CONTENT -->
+<script src="vendor/bootstrap-tagsinput/bootstrap-tagsinput-angular.js"></script>
+<script src="vendor/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+<div class="row margin-bottom-xxl">
+	<div class="spacer"></div>
+	<div class="col-lg-offset-1 col-md-8">
+		<form class="form">
+			<div class="card style-default-dark">
+				<div class="card-head">
+					<header>Seus Dados</header>
+				</div>
+				<div class="card-body form-inverse">
+                    <div class="tab-content clearfix">
 
-		</div><!--end #base-->
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label class="radio-inline radio-styled">
+                                       <input required type="radio"   ng-model="user.genre" ng-value="true" name="gendre"><span>Homem</span>
+                                    </label>
+                                    <label class="radio-inline radio-styled">
+                                       <input required ng-change="string"    type="radio"  ng-model="user.genre"  ng-value="false" name="gendre"><span>Mulher</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="user.name" name="firstname" id="firstname" class="form-control" data-rule-minlength="2" required>
+                                        <label for="firstname" class="control-label">Nome</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" name="lastname" ng-model="user.surname" id="lastname" class="form-control" data-rule-minlength="2" required>
+                                        <label for="lastname" class="control-label">Sobrenome</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <input type="text" name="rg" id="rg" ng-model="user.rg" class="form-control" data-inputmask="'mask': '99999-99'" required>
+                                        <label for="rg" class="control-label">RG</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <input type="text" name="cpf" ng-model="user.cpf" data-inputmask="'mask': '999.999.999-99'" id="cpf" class="form-control" data-rule-minlength="2" required>
+                                        <label for="cpf" class="control-label">CPF</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                     <div class="form-group">
+                                        <input type="text" id="date" name="date"  ng-model="user.dateBirth" class="form-control" data-inputmask="'mask': 'd/m/y'" required>
+                                        <label for="date" class="control-label">Data Nascimento</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="user.UF"   ng-options="state.UF as state.UF for state in states">
+                                        </select>
+                                        <label for="uf" class="control-label">UF</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <input type="text" id="cel" ng-model="user.phone" name="phone" class="form-control" data-inputmask="'mask': '(99) 9 9999-9999'" required>
+                                        <label for="phone" class="control-label">Telefone</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <br/><br/>
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" ng-model="user.email" class="form-control" data-rule-email="true" required>
+                                <label for="email" class="control-label">Email</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="password" ng-model="user.password" name="password1" id="password1" class="form-control" required="" data-rule-minlength="5">
+                                        <label for="password1" class="control-label">Senha</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="password" name="passwordrepeat" id="passwordrepeat" class="form-control" data-rule-equalto="#password1" required="">
+                                        <label for="passwordrepeat" class="control-label">Confirmação de Senha</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="user.club" ng-options="club._id as club.name group by club.UF for club in clubs">
+                                        </select>
+                                        <label>Clube</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control"  ng-model="user.category" ng-options="category._id as category.name for category in categories">
+                                        </select>
+                                        <label>Categoria</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div ng-show="true" class="form-group">
+                                        <input type="text" ng-model="user.cboNumber" name="cbo" id="cbo" class="form-control"    >
+                                        <label for="cbo" class="control-label">Nº CBO</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="user.allergy" ng-value="user.allergy"  data-role="tagsinput" />
+                                        <label>Possui alergia? Relacione.</label>
+                                        <bootstrap-tagsinput
+                                          ng-model="user.allergy">
+
+                                      </bootstrap-tagsinput>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="checkbox checkbox-styled ">
+                                        <label>
+                                            <input ng-model="user.siCard"  id="sicard" type="checkbox">
+                                            <span>Possui SI Card ?</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div ng-show="user.siCard" class="col-sm-3">
+                                    <div class="form-group">
+                                            <input type="number" ng-model="user.siCardNumber" name="siCardNumber" id="siNumber" class="form-control" >
+                                            <label>Numero do SI Card</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div><!--end .card-body -->
+				<div class="card-actionbar">
+					<div class="card-actionbar-row">
+						<button type="submit" class="btn btn-flat btn-default-light ink-reaction">Alterar Dados</button>
+					</div>
+				</div>
+			</div><!--end .card -->
+
+		</form>
+	</div><!--end .col -->
+</div><!--end .row -->
+<!-- END INVERSED FORM -->

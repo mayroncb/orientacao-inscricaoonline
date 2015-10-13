@@ -41,14 +41,14 @@
 		// Generate random sparkline data
 		var points = [20, 10, 25, 15, 30, 20, 30, 10, 15, 10, 20, 25, 25, 15, 20, 25, 10, 67, 10, 20, 25, 15, 25, 97, 10, 30, 10, 38, 20, 15, 82, 44, 20, 25, 20, 10, 20, 38];
 
-		materialadmin.App.callOnResize(function () {
-			var options = $('.sparkline-revenue').data();
-			options.type = 'line';
-			options.width = '100%';
-			options.height = $('.sparkline-revenue').height() + 'px';
-			options.fillColor = false;
-			$('.sparkline-revenue').sparkline(points, options);
-		});
+		// materialadmin.App.callOnResize(function () {
+		// 	var options = $('.sparkline-revenue').data();
+		// 	options.type = 'line';
+		// 	options.width = '100%';
+		// 	options.height = $('.sparkline-revenue').height() + 'px';
+		// 	options.fillColor = false;
+		// 	$('.sparkline-revenue').sparkline(points, options);
+		// });
 
 		materialadmin.App.callOnResize(function () {
 			var parent = $('.sparkline-visits').closest('.card-body');
@@ -64,7 +64,7 @@
 			$('.sparkline-visits').sparkline(points, options);
 		});
 	};
-	
+
 	// =========================================================================
 	// FLOT
 	// =========================================================================
@@ -72,12 +72,12 @@
 	p._initFlotVisitors = function () {
 		var o = this;
 		var chart = $("#flot-visitors");
-		
+
 		// Elements check
 		if (!$.isFunction($.fn.plot) || chart.length === 0) {
 			return;
 		}
-		
+
 		// Chart data
 		var data = [
 			{
@@ -106,7 +106,7 @@
 				last: true
 			}
 		];
-		
+
 		// Chart options
 		var labelColor = chart.css('color');
 		var options = {
@@ -142,7 +142,7 @@
 			}
 		};
 		chart.width('100%');
-		
+
 		// Create chart
 		var plot = $.plot(chart, data, options);
 
@@ -191,7 +191,7 @@
 		for (var i = 0; i < 75; i++) {
 			this.rickshawRandomData.addData(this.rickshawSeries);
 		}
-		
+
 		// Update knob charts
 		this._updateKnob();
 
@@ -272,7 +272,7 @@
 			}
 		});
 	};
-	
+
 	// =========================================================================
 	// FLOT
 	// =========================================================================
@@ -280,12 +280,12 @@
 	p._initFlotRegistration = function () {
 		var o = this;
 		var chart = $("#flot-registrations");
-		
+
 		// Elements check
 		if (!$.isFunction($.fn.plot) || chart.length === 0) {
 			return;
 		}
-		
+
 		// Chart data
 		var data = [
 			{
@@ -343,7 +343,7 @@
 			}
 		};
 		chart.width('100%');
-		
+
 		// Create chart
 		var plot = $.plot(chart, data, options);
 

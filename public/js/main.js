@@ -50,7 +50,7 @@ angular.module('app', ['ngRoute', 'ngResource', 'toastr', 'ui.router'])
        templateUrl : 'partials/dashboard.index.html',
        onEnter: function(){
               console.log("dashboard.index");
-            }
+          }
 
    })
    .state('dashboard.user', {
@@ -58,9 +58,9 @@ angular.module('app', ['ngRoute', 'ngResource', 'toastr', 'ui.router'])
        templateUrl : 'partials/user.edit.html',
        onEnter: function(){
               console.log("dashboard.user.edit");
-            }
-
-   });
+          },
+       controller : 'EditUserController'
+   })
 
 
         $urlRouterProvider.otherwise("/login");

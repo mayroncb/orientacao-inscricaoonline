@@ -9,6 +9,16 @@ module.exports = function() {
             type: Number,
         },
 
+        genre: {
+            type: Boolean,
+            required: true
+        },
+
+        UF: {
+            type: String,
+            required: true
+        },
+
         name: {
             type: String,
             required: true
@@ -78,8 +88,9 @@ module.exports = function() {
 
         category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
 
-        allergy: []
-
+        allergy: {
+            type: String
+        }
     });
 
 

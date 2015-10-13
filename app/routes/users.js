@@ -9,7 +9,7 @@ function verifyCreds(req, res, next) {
 module.exports = function(app){
     var controller = app.controllers.UserController;
     app.route('/users')
-        .get(verifyCreds, controller.listarContatos)
+        .get(verifyCreds, controller.listUsers)
         .post(controller.updateContato);
 
     app.route('/users/:id')

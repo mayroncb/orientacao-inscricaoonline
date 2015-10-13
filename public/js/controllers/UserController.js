@@ -47,15 +47,15 @@ angular.module('app').controller('UserController',
             $scope.user = new User();
         }
 
-        $scope.salvar = function() {
-            $scope.contato.$save()
-            .then(function(){
-                $scope.mensagem = {texto: "Salvo com sucesso!"};
-                $scope.contato = new Contato();
-            }).catch(function(){
-                $scope.mensagem = {texto: "Erro ao salvar!"};
-            });
-        }
+        // $scope.salvar = function() {
+        //     $scope.contato.$save()
+        //     .then(function(){
+        //         $scope.mensagem = {texto: "Salvo com sucesso!"};
+        //         $scope.contato = new Contato();
+        //     }).catch(function(){
+        //         $scope.mensagem = {texto: "Erro ao salvar!"};
+        //     });
+        // }
 
         $scope.createUser = function() {
             $scope.user.type = "USER";
@@ -71,4 +71,29 @@ angular.module('app').controller('UserController',
 
             });
         }
-})
+
+}).controller('EditUserController',
+    function($scope, $routeParams, User, dataService, DataToSignUp,
+          toastr, $location, $state) {
+
+          console.log("EditUserController")
+
+
+                  $scope.categories = DataToSignUp.categories.query(function(categories) {
+                    //   $scope.user['category'] = $scope.categories[0]._id;
+                  });
+
+                  $scope.clubs = DataToSignUp.clubs.query(function(clubs){
+                    //   $scope.user['club'] = $scope.clubs[0]._id;
+                  });
+
+                  $scope.states = DataToSignUp.states.query(function(states){
+                    //   $scope.user['UF'] = $scope.states[14].UF;
+                  });
+
+
+          var data = dataService.getDatas();
+          $scope.user = data[0];
+
+
+});

@@ -8,8 +8,12 @@ module.exports = function(app) {
     var User = app.models.User;
 
 
-    controller.listarContatos = function(req, res) {
-        res.json(contatos)
+    controller.listUsers = function(req, res) {
+        User.find({}, function(err, users){
+            console.log(users);
+            res.json(users)
+        })
+
     }
 
     controller.obterContato = function(req, res) {

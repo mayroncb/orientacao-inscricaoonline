@@ -1,6 +1,5 @@
 <script src="vendor/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
-<!-- <script src="vendor/js/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="vendor/js/libs/moment/moment.min.js"></script> -->
+ 
  <script>$(":input").inputmask();</script>
 <section class="section-account">
     <div class="spacer"></div>
@@ -23,6 +22,18 @@
                         </div><!--end .form-wizard-nav -->
                         <div class="tab-content clearfix">
                             <div class="tab-pane active" id="step1">
+                                <br/>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="radio-inline radio-styled">
+                                           <input type="radio" ng-model="user.genre" value="true"    name="gendre" checked><span>Homem</span>
+                                        </label>
+                                        <label class="radio-inline radio-styled">
+                                           <input type="radio" ng-model="user.genre" value="false" name="gendre"  ><span>Mulher</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <br/>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -52,7 +63,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                          <div class="form-group">
-                                            <input type="text" id="date" name="date"  ng-model="user.dateBirth" class="form-control" data-inputmask="'alias': 'date'" required>
+                                            <input type="text" id="date" name="date"  ng-model="user.dateBirth" class="form-control" data-inputmask="'mask': 'd/m/y'" required>
                                             <label for="date" class="control-label">Data Nascimento</label>
                                         </div>
                                     </div>
@@ -72,7 +83,9 @@
                                             <label for="phone" class="control-label">Telefone</label>
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div><!--end #step1 -->
                             <div class="tab-pane" id="step2">
                                 <br/><br/>
