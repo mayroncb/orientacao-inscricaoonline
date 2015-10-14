@@ -10,7 +10,6 @@ module.exports = function(app) {
 
     controller.listUsers = function(req, res) {
         User.find({}, function(err, users){
-            console.log(users);
             res.json(users)
         })
 
@@ -18,7 +17,7 @@ module.exports = function(app) {
 
     controller.obterContato = function(req, res) {
         var idContato = req.params.id;
-        console.log(req.params.id);
+
         var contato = contatos.filter(function(contato) {
             return contato._id == idContato;
         })[0];
@@ -37,28 +36,24 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
          var userTmp = req.body;
-         console.log(User);
+         console.log( ">>>>>>>>>>>>>>",userTmp);
          userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-         userTmp.password = passHandler.generateHash(userTmp.password);
-         console.log(userTmp);
-         if(userTmp._id) {
+         if (userTmp.password !== null) {
+             userTmp.password = passHandler.generateHash(userTmp.password);
+         } else {
+             delete userTmp.password;
+         }
+
              User.findByIdAndUpdate(userTmp._id, userTmp).exec()
              .then(function(user) {
+                 console.log("atualizado!!!!");
                  res.json(user);
              }, function(erro) {
+                 console.log("Erro ao atualizar!!!!");
                  console.log(erro);
                  res.status(500).json(erro);
              })
-         } else {
-             User.create(userTmp)
-             .then(function(user) {
-                 res.status(201).json(user);
-             }, function(erro){
-                 erro = errorHanler.getKeyErro(erro);
-                 console.log(erro);
-                 res.status(500).json(erro);
-             })
-         }
+
     }
 
 

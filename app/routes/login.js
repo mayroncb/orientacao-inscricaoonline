@@ -1,4 +1,12 @@
 var passport = require('passport');
+function verifyCreds(req, res, next) {
+    if(req.isAuthenticated()){
+        return next();
+    } else {
+        res.status('401').json("Not autorized");
+    }
+}
+
 module.exports = function(app){
 
     app.post("/login/process",  _login);
@@ -8,7 +16,13 @@ module.exports = function(app){
         res.redirect('/');
     });
 
-
+    app.get('/status', function(req, res) {
+        if(req.isAuthenticated()){
+            res.status(200).end();
+        } else {
+            res.status('401').json("Not autorized");
+        }
+    });
 }
 
 

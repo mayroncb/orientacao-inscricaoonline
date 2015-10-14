@@ -48,7 +48,8 @@ angular.module('app', ['ngRoute', 'ngResource', 'toastr', 'ui.router'])
    .state('dashboard.index', {
        url: '/dashboard',
        templateUrl : 'partials/dashboard.index.html',
-       onEnter: function(){
+       controller : 'DashboardController',
+       onEnter: function() {
               console.log("dashboard.index");
           }
 

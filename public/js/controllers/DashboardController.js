@@ -2,7 +2,7 @@ angular.module('app').controller('DashboardController',
     function($scope, $routeParams, User, dataService, $location) {
 
         console.log("DashboardControllerrr")
-        $scope.users = [];
+        $scope.users = [{name: "Paulo", email: "paulo.liraa@gamil.com"}];
         var data = dataService.getDatas();
         if (data.length == 0){
             $location.path("/login");
@@ -11,10 +11,11 @@ angular.module('app').controller('DashboardController',
         }
 
 
-        function loadUsers() {
+        $scope.loadUsers  = function () {
             User.query().$promise.then(
                 function(users) {
                     $scope.users = users;
+                    console.log("123123");
                 },
                 function(erro) {
                     console.log("Não foi possível obter a lista");
@@ -22,6 +23,6 @@ angular.module('app').controller('DashboardController',
             )
         }
 
-        loadUsers();
+        $scope.loadUsers();
 
 })

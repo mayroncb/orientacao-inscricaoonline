@@ -1,6 +1,6 @@
-angular.module('app').controller('UserController',
+    angular.module('app').controller('UserController',
     function($scope, $routeParams, User, dataService,
-        DataToSignUp, toastr, $location, Login, $state) {
+    DataToSignUp, toastr, $location, Login, $state) {
         console.log("UserController")
         $scope.buttonCreateUser = false;
         $scope.user = new User();
@@ -11,13 +11,12 @@ angular.module('app').controller('UserController',
 
             promise.then(function(data) {
                 dataService.addData(data);
-                console.log("OKK", data);
                 $state.go('dashboard.index')
             }, function(erro){
                 toastr.error("Login ou senha inválido")
                 console.log("error")
             })
-}
+        }
 
         $scope.categories = DataToSignUp.categories.query(function(categories) {
             $scope.user['category'] = $scope.categories[0]._id;
@@ -37,63 +36,84 @@ angular.module('app').controller('UserController',
 
         if($routeParams.id) {
             User.get({id: $routeParams.id},
-            function(user){
-                $scope.user = user;
-            },
-            function(erro){
-                console.log('error');
-            })
-        } else {
-            $scope.user = new User();
-        }
-
-        // $scope.salvar = function() {
-        //     $scope.contato.$save()
-        //     .then(function(){
-        //         $scope.mensagem = {texto: "Salvo com sucesso!"};
-        //         $scope.contato = new Contato();
-        //     }).catch(function(){
-        //         $scope.mensagem = {texto: "Erro ao salvar!"};
-        //     });
-        // }
-
-        $scope.createUser = function() {
-            $scope.user.type = "USER";
-            $scope.user.$save()
-            .then(function(user){
-                toastr.success('Usuário cadastrado com sucesso', user.name);
+                function(user){
+                    $scope.user = user;
+                },
+                function(erro){
+                    console.log('error');
+                })
+            } else {
                 $scope.user = new User();
-                $scope.formControll = true;
-            }).catch(function(erro){
-                console.log(erro);
+            }
 
-                toastr.error("Já existe um usuário com esse " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
+            // $scope.salvar = function() {
+            //     $scope.contato.$save()
+            //     .then(function(){
+            //         $scope.mensagem = {texto: "Salvo com sucesso!"};
+            //         $scope.contato = new Contato();
+            //     }).catch(function(){
+            //         $scope.mensagem = {texto: "Erro ao salvar!"};
+            //     });
+            // }
 
-            });
-        }
+            $scope.createUser = function() {
+                $scope.user.type = "USER";
+                $scope.user.$save()
+                .then(function(user){
+                    toastr.success('Usuário cadastrado com sucesso', user.name);
+                    $scope.user = new User();
+                    $scope.formControll = true;
+                    $state.go('login.entrar');
+                }).catch(function(erro){
+                    console.log(erro);
+                    toastr.error("Já existe um usuário com esse " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
 
-}).controller('EditUserController',
-    function($scope, $routeParams, User, dataService, DataToSignUp,
-          toastr, $location, $state) {
+                });
+            }
 
-          console.log("EditUserController")
+        })
 
+        .controller('EditUserController',
+        function($scope, $routeParams, User, dataService, DataToSignUp,
+            toastr, $location, $state) {
 
-                  $scope.categories = DataToSignUp.categories.query(function(categories) {
+                console.log("EditUserController")
+
+                var data = dataService.getDatas();
+                $scope.user = new User(data[0]);
+
+                $scope.user.password = null;
+                $scope.categories = DataToSignUp.categories.query(function(categories) {
                     //   $scope.user['category'] = $scope.categories[0]._id;
-                  });
+                });
 
-                  $scope.clubs = DataToSignUp.clubs.query(function(clubs){
+                $scope.clubs = DataToSignUp.clubs.query(function(clubs){
                     //   $scope.user['club'] = $scope.clubs[0]._id;
-                  });
+                });
 
-                  $scope.states = DataToSignUp.states.query(function(states){
+                $scope.states = DataToSignUp.states.query(function(states){
                     //   $scope.user['UF'] = $scope.states[14].UF;
-                  });
+                });
+
+                $scope.updateUser = function() {
+
+                    $scope.user.$update(function(user) {
+                        console.log("updated",user  )
+
+                    })
 
 
-          var data = dataService.getDatas();
-          $scope.user = data[0];
+
+                    // .then(function(user){
+                    //     toastr.success('Usuário alterado com sucesso', user.name);
+                    //     $state.go('dashboard.index');
+                    // }).catch(function(erro){
+                    //     console.log(erro);
+                    //     toastr.error("Problema " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
+                    //
+                    // });
+                }
+
 
 
 });

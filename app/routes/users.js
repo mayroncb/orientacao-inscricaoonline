@@ -12,8 +12,9 @@ module.exports = function(app){
         .get(verifyCreds, controller.listUsers)
         .post(controller.updateContato);
 
+
     app.route('/users/:id')
         .get(verifyCreds, controller.obterContato)
-        .delete(verifyCreds, controller.removerContato);
-
+        .delete(verifyCreds, controller.removerContato)
+        .post(verifyCreds, controller.updateContato);
 }
