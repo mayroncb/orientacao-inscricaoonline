@@ -9,22 +9,22 @@
 
 <section class="full-bleed">
     <div class="section-body style-default-dark force-padding text-shadow">
-        <div class="img-backdrop" style="background-image: url('../../assets/img/img16.jpg')"></div>
+        <div class="img-backdrop" style="background-image: url('vendor/img/img16.jpg')"></div>
         <div class="overlay overlay-shade-top stick-top-left height-3"></div>
         <div class="row">
             <div class="col-md-3 col-xs-5">
-                <img class="img-circle border-white border-xl img-responsive auto-width" src="../../assets/img/avatar1.jpg?1403934956" alt="" />
-                <h3>Daniel Johnson<br/><small>Consultant at CodeCovers</small></h3>
+                <img class="img-circle border-white border-xl img-responsive auto-width" src="vendor/img/avatar1.jpg?1403934956" alt="" />
+                <h3>{{user.name}}<br/><small>{{user.club}}</small></h3>
             </div><!--end .col -->
             <div class="col-md-9 col-xs-7">
                 <div class="width-3 text-center pull-right">
                     <strong class="text-xl">643</strong><br/>
-                    <span class="text-light opacity-75">followers</span>
+                    <span class="text-light opacity-75">Atletas do seu clube</span>
                 </div>
-                <div class="width-3 text-center pull-right">
+                <!-- <div class="width-3 text-center pull-right">
                     <strong class="text-xl">108</strong><br/>
                     <span class="text-light opacity-75">following</span>
-                </div>
+                </div> -->
             </div><!--end .col -->
         </div><!--end .row -->
         <div class="overlay overlay-shade-bottom stick-bottom-left force-padding text-right">
@@ -39,12 +39,12 @@
 <div class="row margin-bottom-xxl">
 	<div class="spacer"></div>
 	<div class="col-lg-offset-1 col-md-8">
-		<form  ng-submit="updateUser()" class="form">
-			<div class="card style-default-dark">
+		<form novalidate ng-submit="updateUser()" name="myForm" class="form">
+			<div class="card">
 				<div class="card-head">
 					<header>Seus Dados</header>
 				</div>
-				<div class="card-body form-inverse">
+				<div class="card-body">
                     <div class="tab-content clearfix">
 
                             <br/>
@@ -125,9 +125,10 @@
                                         <label for="password1" class="control-label">Senha</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+
+                                <div  class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="password" name="passwordrepeat" id="passwordrepeat" class="form-control" data-rule-equalto="#password1" >
+                                        <input type="password" name="passwordrepeat" id="passwordrepeat" class="form-control"  data-rule-equalto="#password1" >
                                         <label for="passwordrepeat" class="control-label">Confirmação de Senha</label>
                                     </div>
                                 </div>

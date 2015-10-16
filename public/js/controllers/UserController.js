@@ -1,5 +1,5 @@
-    angular.module('app').controller('UserController',
-    function($scope, $routeParams, User, dataService,
+angular.module('app').controller('UserController',
+function($scope, $routeParams, User, dataService,
     DataToSignUp, toastr, $location, Login, $state) {
         console.log("UserController")
         $scope.buttonCreateUser = false;
@@ -96,16 +96,14 @@
                 });
 
                 $scope.updateUser = function() {
-
-                    $scope.user.$update(function(user) {
-                        console.log("updated",user  )
-
-                    })
-
+                    console.log("dasdas");
+                    // $scope.user.$update(function(user) {
+                    //     $scope.user = new User(user);
+                    // })
 
 
                     // .then(function(user){
-                    //     toastr.success('Usuário alterado com sucesso', user.name);
+                        toastr.success('Usuário alterado com sucesso');
                     //     $state.go('dashboard.index');
                     // }).catch(function(erro){
                     //     console.log(erro);
@@ -116,4 +114,4 @@
 
 
 
-});
+            });

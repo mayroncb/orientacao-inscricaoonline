@@ -10,7 +10,7 @@ module.exports = function(app){
     var controller = app.controllers.UserController;
     app.route('/users')
         .get(verifyCreds, controller.listUsers)
-        .post(controller.updateContato);
+        .post(controller.addContato);
 
 
     app.route('/users/:id')

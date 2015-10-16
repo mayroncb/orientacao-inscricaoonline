@@ -35,38 +35,50 @@ module.exports = function(app) {
     }
 
     controller.updateContato = function(req, res) {
-         var userTmp = req.body;
-         console.log( ">>>>>>>>>>>>>>",userTmp);
-         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-         if (userTmp.password !== null) {
-             userTmp.password = passHandler.generateHash(userTmp.password);
-         } else {
-             delete userTmp.password;
-         }
+        var userTmp = req.body;
+        console.log( ">>>>>>>>>>>>>>",userTmp);
+        userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
+        if (userTmp.password !== null) {
+            userTmp.password = passHandler.generateHash(userTmp.password);
+        } else {
+            delete userTmp.password;
+        }
 
-             User.findByIdAndUpdate(userTmp._id, userTmp).exec()
-             .then(function(user) {
-                 console.log("atualizado!!!!");
-                 res.json(user);
-             }, function(erro) {
-                 console.log("Erro ao atualizar!!!!");
-                 console.log(erro);
-                 res.status(500).json(erro);
-             })
+        User.findByIdAndUpdate(userTmp._id, userTmp).exec()
+        .then(function(user) {
+            console.log("atualizado!!!!");
+            res.json(user);
+        }, function(erro) {
+            console.log("Erro ao atualizar!!!!");
+            console.log(erro);
+            res.status(500).json(erro);
+        })
 
     }
 
-
-
-    function atualiza(contatoAlterar){
-        contatos = contatos.map(function(contato){
-            if(contato._id == contatoAlterar._id) {
-                contato = contatoAlterar;
-            }
-            return contato
+    controller.addContato = function(req, res) {
+        var userTmp = req.body;
+        userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
+        userTmp.password = passHandler.generateHash(userTmp.password);
+        User.create(userTmp)
+        .then(function(user) {
+            res.status(201).json(user);
+        }, function(erro){
+            erro = errorHanler.getKeyErro(erro);
+            console.log(erro);
+            res.status(500).json(erro);
         })
-        return contatoAlterar;
-    };
+    }
+
+    // function atualiza(contatoAlterar) {
+    //     contatos = contatos.map(function(contato){
+    //         if(contato._id == contatoAlterar._id) {
+    //             contato = contatoAlterar;
+    //         }
+    //         return contato
+    //     })
+    //     return contatoAlterar;
+    // };
 
     var Category = app.models.Category;
     var Club = app.models.Club;
