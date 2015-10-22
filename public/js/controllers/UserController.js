@@ -78,11 +78,19 @@ function($scope, $routeParams, User, dataService,
             toastr, $location, $state) {
 
                 console.log("EditUserController")
+                $scope.user = new User();
 
-                var data = dataService.getDatas();
-                $scope.user = new User(data[0]);
+                $scope.confirmPass = "";
 
-                $scope.user.password = null;
+                var data = dataService.getDatas()._id;
+                User.get({_id:data}).$promise.then(function(user){
+                    console.log(user);
+                    $scope.user = new User(user);
+                    $scope.user.password = "";
+                })
+
+
+                $scope.user.password = "";
                 $scope.categories = DataToSignUp.categories.query(function(categories) {
                     //   $scope.user['category'] = $scope.categories[0]._id;
                 });
@@ -96,20 +104,16 @@ function($scope, $routeParams, User, dataService,
                 });
 
                 $scope.updateUser = function() {
-                    console.log("dasdas");
-                    // $scope.user.$update(function(user) {
-                    //     $scope.user = new User(user);
-                    // })
-
-
-                    // .then(function(user){
+                    $scope.user.$update(function(user) {
+                        $scope.user = new User(user);
+                    })
+                    .then(function(user){
                         toastr.success('Usuário alterado com sucesso');
-                    //     $state.go('dashboard.index');
-                    // }).catch(function(erro){
-                    //     console.log(erro);
-                    //     toastr.error("Problema " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
-                    //
-                    // });
+                        $state.go('dashboard.index');
+                    }).catch(function(erro){
+                        console.log(erro);
+                        toastr.error("Problema " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
+                    });
                 }
 
 

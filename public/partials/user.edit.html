@@ -36,7 +36,7 @@
 </section>
 
 
-<div class="row margin-bottom-xxl">
+<div ng-show="user" class="row margin-bottom-xxl">
 	<div class="spacer"></div>
 	<div class="col-lg-offset-1 col-md-8">
 		<form novalidate ng-submit="updateUser()" name="myForm" class="form">
@@ -121,16 +121,18 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="password" ng-model="user.password" name="password1" id="password1" class="form-control"   data-rule-minlength="5">
-                                        <label for="password1" class="control-label">Senha</label>
+                                        <input type="password" ng-model="user.password" name="password"  required class="form-control"   ng-minlength="5">
+                                        <label for="password" class="control-label">Senha</label>
                                     </div>
+                                    <span class="alert alert-danger" role="alert" ng-show="myForm.password.$error.minlength"> Senha muito curta.</span>
                                 </div>
 
                                 <div  class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="password" name="passwordrepeat" id="passwordrepeat" class="form-control"  data-rule-equalto="#password1" >
+                                        <input type="password" name="passwordrepeat" ng-model="confirmPass" class="form-control"  >
                                         <label for="passwordrepeat" class="control-label">Confirmação de Senha</label>
                                     </div>
+                                    <span class="alert alert-danger" role="alert" ng-show="user.password != confirmPass "> A senha precisa ser igual</span>
                                 </div>
                             </div>
 
@@ -189,21 +191,10 @@
                             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
 				</div><!--end .card-body -->
 				<div class="card-actionbar">
 					<div class="card-actionbar-row">
-						<button type="submit" class="btn btn-flat btn-default-light ink-reaction">Alterar Dados</button>
+						<button type="submit" ng-disabled="user.password != confirmPass " class="btn ink-reaction btn-raised btn-primary">Alterar Dados</button>
 					</div>
 				</div>
 			</div><!--end .card -->
@@ -211,4 +202,6 @@
 		</form>
 	</div><!--end .col -->
 </div><!--end .row -->
+</div>
+
 <!-- END INVERSED FORM -->

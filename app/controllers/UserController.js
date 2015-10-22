@@ -9,6 +9,7 @@ module.exports = function(app) {
 
 
     controller.listUsers = function(req, res) {
+        console.log("Listar")
         User.find({}, function(err, users){
             res.json(users)
         })
@@ -17,7 +18,7 @@ module.exports = function(app) {
 
     controller.obterContato = function(req, res) {
         var idContato = req.params.id;
-
+        console.log("OKKKK")
         var contato = contatos.filter(function(contato) {
             return contato._id == idContato;
         })[0];
@@ -36,9 +37,8 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
         var userTmp = req.body;
-        console.log( ">>>>>>>>>>>>>>",userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-        if (userTmp.password !== null) {
+        if (userTmp.password !== null || userTmp.password == '' ) {
             userTmp.password = passHandler.generateHash(userTmp.password);
         } else {
             delete userTmp.password;
@@ -58,8 +58,10 @@ module.exports = function(app) {
 
     controller.addContato = function(req, res) {
         var userTmp = req.body;
+        console.log( '::::', userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
         userTmp.password = passHandler.generateHash(userTmp.password);
+        console.log( '???', userTmp);
         User.create(userTmp)
         .then(function(user) {
             res.status(201).json(user);
