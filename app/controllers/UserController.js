@@ -9,7 +9,6 @@ module.exports = function(app) {
 
 
     controller.listUsers = function(req, res) {
-        console.log("Listar")
         User.find({}, function(err, users){
             res.json(users)
         })
@@ -17,13 +16,10 @@ module.exports = function(app) {
     }
 
     controller.obterContato = function(req, res) {
-        var idContato = req.params.id;
-        console.log("OKKKK")
-        var contato = contatos.filter(function(contato) {
-            return contato._id == idContato;
-        })[0];
-        contato ? res.json(contato) :
-        res.status(404).send('Contato não econtrado');
+        User.findOne({_id: req.params.id}, function(err, data) {
+            // console.log(data);
+            res.json(data);
+        })
     }
 
     controller.removerContato = function(req, res) {
@@ -37,31 +33,35 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
         var userTmp = req.body;
+        console.log("UPDATE::: ", userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-        if (userTmp.password !== null || userTmp.password == '' ) {
+        if (userTmp.password !== null || userTmp.password !== '' ) {
+            console.log("with PASS")
             userTmp.password = passHandler.generateHash(userTmp.password);
         } else {
+            console.log("without PASS")
             delete userTmp.password;
         }
+        console.log("POSTT::: ", userTmp);
 
-        User.findByIdAndUpdate(userTmp._id, userTmp).exec()
-        .then(function(user) {
-            console.log("atualizado!!!!");
-            res.json(user);
-        }, function(erro) {
-            console.log("Erro ao atualizar!!!!");
-            console.log(erro);
-            res.status(500).json(erro);
-        })
+        // User.findByIdAndUpdate(userTmp._id, userTmp).exec()
+        // .then(function(user) {
+        //     console.log("atualizado!!!!");
+        //     res.json(user);
+        // }, function(erro) {
+        //     console.log("Erro ao atualizar!!!!");
+        //     console.log(erro);
+        //     res.status(500).json(erro);
+        // })
 
     }
 
     controller.addContato = function(req, res) {
         var userTmp = req.body;
-        console.log( '::::', userTmp);
+        // console.log( 'ADD::::', userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
         userTmp.password = passHandler.generateHash(userTmp.password);
-        console.log( '???', userTmp);
+        // console.log( '???', userTmp);
         User.create(userTmp)
         .then(function(user) {
             res.status(201).json(user);
@@ -72,15 +72,6 @@ module.exports = function(app) {
         })
     }
 
-    // function atualiza(contatoAlterar) {
-    //     contatos = contatos.map(function(contato){
-    //         if(contato._id == contatoAlterar._id) {
-    //             contato = contatoAlterar;
-    //         }
-    //         return contato
-    //     })
-    //     return contatoAlterar;
-    // };
 
     var Category = app.models.Category;
     var Club = app.models.Club;

@@ -74,23 +74,24 @@ function($scope, $routeParams, User, dataService,
         })
 
         .controller('EditUserController',
-        function($scope, $routeParams, User, dataService, DataToSignUp,
+        function($scope, $routeParams, User, dataService, DataToSignUp, $filter,
             toastr, $location, $state) {
 
                 console.log("EditUserController")
-                $scope.user = new User();
+                $scope.userEdit = new User();
 
                 $scope.confirmPass = "";
 
-                var data = dataService.getDatas()._id;
-                User.get({_id:data}).$promise.then(function(user){
-                    console.log(user);
-                    $scope.user = new User(user);
-                    $scope.user.password = "";
+                var data = dataService.getDatas()[0]._id;
+
+                User.get({id:data}).$promise.then(function(user) {
+                    $scope.userEdit = user;
+                    $scope.userEdit.dateBirth = $filter('date')(user.dateBirth, "dd/MM/yyyy");
+                    $scope.userEdit.password = "";
                 })
 
 
-                $scope.user.password = "";
+                $scope.userEdit.password = "";
                 $scope.categories = DataToSignUp.categories.query(function(categories) {
                     //   $scope.user['category'] = $scope.categories[0]._id;
                 });
@@ -103,9 +104,10 @@ function($scope, $routeParams, User, dataService,
                     //   $scope.user['UF'] = $scope.states[14].UF;
                 });
 
-                $scope.updateUser = function() {
-                    $scope.user.$update(function(user) {
-                        $scope.user = new User(user);
+                $scope.updateUser = function(user) {
+                    console.log($scope.userEdit);
+                    $scope.userEdit.$update(function(user) {
+                        $scope.userEdit = new User(user);
                     })
                     .then(function(user){
                         toastr.success('Usuário alterado com sucesso');

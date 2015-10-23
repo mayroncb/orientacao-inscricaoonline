@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngResource', 'toastr', 'ui.router'])
+angular.module('app', ['ngRoute', 'ngResource', 'toastr', 'ui.router', 'ui.mask', "datetime"])
     .config(function($urlRouterProvider, $httpProvider, $stateProvider) {
 
     $httpProvider.interceptors.push('interceptor');

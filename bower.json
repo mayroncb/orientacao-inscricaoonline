@@ -27,6 +27,7 @@
     "iCheck": "icheck#~1.0.2",
     "jquery-migrate": "~1.2.1",
     "moment": "~2.10.6",
-    "spin.js": "~2.3.2"
+    "spin.js": "~2.3.2",
+    "angular-datetime": "~2.0.0"
   }
 }

@@ -1,11 +1,8 @@
 
-<!-- <script src="vendor/js/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="vendor/js/libs/moment/moment.min.js"></script> -->
- <script>$(":input").inputmask();</script>
+
+
 <!-- BEGIN INVERSED FORM -->
 
-<script src="vendor/bootstrap-tagsinput/bootstrap-tagsinput-angular.js"></script>
-<script src="vendor/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 
 <section class="full-bleed">
     <div class="section-body style-default-dark force-padding text-shadow">
@@ -14,7 +11,7 @@
         <div class="row">
             <div class="col-md-3 col-xs-5">
                 <img class="img-circle border-white border-xl img-responsive auto-width" src="vendor/img/avatar1.jpg?1403934956" alt="" />
-                <h3>{{user.name}}<br/><small>{{user.club}}</small></h3>
+                <h3>{{userEdit.name}}<br/><small>{{userEdit.club}}</small></h3>
             </div><!--end .col -->
             <div class="col-md-9 col-xs-7">
                 <div class="width-3 text-center pull-right">
@@ -36,10 +33,10 @@
 </section>
 
 
-<div ng-show="user" class="row margin-bottom-xxl">
+<div ng-show="userEdit" class="row margin-bottom-xxl">
 	<div class="spacer"></div>
 	<div class="col-lg-offset-1 col-md-8">
-		<form novalidate ng-submit="updateUser()" name="myForm" class="form">
+		<form novalidate ng-submit="updateUser(userEdit)" name="myForm" class="form">
 			<div class="card">
 				<div class="card-head">
 					<header>Seus Dados</header>
@@ -51,10 +48,10 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label class="radio-inline radio-styled">
-                                       <input required type="radio"   ng-model="user.genre" ng-value="true" name="gendre"><span>Homem</span>
+                                       <input required type="radio"   ng-model="userEdit.genre" ng-value="true" name="gendre"><span>Homem</span>
                                     </label>
                                     <label class="radio-inline radio-styled">
-                                       <input required ng-change="string"    type="radio"  ng-model="user.genre"  ng-value="false" name="gendre"><span>Mulher</span>
+                                       <input required ng-change="string"    type="radio"  ng-model="userEdit.genre"  ng-value="false" name="gendre"><span>Mulher</span>
                                     </label>
                                 </div>
                             </div>
@@ -62,13 +59,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" ng-model="user.name" name="firstname" id="firstname" class="form-control" data-rule-minlength="2" required>
+                                        <input type="text" ng-model="userEdit.name" name="firstname" id="firstname" class="form-control" data-rule-minlength="2" required>
                                         <label for="firstname" class="control-label">Nome</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" name="lastname" ng-model="user.surname" id="lastname" class="form-control" data-rule-minlength="2" required>
+                                        <input type="text" name="lastname" ng-model="userEdit.surname" id="lastname" class="form-control" data-rule-minlength="2" required>
                                         <label for="lastname" class="control-label">Sobrenome</label>
                                     </div>
                                 </div>
@@ -76,25 +73,25 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <input type="text" name="rg" id="rg" ng-model="user.rg" class="form-control" data-inputmask="'mask': '99999-99'" required>
+                                        <input type="text" name="rg" id="rg" ng-model="userEdit.rg" class="form-control" ui-mask="99999-99" required>
                                         <label for="rg" class="control-label">RG</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <input type="text" name="cpf" ng-model="user.cpf" data-inputmask="'mask': '999.999.999-99'" id="cpf" class="form-control" data-rule-minlength="2" required>
+                                        <input type="text" name="cpf" ng-model="userEdit.cpf" ui-mask="999.999.999-99" id="cpf" class="form-control" data-rule-minlength="2" >
                                         <label for="cpf" class="control-label">CPF</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                      <div class="form-group">
-                                        <input type="text" id="date" name="date"  ng-model="user.dateBirth" class="form-control" data-inputmask="'mask': 'd/m/y'" required>
+                                        <input type="text"  id="date" name="date"   ng-model="userEdit.dateBirth" class="form-control" ui-mask="99/99/9999" >
                                         <label for="date" class="control-label">Data Nascimento</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <select class="form-control" ng-model="user.UF"   ng-options="state.UF as state.UF for state in states">
+                                        <select class="form-control" ng-model="userEdit.UF"   ng-options="state.UF as state.UF for state in states">
                                         </select>
                                         <label for="uf" class="control-label">UF</label>
                                     </div>
@@ -104,7 +101,7 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <input type="text" id="cel" ng-model="user.phone" name="phone" class="form-control" data-inputmask="'mask': '(99) 9 9999-9999'" required>
+                                        <input type="text" id="cel" ng-model="userEdit.phone" name="phone" class="form-control" ui-mask="(99) 9 9999-9999"  required>
                                         <label for="phone" class="control-label">Telefone</label>
                                     </div>
                                 </div>
@@ -115,13 +112,13 @@
 
                             <br/><br/>
                             <div class="form-group">
-                                <input type="email" name="email" id="email" ng-model="user.email" class="form-control" data-rule-email="true" required>
+                                <input type="email" name="email" id="email" ng-model="userEdit.email" class="form-control" data-rule-email="true" required>
                                 <label for="email" class="control-label">Email</label>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="password" ng-model="user.password" name="password"  required class="form-control"   ng-minlength="5">
+                                        <input type="password" ng-model="userEdit.password" name="password"  required class="form-control"   ng-minlength="5">
                                         <label for="password" class="control-label">Senha</label>
                                     </div>
                                     <span class="alert alert-danger" role="alert" ng-show="myForm.password.$error.minlength"> Senha muito curta.</span>
@@ -132,7 +129,7 @@
                                         <input type="password" name="passwordrepeat" ng-model="confirmPass" class="form-control"  >
                                         <label for="passwordrepeat" class="control-label">Confirmação de Senha</label>
                                     </div>
-                                    <span class="alert alert-danger" role="alert" ng-show="user.password != confirmPass "> A senha precisa ser igual</span>
+                                    <span class="alert alert-danger" role="alert" ng-show="userEdit.password != confirmPass "> A senha precisa ser igual</span>
                                 </div>
                             </div>
 
@@ -141,14 +138,14 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <select class="form-control" ng-model="user.club" ng-options="club._id as club.name group by club.UF for club in clubs">
+                                        <select class="form-control" ng-model="userEdit.club" ng-options="club._id as club.name group by club.UF for club in clubs">
                                         </select>
                                         <label>Clube</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
-                                        <select class="form-control"  ng-model="user.category" ng-options="category._id as category.name for category in categories">
+                                        <select class="form-control"  ng-model="userEdit.category" ng-options="category._id as category.name for category in categories">
                                         </select>
                                         <label>Categoria</label>
                                     </div>
@@ -156,7 +153,7 @@
 
                                 <div class="col-sm-2">
                                     <div ng-show="true" class="form-group">
-                                        <input type="text" ng-model="user.cboNumber" name="cbo" id="cbo" class="form-control"    >
+                                        <input type="text" ng-model="userEdit.cboNumber" name="cbo" id="cbo" class="form-control"    >
                                         <label for="cbo" class="control-label">Nº CBO</label>
                                     </div>
                                 </div>
@@ -164,10 +161,10 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" ng-model="user.allergy" ng-value="user.allergy"  data-role="tagsinput" />
+                                        <input type="text" ng-model="userEdit.allergy" ng-value="userEdit.allergy"  data-role="tagsinput" />
                                         <label>Possui alergia? Relacione.</label>
                                         <bootstrap-tagsinput
-                                          ng-model="user.allergy">
+                                          ng-model="userEdit.allergy">
 
                                       </bootstrap-tagsinput>
                                     </div>
@@ -177,14 +174,14 @@
                                 <div class="col-sm-4">
                                     <div class="checkbox checkbox-styled ">
                                         <label>
-                                            <input ng-model="user.siCard"  id="sicard" type="checkbox">
+                                            <input ng-model="userEdit.siCard"  id="sicard" type="checkbox">
                                             <span>Possui SI Card ?</span>
                                         </label>
                                     </div>
                                 </div>
-                                <div ng-show="user.siCard" class="col-sm-3">
+                                <div ng-show="userEdit.siCard" class="col-sm-3">
                                     <div class="form-group">
-                                            <input type="number" ng-model="user.siCardNumber" name="siCardNumber" id="siNumber" class="form-control" >
+                                            <input type="number" ng-model="userEdit.siCardNumber" name="siCardNumber" id="siNumber" class="form-control" >
                                             <label>Numero do SI Card</label>
                                     </div>
                                 </div>
@@ -194,14 +191,14 @@
 				</div><!--end .card-body -->
 				<div class="card-actionbar">
 					<div class="card-actionbar-row">
-						<button type="submit" ng-disabled="user.password != confirmPass " class="btn ink-reaction btn-raised btn-primary">Alterar Dados</button>
+						<button type="submit" ng-disabled="userEdit.password != confirmPass " class="btn ink-reaction btn-raised btn-primary">Alterar Dados</button>
 					</div>
 				</div>
 			</div><!--end .card -->
-
+        </div>
 		</form>
 	</div><!--end .col -->
 </div><!--end .row -->
-</div>
 
+ <!-- <script>$(":input").inputmask();</script> -->
 <!-- END INVERSED FORM -->
