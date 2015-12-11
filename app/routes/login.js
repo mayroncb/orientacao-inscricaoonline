@@ -3,7 +3,7 @@ function verifyCreds(req, res, next) {
     if(req.isAuthenticated()){
         return next();
     } else {
-        res.status('401').json("Not autorized");
+        res.status('401').json("Not autorizeddd");
     }
 }
 
@@ -16,18 +16,13 @@ module.exports = function(app){
         res.redirect('/');
     });
 
-    app.get('/status', function(req, res) {
-        if(req.isAuthenticated()){
-            res.status(200).end();
-        } else {
-            res.status('401').json("Not autorized");
-        }
-    });
+    app.get('/status',  verifyCreds);
 }
 
 
 
 function _login(req, res, next) {
+
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             return next(err)
@@ -40,7 +35,13 @@ function _login(req, res, next) {
             if (err) {
                 return next(err);
             }
-            console.log("_login")
+            // var hour = 3600000;
+            // req.session.cookie.expires = new Date(Date.now() + hour);
+            // req.session.cookie.maxAge = hour;
+            // req.session.cookie.path = "*";
+            // req.session.save(function(err){
+            //    console.log("Session Saved", req.session);
+            //  });
             return res.json(req.user);
         });
     })(req, res, next);

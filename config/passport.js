@@ -1,7 +1,8 @@
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
-var passHandler = require('../app/utils/passHandler')
+var moment = require('moment');
+var passHandler = require('../app/utils/passHandler');
 
 
 // expose this function to our app using module.exports
@@ -23,6 +24,9 @@ module.exports = function(passport) {
                     return done(err);
                 } else {
                    if (passHandler.validPassword(pass, user.password)) {
+                    // console.log("before::, ", moment("2014-02-02T15:00:00-0800").format("DD/MM/YYYY"));
+                    // user['dateBirth'] = moment("2014-02-02T15:00:00-0800").format("DD/MM/YYYY");
+                    // console.log("after::, ", user.dateBirth);
                        return done(null, user);
                    } else {
                        console.log('error:: ', err);

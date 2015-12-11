@@ -9,17 +9,23 @@ module.exports = function() {
             type: Number,
         },
 
+        isCbo: {
+            type: Boolean,
+            required: true,
+            default: Date.now
+        },
+
         genre: {
             type: Boolean,
             required: true
         },
 
-        UF: {
+        uf: {
             type: String,
             required: true
         },
 
-        name: {
+        firstname: {
             type: String,
             required: true
         },
@@ -88,9 +94,7 @@ module.exports = function() {
 
         category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
 
-        allergy: {
-            type: String
-        }
+        allergy: []
     });
 
 

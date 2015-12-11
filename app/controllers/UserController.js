@@ -33,32 +33,33 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
         var userTmp = req.body;
-        console.log("UPDATE::: ", userTmp);
+        // console.log("UPDATE::: ", userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-        if (userTmp.password !== null || userTmp.password !== '' ) {
-            console.log("with PASS")
-            userTmp.password = passHandler.generateHash(userTmp.password);
-        } else {
-            console.log("without PASS")
-            delete userTmp.password;
-        }
-        console.log("POSTT::: ", userTmp);
+        // if (userTmp.password !== null || userTmp.password !== '' ) {
+        //     console.log("with PASS")
+        //     userTmp.password = passHandler.generateHash(userTmp.password);
+        // } else {
+        //     console.log("without PASS")
+        //     delete userTmp.password;
+        // }
+        // console.log("POSTT::: ", userTmp);
 
-        // User.findByIdAndUpdate(userTmp._id, userTmp).exec()
-        // .then(function(user) {
-        //     console.log("atualizado!!!!");
-        //     res.json(user);
-        // }, function(erro) {
-        //     console.log("Erro ao atualizar!!!!");
-        //     console.log(erro);
-        //     res.status(500).json(erro);
-        // })
+        User.findByIdAndUpdate(userTmp._id, userTmp).exec()
+        .then(function(user) {
+          User.findOne({_id: user.id}, function(err, data) {
+              res.json(data);
+          })
+        }, function(erro) {
+            console.log("Erro ao atualizar!!!!");
+            console.log(erro);
+            res.status(500).json(erro);
+        })
 
     }
 
     controller.addContato = function(req, res) {
         var userTmp = req.body;
-        // console.log( 'ADD::::', userTmp);
+        console.log( 'ADD::::', userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
         userTmp.password = passHandler.generateHash(userTmp.password);
         // console.log( '???', userTmp);

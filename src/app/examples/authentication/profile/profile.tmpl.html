@@ -1,0 +1,211 @@
+<div class="full-image-background mb-bg-01 padding-20 padding-top-200 overlay-gradient-30" layout="row" layout-align="start center">
+    <div class="margin-right-20">
+        <img src="assets/images/avatars/avatar-5.png" alt="girl-avatar" class="make-round" width="100"/>
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{user.firstname}} / Perfil</h3>
+        <p class="font-weight-300 margin-top-0">Aqui você pode alterar seus dados...</p>
+     </div>
+</div>
+
+<div layout="row" class="profile" layout-wrap>
+    <div flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Profile">
+                <md-content class="md-padding">
+                    <form name="profile">
+                      <div layout layout-sm="row" flex>
+                        <md-input-container layout="column" flex>
+                            <label for="name" translate>SIGNUP.NAME.LABEL</label>
+                            <input id="name" label="firstname" name="firstname" type="text" ng-model="vm.user.firstname" />
+                            <div ng-messages="profile.firstname.$error">
+                                <div ng-message when="required"><span translate>SIGNUP.NAME.PLEASE_ENTER</span></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container layout="column" flex>
+                            <label for="name" translate>SIGNUP.SURNAME.LABEL</label>
+                            <input id="name" label="surname" name="surname" type="text" ng-model="vm.user.surname" />
+                            <div ng-messages="profile.surname.$error">
+                                <div ng-message when="required"><span translate>SIGNUP.SURNAME.PLEASE_ENTER</span></div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container  layout="column" flex>
+
+
+                              <label translate>SIGNUP.BIRTHDATE.LABEL</label>
+                              <input type="text" ui-mask="99/99/9999"  name="dateBirth" ng-model="vm.user.dateBirth" >
+                              <div ng-messages="profile.dateBirth.$error">
+                                  <div ng-message when="required">
+                                      <span translate>SIGNUP.BIRTHDATE.PLEASE_ENTER</span>
+                                  </div>
+                              </div>
+                        </md-input-container>
+                      </div>
+                      <div layout layout-sm="row" flex>
+                        <md-input-container flex>
+                            <label translate>SIGNUP.RG.LABEL</label>
+                            <input ui-mask="99999-99" placeholder="" type="text" name="rg" ng-model="vm.user.rg" >
+                            <div ng-messages="profile.rg.$error">
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.RG.PLEASE_ENTER</span>
+                                </div>
+
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>SIGNUP.CPF.LABEL</label>
+                            <input ui-mask="999.999.999-99" placeholder="" type="text" name="cpf" ng-model="vm.user.cpf" >
+                            <div ng-messages="profile.cpf.$error">
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.CPF.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                              <label translate>SIGNUP.PHONE.LABEL</label>
+                              <input type="text" ui-mask="(99) 9 9999-9999" placeholder="" name="phone" ng-model="vm.user.phone" >
+                              <div ng-messages="profile.phone.$error">
+                                  <div ng-message when="required">
+                                      <span translate>SIGNUP.PHONE.PLEASE_ENTER</span>
+                                  </div>
+                              </div>
+                        </md-input-container>
+
+                      </div>
+                      <div layout layout-sm="column" flex>
+                        <md-input-container flex>
+                            <label translate>SIGNUP.UF.LABEL</label>
+                            <md-select  placeholder="UF" name="uf" ng-model="vm.user.uf" >
+                              <md-option ng-value="state" ng-repeat="state in vm.states">{{ state.UF }}</md-option>
+                            </md-select>
+                            <div ng-messages="profile.uf.$error">
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.UF.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>SIGNUP.CLUB.LABEL</label>
+                            <md-select  placeholder="Clube" name="club" ng-model="vm.user.club" >
+                              <md-optgroup label="{{currentGroup}}" ng-repeat="currentGroup in vm.groupList">
+                                  <md-option ng-value="club" ng-repeat="club in vm.clubs | filter: {UF: currentGroup}">{{club.name}}</md-option>
+                              </md-optgroup>
+                            </md-select>
+                            <div ng-messages="profile.club.$error">
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.CLUB.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>SIGNUP.CATEGORY.LABEL</label>
+                            <md-select  placeholder="Category" name="state" ng-model="vm.user.category" ng-init="category = vm.user.category" >
+                              <md-option ng-value="category" ng-repeat="category in vm.categories">{{ category.name }}</md-option>
+                            </md-select>
+                            <div ng-messages="profile.category.$error">
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.CATEGORY.PLEASE_ENTER</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                      </div>
+                      <md-input-container class="md-block">
+                        <label translate class="md-title">SIGNUP.ALERGY.LABEL</label>
+                        <md-chips name="alergy"
+                        ng-model="vm.user.allergy"
+                        placeholder="+ Alergias"
+                        readonly="false"
+                        secondary-placeholder="Liste suas Alergias">
+
+                        </md-chips>
+                        <div ng-messages="profile.allergy.$error">
+                            <div ng-message when="required">
+                                <span translate>SIGNUP.ALERGY.PLEASE_ENTER</span>
+                            </div>
+                        </div>
+
+                      </md-input-container>
+                      <div layout layout-sm="row" flex>
+                          <md-switch  ng-model="vm.user.isCbo">
+                              Possui número CBO?
+                          </md-switch>
+                          <md-input-container>
+                              <label >Insira o número aqui</label>
+                              <input type="text"  ng-model="vm.user.cboNumber" ng-disabled="!vm.user.isCbo">
+                          </md-input-container>
+                          <md-switch   ng-model="vm.user.siCard">
+                              Possui SI CARD?
+                          </md-switch>
+                          <md-input-container>
+                              <label>Insira o número aqui</label>
+                              <input type="text"  ng-model="vm.user.siCardNumber" ng-disabled="!vm.user.siCard">
+                          </md-input-container>
+                        </div>
+                      <div class="row">
+
+                          <md-button class="md-raised md-primary margin-left-0" ng-click="vm.updateUser()" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                     </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Password">
+                <md-content class="md-padding">
+                    <form name="password">
+                      <div layout layout-sm="column" flex>
+                          <md-input-container flex>
+                            <label for="password" translate>SIGNUP.PASSWORD.LABEL</label>
+                            <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" tri-same-password="loginForm.confirm" ng-minlength="5" required/>
+                            <div ng-messages="profile.password.$error"  >
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
+                                </div>
+                                <div ng-message when="minlength">
+                                    <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
+                                </div>
+                                <div ng-message when="samePassword">
+                                    <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
+                                </div>
+                              </div>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <label for="password" translate>SIGNUP.PASSWORD_CONFIRM.LABEL</label>
+                            <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="loginForm.password" ng-minlength="5" required/>
+                            <div ng-messages="profile.password.$error"  >
+                                <div ng-message when="required">
+                                    <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
+                                </div>
+                                <div ng-message when="minlength">
+                                    <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
+                                </div>
+                                <div ng-message when="samePassword">
+                                    <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
+                                </div>
+                              </div>
+                        </md-input-container>
+                      </div>
+
+                        <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Notifications">
+                <md-content class="md-padding">
+                    <md-list>
+                        <div ng-repeat="group in ::vm.settingsGroups">
+                            <md-subheader class="md-accent" translate="{{::group.name}}"></md-subheader>
+                            <md-list-item ng-repeat="setting in ::group.settings" layout="row" layout-align="space-around center">
+                                <md-icon md-font-icon="{{::setting.icon}}"></md-icon>
+                                <p translate>{{::setting.title}}</p>
+                                <md-switch class="md-secondary" ng-model="setting.enabled"></md-switch>
+                            </md-list-item>
+                        </div>
+                    </md-list>
+                    <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+
+</div>

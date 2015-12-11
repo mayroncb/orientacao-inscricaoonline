@@ -1,0 +1,35 @@
+<div class="padded-content-page">
+
+    <div class="example-code md-whiteframe-z1">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Etapas Disponíveis</h2>
+            </div>
+        </md-toolbar>
+        <md-content class="md-padding">
+            <md-grid-list class="ui-color-grid" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="(name,palette) in ::vm.palettes" ng-style="::vm.colourRGBA(palette['500'].value)" ng-click="vm.selectPalette($event, name, palette)">
+                    <md-grid-tile-footer>
+                        <h3>{{::name}}</h3>
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-content>
+    </div>
+    <div class="example-code md-whiteframe-z1">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Etapas Encerradas</h2>
+            </div>
+        </md-toolbar>
+        <md-content class="md-padding">
+            <md-grid-list class="ui-color-grid" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="(name,palette) in ::vm.palettes" ng-style="::vm.colourRGBA(palette['500'].value)" ng-click="vm.selectPalette($event, name, palette)">
+                    <md-grid-tile-footer>
+                        <h3>{{::name}}</h3>
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-content>
+    </div>
+</div>

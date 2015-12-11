@@ -1,0 +1,266 @@
+<div flex layout="row" layout-align="center center" layout-fill>
+    <div flex="80" class="md-whiteframe-z1 margin-bottom-100" tri-wizard>
+        <md-toolbar class="md-primary">
+            <div flex class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <h2>FOP - Cadastro</h2><h2> {{triWizard.progress}}% <span translate>SIGNUP.COMPLETE</span></h2>
+            </div>
+            <md-progress-linear class="md-accent padding-bottom-10" md-mode="determinate" ng-value="triWizard.progress"></md-progress-linear>
+        </md-toolbar>
+        <md-tabs class="md-primary" layout-fill md-selected="triWizard.currentStep" md-dynamic-height md-stretch-tabs="always">
+            <md-tab id="account">
+                <md-tab-label>
+                    <span class="oxy-step-label">1</span>
+                    <span translate>SIGNUP.PESSOAL</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="md-padding">
+                        <form name="accountForm"  tri-wizard-form novalidate>
+
+                              <label  >Sexo</label>
+                                  <md-radio-group  layout="row" ng-change="triWizard.updateProgress()"
+                                      class="md-primary" ng-model="::signupController.user.genre"
+                                        required ng-init="signupController.user.genre = 'M'">
+                                    <md-radio-button   value="M">Masculino</md-radio-button>
+                                    <md-radio-button   value="F">Feminino</md-radio-button>
+                                  </md-radio-group>
+
+                              <div layout layout-sm="row" flex>
+                                  <md-input-container flex>
+                                      <label translate>SIGNUP.NAME.LABEL</label>
+                                      <input type="text" name="firstname" ng-model="signupController.user.firstname" required>
+                                      <div ng-messages="accountForm.firstname.$error">
+                                          <div ng-message when="required">
+                                              <span translate>SIGNUP.NAME.PLEASE_ENTER</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                                  <md-input-container flex>
+                                      <label translate>SIGNUP.SURNAME.LABEL</label>
+                                      <input type="text" name="surname" ng-model="signupController.user.surname" required>
+                                    <div ng-messages="accountForm.surname.$error">
+                                          <div ng-message when="required">
+                                              <span translate>SIGNUP.SURNAME.PLEASE_ENTER</span>
+                                          </div>
+                                      </div>
+                                  </md-input-container>
+                              </div>
+                              <div layout layout-sm="row" flex>
+                                <md-input-container flex>
+                                    <label translate>SIGNUP.RG.LABEL</label>
+                                    <input ui-mask="99999-99" placeholder="" type="text" name="rg" ng-model="signupController.user.rg" required>
+                                    <div ng-messages="accountForm.rg.$error">
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.RG.PLEASE_ENTER</span>
+                                        </div>
+
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label translate>SIGNUP.CPF.LABEL</label>
+                                    <input ui-mask="999.999.999-99" placeholder="" type="text" name="cpf" ng-model="signupController.user.cpf" required>
+                                    <div ng-messages="accountForm.cpf.$error">
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.CPF.PLEASE_ENTER</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container>
+                                      <label translate>SIGNUP.PHONE.LABEL</label>
+                                      <input type="text" ui-mask="(99) 9 9999-9999" placeholder="" name="phone" ng-model="signupController.user.phone" required>
+                                      <div ng-messages="accountForm.phone.$error">
+                                          <div ng-message when="required">
+                                              <span translate>SIGNUP.PHONE.PLEASE_ENTER</span>
+                                          </div>
+                                      </div>
+                                </md-input-container>
+
+                                <md-input-container flex>
+                                    <label translate>SIGNUP.UF.LABEL</label>
+                                    <md-select ng-change="triWizard.updateProgress()" placeholder="UF" name="uf" ng-model="signupController.user.uf" required>
+                                      <md-option ng-value="state.UF" ng-repeat="state in signupController.states">{{ state.UF }}</md-option>
+                                    </md-select>
+                                    <div ng-messages="accountForm.uf.$error">
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.UF.PLEASE_ENTER</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                              </div>
+
+                              <md-input-container  >
+                                    <label translate>SIGNUP.BIRTHDATE.LABEL</label>
+                                    <input type="text" ui-mask="99/99/9999" placeholder="DD/MM/AAAA" name="dateBirth" ng-model="signupController.user.dateBirth" required>
+                                    <div ng-messages="accountForm.dateBirth.$error">
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.BIRTHDATE.PLEASE_ENTER</span>
+                                        </div>
+                                    </div>
+                              </md-input-container>
+                            <!-- </div> -->
+                        </form>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab id="dataLogin" ng-disabled="accountForm.$invalid">
+                <md-tab-label>
+                    <span class="oxy-step-label">2</span>
+                    <span translate>SIGNUP.LOGIN</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="md-padding">
+                        <form name="loginForm" tri-wizard-form>
+                            <div layout="column" flex>
+                                <md-input-container>
+                                    <label translate>SIGNUP.EMAIL.LABEL</label>
+                                    <input type="email"  name="email" ng-model="signupController.user.email" required>
+                                    <div ng-messages="loginForm.email.$error"  >
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.EMAIL.PLEASE_ENTER</span>
+                                        </div>
+                                        <div ng-message when="email">
+                                          <span translate>SIGNUP.EMAIL.PASSWORD_VALID</span>
+                                        </div>
+                                    </div>
+
+                                </md-input-container>
+                              <div layout layout-sm="column" flex>
+                                  <md-input-container flex>
+                                    <label for="password" translate>SIGNUP.PASSWORD.LABEL</label>
+                                    <input id="password" label="password" name="password" type="password" ng-model="signupController.user.password" tri-same-password="loginForm.confirm" ng-minlength="5" required/>
+                                    <div ng-messages="loginForm.password.$error"  >
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
+                                        </div>
+                                        <div ng-message when="minlength">
+                                            <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
+                                        </div>
+                                        <div ng-message when="samePassword">
+                                            <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
+                                        </div>
+                                      </div>
+                                </md-input-container>
+
+                                <md-input-container flex>
+                                    <label for="password" translate>SIGNUP.PASSWORD_CONFIRM.LABEL</label>
+                                    <input id="confirm" label="confirm" name="confirm" type="password" ng-model="signupController.user.confirm" tri-same-password="loginForm.password" ng-minlength="5" required/>
+                                    <div ng-messages="loginForm.password.$error"  >
+                                        <div ng-message when="required">
+                                            <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
+                                        </div>
+                                        <div ng-message when="minlength">
+                                            <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
+                                        </div>
+                                        <div ng-message when="samePassword">
+                                            <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
+                                        </div>
+                                      </div>
+                                </md-input-container>
+                              </div>
+
+                            </div>
+                        </form>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab id="atleta" ng-disabled="loginForm.$invalid">
+                <md-tab-label>
+                    <span class="oxy-step-label">3</span>
+                    <span translate>SIGNUP.ATLETA</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="md-padding">
+                        <form name="atletaForm" tri-wizard-form>
+                            <div layout layout-sm="column" flex>
+                              <md-input-container flex>
+                                  <label translate>SIGNUP.CLUB.LABEL</label>
+                                  <md-select ng-change="triWizard.updateProgress()" placeholder="Clube" name="club" ng-model="signupController.user.club" required>
+                                    <md-optgroup label="{{currentGroup}}" ng-repeat="currentGroup in signupController.groupList">
+                                        <md-option ng-value="club" ng-repeat="club in signupController.clubs | filter: {UF: currentGroup}">{{club.name}}</md-option>
+                                    </md-optgroup>
+                                  </md-select>
+                                  <div ng-messages="atletaForm.club.$error">
+                                      <div ng-message when="required">
+                                          <span translate>SIGNUP.CLUB.PLEASE_ENTER</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+                              <md-input-container flex>
+                                  <label translate>SIGNUP.CATEGORY.LABEL</label>
+                                  <md-select ng-change="triWizard.updateProgress()" placeholder="Category" name="state" ng-model="signupController.user.category" required>
+                                    <md-option ng-value="category" ng-repeat="category in signupController.categories">{{ category.name }}</md-option>
+                                  </md-select>
+                                  <div ng-messages="atletaForm.category.$error">
+                                      <div ng-message when="required">
+                                          <span translate>SIGNUP.CATEGORY.PLEASE_ENTER</span>
+                                      </div>
+                                  </div>
+                              </md-input-container>
+                            </div>
+
+
+                            <md-input-container class="md-block">
+                              <label translate class="md-title">SIGNUP.ALERGY.LABEL</label>
+                              <md-chips name="allergy"
+                              ng-model="signupController.user.allergy"
+                              placeholder="+ Alergias"
+                              readonly="false"
+                              secondary-placeholder="Liste suas Alergias"
+                              required>
+
+                              </md-chips>
+                              <div ng-messages="atletaForm.allergy.$error">
+                                  <div ng-message when="required">
+                                      <span translate>SIGNUP.ALERGY.PLEASE_ENTER</span>
+                                  </div>
+                              </div>
+
+                            </md-input-container>
+                            <div layout layout-sm="column" flex>
+                                <md-switch  ng-model="signupController.user.isCbo">
+                                    Possui número CBO?
+                                </md-switch>
+                                <md-input-container>
+                                    <label >Insira o número aqui</label>
+                                    <input type="text"  ng-model="signupController.user.cboNumber" ng-disabled="!signupController.user.isCbo">
+                                </md-input-container>
+                                <md-switch   ng-model="signupController.user.siCard">
+                                    Possui SI CARD?
+                                </md-switch>
+                                <md-input-container>
+                                    <label>Insira o número aqui</label>
+                                    <input type="text"  ng-model="signupController.user.siCardNumber" ng-disabled="!signupController.user.siCard">
+                                </md-input-container>
+                            </div>
+                        </form>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab id="confirm" ng-disabled="atletaForm.$invalid">
+                <md-tab-label>
+                    <span class="oxy-step-label">4</span>
+                    <span translate>SIGNUP.CONFIRM</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="md-padding">
+                        <div class="padding-40" flex layout="column" layout-align="center center">
+                            <md-icon class="big-icon" md-font-icon="zmdi zmdi-cake"></md-icon>
+                            <h3 class="md-display-1" translate>Parabéns, você está a um passo de concluir o cadastro. </h3>
+                        </div>
+                        <md-checkbox ng-model="signupController.checkConfirm" name="confirm"  aria-label="Confirmacão" required>
+                                  Declaro que li e estou de acordo com os termos propostos pela FOP - Federação Paraibana de Orientação.
+                        </md-checkbox>
+                    </md-content>
+                </md-tab-body>
+
+            </md-tab>
+        </md-tabs>
+        <div class="wizard-navbar" layout-fill layout-padding layout="row" layout-align="end center">
+
+            <md-button class="md-primary md-raised" ng-click="triWizard.prevStep()" ng-hide="triWizard.currentStep == 0" ng-disabled="triWizard.prevStepDisabled()" translate="SIGNUP.PREV"></md-button>
+            <md-button class="md-primary md-raised" ng-click="triWizard.nextStep()" ng-hide="triWizard.currentStep > 2" ng-disabled="triWizard.nextStepDisabled()" translate="SIGNUP.NEXT"></md-button>
+            <!-- <md-button class="md-primary md-raised" ng-click="signupController.teste()"   translate="SIGNUP.NEXT"></md-button> -->
+            <md-button class="md-accent md-raised" ng-click="signupController.signupClick()" ng-show="triWizard.currentStep > 2 && signupController.checkConfirm == true " translate="SIGNUP.SEND"></md-button>
+        </div>
+        <md-button ng-href="#/login" class="md-primary md-button md-cyan-theme md-ink-ripple"   ng-show="triWizard.currentStep == 0">Voltar para o Login</md-button>
+    </div>
+</div>
