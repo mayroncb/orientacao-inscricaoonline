@@ -3,32 +3,16 @@
 
     angular
         .module('app.examples.ui')
-        .controller('StepsController', StepsController);
+        .controller('StepsAdmController', StepsController);
 
     /* @ngInject */
-    function StepsController($mdDialog, triTheming, $state, $rootScope, $stateParams) {
+    function StepsController($mdDialog, triTheming, $state, $rootScope) {
         var vm = this;
         vm.colourRGBA = colourRGBA;
         vm.palettes = triTheming.palettes;
         vm.selectPalette = selectPalette;
 
-      //   $rootScope.$on('$viewContentLoading',
-      //     function(event, viewConfig){
-      //         console.log(">>>>>>>>>");
-      //         delete viewConfig.view;
-      // });
-
-        if($rootScope.user.type == "ADM"){
-          console.log("if")
-          console.log($state);
-          $state.go("triangular.admin-default.adm");
-        }
-        // console.log(":::MMM::: " ,$rootScope.user)
-        // delete $state.current.views.belowContent;
-        // delete $state.$current.views['belowContent@triangular.admin-default']
-        // console.log($state.$current.views.belowContent)
-        // console.log($state.$current.views.belowContent)
-        // console.log($state.$current.views['belowContent@triangular.admin-default'])
+       
 
         function colourRGBA(value) {
             var rgba = triTheming.rgba(value);

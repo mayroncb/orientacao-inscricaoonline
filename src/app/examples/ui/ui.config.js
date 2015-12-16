@@ -12,14 +12,55 @@
         $stateProvider
         .state('triangular.admin-default.steps', {
             url: '/steps',
-            controller: 'StepsController',
-            controllerAs: 'vm',
-            templateUrl: 'app/examples/ui/steps.tmpl.html'
-        });
+            views: {
+            '': {
+              controller: 'StepsController',
+              controllerAs: 'vm',
+              templateUrl: 'app/examples/ui/steps.tmpl.html'
+
+            }
+            // ,
+            // 'belowContent': {
+            //     templateUrl: 'app/examples/ui/fab-button.tmpl.html',
+            //     controller: 'StepFabController',
+            //     controllerAs: 'vm'
+            // }
+          },
+          data: {
+              layout: {
+                  contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                  innerContentClass: 'overlay-gradient-20'
+              }
+          }
+        })
+        $stateProvider
+        .state('triangular.admin-default.adm', {
+            url: '/steps',
+            views: {
+            '': {
+              controller: 'StepsAdmController',
+              controllerAs: 'vm',
+              templateUrl: 'app/examples/ui/steps.tmpl.html'
+
+            },
+            'belowContent': {
+                templateUrl: 'app/examples/ui/fab-button.tmpl.html',
+                controller: 'StepFabController',
+                controllerAs: 'vm'
+            }
+          },
+          data: {
+              layout: {
+                  contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                  innerContentClass: 'overlay-gradient-20'
+              }
+          }
+        })
+
 
         triMenuProvider.addMenu({
             name: 'MENU.UI.UI',
-            icon: 'zmdi zmdi-ruler',
+            icon: 'zmdi zmdi-run',
             state: 'triangular.admin-default.steps',
             type: 'link',
             priority: 2.1,

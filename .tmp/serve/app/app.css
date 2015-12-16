@@ -22943,6 +22943,36 @@ md-select[md-container-class="calendar-color-select"] md-select-value span {
   border-radius: 50%;
   z-index: 5; }
 
+.elements-image-table-example .thumb-cell {
+  max-width: 104px;
+  width: 104px;
+  padding: 16px 32px; }
+  .elements-image-table-example .thumb-cell div {
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3); }
+
+table.md-data-table td {
+  vertical-align: middle; }
+  table.md-data-table td img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    margin-top: 4px; }
+
+.md-data-table-toolbar input {
+  width: 100%;
+  margin: 0;
+  border: none;
+  color: rgba(0, 0, 0, 0.87); }
+  .md-data-table-toolbar input:focus {
+    outline: none; }
+
 .login-frame md-card {
   max-width: 400px;
   margin: auto; }
@@ -22992,33 +23022,3 @@ md-select[md-container-class="calendar-color-select"] md-select-value span {
     border: none; }
   .order-dialog .md-icon-button, .order-dialog .md-actions {
     display: none; } }
-
-.elements-image-table-example .thumb-cell {
-  max-width: 104px;
-  width: 104px;
-  padding: 16px 32px; }
-  .elements-image-table-example .thumb-cell div {
-    overflow: hidden;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    background-size: cover;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3); }
-
-table.md-data-table td {
-  vertical-align: middle; }
-  table.md-data-table td img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    box-sizing: content-box;
-    margin-top: 4px; }
-
-.md-data-table-toolbar input {
-  width: 100%;
-  margin: 0;
-  border: none;
-  color: rgba(0, 0, 0, 0.87); }
-  .md-data-table-toolbar input:focus {
-    outline: none; }

@@ -6,7 +6,11 @@ module.exports = function() {
     var schema = mongoose.Schema({
 
         cboNumber: {
-            type: Number,
+            type: Number
+        },
+
+        isFirstEntry: {
+            type: Boolean
         },
 
         isCbo: {

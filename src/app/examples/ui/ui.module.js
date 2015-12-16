@@ -3,7 +3,7 @@
 
     angular
         .module('app.examples.ui', [
-            'ngCookies', 'webfont-loader'
+            'ngCookies'
         ])
         .constant('UI_FONTS', [{
             name: 'Roboto Draft',

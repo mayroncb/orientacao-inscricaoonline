@@ -59,7 +59,6 @@ module.exports = function(app) {
 
     controller.addContato = function(req, res) {
         var userTmp = req.body;
-        console.log( 'ADD::::', userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
         userTmp.password = passHandler.generateHash(userTmp.password);
         // console.log( '???', userTmp);

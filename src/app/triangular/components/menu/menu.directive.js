@@ -36,6 +36,10 @@
     function triMenuController(triMenu) {
         var triMenuController = this;
         // get the menu and order it
+        // state: "triangular.admin-default.steps"
+
         triMenuController.menu = triMenu.menu;
+        // console.log("::::", triMenu.menu);
+
     }
 })();
