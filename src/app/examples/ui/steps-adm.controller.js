@@ -6,14 +6,14 @@
         .controller('StepsAdmController', StepsController);
 
     /* @ngInject */
-    function StepsController($mdDialog, triTheming, $state, $rootScope) {
+    function StepsController($scope ,$mdDialog, triTheming, $state, $rootScope,  $mdMedia) {
         var vm = this;
         vm.colourRGBA = colourRGBA;
         vm.palettes = triTheming.palettes;
         vm.selectPalette = selectPalette;
 
-       
 
+        
         function colourRGBA(value) {
             var rgba = triTheming.rgba(value);
             return {
@@ -25,9 +25,9 @@
 
         function selectPalette($event, name, palette) {
             $mdDialog.show({
-                controller: 'ColorDialogController',
+                controller: 'StepDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/ui/color-dialog.tmpl.html',
+                templateUrl: 'app/examples/ui/step-dialog.tmpl.html',
                 targetEvent: $event,
                 locals: {
                     name: name,

@@ -12,7 +12,14 @@
             abstract: true,
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
-              check: function($cookies, $state){
+              check: function($cookies, $state, $rootScope, UserInstance) {
+                if (!$rootScope.user) {
+                  UserInstance.get({id: $cookies.getAll()['u']}, function(user){
+                    console.log(user);
+                    $rootScope.user = user;
+                  });
+                }
+                console.log($rootScope);
                 // if(!$cookies.getAll()['connect.sid']) {
                 //     $state.go('authentication.login');
                 // }

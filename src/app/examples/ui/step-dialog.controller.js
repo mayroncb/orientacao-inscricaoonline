@@ -3,10 +3,10 @@
 
     angular
         .module('app.examples.ui')
-        .controller('ColorDialogController', ColorDialogController);
+        .controller('StepDialogController', StepDialogController);
 
     /* @ngInject */
-    function ColorDialogController($scope, name, palette, triTheming) {
+    function StepDialogController($scope, name, palette, triTheming) {
         var vm = this;
         vm.itemStyle = itemStyle;
         vm.name = name;

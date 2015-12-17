@@ -18,7 +18,7 @@
       //         delete viewConfig.view;
       // });
 
-        if($rootScope.user.type == "ADM"){
+        if( $rootScope.user && $rootScope.user.type == "ADM"){
           console.log("if")
           console.log($state);
           $state.go("triangular.admin-default.adm");
@@ -41,9 +41,9 @@
 
         function selectPalette($event, name, palette) {
             $mdDialog.show({
-                controller: 'ColorDialogController',
+                controller: 'StepDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/ui/color-dialog.tmpl.html',
+                templateUrl: 'app/examples/ui/step-dialog.tmpl.html',
                 targetEvent: $event,
                 locals: {
                     name: name,

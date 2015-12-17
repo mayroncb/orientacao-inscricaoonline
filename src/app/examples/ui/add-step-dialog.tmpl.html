@@ -1,0 +1,45 @@
+<md-dialog  flex="10%" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Aicionar Etapa</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon   aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+
+        <md-input-container md-no-float class="md-block">
+            <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+            <input type="text" placeholder="Name">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <md-icon md-font-icon="zmdi zmdi-phone"></md-icon>
+            <input type="text" placeholder="Phone Number">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+            <input type="email" placeholder="Email (required)" ng-required="true">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <md-icon md-font-icon="zmdi zmdi-pin"></md-icon>
+            <input type="text" placeholder="Address">
+        </md-input-container>
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Not Useful
+      </md-button>
+      <md-button ng-click="answer('useful')" style="margin-right:20px;">
+        Useful
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

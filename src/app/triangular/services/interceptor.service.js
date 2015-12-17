@@ -1,3 +1,6 @@
+(function() {
+    'use strict';
+
 angular.module('app').factory('interceptor', function($location, $q){
 
     var interceptor = {
@@ -12,3 +15,4 @@ angular.module('app').factory('interceptor', function($location, $q){
     }
     return interceptor;
 });
+})();

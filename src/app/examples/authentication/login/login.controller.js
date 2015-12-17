@@ -39,9 +39,10 @@
           var promise = LoginService.login({'name': vm.user.email, 'pass': vm.user.password }).$promise;
 
           promise.then(function(user) {
+            $cookies.put("u", user._id );
               // dataService.addData(data);
               $rootScope.user = user;
-              console.log($rootScope.user);
+
               $state.go('triangular.admin-default.dashboard-sales')
           }, function(erro){
               toastr.error("Login ou senha inválido")
