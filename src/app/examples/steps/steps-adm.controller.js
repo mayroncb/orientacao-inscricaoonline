@@ -13,7 +13,7 @@
         vm.selectPalette = selectPalette;
 
 
-        
+
         function colourRGBA(value) {
             var rgba = triTheming.rgba(value);
             return {
@@ -27,7 +27,7 @@
             $mdDialog.show({
                 controller: 'StepDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/ui/step-dialog.tmpl.html',
+                templateUrl: 'app/examples/steps/step-dialog.tmpl.html',
                 targetEvent: $event,
                 locals: {
                     name: name,

@@ -17,7 +17,7 @@ angular.module('app').config(function(toastrConfig) {
     progressBar: true,
     tapToDismiss: true,
 
-    timeOut: 10000,
+    timeOut: 3000,
     titleClass: 'toast-title',
     toastClass: 'toast'
   });

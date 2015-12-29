@@ -6,7 +6,8 @@
         .controller('DashboardSalesController', DashboardSalesController);
 
     /* @ngInject */
-    function DashboardSalesController($state, $cookies, $scope, $q, $rootScope, $http, $interval, $mdToast, $filter, $mdDialog, SalesService) {
+    function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
+       $http, $interval, $mdToast, $filter, $mdDialog, SalesService, triMenu) {
         var vm = this;
         console.log('DashboardSalesController');
 
@@ -54,29 +55,29 @@
 
         // events
 
-        $scope.$on('salesChangeDate', function(event, $event) {
-            $mdDialog.show({
-                controller: 'DateChangeDialogController',
-                controllerAs: 'vm',
-                templateUrl: 'app/examples/dashboards/sales/date-change-dialog.tmpl.html',
-                locals: {
-                    range: vm.dateRange
-                },
-                targetEvent: $event
-            })
-            .then(function() {
-                // create new data
-                createData();
-
-                // pop a toast
-                $mdToast.show(
-                    $mdToast.simple()
-                    .content($filter('translate')('DASHBOARDS.SALES.DATE-UPDATED'))
-                    .position('bottom right')
-                    .hideDelay(2000)
-                );
-            });
-        });
+        // $scope.$on('salesChangeDate', function(event, $event) {
+        //     $mdDialog.show({
+        //         controller: 'DateChangeDialogController',
+        //         controllerAs: 'vm',
+        //         templateUrl: 'app/examples/dashboards/sales/date-change-dialog.tmpl.html',
+        //         locals: {
+        //             range: vm.dateRange
+        //         },
+        //         targetEvent: $event
+        //     })
+        //     .then(function() {
+        //         // create new data
+        //         createData();
+        //
+        //         // pop a toast
+        //         $mdToast.show(
+        //             $mdToast.simple()
+        //             .content($filter('translate')('DASHBOARDS.SALES.DATE-UPDATED'))
+        //             .position('bottom right')
+        //             .hideDelay(2000)
+        //         );
+        //     });
+        // });
 
         // init
 

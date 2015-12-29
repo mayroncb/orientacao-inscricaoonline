@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function moduleConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
-        $translatePartialLoaderProvider.addPart('app/examples/ui');
+        $translatePartialLoaderProvider.addPart('app/examples/steps');
 
         $stateProvider
         .state('triangular.admin-default.steps', {
@@ -16,12 +16,12 @@
             '': {
               controller: 'StepsController',
               controllerAs: 'vm',
-              templateUrl: 'app/examples/ui/steps.tmpl.html'
+              templateUrl: 'app/examples/steps/steps.tmpl.html'
 
             }
             // ,
             // 'belowContent': {
-            //     templateUrl: 'app/examples/ui/fab-button.tmpl.html',
+            //     templateUrl: 'app/examples/steps/fab-button.tmpl.html',
             //     controller: 'StepFabController',
             //     controllerAs: 'vm'
             // }
@@ -40,11 +40,11 @@
             '': {
               controller: 'StepsAdmController',
               controllerAs: 'vm',
-              templateUrl: 'app/examples/ui/steps.tmpl.html'
+              templateUrl: 'app/examples/steps/steps.tmpl.html'
 
             },
             'belowContent': {
-                templateUrl: 'app/examples/ui/fab-button.tmpl.html',
+                templateUrl: 'app/examples/steps/fab-button.tmpl.html',
                 controller: 'StepFabController',
                 controllerAs: 'vm'
             }

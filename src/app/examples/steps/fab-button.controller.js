@@ -16,7 +16,7 @@
           var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
           $mdDialog.show({
             controller: 'AddStepDialogController',
-            templateUrl: 'app/examples/ui/add-step-dialog.tmpl.html',
+            templateUrl: 'app/examples/steps/add-step-dialog.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,

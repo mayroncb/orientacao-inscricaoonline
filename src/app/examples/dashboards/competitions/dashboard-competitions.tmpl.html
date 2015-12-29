@@ -1,0 +1,39 @@
+<div class="dashboard-container overlay-10 padded-content-page" layout="column">
+
+  <div layout="row" layout-sm="column" layout-margin>
+      <tri-widget flex title="Campeonatos" content-layout="column" content-layout-align="center">
+          <md-data-table-container>
+              <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                  <thead md-order="vm.query.order" md-trigger="vm.getCompetitions">
+                      <tr>
+                          <th name="Name" order-by="name" ></th>
+                          <th name="Criado em" order-by="createdAt" ></th>
+                          <th name="ID" order-by="_id"></th>
+                          <th name="Editar"></th>
+                          <th name="Exluir"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="competition in vm.competitions | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+                          <td>{{::competition.name}} </td>
+                          <td>{{::competition.createdAt | amDateFormat:'DD/MM/YYYY, h:mm:ss a'}}</td>
+                          <td>{{::competition._id}}</td>
+                          <td>
+                              <md-button ng-click="vm.editCompetition(competition, $event)" class="md-icon-button" aria-label="Open Order">
+                                  <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                              </md-button>
+                          </td>
+                          <td>
+                              <md-button ng-click="vm.removeCompetition(competition, $event)" class="md-icon-button" aria-label="Open Order">
+                                  <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                              </md-button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </md-data-table-container>
+          <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.competitions.length}}"></md-data-table-pagination>
+      </tri-widget>
+  </div>
+
+</div>

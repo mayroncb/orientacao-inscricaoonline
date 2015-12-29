@@ -37,7 +37,7 @@ angular.module('ui.mask', [])
 
                             var originalIsEmpty = controller.$isEmpty;
 	                        controller.$isEmpty = function(value) {
-		                        if (maskPatterns) {
+		                        if (maskProcessed) {
 			                        return originalIsEmpty(unmaskValue(value || ''));
 		                        } else {
 			                        return originalIsEmpty(value);
@@ -149,7 +149,7 @@ angular.module('ui.mask', [])
                             }
 
                             controller.$formatters.push(formatter);
-                            controller.$parsers.push(parser);
+                            controller.$parsers.unshift(parser);
 
                             function uninitialize() {
                                 maskProcessed = false;
@@ -200,7 +200,6 @@ angular.module('ui.mask', [])
                                 iElement.bind('blur', blurHandler);
                                 iElement.bind('mousedown mouseup', mouseDownUpHandler);
                                 iElement.bind(linkOptions.eventsToHandle.join(' '), eventHandler);
-                                iElement.bind('paste', onPasteHandler);
                                 eventsBound = true;
                             }
 
@@ -215,7 +214,6 @@ angular.module('ui.mask', [])
                                 iElement.unbind('keyup', eventHandler);
                                 iElement.unbind('click', eventHandler);
                                 iElement.unbind('focus', eventHandler);
-                                iElement.unbind('paste', onPasteHandler);
                                 eventsBound = false;
                             }
 
@@ -238,6 +236,7 @@ angular.module('ui.mask', [])
                                         maskPatternsCopy.shift();
                                     }
                                 });
+
                                 return valueUnmasked;
                             }
 
@@ -279,7 +278,21 @@ angular.module('ui.mask', [])
                             // of the maskable char gets deleted, we'll still be able to strip
                             // it in the unmaskValue() preprocessing.
                             function getMaskComponents() {
-                                return maskPlaceholder.replace(/[_]+/g, '_').replace(/([^_]+)([a-zA-Z0-9])([^_])/g, '$1$2_$3').split('_');
+                                var maskPlaceholderChars = maskPlaceholder.split(''),
+                                        maskPlaceholderCopy;
+
+                                //maskCaretMap can have bad values if the input has the ui-mask attribute implemented as an obversable property, i.e. the demo page
+                                if (maskCaretMap && !isNaN(maskCaretMap[0])) {
+                                    //Instead of trying to manipulate the RegEx based on the placeholder characters
+                                    //we can simply replace the placeholder characters based on the already built
+                                    //maskCaretMap to underscores and leave the original working RegEx to get the proper
+                                    //mask components
+                                    angular.forEach(maskCaretMap, function(value) {
+                                        maskPlaceholderChars[value] = '_';
+                                    });
+                                }
+                                maskPlaceholderCopy = maskPlaceholderChars.join('');
+                                return maskPlaceholderCopy.replace(/[_]+/g, '_').replace(/([^_]+)([a-zA-Z0-9])([^_])/g, '$1$2_$3').split('_');
                             }
 
                             function processRawMask(mask) {
@@ -327,8 +340,8 @@ angular.module('ui.mask', [])
                                 maskComponents = getMaskComponents();
                                 maskProcessed = maskCaretMap.length > 1 ? true : false;
                             }
-                            
-                            var prevValue = iElement.val(); 
+
+                            var prevValue = iElement.val();
                             function blurHandler() {
                                 if (linkOptions.clearOnBlur) {
                                     oldCaretPosition = 0;
@@ -348,7 +361,7 @@ angular.module('ui.mask', [])
                                 }
                                 prevValue = value;
                             }
-                            
+
                             function triggerChangeEvent(element) {
                                 var change;
                                 if (angular.isFunction(window.Event) && !element.fireEvent) {
@@ -385,11 +398,6 @@ angular.module('ui.mask', [])
                                 /*jshint validthis: true */
                                 oldSelectionLength = getSelectionLength(this);
                                 iElement.unbind('mouseout', mouseoutHandler);
-                            }
-
-                            function onPasteHandler() {
-                                /*jshint validthis: true */
-                                setCaretPosition(this, iElement.val().length);
                             }
 
                             function eventHandler(e) {
@@ -463,14 +471,14 @@ angular.module('ui.mask', [])
 
                                 oldValue = valMasked;
                                 oldValueUnmasked = valUnmasked;
-    
+
                                 //additional check to fix the problem where the viewValue is out of sync with the value of the element.
                                 //better fix for commit 2a83b5fb8312e71d220a497545f999fc82503bd9 (I think)
                                 if (!valAltered && val.length > valMasked.length)
                                     valAltered = true;
-    
+
                                 iElement.val(valMasked);
-    
+
                                 //we need this check.  What could happen if you don't have it is that you'll set the model value without the user
                                 //actually doing anything.  Meaning, things like pristine and touched will be set.
                                 if (valAltered) {

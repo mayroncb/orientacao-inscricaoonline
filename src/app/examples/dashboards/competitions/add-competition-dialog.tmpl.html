@@ -1,0 +1,33 @@
+<md-dialog  flex="30" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Aicionar Etapa</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon   aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+
+        <md-input-container   class="md-block">
+            <md-icon md-font-icon="zmdi zmdi-assignment-o"></md-icon>
+            <input required name="name" ng-model="competition.name" type="text"  placeholder="Name">
+        </md-input-container>
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+      <md-button ng-click="closeDialog()">
+       Cancelar
+      </md-button>
+      <md-button ng-click="addCompetition(competition)" style="margin-right:20px;">
+        Adicionar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

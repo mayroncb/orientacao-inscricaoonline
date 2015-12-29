@@ -3,10 +3,10 @@
 
     angular
         .module('app.examples.dashboards')
-        .controller('DashboardAnalyticsController', DashboardAnalyticsController);
+        .controller('DashboardUsersController', DashboardUsersController);
 
     /* @ngInject */
-    function DashboardAnalyticsController($scope, $timeout, $mdToast, $rootScope, $state) {
+    function DashboardUsersController($scope, $timeout, $mdToast, $rootScope, $state) {
         $timeout(function() {
             $rootScope.$broadcast('newMailNotification');
             $mdToast.show({

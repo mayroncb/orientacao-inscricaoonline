@@ -1,3 +1,6 @@
+(function() {
+    'use strict';
+
 angular.module('app').
   factory("LoadData", function($resource) {
     return {
@@ -12,3 +15,4 @@ angular.module('app').
       })
     };
   })
+})();
