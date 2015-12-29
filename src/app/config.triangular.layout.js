@@ -9,7 +9,7 @@
     function config(triLayoutProvider) {
         triLayoutProvider.setDefaultOption('toolbarSize', 'default');
 
-        triLayoutProvider.setDefaultOption('toolbarShrink', false);
+        triLayoutProvider.setDefaultOption('toolbarShrink', true);
 
         triLayoutProvider.setDefaultOption('toolbarClass', '');
 

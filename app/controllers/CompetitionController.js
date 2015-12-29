@@ -25,6 +25,11 @@ module.exports = function(app) {
         console.log("removed: ", req.params.id);
         Competition.findOne({_id: req.params.id}, function(err, data) {
             data.delete(function(err) {
+              if (err) {
+                data.remove(function(err, pro){
+                  
+                })
+              };
              Competition.findOne({_id: req.params.id}, function(doc) {
                if (!doc) console.log('soft delete worked');
                res.status(200).end();
