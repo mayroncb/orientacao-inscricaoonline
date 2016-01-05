@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="app">
+<html lang="pt-BR" class="no-js" ng-app="app">
   <head>
     <meta charset="utf-8">
     <title>Triangular</title>
@@ -94,6 +94,7 @@
     <script src="../bower_components/textAngular/src/textAngularSetup.js"></script>
     <script src="../bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
     <script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="../bower_components/ngMask/dist/ngMask.js"></script>
     <!-- endbower -->
 
     <!-- enqueue all translations for calendar (remove if you dont need multilanguage) -->
@@ -157,6 +158,8 @@
     <script src="app/examples/dashboards/widgets/widget-calendar.directive.js"></script>
     <script src="app/examples/dashboards/users/dashboard-users.controller.js"></script>
     <script src="app/examples/dashboards/steps/dashboard-steps.controller.js"></script>
+    <script src="app/examples/steps/ui.module.js"></script>
+    <script src="app/examples/dashboards/steps/add-step-dialog.controller.js"></script>
     <script src="app/examples/dashboards/social/dashboard-social.controller.js"></script>
     <script src="app/examples/dashboards/server/dashboard-server.controller.js"></script>
     <script src="app/examples/dashboards/sales/sales.service.js"></script>
@@ -164,7 +167,6 @@
     <script src="app/examples/dashboards/sales/fab-button.controller.js"></script>
     <script src="app/examples/dashboards/sales/date-change-dialog.controller.js"></script>
     <script src="app/examples/dashboards/sales/dashboard-sales.controller.js"></script>
-    <script src="app/examples/steps/ui.module.js"></script>
     <script src="app/examples/dashboards/competitions/fab-button.controller.js"></script>
     <script src="app/examples/dashboards/competitions/edit-competition-dialog.controller.js"></script>
     <script src="app/examples/dashboards/competitions/dashboard-competitions.controller.js"></script>
@@ -189,6 +191,7 @@
     <script src="app/triangular/themes/theming.provider.js"></script>
     <script src="app/triangular/themes/skins.provider.js"></script>
     <script src="app/triangular/services/user.service.js"></script>
+    <script src="app/triangular/services/steps.service.js"></script>
     <script src="app/triangular/services/login.service.js"></script>
     <script src="app/triangular/services/loaddata.service.js"></script>
     <script src="app/triangular/services/interceptor.service.js"></script>
@@ -214,7 +217,6 @@
     <script src="app/examples/steps/steps-adm.controller.js"></script>
     <script src="app/examples/steps/step-dialog.controller.js"></script>
     <script src="app/examples/steps/fab-button.controller.js"></script>
-    <script src="app/examples/steps/add-step-dialog.controller.js"></script>
     <script src="app/examples/menu/menu.config.js"></script>
     <script src="app/examples/menu/level.controller.js"></script>
     <script src="app/examples/menu/dynamicMenu.service.js"></script>

@@ -26,8 +26,7 @@ module.exports = function(app) {
         Competition.findOne({_id: req.params.id}, function(err, data) {
             data.delete(function(err) {
               if (err) {
-                data.remove(function(err, pro){
-                  
+                data.remove(function(err, pro) {
                 })
               };
              Competition.findOne({_id: req.params.id}, function(doc) {

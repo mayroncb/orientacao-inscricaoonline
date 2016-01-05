@@ -6,7 +6,8 @@
         .controller('ProfileController', ProfileController);
 
     /* @ngInject */
-    function ProfileController($scope, $rootScope, LoadData, $filter, toastr, UserInstance, $cookies ) {
+    function ProfileController($scope, $rootScope, LoadData, $filter,
+      toastr, UserInstance, $cookies ) {
         console.log('ProfileController');
 
 
@@ -42,7 +43,6 @@
         function loadData() {
           vm.categories = LoadData.categories.query(function(categories) {
               vm.user['category'] = $filter('filter')(categories, {_id:vm.user['category']})[0];
-              console.log('categories:: ', categories[0]);
           });
 
           vm.clubs = LoadData.clubs.query(function(clubs) {
@@ -53,7 +53,6 @@
                   return previous;
                 }, []);
                 vm.user['club'] = $filter('filter')(clubs, {_id:vm.user['club']})[0];
-                console.log('club:: ', clubs[0]);
           });
 
           vm.states = LoadData.states.query(function(states){

@@ -15,9 +15,13 @@ module.exports = function() {
           required: true,
           default: Date.now
       },
+
       deleted: {
         type: Boolean
-      }
+      },
+
+      steps: [{type: mongoose.Schema.ObjectId, ref: 'Step' }]
+
   });
   // schema.plugin(findOrCreate);
   schema.plugin(mongoose_deleted, { select : false });

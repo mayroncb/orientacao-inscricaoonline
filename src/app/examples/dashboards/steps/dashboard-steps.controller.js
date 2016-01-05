@@ -6,25 +6,40 @@
         .controller('DashboardStepsController', DashboardStepsController);
 
     /* @ngInject */
-    function DashboardStepsController($scope, $timeout, $mdToast, $rootScope, $state) {
-        $timeout(function() {
-            $rootScope.$broadcast('newMailNotification');
-            $mdToast.show({
-                template: '<md-toast><span flex>You have new email messages! View them <a href="" ng-click=vm.viewUnread()>here</a></span></md-toast>',
-                controller: newMailNotificationController,
-                controllerAs: 'vm',
-                position: 'bottom right',
-                hideDelay: 5000
-            });
-        }, 10000);
+    function DashboardStepsController($scope, $timeout, $mdToast, $rootScope,
+       $state, CompetitionInstance, $mdDialog) {
+         var vm = this;
+         vm.competitions = [];
+         vm.compSelected = null;
+         vm.loadCompetition = loadCompetition;
+         vm.addStep = addStep;
 
-        //////////////
+         function addStep(competition, $event) {
+               $mdDialog.show({
+                 controller: 'AddStepDialogController',
+                 controllerAs: 'vm',
+                 templateUrl: 'app/examples/dashboards/steps/add-step-dialog.tmpl.html',
+                 parent: angular.element(document.body),
+                 targetEvent: $event,
+                 locals: {
+                           'competition': competition
+                       },
+                 clickOutsideToClose: true
+               })
+               .then(function() {
 
-        function newMailNotificationController() {
-            var vm = this;
-            vm.viewUnread = function() {
-                $state.go('admin-panel-email-no-scroll.email.inbox');
-            };
-        }
+               }, function() {
+
+               });
+         }
+
+
+         function loadCompetition() {
+           CompetitionInstance.query().$promise.then(function(comps){
+             vm.competitions = comps;
+           });
+         }
+
+         loadCompetition();
     }
 })();

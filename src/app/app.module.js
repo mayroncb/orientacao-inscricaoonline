@@ -4,12 +4,12 @@
     angular
         .module('app', [
             'triangular',
-            'ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages',
+            'ngAnimate', 'ngCookies', 'ngSanitize', 'ngMessages',
             'ngMaterial', 'ngResource', 'ui.router', 'pascalprecht.translate',
             'LocalStorageModule', 'googlechart', 'chart.js', 'linkify',
             'ui.calendar', 'angularMoment', 'textAngular', 'uiGmapgoogle-maps',
             'hljs', 'md.data.table', angularDragula(angular), 'ngFileUpload',
-            'ui.mask', 'toastr',
+            'ui.mask', 'ngMask',  'toastr',
             // 'seed-module'
             // uncomment above to activate the example seed module
             'app.examples'

@@ -6,7 +6,7 @@
         .config(routeConfig);
 
     /* @ngInject */
-    function routeConfig($stateProvider) {
+    function routeConfig($stateProvider, $compileProvider) {
         $stateProvider
         .state('triangular', {
             abstract: true,
@@ -15,11 +15,11 @@
               check: function($cookies, $state, $rootScope, UserInstance) {
                 if (!$rootScope.user) {
                   UserInstance.get({id: $cookies.getAll()['u']}, function(user){
-                    console.log(user);
                     $rootScope.user = user;
                   });
                 }
-                console.log($rootScope);
+                $compileProvider.debugInfoEnabled(false);
+                console.log("Ativar Proteção em produção");
                 // if(!$cookies.getAll()['connect.sid']) {
                 //     $state.go('authentication.login');
                 // }

@@ -3,7 +3,10 @@
         "DASHBOARDS": {
             "DASHBOARDS": "Dashboard",
             "GENERAL": "Geral",
-            "ANALYTICS": "O google Analytics",
+            "ANALYTICS": "Manutenção",
+            "USERS": "Usuários",
+            "STEPS": "Etapas",
+            "COMPETITIONS": "Campeonatos",
             "SERVER": "Servidor",
             "SALES": "Vendas",
             "WIDGETS": "Widgets",
