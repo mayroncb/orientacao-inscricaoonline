@@ -9,9 +9,9 @@ module.exports = function(app) {
 
 
     controller.listSteps = function(req, res) {
-        Step.find({}, function(err, steps){
-            res.json(competitions)
-        })
+        Step.find({}).populate("club").exec(function(err, steps){
+            res.json(steps)
+        });
 
     }
 
@@ -75,6 +75,23 @@ module.exports = function(app) {
             res.status(500).json(erro);
         })
     }
+
+    setInterval(function () {
+      var dateObj = new Date();
+      var month = dateObj.getUTCMonth(); //months from 1-12
+      var day = dateObj.getUTCDate();
+      var year = dateObj.getUTCFullYear();
+      Step.findOne(
+        {entryStartDate: {$lte: new Date(year, month, day).toISOString()},
+        entryEndDate: {$gt: new Date(year, month, day).toISOString()},
+        isActive: false
+        }, function(err, step) { 
+          if (step) {
+            step.isActive = true;
+            step.save();
+          }
+      });
+    }, 5000);
 
     return controller;
 }

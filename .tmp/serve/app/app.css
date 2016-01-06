@@ -25989,6 +25989,23 @@ md-select[md-container-class="calendar-color-select"] md-select-value span {
 .dashboard-container .layout-margin {
   margin: 0px; }
 
+.dashboard-container .status {
+  padding: 8px 14px;
+  border-radius: 6px;
+  min-width: 60px;
+  display: inline-block;
+  text-align: center;
+  color: #fff; }
+
+.dashboard-container .status-delivered {
+  background-color: #26C6DA; }
+
+.dashboard-container .status-true {
+  background-color: #8BC34A; }
+
+.dashboard-container .status-false {
+  background-color: #FF9800; }
+
 .dashboard-container .layout-margin > .widget {
   margin: 8px; }
 

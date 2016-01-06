@@ -40,7 +40,6 @@
 
       function addStep(step) {
 
-        console.log(step);
         vm.step.$save().then(function(step) {
         toastr.success('Etapa cadastrada com sucesso!', step.name);
         $rootScope.$broadcast('stepEvent', true);
@@ -52,7 +51,7 @@
       }
 
       function closeDialog(){
-        $mdDialog.hide();
+        $mdDialog.cancel();
       }
 
     }

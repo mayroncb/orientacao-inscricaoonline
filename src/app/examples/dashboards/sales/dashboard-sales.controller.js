@@ -11,6 +11,7 @@
         var vm = this;
         console.log('DashboardSalesController');
 
+        console.log('Ativar em produção');
             // $interval( function(){
             //
             //   if(!$cookies.getAll()['connect.sid']) {

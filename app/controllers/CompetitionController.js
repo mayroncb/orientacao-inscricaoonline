@@ -8,9 +8,11 @@ module.exports = function(app) {
 
 
     controller.listCompetitions = function(req, res) {
-        Competition.find({}, function(err, competitions){
-            res.json(competitions)
-        })
+        Competition.find({})
+        .populate({path: "steps", populate: {path: "club"}})
+        .exec(function(err, competitions){
+            res.json(competitions);
+        });
 
     }
 
