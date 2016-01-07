@@ -3,20 +3,24 @@
 
     angular
         .module('app.examples.ui')
-        .controller('AddStepDialogController',
-        AddStepDialogController);
+        .controller('EditStepDialogController',
+        EditStepDialogController);
 
     /* @ngInject */
-    function AddStepDialogController($scope, triTheming, LoadData, moment,
-      StepInstance,  toastr, $mdDialog, $rootScope, competition, $filter) {
-      console.log('AddStepDialogController:::');
+    function EditStepDialogController($scope, triTheming, LoadData, moment,
+      StepInstance,  toastr, $mdDialog, $rootScope, step, $filter, competition) {
+      console.log('EditStepDialogController:::');
       var vm = this;
-      vm.addStep = addStep;
+      vm.editStep = editStep;
       vm.closeDialog = closeDialog;
-      vm.step = new StepInstance({});
+      loadClubs();
+      vm.step = new StepInstance(step);
       vm.clubs = [];
       vm.step.competition = competition;
       vm.invalidDate = false;
+
+
+
 
       $scope.$watchGroup(['vm.step.stepDate', 'vm.step.entryStartDate', 'vm.step.entryEndDate'], function(){
         if(vm.step.stepDate && vm.step.stepDate.length == 8 && moment(vm.step.stepDate, "DD-MM-YYYY").isValid() == false) {
@@ -33,12 +37,17 @@
 
 
       })
-      LoadData.clubs.query().$promise.then(function(clubs) {
-        vm.clubs = clubs;
-      })
+
+      function loadClubs() {
+        LoadData.clubs.query().$promise.then(function(clubs) {
+          vm.clubs = clubs;
+          vm.step.club = $filter('filter')(vm.clubs, {_id: vm.step.club._id })[0];
+        })
+      }
 
 
-      function addStep(step) {
+
+      function editStep(step) {
 
         vm.step.$save().then(function(step) {
         toastr.success('Etapa cadastrada com sucesso!', step.name);

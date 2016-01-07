@@ -13,6 +13,8 @@
          vm.compSelected = null;
          vm.loadCompetition = loadCompetition;
          vm.addStep = addStep;
+         vm.editStep = editStep;
+         vm.removeStep = removeStep;
 
 
          vm.query = {
@@ -41,9 +43,50 @@
                });
          }
 
-        //  $rootScope.$on('stepEvent', function(){
-        //    loadCompetition();
-        //  });
+         function editStep(step, $event) {
+           step.stepDate = $filter('date')(step.stepDate, "dd/MM/yyyy", "");
+           step.entryStartDate = $filter('date')(step.entryStartDate, "dd/MM/yyyy", "");
+           step.entryEndDate = $filter('date')(step.entryEndDate, "dd/MM/yyyy", "");
+          //  console.log(vm.compSelected);
+           $mdDialog.show({
+             controller: 'EditStepDialogController',
+             controllerAs: 'vm',
+             templateUrl: 'app/examples/dashboards/steps/edit-step-dialog.tmpl.html',
+             parent: angular.element(document.body),
+             targetEvent: $event,
+             locals: {
+                       'step': step,
+                       'competition': vm.compSelected
+                   },
+             clickOutsideToClose: true
+           })
+           .then(function() {
+             loadCompetition();
+           }, function() {
+             loadCompetition();
+           });
+         }
+         function removeStep(step, $event) {
+           step = new StepInstance(step);
+           console.log(step);
+           var confirm = $mdDialog.confirm({
+                 title: 'Excluir a etapa',
+                 content: 'Tem certeza que deseja excluir a etapa?',
+                 ariaLabel: 'Excluir etapa',
+                 ok: 'Excluir',
+                 cancel: 'Cancelar',
+                 targetEvent: $event
+             });
+             $mdDialog.show(confirm).then(function() {
+                 step.$delete().then(function(resp) {
+                   console.log("Deletado")
+                   loadCompetition();
+                 })
+             }, function() {
+                 console.log( 'You decided to keep your debt.');
+             });;
+         }
+
 
          function loadCompetition() {
            CompetitionInstance.query().$promise.then(function(comps){

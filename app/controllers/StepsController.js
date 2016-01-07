@@ -30,6 +30,13 @@ module.exports = function(app) {
                 data.remove(function(err, pro) {
                 })
               };
+              Competition.update(
+                {_id: data.competition},
+                {$pull: {steps: req.params.id}}, function(err, ok){
+                  console.log(err, ok);
+
+                }
+              )
              Step.findOne({_id: req.params.id}, function(doc) {
                if (!doc) console.log('soft delete worked');
                res.status(200).end();
@@ -39,8 +46,13 @@ module.exports = function(app) {
     }
 
     controller.updateStep = function(req, res) {
+      var step = req.body;
+      step.stepDate = moment(step.stepDate, "DD-MM-YYYY");
+      step.entryStartDate = moment(step.entryStartDate, "DD-MM-YYYY");
+      step.entryEndDate = moment(step.entryEndDate, "DD-MM-YYYY");
       Step.findByIdAndUpdate(req.body._id, req.body).exec()
       .then(function(step) {
+        checkOpenSteps();
         Step.findOne({_id: step.id}, function(err, data) {
             res.json(data);
         })
@@ -62,9 +74,8 @@ module.exports = function(app) {
 
         Step.create(req.body)
         .then(function(step) {
-          console.log(step.competition);
+          checkOpenSteps();
           Competition.findById(step.competition, function(err, comp){
-            console.log("Comp", comp);
             comp.steps.push(step);
             comp.save();
           })
@@ -76,22 +87,46 @@ module.exports = function(app) {
         })
     }
 
-    setInterval(function () {
-      var dateObj = new Date();
-      var month = dateObj.getUTCMonth(); //months from 1-12
-      var day = dateObj.getUTCDate();
-      var year = dateObj.getUTCFullYear();
-      Step.findOne(
-        {entryStartDate: {$lte: new Date(year, month, day).toISOString()},
-        entryEndDate: {$gt: new Date(year, month, day).toISOString()},
-        isActive: false
-        }, function(err, step) { 
-          if (step) {
-            step.isActive = true;
-            step.save();
-          }
-      });
-    }, 5000);
+    checkOpenSteps();
+    setInterval(checkOpenSteps, 5000);
+
+function checkOpenSteps() {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth(); //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    Step.findOne({$and: [
+      {entryStartDate: {$lte: new Date(year, month, day).toISOString()}},
+      {entryEndDate: {$gt: new Date(year, month, day).toISOString()}},
+      {isActive: false}
+    ]}, function(err, step) { 
+      // console.log( "AND", err, step)
+        if (step) {
+          step.isActive = true;
+          step.save();
+        }
+    });
+    Step.findOne({
+      $and: [
+          {$or: [
+          {
+            entryStartDate: {$gt: new Date(year, month, day).toISOString()}
+          },
+          {
+            entryEndDate: {$lt: new Date(year, month, day).toISOString()}
+          },
+        ]},
+        {isActive: true}
+      ]
+      }, function(err, step) { 
+        if (step) {
+          // console.log("chamou:: ", step);
+          step.isActive = false;
+          step.save();
+        }
+    });
+  }
+
 
     return controller;
 }

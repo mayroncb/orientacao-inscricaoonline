@@ -29,7 +29,7 @@
                 <thead md-order="vm.query.order" md-trigger="vm.getCompetitions">
                     <tr>
                         <th name="Name" order-by="name" ></th>
-                        <th name="Data" order-by="createdAt" ></th>
+                        <th name="Data" order-by="stepDate" ></th>
                         <th name="Club"></th>
                         <th name="Status"></th>
                         <th name="Editar"></th>
@@ -39,20 +39,20 @@
                 <tbody>
                     <tr ng-repeat="step in vm.compSelected.steps | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
                         <td>{{::step.name}} </td>
-                        <td>{{::step.entryStartDate | amDateFormat:'DD/MM/YYYY'}}</td>
+                        <td>{{::step.stepDate | amDateFormat:'DD/MM/YYYY'}}</td>
                         <td>{{::step.club.name}}</td>
-                        <td>
-                          <span class="status" ng-class="'status-'+step.isActive"  >
+                        <td flex="10">
+                          <span class="status"  ng-class="'status-'+step.isActive"  >
                               {{::step.isActive ? "Aberto": "Fechado"}}
                           </span>
                         </td>
                         <td >
-                            <md-button ng-click="vm.editCompetition(competition, $event)" class="md-icon-button" aria-label="Open Order">
+                            <md-button ng-click="vm.editStep(step, $event)" class="md-icon-button" aria-label="Open Order">
                                 <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
                             </md-button>
                         </td>
                         <td>
-                            <md-button ng-click="vm.removeCompetition(competition, $event)" class="md-icon-button" aria-label="Open Order">
+                            <md-button ng-click="vm.removeStep(step, $event)" class="md-icon-button" aria-label="Open Order">
                                 <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
                             </md-button>
                         </td>

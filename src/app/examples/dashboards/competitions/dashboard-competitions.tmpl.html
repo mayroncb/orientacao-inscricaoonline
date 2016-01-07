@@ -16,7 +16,7 @@
                   <tbody>
                       <tr ng-repeat="competition in vm.competitions | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
                           <td>{{::competition.name}} </td>
-                          <td>{{::competition.createdAt | amDateFormat:'DD/MM/YYYY, h:mm:ss a'}}</td>
+                          <td>{{::competition.createdAt | amDateFormat:'DD/MM/YYYY'}}</td>
                           <td>{{::competition._id}}</td>
                           <td>
                               <md-button ng-click="vm.editCompetition(competition, $event)" class="md-icon-button" aria-label="Open Order">

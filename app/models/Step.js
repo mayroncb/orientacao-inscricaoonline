@@ -11,6 +11,10 @@ module.exports = function() {
           required: true,
       },
 
+      locate: {
+          type: String,
+      },
+
       createdAt: {
           type: Date,
           required: true,
