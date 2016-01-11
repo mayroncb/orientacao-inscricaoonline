@@ -40,7 +40,7 @@
                 "TITLE": "Fim #",
                 "DATE": "Data Do Pedido",
                 "BUYER-NAME": "Nome Do Cliente",
-                "BUYER-EMAIL": "Cliente De E-Mail",
+                "BUYER-EMAIL": "Email do Cliente",
                 "NUM-ITEMS": "Número de Itens",
                 "PRODUCT": "Descrição Do Produto",
                 "CATEGORY": "Categoria",

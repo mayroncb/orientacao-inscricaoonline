@@ -42,11 +42,6 @@
               controllerAs: 'vm',
               templateUrl: 'app/examples/steps/steps.tmpl.html'
 
-            },
-            'belowContent': {
-                templateUrl: 'app/examples/steps/fab-button.tmpl.html',
-                controller: 'StepFabController',
-                controllerAs: 'vm'
             }
           },
           data: {

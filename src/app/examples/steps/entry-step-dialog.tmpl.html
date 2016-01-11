@@ -1,0 +1,126 @@
+<md-dialog class="order-dialog mobile-fullwidth-dialog" flex="60" flex-sm="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex >
+                <span>#{{vm.step.name}} - {{vm.step.locate}} {{vm.step.stepDate | amDateFormat:'DD/MM/YYYY' }}</span>
+            </h2>
+            <!-- <md-button class="md-icon-button" ng-click="vm.printClick()" aria-label="print">
+                <md-icon md-font-icon="zmdi zmdi-print"></md-icon>
+            </md-button> -->
+            <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="padding-20">
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Dados para Pagamento</strong>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Banco</strong>
+            </div>
+            <div flex>
+                <span>Banco do Brasil</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Nome</strong>
+            </div>
+            <div flex>
+                <span>Federação Paraiba de Orientação</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Agencia / Conta</strong>
+            </div>
+            <div flex>
+                <span>Ag. 0000-0 / Cc. 00000-X</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Comprovante</strong>
+            </div>
+            <div flex>
+              <md-button class="md-primary md-mini md-raised" ngf-select="vm.upload($files)" ng-disabled="vm.status != 'idle'" ngf-multiple="true" aria-label="upload">
+                    Enviar <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'idle', 'fa fa-spinner fa-pulse': vm.status == 'uploading', 'zmdi zmdi-check': vm.status == 'complete'}"></md-icon>
+              </md-button>
+            </div>
+        </div>
+         <md-divider ></md-divider>
+        <br/>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Dados do Atleta</strong>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Nome</strong>
+            </div>
+            <div flex>
+                <span>{{vm.order.user.firstname}} {{vm.order.user.surname}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Email</strong>
+            </div>
+            <div flex>
+                <span>{{vm.order.user.email}}</span>
+            </div>
+        </div>
+
+        <!-- <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>DASHBOARDS.SALES.ORDER.NUM-ITEMS</strong>
+            </div>
+            <div flex>
+                <span>{{vm.order.items.length}}</span>
+            </div>
+        </div> -->
+
+        <md-divider></md-divider>
+
+        <table class="md-table">
+            <thead>
+                <tr>
+                    <th translate>Descrição da Inscrição</th>
+                    <th translate>DASHBOARDS.SALES.ORDER.PRICE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.items">
+                    <td>{{item.name}}</td>
+                    <td class="text-right padding-right-10">{{item.value | currency:'R$':2}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="md-table" palette-background="grey:100">
+            <tbody>
+                <!-- <tr>
+                    <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.SUB-TOTAL</td>
+                    <td class="text-right font-weight-600 padding-right-10">{{vm.total | currency}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.TAX</td>
+                    <td class="text-right font-weight-600 padding-right-10">{{vm.order.tax | currency}}</td>
+                </tr> -->
+                <tr>
+                    <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.TOTAL</td>
+                    <td class="text-right font-weight-600 padding-right-10">{{vm.total | currency:'R$':2}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </md-dialog-content>
+    <md-dialog-actions class="" layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.okClick()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="GENERAL.OK"></md-button>
+    </md-dialog-actions>
+</md-dialog>
