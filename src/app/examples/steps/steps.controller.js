@@ -6,51 +6,33 @@
         .controller('StepsController', StepsController);
 
     /* @ngInject */
-    function StepsController($mdDialog, triTheming, $state, $rootScope,
-      $stateParams, CompetitionInstance, StepInstance, $filter) {
+    function StepsController($mdDialog, toastr, $state, $rootScope, Upload,
+      $stateParams, CompetitionInstance, StepInstance, $filter, EntryInstance) {
         var vm = this;
         vm.stepEntry = stepEntry;
+        vm.steps = [];
+        vm.activeSteps = [];
+        vm.oldSteps = [];
+        // vm.isRegistered = false;
 
-
-       StepInstance.query().$promise.then(function(steps){
-              vm.steps = steps;
-              vm.activeSteps = $filter('filter')(vm.steps, {isActive: true });
-              vm.oldSteps = $filter('filter')(vm.steps, {isActive: false });
-              console.log(vm.activeSteps)
-              console.log(vm.activeSteps)
-        });
-
-
-        // vm.palettes = triTheming.palettes;
-        // vm.selectPalette = selectPalette;
-
-      //   $rootScope.$on('$viewContentLoading',
-      //     function(event, viewConfig){
-      //         console.log(">>>>>>>>>");
-      //         delete viewConfig.view;
-      // });
-        //
-        // if( $rootScope.user && $rootScope.user.type == "ADM"){
-        //   console.log("if")
-        //   console.log($state);
-        //   $state.go("triangular.admin-default.adm");
-        // }
-        // console.log(":::MMM::: " ,$rootScope.user)
-        // delete $state.current.views.belowContent;
-        // delete $state.$current.views['belowContent@triangular.admin-default']
-        // console.log($state.$current.views.belowContent)
-        // console.log($state.$current.views.belowContent)
-        // console.log($state.$current.views['belowContent@triangular.admin-default'])
-
-        // function colourRGBA(value) {
-        //     var rgba = triTheming.rgba(value);
-        //     return {
-        //         'background-color': rgba
-        //     };
-        // }
-
-
-
+        function loadSteps() {
+          StepInstance.query().$promise.then(function(steps){
+                 vm.steps = steps;
+                 vm.activeSteps = $filter('filter')(vm.steps, {isActive: true });
+                 vm.oldSteps = $filter('filter')(vm.steps, {isActive: false });
+                 for (var i in vm.activeSteps) {
+                   for (var entry in vm.activeSteps[i].entries) {
+                     if ($rootScope.user._id === vm.activeSteps[i].entries[entry].user) {
+                       if ( vm.activeSteps[i].entries[entry].status === "Registrado" || vm.activeSteps[i].entries[entry].status === "Processando")
+                       vm.activeSteps[i].isRegistered = true;
+                     }
+                   }
+                   console.log(vm.activeSteps);
+                 }
+                //  vm.isRegistered =
+           });
+        }
+        loadSteps();
         function stepEntry($event, step) {
             $mdDialog.show({
                 controller: 'StepEntryDialogController',
@@ -62,8 +44,9 @@
                 },
                 clickOutsideToClose: true
             })
-            .then(function(answer) {
-                vm.alert = 'You said the information was "' + answer + '".';
+            .then(function(step) {
+              toastr.warning('Aguarde a confirmação', 'Inscrição efetuada!');
+              loadSteps();
             }, cancelDialog);
 
             function cancelDialog() {

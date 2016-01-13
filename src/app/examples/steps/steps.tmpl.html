@@ -8,9 +8,14 @@
         </md-toolbar>
         <md-content class="md-padding">
             <md-grid-list class="ui-color-grid" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="step in vm.activeSteps" class="mb-bg-07" ng-click="vm.stepEntry($event, step)">
+                <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="step in vm.activeSteps" class="mb-bg-07"   ng-click="step.isRegistered || vm.stepEntry($event, step)">
                     <md-grid-tile-footer>
-                        <h3 style="font-weight:100;"><strong>{{::step.name}} - {{::step.stepDate | amDateFormat:'DD/MM/YYYY'}}</strong> </h3>
+                        <h3 ng-show="!step.isRegistered" style="font-weight:100;">
+                          <strong>{{::step.name}} - {{::step.stepDate | amDateFormat:'DD/MM/YYYY'}}</strong>
+                        </h3>
+                        <h3 ng-show="step.isRegistered" style="font-weight:100;">
+                          <strong>Você já esta cadastrado nessa etapa.</strong>
+                        </h3>
                     </md-grid-tile-footer>
                 </md-grid-tile>
             </md-grid-list>

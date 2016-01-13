@@ -56,6 +56,15 @@ module.exports = function() {
         required: true
        },
 
+       entries: [{
+         comp: mongoose.Schema.ObjectId,
+         items: Array,
+         total: Number,
+         status: {type: String, default: "Processando" },
+         user: {type: mongoose.Schema.ObjectId, ref: 'User'},
+         date: {type: Date, default: new Date()}
+       }],
+
       deleted: {
         type: Boolean
       },

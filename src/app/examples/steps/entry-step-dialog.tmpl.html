@@ -47,11 +47,16 @@
             <div flex>
                 <strong translate>Comprovante</strong>
             </div>
-            <div flex>
-              <md-button class="md-primary md-mini md-raised" ngf-select="vm.upload($files)" ng-disabled="vm.status != 'idle'" ngf-multiple="true" aria-label="upload">
-                    Enviar <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'idle', 'fa fa-spinner fa-pulse': vm.status == 'uploading', 'zmdi zmdi-check': vm.status == 'complete'}"></md-icon>
+            <div flex="30">
+              <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*" ngf-max-size="1MB"
+              ngf-select="vm.upload($file)" ng-disabled="vm.status != 'Enviar'"   aria-label="upload">
+                    {{vm.status}} <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'Enviar', 'fa fa-spinner fa-pulse': vm.status == 'Enviando', 'zmdi zmdi-check': vm.status == 'Completo'}"></md-icon>
               </md-button>
             </div>
+            <div flex="20" class="thumb_div">
+              <img ngf-src="vm.comp" class="thumb">
+            </div>
+
         </div>
          <md-divider ></md-divider>
         <br/>
@@ -65,7 +70,7 @@
                 <strong translate>Nome</strong>
             </div>
             <div flex>
-                <span>{{vm.order.user.firstname}} {{vm.order.user.surname}}</span>
+                <span>{{vm.user.firstname}} {{vm.user.surname}}</span>
             </div>
         </div>
         <div flex layout="row" class="margin-bottom-10">
@@ -73,7 +78,7 @@
                 <strong translate>Email</strong>
             </div>
             <div flex>
-                <span>{{vm.order.user.email}}</span>
+                <span>{{vm.user.email}}</span>
             </div>
         </div>
 
@@ -96,7 +101,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in vm.items">
+                <tr ng-repeat="item in vm.order.items">
                     <td>{{item.name}}</td>
                     <td class="text-right padding-right-10">{{item.value | currency:'R$':2}}</td>
                 </tr>
@@ -114,13 +119,17 @@
                 </tr> -->
                 <tr>
                     <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.TOTAL</td>
-                    <td class="text-right font-weight-600 padding-right-10">{{vm.total | currency:'R$':2}}</td>
+                    <td class="text-right font-weight-600 padding-right-10">{{vm.order.total | currency:'R$':2}}</td>
                 </tr>
             </tbody>
         </table>
     </md-dialog-content>
     <md-dialog-actions class="" layout="row">
         <span flex></span>
-        <md-button ng-click="vm.okClick()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="GENERAL.OK"></md-button>
+        <md-button ng-click="vm.okClick(vm.order)" class="md-primary" ng-disabled="!vm.comp" aria-label="{{GENERAL.OK | translate}}" translate="">
+          Inscrever
+          <md-tooltip md-visible="true" md-direction="left">Insira o comprovante para efetuar a inscrição <</md-tooltip>
+        </md-button>
+
     </md-dialog-actions>
 </md-dialog>

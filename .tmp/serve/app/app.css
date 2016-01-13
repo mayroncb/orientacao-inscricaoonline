@@ -26592,6 +26592,15 @@ table.md-data-table td {
     padding: 0px;
     width: 500px; }
 
+.btns {
+  margin-left: auto; }
+
+.thumb {
+  width: 50px;
+  height: 36px;
+  padding-top: 9px;
+  padding-left: 0px; }
+
 .ui-typography-try-font {
   width: 80%;
   text-align: center; }

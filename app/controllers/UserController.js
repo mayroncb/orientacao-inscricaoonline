@@ -2,6 +2,7 @@
 var moment = require('moment');
 var errorHanler = require('../utils/errorHandler')
 var passHandler = require('../utils/passHandler')
+
 module.exports = function(app) {
     var controller = {}
 

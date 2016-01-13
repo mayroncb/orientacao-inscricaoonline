@@ -1,11 +1,20 @@
 
 var moment = require('moment');
-
+var mongoose = require('mongoose');
+var Grid = require('gridfs-stream');
+var Busboy = require('busboy');
+var fs = require('fs');
 module.exports = function(app) {
-    var controller = {}
 
+    var controller = {}
     var Step = app.models.Step;
     var Competition = app.models.Competition;
+    var gfs;
+    mongoose.connection.on('connected', function(){
+      Grid.mongo = mongoose.mongo;
+      var db = mongoose.connection.db;
+      gfs = new Grid(db);
+    });
 
 
     controller.listSteps = function(req, res) {
@@ -45,6 +54,28 @@ module.exports = function(app) {
         })
     }
 
+    controller.addEntry = function(req, res) {
+      var file = req.files.file;
+      var order = JSON.parse(req.body.order);
+
+      var writestream = gfs.createWriteStream({
+        filename: file.name
+      });
+      fs.createReadStream(file.path).pipe(writestream);
+
+      writestream.on('close', function (file) {
+        order.comp = file.id;
+         Step.findById(req.params.id,function(err, step) {
+            step.entries.push(order);
+            step.save(function(err, step2){
+              res.status(200).send(step2);
+            });
+        })
+
+        console.log(file.filename + ' Written To DB');
+      });
+    }
+
     controller.updateStep = function(req, res) {
       var step = req.body;
       step.stepDate = moment(step.stepDate, "DD-MM-YYYY");
@@ -61,8 +92,6 @@ module.exports = function(app) {
           console.log(erro);
           res.status(500).json(erro);
       })
-
-
     }
 
     controller.addStep = function(req, res) {

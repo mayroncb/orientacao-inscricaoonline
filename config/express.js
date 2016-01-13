@@ -1,7 +1,9 @@
 var express = require('express');
 var load = require('express-load');
 var bodyParser = require('body-parser');
-var cors = require('cors')
+var cors = require('cors');
+var busboy = require('connect-busboy');
+
 module.exports = function(){
     var passport = require('passport');
     var app = express();
@@ -26,10 +28,9 @@ module.exports = function(){
     app.use(express.static('./dist'));
     // app.set('view engine', 'ejs');
     // app.set('views', './app/views');
-
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(bodyParser.json())
-
+    app.use(busboy());
     var cookieParser = require('cookie-parser');
     var session = require('express-session');
 
