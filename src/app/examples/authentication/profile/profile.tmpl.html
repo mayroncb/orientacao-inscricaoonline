@@ -143,7 +143,9 @@
                         </div>
                       <div class="row">
 
-                          <md-button class="md-raised md-primary margin-left-0" ng-click="vm.updateUser()" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                          <md-button class="md-raised md-primary margin-left-0" arial-label="Alterar Usuário"
+                           ng-click="vm.updateUser()" ng-disabled="profile.$invalid"
+                           translate="PROFILE.BUTTON"></md-button>
                      </div>
                     </form>
                 </md-content>
@@ -154,15 +156,15 @@
                       <div layout layout-xs="column" flex>
                           <md-input-container flex>
                             <label for="password" translate>SIGNUP.PASSWORD.LABEL</label>
-                            <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" tri-same-password="loginForm.confirm" ng-minlength="5" required/>
-                            <div ng-messages="profile.password.$error"  >
-                                <div ng-message when="required">
+                            <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" tri-same-password="password.confirm" ng-minlength="5" required/>
+                            <div ng-show="true"  ng-messages="password.password.$error"  >
+                                <div ng-message  when="required">
                                     <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
                                 </div>
-                                <div ng-message when="minlength">
+                                <div ng-message   when="minlength">
                                     <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
                                 </div>
-                                <div ng-message when="samePassword">
+                                <div ng-message   when="samePassword">
                                     <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
                                 </div>
                               </div>
@@ -170,8 +172,8 @@
 
                         <md-input-container flex>
                             <label for="password" translate>SIGNUP.PASSWORD_CONFIRM.LABEL</label>
-                            <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="loginForm.password" ng-minlength="5" required/>
-                            <div ng-messages="profile.password.$error"  >
+                            <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="password.password" ng-minlength="5" required/>
+                            <div ng-show="true" ng-messages="password.password.$error"  >
                                 <div ng-message when="required">
                                     <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
                                 </div>
@@ -185,7 +187,8 @@
                         </md-input-container>
                       </div>
 
-                        <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                        <md-button class="md-raised md-primary margin-left-0" ng-click="vm.changePass()"
+                        ng-disabled="password.$invalid" translate="PROFILE.BUTTON" arial-label="Mudar Senha"></md-button>
 
                     </form>
                 </md-content>
@@ -202,7 +205,8 @@
                             </md-list-item>
                         </div>
                     </md-list>
-                    <md-button class="md-raised md-primary margin-left-0" ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
+                    <md-button class="md-raised md-primary margin-left-0" arial-label="Mudar Senha"
+                    ng-disabled="profile.$invalid" translate="PROFILE.BUTTON"></md-button>
                 </md-content>
             </md-tab>
         </md-tabs>

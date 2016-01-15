@@ -1,0 +1,82 @@
+<md-dialog  flex="70" ng-cloak>
+  <form name="formClub" >
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Adicionar Clube</h2>
+        <span flex></span>
+        <md-button class="md-primary md-mini   md-fab" ng-click="vm.closeDialog()">
+          <md-icon  md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content flex>
+      <div class="md-dialog-content">
+        <div layout="row" layout-sm="column" >
+
+          <md-input-container  flex=70>
+              <input required name="name" ng-model="vm.club.name" type="text"  placeholder="Name">
+              <div ng-messages="formClub.name.$error" ng-if="true">
+                  <div ng-message when="required">
+                      <span translate>Adicione o nome do clube</span>
+                  </div>
+              </div>
+          </md-input-container>
+
+          <md-input-container flex="30" >
+            <md-select required  placeholder="UF" name="uf" ng-model="vm.club.UF" >
+              <md-option ng-value="state.UF" ng-repeat="state in vm.states">{{ state.UF }}</md-option>
+            </md-select>
+            <div ng-messages="formClub.uf.$error" ng-if="true">
+                <div ng-message when="required">
+                    <span translate>Selecione o estado</span>
+                </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="row" layout-sm="column" >
+
+             <md-autocomplete  flex=100 name="adminSelect"
+                      md-selected-item="vm.selectedItem"
+                      md-search-text-change="vm.searchTextChange(vm.searchText)"
+                      md-search-text="vm.searchText"
+                      md-no-cache="true"
+                      md-selected-item-change="vm.selectedItemChange(vm.selectedItem)"
+                      md-items="user in vm.searchTextChange(vm.searchText)"
+                      md-item-text="user.firstname"
+                      md-min-length="0"
+                      placeholder="Selecione o administradar do clube" >
+                    <md-item-template>
+                      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{user.firstname}} {{user.surname}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      Nenhum usuário "{{vm.searchText}}" encontrado!
+                      <a ng-click="vm.newUser(user)">Adicionar Usuario?</a>
+                    </md-not-found>
+                </md-autocomplete>
+         </div>
+
+        <div style="color: #FF6D00; font-size:12px; line-height:14px; padding-top:2px "
+             ng-show="!vm.selectedItem">
+                 <span translate>Selecione o administrador do clube</span>
+        </div>
+        <div style="color: #FF6D00; font-size:12px; line-height:14px; padding-top:2px "
+             ng-show="vm.selectedItem
+              && vm.selectedItem.club.name">
+                 <span translate>Você selecionou o atleta
+                  {{vm.selectedItem.firstname}} {{vm.selectedItem.surname}} que
+                  pertence ao clube {{vm.selectedItem.club.name}}
+                 </span>
+        </div>
+
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+      <md-button  class="md-primary"  ng-click="vm.editClub(vm.club)" style="margin-right:20px;">
+        Alterar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

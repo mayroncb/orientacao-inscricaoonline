@@ -23,6 +23,30 @@ module.exports = function(app) {
         })
     }
 
+    controller.getUserByName = function(req, res) {
+      var text = req.params.text;
+      var entries = text.toString().split(" ");
+      if(entries.length == 1) {
+        User.find({$or:[ {"firstname": { "$regex": text, "$options": "i" }},
+                  { "surname": { "$regex": text, "$options": "i" }}]})
+                  .populate("club").exec( function(err, docs) {
+          setTimeout(function () {
+            console.log(docs);
+                res.status(200).json(docs);
+          }, 100);
+      });
+    } else {
+        User.find({$or:[ {"firstname": { "$regex": entries[0], "$options": "i" }},
+                  { "surname": { "$regex": entries[1], "$options": "i" }}]})
+                  .populate("club").exec( function(err, docs) {
+          setTimeout(function () {
+            console.log(docs);
+                res.status(200).json(docs);
+          }, 100);
+      });
+      }
+    }
+
     controller.removerContato = function(req, res) {
         console.log("removed: ", req.params.id);
         var idContato = req.params.id;
@@ -34,15 +58,18 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
         var userTmp = req.body;
-        // console.log("UPDATE::: ", userTmp);
+        if(userTmp.password){
+            console.log("WITH PASSS PICA::: ", userTmp.password);
+        }
+        console.log("UPDATE::: ", userTmp);
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
-        // if (userTmp.password !== null || userTmp.password !== '' ) {
-        //     console.log("with PASS")
-        //     userTmp.password = passHandler.generateHash(userTmp.password);
-        // } else {
-        //     console.log("without PASS")
-        //     delete userTmp.password;
-        // }
+        if (userTmp.password) {
+            console.log("with PASS")
+            userTmp.password = passHandler.generateHash(userTmp.password);
+        } else {
+            console.log("without PASS")
+            delete userTmp.password;
+        }
         // console.log("POSTT::: ", userTmp);
 
         User.findByIdAndUpdate(userTmp._id, userTmp).exec()

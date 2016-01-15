@@ -56,6 +56,22 @@
             controller: 'DashboardStepsController',
             controllerAs: 'vm'
         })
+        .state('triangular.admin-default.dashboard-clubs', {
+            url: '/dashboards/clubs',
+            views: {
+            '':{
+
+            templateUrl: 'app/examples/dashboards/clubs/dashboard-clubs.tmpl.html',
+            controller: 'DashboardClubsController',
+            controllerAs: 'vm'
+          },
+          'belowContent': {
+              templateUrl: 'app/examples/dashboards/clubs/fab-button.tmpl.html',
+              controller: 'ClubsFabController',
+              controllerAs: 'vm'
+          }
+          }
+        })
         // .state('triangular.admin-default.dashboard-server', {
         //     url: '/dashboards/server',
         //     templateUrl: 'app/examples/dashboards/server/dashboard-server.tmpl.html',
@@ -124,7 +140,12 @@
                 name: 'MENU.DASHBOARDS.STEPS',
                 state: 'triangular.admin-default.dashboard-steps',
                 type: 'link'
-            }]
+            },{
+                name: 'MENU.DASHBOARDS.CLUBS',
+                state: 'triangular.admin-default.dashboard-clubs',
+                type: 'link'
+            }
+          ]
         });
 
     }

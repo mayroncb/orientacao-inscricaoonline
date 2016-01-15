@@ -15,13 +15,15 @@
         var vm = this;
         vm.user =  new UserInstance($rootScope.user);
         vm.updateUser = updateUser;
+        vm.changePass = changePass;
         vm.categories = [];
         vm.states = [];
         vm.clubs = [];
         delete vm.user.password;
         function updateUser() {
+          delete vm.user.password
+          delete vm.user.confirm
           vm.user.uf = vm.user.uf.UF;
-          console.log(vm.user.uf);
           vm.user.$save().then(function(user) {
               toastr.success('Usuário alterado com sucesso.');
               vm.user = new UserInstance(user);
@@ -30,11 +32,29 @@
               console.log(erro);
               toastr.error("Erro ao alterar usuario!");
           });
+
+        }
+
+        function changePass() {
+          console.log("vm.user");
+            vm.user.uf = vm.user.uf.UF
+           vm.user.$save().then(function(user) {
+              toastr.success('Senha alterada com sucesso.');
+              vm.user = new UserInstance(user);
+          }).catch(function(erro){
+              console.log(erro);
+              toastr.error("Erro ao alterar senha!");
+          }).finally(function(){
+              delete vm.user.password
+              delete vm.user.confirm
+          }) ;
+
+
+
         }
 
         $scope.$watch('vm.user', function() {
             console.log('$watch :::::');
-
             vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
             $rootScope.user = vm.user;
             loadData();

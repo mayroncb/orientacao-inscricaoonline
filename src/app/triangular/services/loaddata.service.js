@@ -12,6 +12,9 @@ angular.module('app').
       }),
       states: $resource('http://localhost:3000/states', {}, {
         query: { method: 'GET', params: {}, isArray: true }
+      }),
+      userByName: $resource('http://localhost:3000/users/q/:text', {}, {
+        query: { method: 'GET', params: {text: '@text'}, isArray: true }
       })
     };
   })

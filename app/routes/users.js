@@ -12,11 +12,14 @@ function verifyCreds(req, res, next) {
 module.exports = function(app){
     var controller = app.controllers.UserController;
     app.route('/users')
-        .get(verifyCreds, controller.listUsers)
+        .get(controller.listUsers)
         .post(controller.addContato);
 
     app.route('/users/:id')
         .get( controller.obterContato) //ADD Verificação na produção
         .delete(verifyCreds, controller.removerContato)
-        .post(verifyCreds, controller.updateContato);
+        .post(controller.updateContato);
+
+    app.route('/users/q/:text')
+        .get(controller.getUserByName) //ADD Verificação na produção
 }

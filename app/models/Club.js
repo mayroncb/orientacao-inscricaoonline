@@ -6,6 +6,7 @@ module.exports = function() {
         UF: {
             type: String,
         },
+
         name: {
             type: String,
             required: true,
@@ -13,9 +14,17 @@ module.exports = function() {
                 unique: true
             }
         },
+
         admin: {
             type: Schema.ObjectId, ref: 'User'
-            }
+        },
+
+        createdAt: {
+            type: Date,
+            required: true,
+            default: Date.now
+        },
+
     });
 
     return mongoose.model('Club', schema);
