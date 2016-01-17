@@ -54,12 +54,7 @@
         return  deferred.promise;
       };
 
-       vm.states = LoadData.states.query();
-
-
-
-
-
+      vm.states = LoadData.states.query();
 
       vm.selectedItemChange = selectedItemChange;
       function selectedItemChange(item) {

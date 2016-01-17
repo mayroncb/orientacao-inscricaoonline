@@ -10,7 +10,7 @@ module.exports = function(app) {
 
 
     controller.listUsers = function(req, res) {
-        User.find({}, function(err, users){
+        User.find({}).populate('club').exec(function(err, users){
             res.json(users)
         })
 
@@ -48,12 +48,11 @@ module.exports = function(app) {
     }
 
     controller.removerContato = function(req, res) {
-        console.log("removed: ", req.params.id);
-        var idContato = req.params.id;
-        contatos = contatos.filter(function(contato) {
-            return contato._id != idContato;
-        });
-        res.redirect(204);
+        User.findOne({_id: req.params.id}, function(err, data) {        
+                data.remove(function(err, pro) {
+                  res.status(204).end();
+                })
+              });
     }
 
     controller.updateContato = function(req, res) {

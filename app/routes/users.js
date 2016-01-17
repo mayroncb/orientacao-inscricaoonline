@@ -17,7 +17,7 @@ module.exports = function(app){
 
     app.route('/users/:id')
         .get( controller.obterContato) //ADD Verificação na produção
-        .delete(verifyCreds, controller.removerContato)
+        .delete(controller.removerContato)
         .post(controller.updateContato);
 
     app.route('/users/q/:text')

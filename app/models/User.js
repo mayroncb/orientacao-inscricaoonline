@@ -98,7 +98,12 @@ module.exports = function() {
 
         category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
 
-        allergy: []
+        allergy: [],
+
+        isActive: {
+          type: Boolean,
+          default: true
+        }
     });
 
 

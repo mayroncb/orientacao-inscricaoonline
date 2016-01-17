@@ -1,0 +1,136 @@
+<md-dialog  flex="60" ng-cloak>
+  <form name="addStep">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Adicionar Etapa</h2>
+        <span flex></span>
+        <md-button class="md-primary md-mini   md-fab" ng-click="vm.closeDialog()">
+          <md-icon  md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+           <div layout="row" layout-sm="column" layout-wrap>
+             <md-input-container flex="40" >
+                <input ng-disabled="true" name="compName"
+                ng-model="vm.step.competition.name"
+                type="text"  placeholder="Compeonato">
+             </md-input-container>
+             <md-input-container flex="60" >
+               <md-select flex class="md-select-form" required
+                name="club" ng-model="vm.step.club" placeholder="Selecione o Clube">
+                  <md-option ng-value="club" ng-repeat="club in vm.clubs">{{club.name}}</md-option>
+              </md-select>
+              <div ng-messages="addStep.club.$error" ng-if="true">
+                  <div ng-message when="required">
+                      <span translate>Selecione o Clube responsável pela etapa</span>
+                  </div>
+              </div>
+            </md-input-container>
+
+            </div>
+            <div layout="row" layout-sm="column" layout-wrap>
+              <md-input-container flex >
+                 <input name="name" required
+                 ng-model="vm.step.name"
+                 type="text"  placeholder="Nome">
+                 <div ng-messages="addStep.name.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira o nome da etapa</span>
+                     </div>
+                 </div>
+              </md-input-container>
+              <md-input-container flex >
+                 <input name="locate" required
+                 ng-model="vm.step.locate"
+                 type="text"  placeholder="Local">
+                 <div ng-messages="addStep.name.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira o local da etapa</span>
+                     </div>
+                 </div>
+              </md-input-container>
+            </div>
+            <div layout="row" layout-sm="column" layout-wrap>
+              <md-input-container flex="33" >
+                 <input name="stepDate" required restrict="reject" clean="true" mask='39/19/2999'
+                 ng-model="vm.step.stepDate"
+                 type="text"  placeholder="Data da Etapa">
+                 <div ng-if="vm.invalidDate">
+                     <div  style="color: rgb(255,109,0); font-size: 12px; line-height: 14px;" >
+                         <span translate>Data Inválida</span>
+                     </div>
+                 </div>
+                 <div ng-messages="addStep.stepDate.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira a data da etapa</span>
+                     </div>
+                 </div>
+
+              </md-input-container>
+              <md-input-container flex="33" >
+                 <input name="starDate" restrict="reject" required clean="true" mask='39/19/2999'
+                 ng-model="vm.step.entryStartDate"
+                 type="text"  placeholder="Incrições Inicio">
+                 <div ng-messages="addStep.starDate.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira a data inicial das inscrições</span>
+                     </div>
+                 </div>
+              </md-input-container>
+              <md-input-container flex="33" >
+                 <input name="endDate" restrict="reject" required clean="true"
+                 ng-model="vm.step.entryEndDate" mask='39/19/2999'
+                 type="text"  placeholder="Inscrições Fim">
+                 <div ng-messages="addStep.endDate.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira a data final das inscrições</span>
+                     </div>
+                 </div>
+              </md-input-container>
+            </div>
+            <div layout="row" layout-sm="column" layout-wrap>
+              <md-input-container flex="33" >
+                 <input type="number" required name="entryValue"
+                 ng-model="vm.step.entryValue"
+                 type="text"  placeholder="Valor Inscrição">
+                 <div ng-messages="addStep.entryValue.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira o valor da inscrição</span>
+                     </div>
+                 </div>
+              </md-input-container>
+              <md-input-container flex="33" >
+                 <input  type="number" required name="siCardValue"
+                 ng-model="vm.step.siCardValue"
+                 type="text"  placeholder="Valor SI Card">
+                 <div ng-messages="addStep.siCardValue.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira o valor do aluguel do SiCard</span>
+                     </div>
+                 </div>
+              </md-input-container>
+              <md-input-container flex="33" >
+                 <input name="annuity" required type="number" aria-label="amount"
+                 ng-model="vm.step.annuityValue"
+                 type="text"  placeholder="Valor Anuidade">
+                 <div ng-messages="addStep.annuity.$error" ng-if="true">
+                     <div ng-message when="required">
+                         <span translate>Insira o valor da anuidade</span>
+                     </div>
+                 </div>
+              </md-input-container>
+            </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+
+      <md-button class="md-primary" ng-disabled="!addStep.$valid" ng-click="vm.addStep(vm.step)" style="margin-right:20px;">
+        Adicionar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
