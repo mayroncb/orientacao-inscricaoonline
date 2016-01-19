@@ -1,0 +1,58 @@
+<md-dialog  flex="60" ng-cloak>
+  <form name="passform">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Alterar Senha</h2>
+        <span flex></span>
+        <md-button class="md-primary md-mini   md-fab" ng-click="vm.closeDialog()">
+          <md-icon  md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div layout layout-xs="column" flex>
+            <md-input-container flex>
+              <label for="password" translate>SIGNUP.PASSWORD.LABEL</label>
+              <input id="password" label="password" name="password" type="password" ng-model="vm.user.password" tri-same-password="passform.confirm" ng-minlength="5" required/>
+              <div ng-show="true"  ng-messages="passform.password.$error"  >
+                  <div ng-message  when="required">
+                      <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
+                  </div>
+                  <div ng-message   when="minlength">
+                      <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
+                  </div>
+                  <div ng-message   when="samePassword">
+                      <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
+                  </div>
+                </div>
+          </md-input-container>
+
+          <md-input-container flex>
+              <label for="password" translate>SIGNUP.PASSWORD_CONFIRM.LABEL</label>
+              <input id="confirm" label="confirm" name="confirm" type="password" ng-model="vm.user.confirm" tri-same-password="passform.password" ng-minlength="5" required/>
+              <div ng-show="true" ng-messages="passform.password.$error"  >
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.PASSWORD.PLEASE_ENTER</span>
+                  </div>
+                  <div ng-message when="minlength">
+                      <span translate>SIGNUP.PASSWORD.MIN_LENGTH</span>
+                  </div>
+                  <div ng-message when="samePassword">
+                      <span translate>SIGNUP.PASSWORD.SAME_PASSWORD</span>
+                  </div>
+                </div>
+          </md-input-container>
+        </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+
+      <md-button class="md-primary" ng-disabled="!passform.$valid" ng-click="vm.changePass(vm.user)" style="margin-right:20px;">
+        Alterar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -7,45 +7,24 @@
         ChangePassDialogController);
 
     /* @ngInject */
-    function ChangePassDialogController($scope, triTheming, LoadData, moment,
-      StepInstance,  toastr, $mdDialog, $rootScope, competition, $filter) {
+    function ChangePassDialogController($scope, LoadData, moment,
+      UserInstance,  toastr, $mdDialog, $rootScope, user, $filter) {
       console.log('ChangePassDialogController:::');
       var vm = this;
-      vm.addStep = addStep;
+      vm.changePass = changePass;
       vm.closeDialog = closeDialog;
-      vm.step = new StepInstance({});
-      vm.clubs = [];
-      vm.step.competition = competition;
-      vm.invalidDate = false;
+      vm.user = user;
+      vm.user.password = ''
 
-      $scope.$watchGroup(['vm.step.stepDate', 'vm.step.entryStartDate', 'vm.step.entryEndDate'], function(){
-        if(vm.step.stepDate && vm.step.stepDate.length == 8 && moment(vm.step.stepDate, "DD-MM-YYYY").isValid() == false) {
-          // console.log(moment(vm.step.stepDate, "DD-MM-YYYY").isValid()," ::: " , moment(vm.step.stepDate, "DD-MM-YYYY"));
-          vm.invalidDate = true;
-        } else {
-          vm.invalidDate = false;
-        }
-        // if(vm.step.stepDate && vm.step.stepDate.length == 8
-        //     && vm.step.entryStartDate && vm.step.entryStartDate.length == 8
-        //     && vm.step.entryEndDate && vm.step.entryEndDate.length == 8) {
-        //   console.log(moment(vm.step.stepDate, "DD-MM-YYYY").isValid()," ::: " , moment(vm.step.stepDate, "DD-MM-YYYY"));
-        // }
-
-
-      })
-      LoadData.clubs.query().$promise.then(function(clubs) {
-        vm.clubs = clubs;
-      })
-
-
-      function addStep(step) {
-
-        vm.step.$save().then(function(step) {
-        toastr.success('Etapa cadastrada com sucesso!', step.name);
+      function changePass(user) {
+        user.$save().then(function(user) {
+        toastr.success('Senha alterada com sucesso!');
         $mdDialog.hide();
         }).catch(function(erro){
+            delete user.password
+            delete user.confirm
             console.log(erro);
-            toastr.error("Problema ao adicionar a etapa");
+            toastr.error("Problema ao alterar a senha");
         });
       }
 

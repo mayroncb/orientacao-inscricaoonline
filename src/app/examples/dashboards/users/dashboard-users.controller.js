@@ -13,6 +13,7 @@
         loadUsers();
         vm.activateUser = activateUser;
         vm.removeUser = removeUser;
+        vm.openChangePass = openChangePass;
 
 
         function loadUsers() {
@@ -51,6 +52,43 @@
                     console.log( 'You decided to keep your debt.');
                 });;
 
+        }
+
+        function openChangePass(user, $event) {
+              $mdDialog.show({
+                controller: 'ChangePassDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/examples/dashboards/users/change-pass-dialog.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: $event,
+                locals: {
+                          'user': user
+                      },
+                clickOutsideToClose: true
+              })
+              .then(function() {
+                // loadUsers();
+              }, function() {
+                // loadUsers();
+              });
+        }
+        function editUser(user, $event) {
+              $mdDialog.show({
+                controller: 'ChangePassDialogController',
+                controllerAs: 'vm',
+                templateUrl: 'app/examples/dashboards/users/change-pass-dialog.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: $event,
+                locals: {
+                          'user': user
+                      },
+                clickOutsideToClose: true
+              })
+              .then(function() {
+                loadUsers();
+              }, function() {
+                loadUsers();
+              });
         }
 
 

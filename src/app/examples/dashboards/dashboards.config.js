@@ -46,9 +46,19 @@
         })
         .state('triangular.admin-default.dashboard-users', {
             url: '/dashboards/users',
-            templateUrl: 'app/examples/dashboards/users/dashboard-users.tmpl.html',
-            controller: 'DashboardUsersController',
-            controllerAs: 'vm'
+            views:{
+              '':{
+                templateUrl: 'app/examples/dashboards/users/dashboard-users.tmpl.html',
+                controller: 'DashboardUsersController',
+                controllerAs: 'vm'
+              },
+              belowContent: {
+                templateUrl: 'app/examples/dashboards/users/fab-button-add-user.tmpl.html',
+                controller: 'AddUserFabController',
+                controllerAs: 'vm'
+              }
+            }
+
         })
         .state('triangular.admin-default.dashboard-steps', {
             url: '/dashboards/steps',
