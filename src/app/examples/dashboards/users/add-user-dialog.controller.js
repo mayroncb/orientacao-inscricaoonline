@@ -7,13 +7,12 @@
 
     /* @ngInject */
     function AddUserController($scope, $state, $location, toastr, $http, $filter,
-      triSettings, API_CONFIG, LoadData, UserInstance) {
+      triSettings, $mdDialog, LoadData, UserInstance, $rootScope) {
         var vm = this;
 
-
-        vm.triSettings = triSettings;
-        vm.signupClick = signupClick;
-        vm.teste = teste;
+        vm.types = ['USER', 'ADMIN', 'CLUB_ADMIN']
+        vm.closeDialog = closeDialog;
+        vm.addUser = addUser;
         vm.checkConfirm = false;
         vm.user = {
             firstname: '',
@@ -28,7 +27,7 @@
             siCardNumber: '',
             siCard: false,
             category: '',
-            club: {},
+            club: '',
             dateBirth: '',
             email: '',
             password: '',
@@ -55,14 +54,17 @@
           vm.user['uf'] = vm.states[14];
         });
 
-        function addUser() {
-          vm.user.type = "USER";
-          // delete vm.user.confirm;
+        function closeDialog(){
+          $mdDialog.cancel();
+        }
+
+        function addUser(user) {
+          console.log(user);
+          delete vm.user.confirm;
           vm.user.$save().then(function(user) {
               toastr.success('Usuário cadastrado com sucesso', user.firstname);
-              // $location.path('/login');
-              $state.go('authentication.login');
-
+              $mdDialog.hide();
+              $rootScope.$broadcast('userEvent', true);
           }).catch(function(erro){
               console.log(erro);
               toastr.error("Já existe um usuário com esse " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');

@@ -20,6 +20,10 @@
             vm.users = UserInstance.query()
         }
 
+        $rootScope.$on('userEvent', function(){
+          loadUsers();
+        });
+
         function activateUser(user) {
           delete user.password;
           user.$save().then(function(user) {
