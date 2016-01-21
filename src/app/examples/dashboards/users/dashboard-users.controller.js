@@ -13,6 +13,7 @@
         loadUsers();
         vm.activateUser = activateUser;
         vm.removeUser = removeUser;
+        vm.openEditUser = openEditUser;
         vm.openChangePass = openChangePass;
 
 
@@ -76,11 +77,11 @@
                 // loadUsers();
               });
         }
-        function editUser(user, $event) {
+        function openEditUser(user, $event) {
               $mdDialog.show({
-                controller: 'ChangePassDialogController',
+                controller: 'EditUserController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/dashboards/users/change-pass-dialog.tmpl.html',
+                templateUrl: 'app/examples/dashboards/users/edit-user-dialog.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: $event,
                 locals: {
@@ -91,7 +92,7 @@
               .then(function() {
                 loadUsers();
               }, function() {
-                loadUsers();
+                // loadUsers();
               });
         }
 

@@ -19,9 +19,9 @@
                               <label  >Sexo</label>
                                   <md-radio-group  layout="row" ng-change="triWizard.updateProgress()"
                                       class="md-primary" ng-model="::signupController.user.genre"
-                                        required ng-init="signupController.user.genre = 'M'">
-                                    <md-radio-button   value="M">Masculino</md-radio-button>
-                                    <md-radio-button   value="F">Feminino</md-radio-button>
+                                        required ng-init="signupController.user.genre = true">
+                                    <md-radio-button   ng-value="true">Masculino</md-radio-button>
+                                    <md-radio-button   ng-value="false">Feminino</md-radio-button>
                                   </md-radio-group>
 
                               <div layout layout-sm="row" flex>
@@ -218,6 +218,9 @@
                             <div layout layout-sm="column" flex>
                                 <md-switch  ng-model="signupController.user.isCbo">
                                     Possui número CBO?
+                                    <md-tooltip md-direction="botton">
+                                      Pro favor, ative apenas se realmente tiver um numero CBO
+                                    </md-tooltip>
                                 </md-switch>
                                 <md-input-container>
                                     <label >Insira o número aqui</label>
@@ -225,6 +228,9 @@
                                 </md-input-container>
                                 <md-switch   ng-model="signupController.user.siCard">
                                     Possui SI CARD?
+                                    <md-tooltip md-direction="botton">
+                                      Pro favor, ative apenas se realmente tiver um SI CARD
+                                    </md-tooltip>
                                 </md-switch>
                                 <md-input-container>
                                     <label>Insira o número aqui</label>

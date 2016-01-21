@@ -21,6 +21,10 @@
 
 
         vm.user = $rootScope.user;
+
+        vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
+        console.log(vm.avatar)
+
         $scope.$watch('$rootScope.user', function() {
             vm.user = $rootScope.user;
         });

@@ -1,0 +1,212 @@
+<md-dialog  flex="80" ng-cloak>
+  <form name="profile">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Adicionar Etapa</h2>
+        <span flex></span>
+        <md-button class="md-primary md-mini   md-fab" ng-click="vm.closeDialog()">
+          <md-icon  md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <label  >Sexo</label>
+        <div layout layout-xs="row" flex>
+            <md-radio-group  layout="row"
+                class="md-primary" ng-model="vm.user.genre">
+              <md-radio-button ng-value="true">Masculino</md-radio-button>
+              <md-radio-button ng-value="false">Feminino</md-radio-button>
+            </md-radio-group>
+
+        </div>
+        <div layout layout-xs="row" flex>
+          <md-input-container  flex>
+
+              <input required id="name" label="firstname" translate placeholder="Nome" name="firstname" type="text" ng-model="vm.user.firstname" />
+              <div ng-show="true" ng-messages="profile.firstname.$error">
+                  <div ng-message when="required"><span translate>SIGNUP.NAME.PLEASE_ENTER</span></div>
+              </div>
+          </md-input-container>
+
+          <md-input-container  flex>
+              <input required id="name" label="surname" placeholder="Sobrenome" name="surname" type="text" ng-model="vm.user.surname" />
+              <div ng-show="true" ng-messages="profile.surname.$error">
+                  <div ng-message when="required"><span translate>SIGNUP.SURNAME.PLEASE_ENTER</span></div>
+              </div>
+          </md-input-container>
+
+          <md-input-container flex>
+                <label translate>SIGNUP.BIRTHDATE.LABEL</label>
+                <input required type="text" ui-mask="99/99/9999" placeholder=""  name="dateBirth" ng-model="vm.user.dateBirth" >
+                <div ng-show="true" ng-messages="profile.dateBirth.$error">
+                    <div ng-message when="required">
+                        <span translate>SIGNUP.BIRTHDATE.PLEASE_ENTER</span>
+                    </div>
+                </div>
+          </md-input-container>
+        </div>
+        <div layout layout-xs="row" flex>
+          <md-input-container flex>
+              <label translate>SIGNUP.RG.LABEL</label>
+              <input required ui-mask="99999-99" placeholder="" type="text" name="rg" ng-model="vm.user.rg" >
+              <div ng-show="true" ng-messages="profile.rg.$error">
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.RG.PLEASE_ENTER</span>
+                  </div>
+
+              </div>
+          </md-input-container>
+          <md-input-container flex>
+              <label translate>SIGNUP.CPF.LABEL</label>
+              <input required ui-mask="999.999.999-99" placeholder="" type="text" name="cpf" ng-model="vm.user.cpf" >
+              <div ng-show="true" ng-messages="profile.cpf.$error">
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.CPF.PLEASE_ENTER</span>
+                  </div>
+              </div>
+          </md-input-container>
+          <md-input-container flex>
+                <label translate>SIGNUP.PHONE.LABEL</label>
+                <input required type="text" ui-mask="(99) 9 9999-9999" placeholder="" name="phone" ng-model="vm.user.phone" >
+                <div ng-show="true" ng-messages="profile.phone.$error">
+                    <div ng-message when="required">
+                        <span translate>SIGNUP.PHONE.PLEASE_ENTER</span>
+                    </div>
+                </div>
+          </md-input-container>
+
+        </div>
+        <div layout layout-xs="column" flex>
+          <md-input-container flex="33">
+            <label translate>Email</label>
+            <input required type="email" name="email" ng-model="vm.user.email" >
+              <div ng-show="true" ng-messages="profile.email.$error">
+                  <div ng-message when="required">
+                      <span translate>Pro favor, insira um email</span>
+                  </div>
+                  <div ng-message when="email">
+                      <span translate>Pro favor, insira um email válido</span>
+                  </div>
+              </div>
+          </md-input-container>
+          <md-input-container flex>
+              <label translate>SIGNUP.CLUB.LABEL</label>
+              <md-select placeholder="Clube" name="club" ng-model="vm.user.club" required>
+                <md-optgroup label="{{currentGroup}}" ng-repeat="currentGroup in vm.groupList">
+                    <md-option ng-value="club" ng-repeat="club in vm.clubs | filter: {UF: currentGroup}">{{club.name}}</md-option>
+                </md-optgroup>
+              </md-select>
+              <div ng-show="true" ng-messages="profile.club.$error">
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.CLUB.PLEASE_ENTER</span>
+                  </div>
+              </div>
+          </md-input-container>
+        </div>
+        <div layout layout-xs="column" flex>
+          <md-input-container flex="33">
+              <label translate>SIGNUP.UF.LABEL</label>
+              <md-select required placeholder="UF" name="uf" ng-model="vm.user.uf" >
+                <md-option ng-value="state.UF" ng-repeat="state in vm.states">{{ state.UF }}</md-option>
+              </md-select>
+              <div  ng-show="true" ng-messages="profile.uf.$error">
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.UF.PLEASE_ENTER</span>
+                  </div>
+              </div>
+          </md-input-container>
+
+          <md-input-container flex>
+              <label translate>SIGNUP.CATEGORY.LABEL</label>
+              <md-select required placeholder="Category" name="category" ng-model="vm.user.category" ng-init="category = vm.user.category" >
+                <md-option ng-value="category" ng-repeat="category in vm.categories">{{ category.name }}</md-option>
+              </md-select>
+              <div ng-show="true" ng-messages="profile.category.$error">
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.CATEGORY.PLEASE_ENTER</span>
+                  </div>
+              </div>
+          </md-input-container>
+          <md-input-container flex>
+              <label translate>SIGNUP.CATEGORY.LABEL</label>
+              <md-select required placeholder="Tipo" name="type" ng-model="vm.user.type">
+                <md-option ng-value="type" ng-repeat="type in vm.types">{{ type }}</md-option>
+              </md-select>
+              <div ng-show="true" ng-messages="profile.type.$error">
+                  <div ng-message when="required">
+                      <span translate>SIGNUP.CATEGORY.PLEASE_ENTER</span>
+                  </div>
+              </div>
+          </md-input-container>
+        </div>
+
+        <!-- <md-input-container class="md-block">
+          <label translate class="md-title">SIGNUP.ALERGY.LABEL</label>
+          <md-chips name="alergy"
+          ng-model="vm.user.allergy"
+          placeholder="+ Alergias"
+          readonly="false"
+          secondary-placeholder="Liste suas Alergias">
+
+          </md-chips>
+          <div ng-show="true" ng-messages="profile.allergy.$error">
+              <div ng-message when="required">
+                  <span translate>SIGNUP.ALERGY.PLEASE_ENTER</span>
+              </div>
+          </div>
+
+        </md-input-container> -->
+        <div layout="row" layout-wrap>
+          <div flex="20">
+              <md-switch flex ng-model="vm.user.isCbo">
+                  CBO?
+                  <md-tooltip md-direction="botton">
+                    Pro favor, ative apenas se realmente tiver um número CBO
+                  </md-tooltip>
+              </md-switch>
+            </div>
+            <div flex=30>
+              <md-input-container flex>
+                  <label >Insira o número aqui</label>
+                  <input ng-required="vm.user.isCbo" type="number" name="cbo" ng-model="vm.user.cboNumber" ng-disabled="!vm.user.isCbo">
+                  <div ng-show="true"   ng-messages="profile.cbo.$error">
+                      <div ng-message when="required && ng-disabled='false'">
+                          <span translate>Insira o numero CBO</span>
+                      </div>
+                  </div>
+              </md-input-container>
+              </div>
+
+            <div flex="20">
+              <md-switch   ng-model="vm.user.siCard">
+                  SI CARD
+                  <md-tooltip md-direction="botton">
+                    Pro favor, ative apenas se realmente tiver um SI CARD
+                  </md-tooltip>
+              </md-switch>
+            </div>
+            <div flex="30">
+              <md-input-container>
+                  <label>Insira o número aqui</label>
+                  <input ng-required="vm.user.siCard" type="number" name="sicard" ng-model="vm.user.siCardNumber" ng-disabled="!vm.user.siCard">
+                  <div ng-show="true"   ng-messages="profile.sicard.$error">
+                      <div ng-message when="required">
+                          <span translate>Insira o numero do siCard</span>
+                      </div>
+                  </div>
+              </md-input-container>
+            </div>
+          </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+
+      <md-button class="md-primary" ng-disabled="!profile.$valid" ng-click="vm.editUser(vm.user)" style="margin-right:20px;">
+        Alterar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
