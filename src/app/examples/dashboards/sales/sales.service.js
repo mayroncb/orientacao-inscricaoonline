@@ -6,7 +6,7 @@
         .service('SalesService', SalesService);
 
     /* @ngInject */
-    function SalesService() {
+    function SalesService(moment) {
         this.generateSales = generateSales;
         this.createLineChartData = createLineChartData;
         this.createPieChartData = createPieChartData;
@@ -94,17 +94,18 @@
             return order;
         }
 
-        function createLineChartData(salesData) {
+        function createLineChartData(comp) {
+
             var chartData = {
                 labels: [],
-                series: ['Sales'],
+                series: ['Entry'],
                 options: {
                     maintainAspectRatio: false,
-                    datasetFill: false,
+                    datasetFill: true,
                     responsive: true,
                     scaleShowGridLines: false,
                     bezierCurve: true,
-                    pointDotRadius: 2,
+                    pointDotRadius: 3,
                     scaleFontColor: '#ffffff',
                     scaleFontSize: 16
                 },
@@ -113,12 +114,11 @@
             };
 
             var row = [];
-            for (var i = 0; i < salesData.dayTotals.length; i++) {
-                chartData.labels.push(salesData.dayTotals[i].date.format('M/D/YY'));
-                row.push(salesData.dayTotals[i].sales);
+            for(var it = 0; it < comp.steps.length; it ++ ){
+              chartData.labels.push(moment(comp.steps[it].stepDate).utc().format("DD/MM/YYYY"))
+              row.push(comp.steps[it].entries.length)
             }
             chartData.data.push(row);
-
             return chartData;
         }
 

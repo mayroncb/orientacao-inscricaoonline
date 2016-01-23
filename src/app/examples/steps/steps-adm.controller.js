@@ -14,12 +14,12 @@
 
 
 
-        function colourRGBA(value) {
-            var rgba = triTheming.rgba(value);
-            return {
-                'background-color': rgba
-            };
-        }
+        // function colourRGBA(value) {
+        //     var rgba = triTheming.rgba(value);
+        //     return {
+        //         'background-color': rgba
+        //     };
+        // }
 
 
 

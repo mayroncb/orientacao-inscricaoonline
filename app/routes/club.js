@@ -5,6 +5,9 @@ module.exports = function(app){
         .get(controller.loadClubs)
         .post(controller.addClub); //ADD Verificação na produção
 
+    app.route('/clubs/qtd')
+        .get(controller.getCount) //ADD Verificação na produção
+
    app.route('/clubs/:id')
         .get(controller.getClub) //ADD Verificação na produção
         .delete(controller.removeClub)

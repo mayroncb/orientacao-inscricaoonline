@@ -27,7 +27,7 @@
                        vm.activeSteps[i].isRegistered = true;
                      }
                    }
-                   console.log(vm.activeSteps);
+                  //  console.log(vm.activeSteps);
                  }
                 //  vm.isRegistered =
            });
@@ -45,7 +45,7 @@
                 clickOutsideToClose: true
             })
             .then(function(step) {
-              toastr.warning('Aguarde a confirmação', 'Inscrição efetuada!');
+              toastr.warning('Aguarde a confirmação', 'Inscrição enviada!');
               loadSteps();
             }, cancelDialog);
 

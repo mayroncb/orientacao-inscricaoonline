@@ -116,6 +116,12 @@
                 //     controller: 'SalesFabController',
                 //     controllerAs: 'vm'
                 // }
+            },
+            data: {
+                layout: {
+                    contentClass: 'full-image-background   background-overlay-static',
+                    innerContentClass: 'overlay-gradient-20'
+                }
             }
         })
         // .state('triangular.admin-default.dashboard-draggable', {

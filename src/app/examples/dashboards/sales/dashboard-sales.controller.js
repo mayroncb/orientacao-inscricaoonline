@@ -7,10 +7,18 @@
 
     /* @ngInject */
     function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
-       $http, $interval, $mdToast, $filter, $mdDialog, SalesService, triMenu) {
+      CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
+      SalesService, triMenu) {
         var vm = this;
+        vm.loadGraph = loadGraph;
         console.log('DashboardSalesController');
 
+        LoadData.clubQtd.query().$promise.then(function(data){
+          vm.clubsQtd = data.value
+        })
+        LoadData.userQtd.query().$promise.then(function(data){
+          vm.usersQtd = data.value
+        })
         console.log('Ativar em produção');
             // $interval( function(){
             //
@@ -20,16 +28,21 @@
             //
             //
             //  }, 3000);
+
+
         vm.dateRange = {
             start: moment().startOf('week'),
             end: moment().endOf('week')
         };
 
+
+
         vm.query = {
-            order: 'date',
-            limit: 5,
-            page: 1
-        };
+           filter: '',
+           limit: '5',
+           order: '-date',
+           page: 1
+         };
 
         vm.openOrder = openOrder;
 
@@ -47,11 +60,28 @@
             });
         }
 
+        function loadCompetitions(){
+          CompetitionInstance.query().$promise.then(function(comps){
+            console.log(comps)
+            vm.competitions = comps;
+            vm.competition = vm.competitions[0]
+            vm.step = vm.competition.steps[0]
+            createData();
+          })
+        }
+
+        loadCompetitions();
+
         function createData() {
-            vm.salesData = SalesService.generateSales(vm.dateRange);
-            vm.chartLineData = SalesService.createLineChartData(vm.salesData);
-            vm.chartPieData = SalesService.createPieChartData(vm.salesData);
-            vm.chartBarData = SalesService.createBarChartData(vm.salesData);
+            // vm.salesData = SalesService.generateSales(vm.dateRange);
+            vm.chartLineData = SalesService.createLineChartData(vm.competition);
+            // vm.chartPieData = SalesService.createPieChartData(vm.salesData);
+            // vm.chartBarData = SalesService.createBarChartData(vm.salesData);
+        }
+
+        function loadGraph() {
+          console.log("changed")
+          createData();
         }
 
         // events
@@ -82,6 +112,6 @@
 
         // init
 
-        createData();
+
     }
 })();

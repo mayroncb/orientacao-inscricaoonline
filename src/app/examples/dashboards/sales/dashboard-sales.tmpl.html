@@ -1,24 +1,117 @@
 <div class="sales-dashboard" layout="column">
-    <tri-widget title="DASHBOARDS.SALES.SALES" subtitle="{{vm.dateRange.start | amDateFormat:'MMMM Do YYYY'}} - {{vm.dateRange.end | amDateFormat:'MMMM Do YYYY'}}" palette-background="triCyan:800" class="padding-left-40 padding-right-40 padding-top-20 padding-bottom-20 no-shadow">
+    <tri-widget title="Inscricões / Etapa" subtitle="Total de inscritos em cada etapa" palette-background="triCyan:800" class="padding-left-40 padding-right-40 padding-top-20 padding-bottom-20 no-shadow">
         <canvas height="300" class="chart-line" chart-data="vm.chartLineData.data" chart-labels="vm.chartLineData.labels" chart-series="vm.chartLineData.series" chart-options="vm.chartLineData.options" chart-colours="vm.chartLineData.colors"></canvas>
     </tri-widget>
 
     <div layout="row" layout-sm="column" layout-margin dragula='"drag-analytics-container"'>
         <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
-            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.salesData.totalSales" duration="1.5" decimals="0"></p>
-            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>DASHBOARDS.SALES.TOTAL-SALES</p>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.usersQtd" duration="1.5" decimals="0"></p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Total de Usuários</p>
         </tri-widget>
         <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
-            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.salesData.totalEarnings" duration="1.5" options="{ prefix: '$' }" decimals="2"></p>
-            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>DASHBOARDS.SALES.TOTAL-EARNINGS</p>
-        </tri-widget>
-        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
-            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="971315.53" duration="1.5" options="{ prefix: '$' }" decimals="2"></p>
-            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>DASHBOARDS.SALES.ALL-TIME-EARNINGS</p>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.clubsQtd" duration="1.5" decimals="0"></p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Total de Clubes</p>
         </tri-widget>
     </div>
 
     <div layout="row" layout-sm="column" layout-margin>
+      <tri-widget flex="100" flex-sm="100" >
+        <form name="formComps">
+
+          <md-tabs layout-fill flex md-dynamic-height md-no-disconnect md-stretch-tabs="always" md-no-pagination>
+              <md-tab label="Inscrições Pendentes">
+                  <md-content class="md-padding">
+                    <div layout layout-xs="column" flex>
+                      <md-input-container flex="50">
+                          <md-select required ng-change="vm.loadGraph()" placeholder="Campeonatos" name="competitions" ng-model="vm.competition" >
+                            <md-option ng-value="competition" ng-repeat="competition in vm.competitions">{{ competition.name }}</md-option>
+                          </md-select>
+                      </md-input-container>
+
+                      <md-input-container flex="50">
+                          <md-select ng-disabled="!vm.competition"
+                          placeholder="Etapas" name="steps" ng-model="vm.step" >
+                            <md-option ng-value="step" ng-repeat="step in vm.competition.steps">{{ step.name }}</md-option>
+                          </md-select>
+                          <div ng-show="true" ng-messages="formComps.competitions.$error">
+                              <div ng-message when="required">
+                                  <span translate>Por favor, selecione um campeonato</span>
+                              </div>
+                          </div>
+                      </md-input-container>
+                    </div>
+
+
+
+                    <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
+                        <md-data-table-container>
+                            <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                                <thead md-order="vm.query.order" md-trigger="vm.getCompetitions">
+                                    <tr>
+                                        <th name="Data" order-by="date" ></th>
+                                        <th name="Nome"></th>
+                                        <th name="Valor"></th>
+                                        <th name="Status"></th>
+                                        <th name="Action"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="entry in vm.step.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+                                        <td>{{::entry.date | amDateFormat:'DD/MM/YYYY'}}</td>
+                                        <td>{{::entry.user.firstname}} {{::entry.user.surname}}</td>
+                                        <td>{{::entry.total}}</td>
+                                        <td flex="10">
+                                          <span class="status"  ng-class="'status-'+entry.status"  >
+                                              {{::entry.status}}
+                                          </span>
+                                        </td>
+                                        <td>
+                                          <div layout="row"  layout-wrap>
+                                            <div flex="33">
+                                              <md-button ng-click="vm.openEditUser(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                                  <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                              </md-button>
+                                            </div>
+                                            <div flex="33">
+                                              <md-button ng-click="vm.openChangePass(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                                  <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                              </md-button>
+                                            </div>
+                                            <div flex="33">
+                                              <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Usuário">
+                                                  <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                                              </md-button>
+                                            </div>
+                                          </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-data-table-container>
+                        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.step.entries.length}}"></md-data-table-pagination>
+                    </tri-widget>
+                  </md-content>
+              </md-tab>
+              <md-tab label="{{'DASHBOARDS.SERVER.24HRS' | translate}}">
+                  <md-content class="md-padding">
+                      <canvas flex class="chart-bar" chart-data="serverCharts.data24hrs.data" chart-labels="serverCharts.data24hrs.labels" chart-legend="true" chart-options="serverCharts.data24hrs.options" chart-series="serverCharts.data24hrs.series"></canvas>
+                  </md-content>
+              </md-tab>
+              <md-tab label="{{'DASHBOARDS.SERVER.7DAYS' | translate}}">
+                  <md-content class="md-padding">
+                      <canvas flex class="chart-bar" chart-data="serverCharts.data7days.data" chart-labels="serverCharts.data7days.labels" chart-legend="true" chart-options="serverCharts.data7days.options" chart-series="serverCharts.data7days.series"></canvas>
+                  </md-content>
+              </md-tab>
+              <md-tab label="{{'DASHBOARDS.SERVER.365DAYS' | translate}}">
+                  <md-content class="md-padding">
+                      <canvas flex class="chart-bar" chart-data="serverCharts.data365days.data" chart-labels="serverCharts.data365days.labels" chart-legend="true" chart-options="serverCharts.data365days.options" chart-series="serverCharts.data365days.series"></canvas>
+                  </md-content>
+              </md-tab>
+          </md-tabs>
+          </form>
+      </tri-widget>
+    </div>
+    <!-- <div layout="row" layout-sm="column" layout-margin>
         <tri-widget flex title="DASHBOARDS.SALES.ORDERS" content-layout="column" content-layout-align="center">
             <md-data-table-container>
                 <table md-data-table class="md-data-table" md-progress="vm.deferred">
@@ -54,7 +147,7 @@
             </md-data-table-container>
             <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.salesData.orders.length}}"></md-data-table-pagination>
         </tri-widget>
-    </div>
+    </div> -->
 
     <!-- <div layout="row" layout-sm="column" layout-margin>
         <tri-widget flex flex-sm="100" title="DASHBOARDS.SALES.ORDER-STATUS" content-padding>

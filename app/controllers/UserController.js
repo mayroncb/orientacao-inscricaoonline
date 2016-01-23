@@ -8,6 +8,11 @@ module.exports = function(app) {
 
     var User = app.models.User;
 
+  controller.getCount = function(req, res) {
+      User.count({}, function(err, n){
+        res.status(200).json({value: n});
+      })
+    }
 
     controller.listUsers = function(req, res) {
         User.find({}).populate('club').exec(function(err, users){
@@ -48,7 +53,7 @@ module.exports = function(app) {
     }
 
     controller.removerContato = function(req, res) {
-        User.findOne({_id: req.params.id}, function(err, data) {        
+        User.findOne({_id: req.params.id}, function(err, data) {
                 data.remove(function(err, pro) {
                   res.status(204).end();
                 })

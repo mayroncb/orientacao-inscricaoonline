@@ -1,17 +1,68 @@
 
 var moment = require('moment');
+var async = require('async');
 
 module.exports = function(app) {
     var controller = {}
 
     var Competition = app.models.Competition;
+    var User = app.models.User;
 
 
     controller.listCompetitions = function(req, res) {
+
+
+
+
         Competition.find({})
         .populate({path: "steps", populate: {path: "club"}})
-        .exec(function(err, competitions){
-            res.json(competitions);
+        .lean()
+        .exec(function(err, competitions) {
+          uIds = [];
+          loadedUsers = [];
+          async.series([
+            function(callback) {
+              async.forEach(competitions, function(comp) {
+                compIndex = competitions.indexOf(comp);
+                async.forEach(comp.steps, function(step){
+                  stepIndex = comp.steps.indexOf(step)
+                  async.forEach(step.entries, function(entry) {
+                    entryIndex = step.entries.indexOf(entry);
+                    uIds.push(entry.user)
+
+                  })
+                })
+              })
+              User.find()
+                .where('_id')
+                .in(uIds)
+                .exec(function(err, users){
+                  loadedUsers = users;
+                  callback()
+                })
+            },
+            function(callback){
+              async.forEach(competitions, function(comp) {
+                compIndex = competitions.indexOf(comp);
+                async.forEach(comp.steps, function(step){
+                  stepIndex = comp.steps.indexOf(step)
+                  async.forEach(step.entries, function(entry) {
+                    entryIndex = step.entries.indexOf(entry);
+                    async.forEach(loadedUsers, function(user){
+                      if(JSON.stringify(competitions[compIndex].steps[stepIndex].entries[entryIndex].user)
+                          === JSON.stringify(user._id)) {
+                          competitions[compIndex].steps[stepIndex].entries[entryIndex].user = user
+                      }
+                    })
+                  })
+                })
+              })
+              res.json(competitions);
+            }
+          ])
+
+
+
         });
 
     }

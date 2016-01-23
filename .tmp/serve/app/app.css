@@ -26753,8 +26753,8 @@ table.md-data-table td {
 .sales-dashboard .status-complete {
   background-color: #8BC34A; }
 
-.sales-dashboard .status-pending {
-  background-color: #FF9800; }
+.sales-dashboard .status-Processando {
+  background-color: #F5BA0A; }
 
 .order-dialog {
   box-shadow: none; }

@@ -10,6 +10,7 @@ module.exports = function(app) {
     var Step = app.models.Step;
     var Competition = app.models.Competition;
     var gfs;
+
     mongoose.connection.on('connected', function(){
       Grid.mongo = mongoose.mongo;
       var db = mongoose.connection.db;
@@ -64,12 +65,15 @@ module.exports = function(app) {
       fs.createReadStream(file.path).pipe(writestream);
 
       writestream.on('close', function (file) {
-        order.comp = file.id;
+        order.comp = file._id;
+        console.log(":::>>> ", file);
+
          Step.findById(req.params.id,function(err, step) {
-            step.entries.push(order);
-            step.save(function(err, step2){
+           console.log(":::: ", order);
+          step.entries.push(order);
+          step.save(function(err, step2){
               res.status(200).send(step2);
-            });
+          });
         })
 
         console.log(file.filename + ' Written To DB');

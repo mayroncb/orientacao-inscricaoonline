@@ -19,6 +19,12 @@ module.exports = function(app) {
             )
     }
 
+    controller.getCount = function(req, res) {
+      Club.count({}, function(err, n){
+        res.status(200).json({value: n});
+      })
+    }
+
     // controller.listCompetitions = function(req, res) {
     //     Competition.find({})
     //     .populate({path: "steps", populate: {path: "club"}})

@@ -58,7 +58,7 @@
         //     vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
         //     $rootScope.user = vm.user;
         // });
-         loadData()
+        loadData()
         function loadData() {
           LoadData.categories.query().$promise.then(function(categories) {
               vm.categories = categories;

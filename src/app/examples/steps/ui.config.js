@@ -28,29 +28,29 @@
           },
           data: {
               layout: {
-                  contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+                  contentClass: 'full-image-background  background-overlay-static',
                   innerContentClass: 'overlay-gradient-20'
               }
           }
         })
-        $stateProvider
-        .state('triangular.admin-default.adm', {
-            url: '/steps',
-            views: {
-            '': {
-              controller: 'StepsAdmController',
-              controllerAs: 'vm',
-              templateUrl: 'app/examples/steps/steps.tmpl.html'
-
-            }
-          },
-          data: {
-              layout: {
-                  contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
-                  innerContentClass: 'overlay-gradient-20'
-              }
-          }
-        })
+        // $stateProvider
+        // .state('triangular.admin-default.adm', {
+        //     url: '/steps',
+        //     views: {
+        //     '': {
+        //       controller: 'StepsAdmController',
+        //       controllerAs: 'vm',
+        //       templateUrl: 'app/examples/steps/steps.tmpl.html'
+        //
+        //     }
+        //   },
+        //   data: {
+        //       layout: {
+        //           contentClass: 'full-image-background mb-bg-fb-08 background-overlay-static',
+        //           innerContentClass: 'overlay-gradient-20'
+        //       }
+        //   }
+        // })
 
 
         triMenuProvider.addMenu({

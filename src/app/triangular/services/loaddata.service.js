@@ -15,6 +15,12 @@ angular.module('app').
       }),
       userByName: $resource('http://localhost:3000/users/q/:text', {}, {
         query: { method: 'GET', params: {text: '@text'}, isArray: true }
+      }),
+      userQtd: $resource('http://localhost:3000/users/qtd', {}, {
+        query: { method: 'GET', isArray: false }
+      }),
+      clubQtd: $resource('http://localhost:3000/clubs/qtd', {}, {
+        query: { method: 'GET',  isArray: false }
       })
     };
   })

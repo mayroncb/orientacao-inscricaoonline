@@ -21,18 +21,26 @@
         </div>
         <div flex layout="row" class="margin-bottom-10">
             <div flex>
-                <strong translate>Banco</strong>
-            </div>
-            <div flex>
-                <span>Banco do Brasil</span>
-            </div>
-        </div>
-        <div flex layout="row" class="margin-bottom-10">
-            <div flex>
                 <strong translate>Nome</strong>
             </div>
             <div flex>
                 <span>Federação Paraiba de Orientação</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>CNPJ</strong>
+            </div>
+            <div flex>
+                <span>000.000.000/00001-01</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex>
+                <strong translate>Banco</strong>
+            </div>
+            <div flex>
+                <span>Banco do Brasil</span>
             </div>
         </div>
         <div flex layout="row" class="margin-bottom-10">
@@ -43,20 +51,30 @@
                 <span>Ag. 0000-0 / Cc. 00000-X</span>
             </div>
         </div>
-        <div flex layout="row" class="margin-bottom-10">
+        <div flex layout="row" style="height: 30px;" class="margin-bottom-10">
             <div flex>
+                <strong translate>Nº do comprovante</strong>
+            </div>
+            <div flex>
+              <md-input-container   class="md-block">
+                  <input required name="compNumber"  style="margin-top: -30px;"
+                  ng-model="vm.order.compNumber" type="text" >
+              </md-input-container>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex="50">
                 <strong translate>Comprovante</strong>
             </div>
-            <div flex="30">
-              <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*" ngf-max-size="1MB"
+            <div layout="row" flex="50">
+              <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*" ngf-max-size="3MB"
               ngf-select="vm.upload($file)" ng-disabled="vm.status != 'Enviar'"   aria-label="upload">
                     {{vm.status}} <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'Enviar', 'fa fa-spinner fa-pulse': vm.status == 'Enviando', 'zmdi zmdi-check': vm.status == 'Completo'}"></md-icon>
               </md-button>
+              <div flex="70" class="thumb_div">
+                <img ngf-src="vm.comp" class="thumb">
+              </div>
             </div>
-            <div flex="20" class="thumb_div">
-              <img ngf-src="vm.comp" class="thumb">
-            </div>
-
         </div>
          <md-divider ></md-divider>
         <br/>
@@ -81,15 +99,16 @@
                 <span>{{vm.user.email}}</span>
             </div>
         </div>
-
-        <!-- <div flex layout="row" class="margin-bottom-10">
-            <div flex>
-                <strong translate>DASHBOARDS.SALES.ORDER.NUM-ITEMS</strong>
+        <div flex layout="row" class="margin-bottom-10">
+            <div flex="50">
+                <strong translate>Categoria</strong>
             </div>
-            <div flex>
-                <span>{{vm.order.items.length}}</span>
+            <div flex="50">
+                  <md-select style="margin-top: -10px;" required placeholder="Category" name="category" ng-model="vm.order.category">
+                      <md-option ng-value="category" ng-repeat="category in vm.categories">{{ category.name }}</md-option>
+                  </md-select>
             </div>
-        </div> -->
+        </div>
 
         <md-divider></md-divider>
 
@@ -126,7 +145,7 @@
     </md-dialog-content>
     <md-dialog-actions class="" layout="row">
         <span flex></span>
-        <md-button ng-click="vm.okClick(vm.order)" class="md-primary" ng-disabled="!vm.comp" aria-label="{{GENERAL.OK | translate}}" translate="">
+        <md-button ng-click="vm.entryStep(vm.order)" class="md-primary" ng-disabled="!vm.comp || !vm.order.compNumber" aria-label="{{GENERAL.OK | translate}}" translate="">
           Inscrever
           <md-tooltip md-visible="true" md-direction="left">Insira o comprovante para efetuar a inscrição <</md-tooltip>
         </md-button>
