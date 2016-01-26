@@ -22,7 +22,7 @@
             genre: '',
             cpf: '',
             phone: '',
-            uf: {},
+            uf: null,
             cboNumber: '',
             isCbo: false,
             siCardNumber: '',
@@ -37,7 +37,7 @@
         };
         vm.user = new UserInstance(vm.user);
         vm.categories = LoadData.categories.query(function(categories) {
-            // vm.user['category'] = vm.categories[17];
+            vm.user['category'] = vm.categories[17];
         });
 
         vm.clubs = LoadData.clubs.query(function(clubs){
@@ -48,11 +48,11 @@
                 }
                 return previous;
               }, []);
-              // vm.user['club'] = vm.clubs[0];
+              vm.user['club'] = vm.clubs[0];
         });
 
         vm.states = LoadData.states.query(function(states){
-          vm.user['uf'] = vm.states[14];
+          vm.user['uf'] = vm.states[14].UF;
         });
 
         function signupClick() {
@@ -64,8 +64,17 @@
               $state.go('authentication.login');
 
           }).catch(function(erro){
-              console.log(erro);
+            console.log(erro)
+            if(erro.data.errors) {
+              var errors = Object.keys(erro.data.errors);
+              if (erro.data.fieldName){
+
+              } else if (errors[0] === "dateBirth" ) {
+                toastr.error("Por favor verifique sua data de nascimento, tem algo errado com ela");
+              }
+            } else if (erro.data.fieldName) {
               toastr.error("Já existe um usuário com esse " + erro.data.fieldName  + " cadastrado!", 'Erro no cadastro');
+            }
           });
 
 
