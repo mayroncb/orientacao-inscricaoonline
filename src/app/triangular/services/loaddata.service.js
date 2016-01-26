@@ -21,6 +21,9 @@ angular.module('app').
       }),
       clubQtd: $resource('http://localhost:3000/clubs/qtd', {}, {
         query: { method: 'GET',  isArray: false }
+      }),
+      loadComp: $resource('http://localhost:3000/entry/comp/:id', {}, {
+        query: { method: 'GET',  params:{id: '@id'}, isArray: false }
       })
     };
   })

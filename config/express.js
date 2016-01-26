@@ -5,6 +5,8 @@ var cors = require('cors');
 var busboy = require('connect-busboy');
 
 module.exports = function(){
+    process.env.AWS_ACCESS_KEY_ID = "AKIAIHCNUOOH6WBS4IVA"
+    process.env.AWS_SECRET_ACCESS_KEY = "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"
     var passport = require('passport');
     var app = express();
     var whitelist = [

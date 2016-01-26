@@ -7,4 +7,7 @@ module.exports = function(app){
     app.route('/states')
         .get(controller.loadStates);
 
+    app.route('/status')
+        .get(controller.loadStatus);
+
 }

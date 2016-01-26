@@ -1,0 +1,14 @@
+[
+  {
+      "id": 0,
+      "name": "Processando"
+  },
+  {
+      "id": 1,
+      "name": "Aceita"
+  },
+  {
+      "id": 2,
+      "name": "Cancelada"
+  }
+]

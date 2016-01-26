@@ -22,44 +22,29 @@
               <md-tab label="Inscrições Pendentes">
                   <md-content class="md-padding">
                     <div layout layout-xs="column" flex>
-                      <md-input-container flex="50">
-                          <md-select required ng-change="vm.loadGraph()" placeholder="Campeonatos" name="competitions" ng-model="vm.competition" >
-                            <md-option ng-value="competition" ng-repeat="competition in vm.competitions">{{ competition.name }}</md-option>
-                          </md-select>
-                      </md-input-container>
-
-                      <md-input-container flex="50">
-                          <md-select ng-disabled="!vm.competition"
-                          placeholder="Etapas" name="steps" ng-model="vm.step" >
-                            <md-option ng-value="step" ng-repeat="step in vm.competition.steps">{{ step.name }}</md-option>
-                          </md-select>
-                          <div ng-show="true" ng-messages="formComps.competitions.$error">
-                              <div ng-message when="required">
-                                  <span translate>Por favor, selecione um campeonato</span>
-                              </div>
-                          </div>
+                      <md-input-container flex="100">
+                          <input placeholder="Filtro" ng-model="vm.queryFilter">
+                          </input>
+                          <md-icon md-font-icon="zmdi zmdi-search" class="name"></md-icon>
                       </md-input-container>
                     </div>
-
-
-
                     <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
                         <md-data-table-container>
                             <table md-data-table class="md-data-table" md-progress="vm.deferred">
-                                <thead md-order="vm.query.order" md-trigger="vm.getCompetitions">
+                                <thead md-order="vm.query.order" >
                                     <tr>
-                                        <th name="Data" order-by="date" ></th>
+                                        <th name="Compravante" order-by="compNumber" ></th>
                                         <th name="Nome"></th>
                                         <th name="Valor"></th>
                                         <th name="Status"></th>
-                                        <th name="Action"></th>
+                                        <th name="Ação"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="entry in vm.step.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
-                                        <td>{{::entry.date | amDateFormat:'DD/MM/YYYY'}}</td>
+                                    <tr ng-repeat="entry in vm.pendingEntries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.queryFilter">
+                                        <td>{{::entry.compNumber}}</td>
                                         <td>{{::entry.user.firstname}} {{::entry.user.surname}}</td>
-                                        <td>{{::entry.total}}</td>
+                                        <td>{{::entry.value}}</td>
                                         <td flex="10">
                                           <span class="status"  ng-class="'status-'+entry.status"  >
                                               {{::entry.status}}
@@ -68,17 +53,17 @@
                                         <td>
                                           <div layout="row"  layout-wrap>
                                             <div flex="33">
-                                              <md-button ng-click="vm.openEditUser(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                              <md-button ng-click="vm.editEntry(entry, $event)" class="md-icon-button" aria-label="Editar Inscrição">
                                                   <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
                                               </md-button>
                                             </div>
                                             <div flex="33">
-                                              <md-button ng-click="vm.openChangePass(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                              <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
                                                   <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                                               </md-button>
                                             </div>
                                             <div flex="33">
-                                              <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Usuário">
+                                              <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Inscrição">
                                                   <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
                                               </md-button>
                                             </div>
@@ -92,12 +77,77 @@
                     </tri-widget>
                   </md-content>
               </md-tab>
-              <md-tab label="{{'DASHBOARDS.SERVER.24HRS' | translate}}">
-                  <md-content class="md-padding">
-                      <canvas flex class="chart-bar" chart-data="serverCharts.data24hrs.data" chart-labels="serverCharts.data24hrs.labels" chart-legend="true" chart-options="serverCharts.data24hrs.options" chart-series="serverCharts.data24hrs.series"></canvas>
-                  </md-content>
+              <md-tab label="Inscrições por etapa">
+                <md-content class="md-padding">
+                  <div layout layout-xs="column" flex>
+                    <md-input-container flex="50">
+                        <md-select required ng-change="vm.loadGraph()" placeholder="Campeonatos" name="competitions" ng-model="vm.competition" >
+                          <md-option ng-value="competition" ng-repeat="competition in vm.competitions">{{ competition.name }}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="50">
+                        <md-select ng-disabled="!vm.competition"
+                        placeholder="Etapas" ng-change="vm.loadEntries()" name="steps" ng-model="vm.step" >
+                          <md-option ng-value="step" ng-repeat="step in vm.competition.steps">{{ step.name }}</md-option>
+                        </md-select>
+                        <div ng-show="true" ng-messages="formComps.competitions.$error">
+                            <div ng-message when="required">
+                                <span translate>Por favor, selecione um campeonato</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                  </div>
+                  <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
+                      <md-data-table-container>
+                          <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                              <thead md-order="vm.query.order" md-trigger="vm.getCompetitions">
+                                  <tr>
+                                      <th name="Compravante" order-by="compNumber" ></th>
+                                      <th name="Nome"></th>
+                                      <th name="Valor"></th>
+                                      <th name="Status"></th>
+                                      <th name="Ação"></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr ng-repeat="entry in vm.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+                                      <td>{{::entry.compNumber}}</td>
+                                      <td>{{::entry.user.firstname}} {{::entry.user.surname}}</td>
+                                      <td>{{::entry.value}}</td>
+                                      <td flex="10">
+                                        <span class="status"  ng-class="'status-'+entry.status"  >
+                                            {{::entry.status}}
+                                        </span>
+                                      </td>
+                                      <td>
+                                        <div layout="row"  layout-wrap>
+                                          <div flex="33">
+                                            <md-button ng-click="vm.editEntry(entry, $event)" class="md-icon-button" aria-label="Editar Inscrição">
+                                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                            </md-button>
+                                          </div>
+                                          <div flex="33">
+                                            <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
+                                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                            </md-button>
+                                          </div>
+                                          <div flex="33">
+                                            <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Inscrição">
+                                                <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                                            </md-button>
+                                          </div>
+                                        </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </md-data-table-container>
+                      <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.step.entries.length}}"></md-data-table-pagination>
+                  </tri-widget>
+                </md-content>
               </md-tab>
-              <md-tab label="{{'DASHBOARDS.SERVER.7DAYS' | translate}}">
+              <!-- <md-tab label="{{'DASHBOARDS.SERVER.7DAYS' | translate}}">
                   <md-content class="md-padding">
                       <canvas flex class="chart-bar" chart-data="serverCharts.data7days.data" chart-labels="serverCharts.data7days.labels" chart-legend="true" chart-options="serverCharts.data7days.options" chart-series="serverCharts.data7days.series"></canvas>
                   </md-content>
@@ -106,7 +156,7 @@
                   <md-content class="md-padding">
                       <canvas flex class="chart-bar" chart-data="serverCharts.data365days.data" chart-labels="serverCharts.data365days.labels" chart-legend="true" chart-options="serverCharts.data365days.options" chart-series="serverCharts.data365days.series"></canvas>
                   </md-content>
-              </md-tab>
+              </md-tab> -->
           </md-tabs>
           </form>
       </tri-widget>

@@ -59,6 +59,7 @@
     "angular-aria": "^1.4.7",
     "angular-material": "^0.11.4",
     "async": "^1.5.2",
+    "aws-sdk": "^2.2.32",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.6.7",
     "busboy": "^0.2.12",

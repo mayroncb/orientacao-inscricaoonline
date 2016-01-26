@@ -16,7 +16,7 @@ module.exports = function(app){
         res.redirect('/');
     });
 
-    app.get('/status',  verifyCreds);
+    // app.get('/status',  verifyCreds);
 }
 
 

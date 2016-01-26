@@ -19,17 +19,50 @@ module.exports = function(app) {
 
 
     controller.listSteps = function(req, res) {
-        Step.find({}).populate("club").exec(function(err, steps){
+        Step.find({}).populate("club entries").exec(function(err, steps){
             res.json(steps)
         });
 
     }
+    controller.loadComp = function(req, res) {
+        console.log(req.params.id)
+        gfs.findOne({ _id: req.params.id}, function(err, file) {
+          console.log(file)
+            if(err) {
+                res.status(404).end();
+            } else if(!file){
+                res.status(404).end();
+            } else {
+                var readstream = gfs.createReadStream({
+                  _id: file._id
+                });
+                var bufs = [];
+                res.set('Content-Type', 'image/png');
+                // res.set('Content-Disposition', 'attachment; filename="' + file.filename + '"');
+
+                readstream.on('error', function (err) {
+                    res.send(500, err);
+                });
+                readstream.on('data', function (chunk) {
+                  console.log("da")
+                  bufs.push(chunk);
+                });
+                readstream.on('end', function () {
+                  var fbuf = Buffer.concat(bufs);
+                  var base64 = (fbuf.toString());
+                  res.send(base64);
+                });
+            }
+        });
+      }
 
     controller.getStep = function(req, res) {
-        Step.findOne({_id: req.params.id}, function(err, data) {
-            // console.log(data);
-            res.json(data);
-        })
+      Step.findOne({_id: req.params.id})
+      .populate("club")
+      .populate({path: "entries", populate: {path: "user category"}})
+      .exec(function(err, steps){
+        res.json(steps)
+      });
     }
 
     controller.removeStep = function(req, res) {
@@ -55,32 +88,8 @@ module.exports = function(app) {
         })
     }
 
-    controller.addEntry = function(req, res) {
-      var file = req.files.file;
-      var order = JSON.parse(req.body.order);
-
-      var writestream = gfs.createWriteStream({
-        filename: file.name
-      });
-      fs.createReadStream(file.path).pipe(writestream);
-
-      writestream.on('close', function (file) {
-        order.comp = file._id;
-        console.log(":::>>> ", file);
-
-         Step.findById(req.params.id,function(err, step) {
-           console.log(":::: ", order);
-          step.entries.push(order);
-          step.save(function(err, step2){
-              res.status(200).send(step2);
-          });
-        })
-
-        console.log(file.filename + ' Written To DB');
-      });
-    }
-
     controller.updateStep = function(req, res) {
+      console.log("updated")
       var step = req.body;
       step.stepDate = moment(step.stepDate, "DD-MM-YYYY");
       step.entryStartDate = moment(step.entryStartDate, "DD-MM-YYYY");
@@ -99,6 +108,8 @@ module.exports = function(app) {
     }
 
     controller.addStep = function(req, res) {
+      console.log("add")
+
         var step = req.body;
 
         step.stepDate = moment(step.stepDate, "DD-MM-YYYY");
@@ -120,8 +131,11 @@ module.exports = function(app) {
         })
     }
 
-    checkOpenSteps();
-    setInterval(checkOpenSteps, 5000);
+
+
+
+checkOpenSteps();
+setInterval(checkOpenSteps, 5000);
 
 function checkOpenSteps() {
     var dateObj = new Date();

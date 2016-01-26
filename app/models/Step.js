@@ -56,20 +56,11 @@ module.exports = function() {
         required: true
        },
 
-       entries: [{
-         comp: mongoose.Schema.ObjectId,
-         items: Array,
-         total: Number,
-         compNumber: String,
-         status: {type: String, default: "Processando" },
-         user: {type: mongoose.Schema.ObjectId, ref: 'User'},
-         date: {type: Date, default: new Date()},
-         category: {type: mongoose.Schema.ObjectId, ref: 'category'}
-       }],
-
       deleted: {
         type: Boolean
       },
+
+      entries: [{type: mongoose.Schema.ObjectId, ref: 'Entry' }],
 
       competition: {
         type: mongoose.Schema.ObjectId, ref: 'Competition',

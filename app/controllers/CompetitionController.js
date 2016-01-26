@@ -7,65 +7,20 @@ module.exports = function(app) {
 
     var Competition = app.models.Competition;
     var User = app.models.User;
+    var Entry = app.models.Entry;
 
 
     controller.listCompetitions = function(req, res) {
-
-
-
 
         Competition.find({})
         .populate({path: "steps", populate: {path: "club"}})
         .lean()
         .exec(function(err, competitions) {
-          uIds = [];
-          loadedUsers = [];
-          async.series([
-            function(callback) {
-              async.forEach(competitions, function(comp) {
-                compIndex = competitions.indexOf(comp);
-                async.forEach(comp.steps, function(step){
-                  stepIndex = comp.steps.indexOf(step)
-                  async.forEach(step.entries, function(entry) {
-                    entryIndex = step.entries.indexOf(entry);
-                    uIds.push(entry.user)
-
-                  })
-                })
-              })
-              User.find()
-                .where('_id')
-                .in(uIds)
-                .exec(function(err, users){
-                  loadedUsers = users;
-                  callback()
-                })
-            },
-            function(callback){
-              async.forEach(competitions, function(comp) {
-                compIndex = competitions.indexOf(comp);
-                async.forEach(comp.steps, function(step){
-                  stepIndex = comp.steps.indexOf(step)
-                  async.forEach(step.entries, function(entry) {
-                    entryIndex = step.entries.indexOf(entry);
-                    async.forEach(loadedUsers, function(user){
-                      if(JSON.stringify(competitions[compIndex].steps[stepIndex].entries[entryIndex].user)
-                          === JSON.stringify(user._id)) {
-                          competitions[compIndex].steps[stepIndex].entries[entryIndex].user = user
-                      }
-                    })
-                  })
-                })
-              })
-              res.json(competitions);
-            }
-          ])
-
-
-
+            res.json(competitions)
         });
 
     }
+
 
     controller.getCompetition = function(req, res) {
         Competition.findOne({_id: req.params.id}, function(err, data) {

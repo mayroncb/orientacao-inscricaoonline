@@ -17,9 +17,15 @@ module.exports = function(app) {
                 }
             )
     }
+
     controller.loadStates = function(req, res) {
          var states = require('../utils/estados.json');
          res.json(states);
+    }
+
+    controller.loadStatus = function(req, res) {
+         var stats = require('../utils/status.json');
+         res.json(stats);
     }
 
 

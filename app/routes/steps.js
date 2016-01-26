@@ -5,16 +5,13 @@ multipartyMiddleware = multiparty(),
 module.exports = function(app){
     var controller = app.controllers.StepsController;
     app.route('/steps')
-        .get( controller.listSteps)//ADD Verificação na produção
+        .get(controller.listSteps)//ADD Verificação na produção
         .post(controller.addStep); //ADD Verificação na produção
 
     app.route('/steps/:id')
         .get(controller.getStep) //ADD Verificação na produção
         .delete(controller.removeStep)
         .post(controller.updateStep);//ADD Verificação na produção
-
-    app.route('/steps/entry/:id')
-        .post(multipartyMiddleware, controller.addEntry);//ADD Verificação na produção
 }
 
 

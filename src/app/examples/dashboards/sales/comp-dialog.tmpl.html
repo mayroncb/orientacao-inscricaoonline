@@ -1,0 +1,21 @@
+<md-dialog  aria-label="Comprovante" flex="20">
+  <md-toolbar>
+      <div   class="md-toolbar-tools">
+          <h2 flex >
+              <span>#{{vm.comp.user.firstname}} {{vm.comp.user.surname}} - {{vm.comp.category.name}} </span>
+          </h2>
+
+          <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="cancel">
+              <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+          </md-button>
+      </div>
+  </md-toolbar>
+    <md-dialog-content class="extras-image-dialog">
+        <img ng-src="data:image/*;base64,{{vm.compImg}}"   >
+    </md-dialog-content>
+    <md-dialog-actions>
+      <div >
+          Nº do comprovante: {{vm.comp.compNumber}}
+      </div>
+    </md-dialog-actions>
+</md-dialog>

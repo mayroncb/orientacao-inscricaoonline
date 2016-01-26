@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function StepEntryDialogController($scope, step, $mdDialog, $rootScope,
-      $window, $timeout, $mdToast, Upload, LoadData, $filter) {
+      $window, $timeout, $mdToast, Upload, LoadData, $filter, EntryInstance) {
         var vm = this;
         var tmp;
         vm.step = step;
@@ -16,7 +16,7 @@
         vm.categories = [];
         vm.cancelClick = cancelClick;
         vm.entryStep = entryStep;
-        vm.order.total = 0;
+        vm.order.value = 0;
         vm.user = $rootScope.user;
         vm.status = 'Enviar';  // Enviar | Enviando | Completo
         vm.upload = upload;
@@ -36,7 +36,7 @@
 
         function total(){
           for (var item in vm.order.items) {
-              vm.order.total += vm.order.items[item].value;
+              vm.order.value += vm.order.items[item].value;
           }
         }
 
@@ -48,8 +48,9 @@
 
         function entryStep(order) {
           order.user = vm.user;
+          order.step = vm.step;
           Upload.upload({
-             url: 'http://localhost:3000/steps/entry/' + vm.step._id,
+             url: 'http://localhost:3000/entries/',
              method: 'POST',
              data: {file: tmp, 'order': angular.toJson(order)}
              }).then(function (resp) {

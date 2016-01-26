@@ -14,6 +14,7 @@
     </md-toolbar>
 
     <md-dialog-content class="padding-20">
+      <form name="entryForm">
         <div flex layout="row" class="margin-bottom-10">
             <div flex>
                 <strong translate>Dados para Pagamento</strong>
@@ -59,6 +60,11 @@
               <md-input-container   class="md-block">
                   <input required name="compNumber"  style="margin-top: -30px;"
                   ng-model="vm.order.compNumber" type="text" >
+                  <div ng-messages="entryForm.compNumber.$error" ng-if="true">
+                      <div ng-message when="required">
+                          <span translate>Insira o número do comprovante</span>
+                      </div>
+                  </div>
               </md-input-container>
             </div>
         </div>
@@ -128,27 +134,21 @@
         </table>
         <table class="md-table" palette-background="grey:100">
             <tbody>
-                <!-- <tr>
-                    <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.SUB-TOTAL</td>
-                    <td class="text-right font-weight-600 padding-right-10">{{vm.total | currency}}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.TAX</td>
-                    <td class="text-right font-weight-600 padding-right-10">{{vm.order.tax | currency}}</td>
-                </tr> -->
                 <tr>
                     <td class="font-weight-600" translate>DASHBOARDS.SALES.ORDER.TOTAL</td>
-                    <td class="text-right font-weight-600 padding-right-10">{{vm.order.total | currency:'R$':2}}</td>
+                    <td class="text-right font-weight-600 padding-right-10">{{vm.order.value | currency:'R$':2}}</td>
                 </tr>
             </tbody>
         </table>
+      </form>
     </md-dialog-content>
+
     <md-dialog-actions class="" layout="row">
         <span flex></span>
+        <md-input-container>
         <md-button ng-click="vm.entryStep(vm.order)" class="md-primary" ng-disabled="!vm.comp || !vm.order.compNumber" aria-label="{{GENERAL.OK | translate}}" translate="">
           Inscrever
-          <md-tooltip md-visible="true" md-direction="left">Insira o comprovante para efetuar a inscrição <</md-tooltip>
         </md-button>
-
+      </md-input-container>
     </md-dialog-actions>
 </md-dialog>
