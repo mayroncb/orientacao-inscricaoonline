@@ -13,11 +13,13 @@
         var vm = this;
         vm.loadGraph = loadGraph;
         vm.loadEntries = loadEntries;
+        vm.loadCompetitions = loadCompetitions;
         vm.openComp = openComp;
         vm.editEntry = editEntry;
         vm.pendingEntries = [];
         vm.queryFilter = "";
         vm.entries = [];
+        vm.step = {}
         LoadData.clubQtd.query().$promise.then(function(data){
           vm.clubsQtd = data.value
         })
@@ -115,12 +117,17 @@
         }
 
         function loadEntries(){
-          StepInstance.get({id: vm.step._id}, function(step){
-              vm.entries = step.entries;
+
+          StepInstance.get({id: vm.step._id}, function(step) {
+            vm.entries = []
+            if (step.entries.length > 0) vm.entries = step.entries;
           })
           EntryInstance.query().$promise.then(function(entries) {
-            vm.pendingEntries = $filter('filter')(entries, {status: "!Aceita"});
-            // vm.pendingEntries = entries;
+            vm.pendingEntries = [ ]
+            vm.tempList = $filter('filter')(entries, {status: "!Aceita"})
+            if (vm.tempList.length > 0 ){
+              vm.pendingEntries = vm.tempList
+              }
           })
         }
 
@@ -135,7 +142,7 @@
           createData();
         }
 
- 
+
 
 
     }

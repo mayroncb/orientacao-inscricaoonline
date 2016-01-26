@@ -23,7 +23,7 @@
                  for (var i in vm.activeSteps) {
                    for (var entry in vm.activeSteps[i].entries) {
                      if ($rootScope.user._id === vm.activeSteps[i].entries[entry].user) {
-                       if ( vm.activeSteps[i].entries[entry].status === "Registrado" || vm.activeSteps[i].entries[entry].status === "Processando")
+                       if (vm.activeSteps[i].entries[entry].status === "Registrado" || vm.activeSteps[i].entries[entry].status === "Aceita")
                        vm.activeSteps[i].isRegistered = true;
                      }
                    }
