@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.examples.dashboards')
+        .module('app.fop.maintenance')
         .controller('DashboardClubsController', DashboardClubsController);
 
     /* @ngInject */
@@ -39,7 +39,7 @@ function editClub(club, $event) {
       $mdDialog.show({
         controller: 'EditClubDialogController',
         controllerAs: 'vm',
-        templateUrl: 'app/examples/dashboards/clubs/edit-club-dialog.tmpl.html',
+        templateUrl: 'app/examples/maintenance/clubs/edit-club-dialog.tmpl.html',
         parent: angular.element(document.body),
         targetEvent: $event,
         locals: {

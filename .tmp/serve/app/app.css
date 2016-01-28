@@ -26569,6 +26569,62 @@ table.md-data-table td {
 .github-user-dropdown span {
   margin-left: 16px; }
 
+.dashboard-container .layout-margin {
+  margin: 0px; }
+
+.dashboard-container .status {
+  padding: 8px 14px;
+  border-radius: 6px;
+  min-width: 60px;
+  display: inline-block;
+  text-align: center;
+  color: #fff; }
+
+.dashboard-container .status-delivered {
+  background-color: #26C6DA; }
+
+.dashboard-container .status-true {
+  background-color: #8BC34A; }
+
+.dashboard-container .status-false {
+  background-color: #FF9800; }
+
+.dashboard-container .layout-margin > .widget {
+  margin: 8px; }
+
+.dashboard-fullwidth-chart .chart-container {
+  position: relative;
+  left: -5px;
+  bottom: -5px;
+  width: calc(100% + 10px); }
+
+.dashboard-no-bar-tabs md-tabs-wrapper {
+  display: none; }
+
+.google-chart {
+  height: 100%;
+  width: 100%; }
+
+.tabs-tall md-pagination-wrapper, .tabs-tall md-tabs-canvas {
+  height: 72px; }
+
+table.md-data-table td {
+  vertical-align: middle; }
+  table.md-data-table td img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    margin-top: 4px; }
+
+.md-data-table-toolbar input {
+  width: 100%;
+  margin: 0;
+  border: none;
+  color: rgba(0, 0, 0, 0.87); }
+  .md-data-table-toolbar input:focus {
+    outline: none; }
+
 .maps-example .angular-google-map-container {
   height: 550px; }
 

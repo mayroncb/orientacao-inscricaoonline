@@ -2,28 +2,27 @@
     'use strict';
 
     angular
-        .module('app.examples.ui')
-        .controller('AddClubDialogController',
-        AddClubDialogController);
+        .module('app.fop.maintenance')
+        .controller('EditClubDialogController',
+        EditClubDialogController);
 
     /* @ngInject */
-    function AddClubDialogController($log, $scope, triTheming, $timeout, $q,
-      ClubInstance,  toastr, $mdDialog, $rootScope, LoadData, UserInstance) {
-      console.log('AddClubDialogController');
+    function EditClubDialogController($log, $scope, triTheming, $timeout, $q,
+      ClubInstance,  toastr, $mdDialog, $rootScope, LoadData, UserInstance, club) {
+      console.log('EditClubDialogController');
       var vm = this;
-      vm.addClub = addClub;
+      vm.club = new ClubInstance(club);
+      vm.editClub = editClub;
       vm.closeDialog = closeDialog;
       vm.newUser = newUser;
       vm.states = [];
-      vm.club = new ClubInstance({name: '', admin: {}, state: ''});
       vm.users = [];
-      vm.selectedItem;
+      vm.selectedItem = vm.club.admin;
 
-      function addClub(club) {
+      function editClub(club) {
         club.admin = vm.selectedItem;
-        console.log(club);
         vm.club.$save().then(function() {
-        toastr.success(club.name, 'Clube cadastrado com sucesso!');
+        toastr.success(club.name, 'Clube alterado com sucesso!');
         $rootScope.$broadcast('clubEvent', true);
         $mdDialog.hide();
         }).catch(function(erro){
@@ -55,12 +54,7 @@
         return  deferred.promise;
       };
 
-       vm.states = LoadData.states.query();
-
-
-
-
-
+      vm.states = LoadData.states.query();
 
       vm.selectedItemChange = selectedItemChange;
       function selectedItemChange(item) {

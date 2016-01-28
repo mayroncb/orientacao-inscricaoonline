@@ -43,7 +43,7 @@
               // dataService.addData(data);
               $rootScope.user = user;
 
-              $state.go('triangular.admin-default.dashboard-sales')
+              $state.go('triangular.admin-default.dashboard-adm')
           }, function(erro){
               toastr.error("Login ou senha inválido")
           })

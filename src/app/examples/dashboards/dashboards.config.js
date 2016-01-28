@@ -11,7 +11,7 @@
 
 
         $stateProvider
-        .state('triangular.sales-layout', {
+        .state('triangular.dashboards-layou', {
             abstract: true,
             views: {
                 sidebarLeft: {
@@ -28,60 +28,60 @@
             }
         })
 
-        .state('triangular.admin-default.dashboard-competitions', {
-            url: '/dashboards/competitions',
-            views: {
-              '': {
-                    templateUrl: 'app/examples/dashboards/competitions/dashboard-competitions.tmpl.html',
-                    controller: 'DashboardCompetitionsController',
-                    controllerAs: 'vm'
-                  },
-                  'belowContent': {
-                      templateUrl: 'app/examples/dashboards/competitions/fab-button.tmpl.html',
-                      controller: 'CompetitionsFabController',
-                      controllerAs: 'vm'
-                  }
-            }
-
-        })
-        .state('triangular.admin-default.dashboard-users', {
-            url: '/dashboards/users',
-            views:{
-              '':{
-                templateUrl: 'app/examples/dashboards/users/dashboard-users.tmpl.html',
-                controller: 'DashboardUsersController',
-                controllerAs: 'vm'
-              },
-              belowContent: {
-                templateUrl: 'app/examples/dashboards/users/fab-button-add-user.tmpl.html',
-                controller: 'AddUserFabController',
-                controllerAs: 'vm'
-              }
-            }
-
-        })
-        .state('triangular.admin-default.dashboard-steps', {
-            url: '/dashboards/steps',
-            templateUrl: 'app/examples/dashboards/steps/dashboard-steps.tmpl.html',
-            controller: 'DashboardStepsController',
-            controllerAs: 'vm'
-        })
-        .state('triangular.admin-default.dashboard-clubs', {
-            url: '/dashboards/clubs',
-            views: {
-            '':{
-
-            templateUrl: 'app/examples/dashboards/clubs/dashboard-clubs.tmpl.html',
-            controller: 'DashboardClubsController',
-            controllerAs: 'vm'
-          },
-          'belowContent': {
-              templateUrl: 'app/examples/dashboards/clubs/fab-button.tmpl.html',
-              controller: 'ClubsFabController',
-              controllerAs: 'vm'
-          }
-          }
-        })
+        // .state('triangular.admin-default.dashboard-competitions', {
+        //     url: '/dashboards/competitions',
+        //     views: {
+        //       '': {
+        //             templateUrl: 'app/examples/dashboards/competitions/dashboard-competitions.tmpl.html',
+        //             controller: 'DashboardCompetitionsController',
+        //             controllerAs: 'vm'
+        //           },
+        //           'belowContent': {
+        //               templateUrl: 'app/examples/dashboards/competitions/fab-button.tmpl.html',
+        //               controller: 'CompetitionsFabController',
+        //               controllerAs: 'vm'
+        //           }
+        //     }
+        //
+        // })
+        // .state('triangular.admin-default.dashboard-users', {
+        //     url: '/dashboards/users',
+        //     views:{
+        //       '':{
+        //         templateUrl: 'app/examples/dashboards/users/dashboard-users.tmpl.html',
+        //         controller: 'DashboardUsersController',
+        //         controllerAs: 'vm'
+        //       },
+        //       belowContent: {
+        //         templateUrl: 'app/examples/dashboards/users/fab-button-add-user.tmpl.html',
+        //         controller: 'AddUserFabController',
+        //         controllerAs: 'vm'
+        //       }
+        //     }
+        //
+        // })
+        // .state('triangular.admin-default.dashboard-steps', {
+        //     url: '/dashboards/steps',
+        //     templateUrl: 'app/examples/dashboards/steps/dashboard-steps.tmpl.html',
+        //     controller: 'DashboardStepsController',
+        //     controllerAs: 'vm'
+        // })
+        // .state('triangular.admin-default.dashboard-clubs', {
+        //     url: '/dashboards/clubs',
+        //     views: {
+        //     '':{
+        //
+        //     templateUrl: 'app/examples/dashboards/clubs/dashboard-clubs.tmpl.html',
+        //     controller: 'DashboardClubsController',
+        //     controllerAs: 'vm'
+        //   },
+        //   'belowContent': {
+        //       templateUrl: 'app/examples/dashboards/clubs/fab-button.tmpl.html',
+        //       controller: 'ClubsFabController',
+        //       controllerAs: 'vm'
+        //   }
+        //   }
+        // })
         // .state('triangular.admin-default.dashboard-server', {
         //     url: '/dashboards/server',
         //     templateUrl: 'app/examples/dashboards/server/dashboard-server.tmpl.html',
@@ -98,8 +98,8 @@
         //     controller: 'DashboardSocialController',
         //     controllerAs: 'vm'
         // })
-        .state('triangular.admin-default.dashboard-sales', {
-            url: '/dashboard',
+        .state('triangular.admin-default.dashboard-adm', {
+            url: '/dashboard/admin',
             data: {
                 layout: {
                     showToolbar: true,
@@ -130,35 +130,35 @@
         triMenuProvider.addMenu({
             name: 'MENU.DASHBOARDS.DASHBOARDS',
             icon: 'zmdi zmdi-home',
-            state: 'triangular.admin-default.dashboard-sales',
+            state: 'triangular.admin-default.dashboard-adm',
             type: 'link',
             priority: 1.1,
         });
-        triMenuProvider.addMenu({
-            name: 'MENU.DASHBOARDS.ANALYTICS',
-            icon: 'zmdi zmdi-assignment-o',
-            state: 'triangular.admin-default.dashboard-analytics',
-            type: 'dropdown',
-            priority: 3.1,
-            children: [{
-                name: 'MENU.DASHBOARDS.USERS',
-                state: 'triangular.admin-default.dashboard-users',
-                type: 'link'
-            },{
-                name: 'MENU.DASHBOARDS.COMPETITIONS',
-                state: 'triangular.admin-default.dashboard-competitions',
-                type: 'link'
-            },{
-                name: 'MENU.DASHBOARDS.STEPS',
-                state: 'triangular.admin-default.dashboard-steps',
-                type: 'link'
-            },{
-                name: 'MENU.DASHBOARDS.CLUBS',
-                state: 'triangular.admin-default.dashboard-clubs',
-                type: 'link'
-            }
-          ]
-        });
+        // triMenuProvider.addMenu({
+        //     name: 'MENU.DASHBOARDS.ANALYTICS',
+        //     icon: 'zmdi zmdi-assignment-o',
+        //     state: 'triangular.admin-default.dashboard-adm',
+        //     type: 'dropdown',
+        //     priority: 3.1
+          //   children: [{
+          //       name: 'MENU.DASHBOARDS.USERS',
+          //       state: 'triangular.admin-default.dashboard-users',
+          //       type: 'link'
+          //   },{
+          //       name: 'MENU.DASHBOARDS.COMPETITIONS',
+          //       state: 'triangular.admin-default.dashboard-competitions',
+          //       type: 'link'
+          //   },{
+          //       name: 'MENU.DASHBOARDS.STEPS',
+          //       state: 'triangular.admin-default.dashboard-steps',
+          //       type: 'link'
+          //   },{
+          //       name: 'MENU.DASHBOARDS.CLUBS',
+          //       state: 'triangular.admin-default.dashboard-clubs',
+          //       type: 'link'
+          //   }
+          // ]
+        // });
 
     }
 })();

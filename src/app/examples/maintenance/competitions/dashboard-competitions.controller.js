@@ -38,7 +38,7 @@ $rootScope.$on('compEvent', function(){
 function editCompetition(competition, $event, ev) {
       $mdDialog.show({
         controller: 'EditCompetitionDialogController',
-        templateUrl: 'app/examples/dashboards/competitions/edit-competition-dialog.tmpl.html',
+        templateUrl: 'app/examples/maintenance/competitions/edit-competition-dialog.tmpl.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         locals: {

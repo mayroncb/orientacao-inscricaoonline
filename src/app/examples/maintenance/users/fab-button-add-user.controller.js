@@ -3,19 +3,19 @@
 
     angular
         .module('app.examples.ui')
-        .controller('ClubsFabController', ClubsFabController);
+        .controller('AddUserFabController', AddUserFabController);
 
     /* @ngInject */
-    function ClubsFabController($rootScope, $scope, $mdMedia, $mdDialog) {
+    function AddUserFabController($rootScope, $scope, $mdMedia, $mdDialog) {
 
       $scope.customFullscreen = $mdMedia('xs') || $mdMedia('xs');
 
       $scope.showDialog = function(ev) {
           var useFullScreen = ($mdMedia('xs') || $mdMedia('xs'))  && $scope.customFullscreen;
           $mdDialog.show({
-            controller: 'AddClubDialogController',
+            controller: 'AddUserController',
             controllerAs: 'vm',
-            templateUrl: 'app/examples/dashboards/clubs/add-club-dialog.tmpl.html',
+            templateUrl: 'app/examples/maintenance/users/add-user-dialog.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
@@ -34,9 +34,7 @@
           });
       };
 
-      function closeDialog(){
-        $mdDialog.hide();
-      }
+
     //   function DialogController($scope, $mdDialog) {
     //     $scope.hide = function() {
     //       $mdDialog.hide();

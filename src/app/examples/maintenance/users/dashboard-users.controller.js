@@ -63,7 +63,7 @@
               $mdDialog.show({
                 controller: 'ChangePassDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/dashboards/users/change-pass-dialog.tmpl.html',
+                templateUrl: 'app/examples/maintenance/users/change-pass-dialog.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: $event,
                 locals: {
@@ -81,7 +81,7 @@
               $mdDialog.show({
                 controller: 'EditUserController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/dashboards/users/edit-user-dialog.tmpl.html',
+                templateUrl: 'app/examples/maintenance/users/edit-user-dialog.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: $event,
                 locals: {

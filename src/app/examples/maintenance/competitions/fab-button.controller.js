@@ -14,7 +14,7 @@
           var useFullScreen = ($mdMedia('xs') || $mdMedia('xs'))  && $scope.customFullscreen;
           $mdDialog.show({
             controller: 'AddCompetitionDialogController',
-            templateUrl: 'app/examples/dashboards/competitions/add-competition-dialog.tmpl.html',
+            templateUrl: 'app/examples/maintenance/competitions/add-competition-dialog.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,

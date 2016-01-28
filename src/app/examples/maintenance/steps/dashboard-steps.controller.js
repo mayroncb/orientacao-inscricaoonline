@@ -28,7 +28,7 @@
                $mdDialog.show({
                  controller: 'AddStepDialogController',
                  controllerAs: 'vm',
-                 templateUrl: 'app/examples/dashboards/steps/add-step-dialog.tmpl.html',
+                 templateUrl: 'app/examples/maintenance/steps/add-step-dialog.tmpl.html',
                  parent: angular.element(document.body),
                  targetEvent: $event,
                  locals: {
@@ -51,7 +51,7 @@
            $mdDialog.show({
              controller: 'EditStepDialogController',
              controllerAs: 'vm',
-             templateUrl: 'app/examples/dashboards/steps/edit-step-dialog.tmpl.html',
+             templateUrl: 'app/examples/maintenance/steps/edit-step-dialog.tmpl.html',
              parent: angular.element(document.body),
              targetEvent: $event,
              locals: {
