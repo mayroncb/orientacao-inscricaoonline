@@ -74,7 +74,7 @@
           $mdDialog.show({
               controller: 'CompDialogController',
               controllerAs: 'vm',
-              templateUrl: 'app/examples/dashboards/sales/comp-dialog.tmpl.html',
+              templateUrl: 'app/examples/dashboards/admin/comp-dialog.tmpl.html',
               clickOutsideToClose: true,
               focusOnOpen: false,
               targetEvent: $event,
@@ -89,7 +89,7 @@
             $mdDialog.show({
                 controller: 'EditEntryDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/dashboards/sales/edit-entry-step-dialog.tmpl.html',
+                templateUrl: 'app/examples/dashboards/admin/edit-entry-step-dialog.tmpl.html',
                 targetEvent: $event,
                 locals: {
                     step: vm.step,

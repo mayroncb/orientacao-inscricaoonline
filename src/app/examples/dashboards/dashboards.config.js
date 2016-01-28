@@ -109,7 +109,7 @@
             },
             views: {
                 '': {
-                    templateUrl: 'app/examples/dashboards/sales/dashboard-sales.tmpl.html',
+                    templateUrl: 'app/examples/dashboards/admin/dashboard-admin.tmpl.html',
                     controller: 'DashboardSalesController',
                     controllerAs: 'vm'
                 },
