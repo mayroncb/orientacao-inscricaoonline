@@ -11,6 +11,11 @@ module.exports = function(app){
     app.route('/entry/comp/')
         .get(controller.loadComp)//ADD Verificação na produção
 
+    app.route('/entries/userqtd/:id')
+        .get(controller.loadQtdEntriesByUser)//ADD Verificação na produção
+
+    app.route('/entries/user/:id')
+        .get(controller.entriesByUser)//ADD Verificação na produção
 
     app.route('/entries/:id')
         .get(controller.getEntry) //ADD Verificação na produção

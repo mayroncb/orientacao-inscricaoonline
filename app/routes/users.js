@@ -15,12 +15,15 @@ module.exports = function(app){
 
     app.route('/users')
         .get(controller.listUsers)
-        .post(controller.addContato);
+        .post(controller.addContato)
+
+    app.route('/users/club/:id')
+        .get(controller.listUsersByClub)
 
     app.route('/users/:id')
         .get(controller.obterContato) //ADD Verificação na produção
         .delete(controller.removerContato)
-        .post(controller.updateContato);
+        .post(controller.updateContato)
 
     app.route('/users/q/:text')
         .get(controller.getUserByName); //ADD Verificação na produção

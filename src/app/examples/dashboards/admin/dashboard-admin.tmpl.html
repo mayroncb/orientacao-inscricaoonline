@@ -50,23 +50,19 @@
                                               {{::entry.status}}
                                           </span>
                                         </td>
-                                        <td>
+                                        <td align="left" >
                                           <div layout="row"  layout-wrap>
-                                            <div flex="33">
+                                            <div flex="50" >
                                               <md-button ng-click="vm.editEntry(entry, $event)" class="md-icon-button" aria-label="Editar Inscrição">
-                                                  <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
-                                              </md-button>
-                                            </div>
-                                            <div flex="33">
-                                              <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
                                                   <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                                               </md-button>
                                             </div>
-                                            <div flex="33">
-                                              <!-- <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Inscrição">
-                                                  <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
-                                              </md-button> -->
+                                            <div flex="50">
+                                              <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
+                                                  <md-icon md-font-icon="zmdi zmdi-assignment"></md-icon>
+                                              </md-button>
                                             </div>
+
                                           </div>
                                         </td>
                                     </tr>
@@ -117,12 +113,12 @@
                                       </td>
                                       <td md-cell >
                                         <div layout="row"  layout-wrap>
-                                          <div flex="33">
+                                          <div flex="40">
                                             <md-button ng-click="vm.editEntry(entry, $event)" class="md-icon-button" aria-label="Editar Inscrição">
                                                 <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
                                             </md-button>
                                           </div>
-                                          <div flex="33">
+                                          <div flex="40">
                                             <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
                                                 <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                                             </md-button>

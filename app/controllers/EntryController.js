@@ -37,9 +37,23 @@ module.exports = function(app) {
         .exec(function(err, entries){
             res.json(entries)
         });
-
     }
 
+    controller.entriesByUser = function(req, res) {
+        Entry.find({user: req.params.id})
+        .populate("user")
+        .populate("category")
+        .exec(function(err, entries){
+            res.json(entries)
+        });
+    }
+
+    controller.loadQtdEntriesByUser = function(req, res) {
+      Entry.find({user: req.params.id, status: "Aceita"})
+      .exec(function(err, entries){
+          res.send({"value":entries.length})
+      });
+    }
     controller.loadComp = function(req, res) {
         gfs.findOne({ _id: req.query.id}, function(err, file) {
             if(err) {
@@ -51,8 +65,6 @@ module.exports = function(app) {
                   _id: file._id
                 });
                 var bufs = [];
-                // res.set('Content-Type', file.contentType);
-                // res.set('Content-Disposition', 'attachment; filename="' + file.filename + '"');
 
                 readstream.on('error', function (err) {
                     res.send(500, err);
@@ -67,10 +79,6 @@ module.exports = function(app) {
                 });
             }
         });
-
-
-
-
       }
 
     controller.getEntry = function(req, res) {

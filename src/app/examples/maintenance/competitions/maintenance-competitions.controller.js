@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.examples.dashboards')
-        .controller('DashboardCompetitionsController', DashboardCompetitionsController);
+        .module('app.fop.maintenance')
+        .controller('MaintenanceCompetitionsController', MaintenanceCompetitionsController);
 
     /* @ngInject */
-    function DashboardCompetitionsController($scope, $timeout, $mdMedia,
+    function MaintenanceCompetitionsController($scope, $timeout, $mdMedia,
       $mdToast, $rootScope, CompetitionInstance, $state, $mdDialog) {
       var vm = this;
       vm.getCompetitions = getCompetitions;

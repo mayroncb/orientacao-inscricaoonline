@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.examples.dashboards')
-        .controller('DashboardUsersController', DashboardUsersController);
+        .module('app.fop.maintenance')
+        .controller('MaintenanceUsersController', MaintenanceUsersController);
 
     /* @ngInject */
-    function DashboardUsersController($scope, $timeout, $mdToast, $rootScope,
+    function MaintenanceUsersController($scope, $timeout, $mdToast, $rootScope,
       $state, UserInstance, toastr, $mdDialog ) {
         var vm = this;
         vm.users = [];

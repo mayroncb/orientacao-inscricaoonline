@@ -2,31 +2,40 @@
     'use strict';
 
     angular
-        .module('app.examples.dashboards')
-        .controller('DashboardSalesController', DashboardSalesController);
+        .module('app.fop.dashboards')
+        .controller('DashboardUserController', DashboardUserController);
 
     /* @ngInject */
-    function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
+    function DashboardUserController($state, $cookies, $scope, $q,
       CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
-      SalesService, StepInstance, EntryInstance) {
-        console.log('DashboardSalesController');
+      SalesService, StepInstance, EntryInstance, $rootScope, $http) {
+        console.log('DashboardUserController');
         var vm = this;
-        vm.loadGraph = loadGraph;
+        // vm.loadGraph = loadGraph;
         vm.loadEntries = loadEntries;
-        vm.loadCompetitions = loadCompetitions;
+        // vm.loadCompetitions = loadCompetitions;
         vm.openComp = openComp;
         vm.editEntry = editEntry;
         vm.pendingEntries = [];
         vm.queryFilter = "";
         vm.entries = [];
         vm.step = {}
-        LoadData.clubQtd.query().$promise.then(function(data){
-          vm.clubsQtd = data.value
-        })
-        LoadData.userQtd.query().$promise.then(function(data){
-          vm.usersQtd = data.value
-        })
 
+        $http.get("http://localhost:3000/entries/userqtd/"+$rootScope.user._id)
+          .success(function(res) {
+            vm.entriesbyuser = res.value;
+          })
+          .error(function(error) {
+            console.log(error);
+          });
+
+        $http.get("http://localhost:3000/users/club/"+$rootScope.user.club)
+          .success(function(res) {
+            vm.clubsQtd = res.length;
+          })
+          .error(function(error) {
+            console.log(error);
+          });
 
         console.log('Ativar em produção');
             // $interval( function(){
@@ -70,11 +79,11 @@
         //     });
         // }
 
-        function openComp(comp, $event){
+        function openComp(comp, $event) {
           $mdDialog.show({
-              controller: 'CompDialogController',
+              controller: 'CompUserDialogController',
               controllerAs: 'vm',
-              templateUrl: 'app/examples/dashboards/admin/comp-dialog.tmpl.html',
+              templateUrl: 'app/examples/dashboards/user/comp-dialog.tmpl.html',
               clickOutsideToClose: true,
               focusOnOpen: false,
               targetEvent: $event,
@@ -82,14 +91,13 @@
                   comp: comp
               }
           });
-
         }
 
         function editEntry(entry, $event) {
             $mdDialog.show({
-                controller: 'EditEntryDialogController',
+                controller: 'ShowEntryDialogController',
                 controllerAs: 'vm',
-                templateUrl: 'app/examples/dashboards/admin/edit-entry-step-dialog.tmpl.html',
+                templateUrl: 'app/examples/dashboards/user/show-entry-step-dialog.tmpl.html',
                 targetEvent: $event,
                 locals: {
                     step: vm.step,
@@ -98,7 +106,6 @@
                 clickOutsideToClose: true
             })
             .then(function(entry) {
-              loadCompetitions();
             }, cancelDialog);
 
             function cancelDialog() {
@@ -106,32 +113,29 @@
             }
         }
 
-        function loadCompetitions() {
-          CompetitionInstance.query().$promise.then(function(comps){
-            vm.competitions = comps;
-            vm.competition = vm.competitions[0]
-            vm.step = vm.competition.steps[0]
-            loadEntries();
-            createData();
-          })
+        // function loadCompetitions() {
+        //   CompetitionInstance.query().$promise.then(function(comps){
+        //     vm.competitions = comps;
+        //     vm.competition = vm.competitions[0]
+        //     vm.step = vm.competition.steps[0]
+        //     loadEntries();
+        //     createData();
+        //   })
+        // }
+
+        function loadEntries() {
+          $http.get("http://localhost:3000/entries/user/"+$rootScope.user._id)
+            .success(function(entries) {
+              console.log(entries)
+              vm.entries = entries;
+            })
+            .error(function(error) {
+              console.log(error);
+            });
+
         }
 
-        function loadEntries(){
-
-          StepInstance.get({id: vm.step._id}, function(step) {
-            vm.entries = []
-            if (step.entries.length > 0) vm.entries = step.entries;
-          })
-          EntryInstance.query().$promise.then(function(entries) {
-            vm.pendingEntries = [ ]
-            vm.tempList = $filter('filter')(entries, {status: "!Aceita"})
-            if (vm.tempList.length > 0 ){
-              vm.pendingEntries = vm.tempList
-              }
-          })
-        }
-
-        loadCompetitions();
+        loadEntries();
 
         function createData() {
             vm.chartLineData = SalesService.createLineChartData(vm.competition);

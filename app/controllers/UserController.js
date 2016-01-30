@@ -28,6 +28,13 @@ module.exports = function(app) {
         })
     }
 
+    controller.listUsersByClub = function(req, res) {
+        User.find({club: req.params.id}, function(err, data) {
+            // console.log(data);
+            res.json(data);
+        })
+    }
+
     controller.getUserByName = function(req, res) {
       var text = req.params.text;
       var entries = text.toString().split(" ");

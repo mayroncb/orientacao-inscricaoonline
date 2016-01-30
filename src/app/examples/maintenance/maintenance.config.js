@@ -32,8 +32,8 @@
             url: '/maintenance/competitions',
             views: {
               '': {
-                    templateUrl: 'app/examples/maintenance/competitions/dashboard-competitions.tmpl.html',
-                    controller: 'DashboardCompetitionsController',
+                    templateUrl: 'app/examples/maintenance/competitions/maintenance-competitions.tmpl.html',
+                    controller: 'MaintenanceCompetitionsController',
                     controllerAs: 'vm'
                   },
                   'belowContent': {
@@ -48,8 +48,8 @@
             url: '/maintenance/users',
             views:{
               '':{
-                templateUrl: 'app/examples/maintenance/users/dashboard-users.tmpl.html',
-                controller: 'DashboardUsersController',
+                templateUrl: 'app/examples/maintenance/users/maintenance-users.tmpl.html',
+                controller: 'MaintenanceUsersController',
                 controllerAs: 'vm'
               },
               belowContent: {
@@ -62,8 +62,8 @@
         })
         .state('triangular.maintenance.maintenance-steps', {
             url: '/maintenance/steps',
-            templateUrl: 'app/examples/maintenance/steps/dashboard-steps.tmpl.html',
-            controller: 'DashboardStepsController',
+            templateUrl: 'app/examples/maintenance/steps/maintenance-steps.tmpl.html',
+            controller: 'MaintenanceStepsController',
             controllerAs: 'vm'
         })
         .state('triangular.maintenance.maintenance-clubs', {
@@ -71,8 +71,8 @@
             views: {
             '':{
 
-            templateUrl: 'app/examples/maintenance/clubs/dashboard-clubs.tmpl.html',
-            controller: 'DashboardClubsController',
+            templateUrl: 'app/examples/maintenance/clubs/maintenance-clubs.tmpl.html',
+            controller: 'MaintenanceClubsController',
             controllerAs: 'vm'
           },
           'belowContent': {

@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.examples.dashboards')
-        .controller('CompDialogController', CompDialogController);
+        .module('app.fop.dashboards')
+        .controller('CompUserDialogController', CompUserDialogController);
 
     /* @ngInject */
-    function CompDialogController($mdDialog, LoadData, comp, $q, $http) {
+    function CompUserDialogController($mdDialog, LoadData, comp, $q, $http) {
         var vm = this;
         vm.comp = comp;
         vm.compImg;

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.examples.dashboards')
+        .module('app.fop.dashboards')
         .config(moduleConfig);
 
     /* @ngInject */
@@ -11,7 +11,7 @@
 
 
         $stateProvider
-        .state('triangular.dashboards-layou', {
+        .state('triangular.dashboards-layout', {
             abstract: true,
             views: {
                 sidebarLeft: {
@@ -98,7 +98,7 @@
         //     controller: 'DashboardSocialController',
         //     controllerAs: 'vm'
         // })
-        .state('triangular.admin-default.dashboard-adm', {
+        .state('triangular.admin-default.dashboard-admin', {
             url: '/dashboard/admin',
             data: {
                 layout: {
@@ -120,6 +120,28 @@
                 // }
             }
         })
+        .state('triangular.admin-default.dashboard-user', {
+            url: '/dashboard/user',
+            data: {
+                layout: {
+                    showToolbar: true,
+                    contentClass: 'full-image-background   background-overlay-static',
+                    innerContentClass: 'overlay-gradient-20'
+                }
+            },
+            views: {
+                '': {
+                    templateUrl: 'app/examples/dashboards/user/dashboard-user.tmpl.html',
+                    controller: 'DashboardUserController',
+                    controllerAs: 'vm'
+                },
+                // 'belowContent': {
+                //     templateUrl: 'app/examples/dashboards/sales/fab-button.tmpl.html',
+                //     controller: 'SalesFabController',
+                //     controllerAs: 'vm'
+                // }
+            }
+        })
         // .state('triangular.admin-default.dashboard-draggable', {
         //     url: '/dashboards/draggable-widgets',
         //     templateUrl: 'app/examples/dashboards/dashboard-draggable.tmpl.html',
@@ -130,7 +152,7 @@
         triMenuProvider.addMenu({
             name: 'MENU.DASHBOARDS.DASHBOARDS',
             icon: 'zmdi zmdi-home',
-            state: 'triangular.admin-default.dashboard-adm',
+            state: 'triangular.admin-default.dashboard-user',
             type: 'link',
             priority: 1.1,
         });

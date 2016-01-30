@@ -25,15 +25,7 @@
                 <strong translate>Nº do comprovante</strong>
             </div>
             <div flex>
-              <md-input-container   class="md-block">
-                  <input required name="compNumber"  style="margin-top: -30px;"
-                  ng-model="vm.order.compNumber" type="text" >
-                  <div ng-messages="entryForm.compNumber.$error" ng-if="true">
-                      <div ng-message when="required">
-                          <span translate>Número do comprovante</span>
-                      </div>
-                  </div>
-              </md-input-container>
+                <span>{{vm.order.compNumber}}</span>
             </div>
         </div>
         <div flex layout="row" class="margin-bottom-10">
@@ -41,9 +33,7 @@
                 <strong translate>Estatus da Inscrição</strong>
             </div>
             <div flex="50">
-                  <md-select style="margin-top: -10px;" placeholder="Estatus" name="stats" ng-model="vm.order.status">
-                      <md-option ng-value="status.name" ng-repeat="status in vm.statusList">{{ status.name }}</md-option>
-                  </md-select>
+                  <span>{{vm.order.status}}</span>
             </div>
         </div>
 
@@ -75,9 +65,7 @@
                 <strong translate>Categoria</strong>
             </div>
             <div flex="50">
-                  <md-select style="margin-top: -10px;" placeholder="Category" name="category" ng-model="vm.order.category">
-                      <md-option ng-value="category" ng-repeat="category in vm.categories">{{ category.name }}</md-option>
-                  </md-select>
+              <span>{{vm.order.category.name}}</span>
             </div>
         </div>
 
@@ -111,8 +99,8 @@
     <md-dialog-actions class="" layout="row">
         <span flex></span>
         <md-input-container>
-        <md-button ng-click="vm.editEntry(vm.order)" class="md-primary"  aria-label="{{GENERAL.OK | translate}}" translate="">
-          Alterar
+        <md-button ng-click="vm.cancelClick(vm.order)" class="md-primary"  aria-label="{{GENERAL.OK | translate}}" translate="">
+          Fechar
         </md-button>
       </md-input-container>
     </md-dialog-actions>

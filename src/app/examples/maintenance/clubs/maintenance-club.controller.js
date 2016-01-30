@@ -3,10 +3,10 @@
 
     angular
         .module('app.fop.maintenance')
-        .controller('DashboardClubsController', DashboardClubsController);
+        .controller('MaintenanceClubsController', MaintenanceClubsController);
 
     /* @ngInject */
-    function DashboardClubsController($scope, $timeout, $mdMedia,
+    function MaintenanceClubsController($scope, $timeout, $mdMedia,
       $mdToast, $rootScope, ClubInstance, $state, $mdDialog) {
       var vm = this;
       vm.getClubs = getClubs;

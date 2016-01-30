@@ -4,7 +4,7 @@
     angular
         .module('app.examples', [
             'app.examples.authentication',
-            'app.examples.dashboards',
+            'app.fop.dashboards',
             'app.fop.maintenance',
             // 'app.examples.calendar',
             // 'app.examples.charts',
