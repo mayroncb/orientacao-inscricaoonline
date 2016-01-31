@@ -2,7 +2,5 @@
     'use strict';
 
     angular
-        .module('app.fop.dashboards', [
-        ]);
-          console.log("dldldldldldld")
+        .module('app.fop.dashboards', []);
 })();

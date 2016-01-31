@@ -42,8 +42,7 @@
             $cookies.put("u", user._id );
               // dataService.addData(data);
               $rootScope.user = user;
-
-              $state.go('triangular.admin-default.dashboard-admin')
+              $state.go('triangular.admin-default.dashboard')
           }, function(erro){
               toastr.error("Login ou senha inválido")
           })

@@ -9,6 +9,7 @@
     function SalesService(moment) {
         this.generateSales = generateSales;
         this.createLineChartData = createLineChartData;
+        this.createLineChartClub = createLineChartClub;
         this.createPieChartData = createPieChartData;
         this.createBarChartData = createBarChartData;
 
@@ -117,6 +118,33 @@
             for(var it = 0; it < comp.steps.length; it ++ ){
               chartData.labels.push(moment(comp.steps[it].stepDate).utc().format("DD/MM/YYYY"))
               row.push(comp.steps[it].entries.length)
+            }
+            chartData.data.push(row);
+            return chartData;
+        }
+        function createLineChartClub(entries) {
+          console.log(entries)
+            var chartData = {
+                labels: [],
+                series: ['Entry'],
+                options: {
+                    maintainAspectRatio: false,
+                    datasetFill: true,
+                    responsive: true,
+                    scaleShowGridLines: false,
+                    bezierCurve: true,
+                    pointDotRadius: 3,
+                    scaleFontColor: '#ffffff',
+                    scaleFontSize: 16
+                },
+                colors: ['#ffffff'],
+                data: []
+            };
+
+            var row = [];
+            for(var it = 0; it < entries.length; it ++ ){
+              chartData.labels.push(entries[it].step)
+              row.push(entries)
             }
             chartData.data.push(row);
             return chartData;

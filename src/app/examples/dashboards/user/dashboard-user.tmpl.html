@@ -39,7 +39,7 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="entry in vm.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.queryFilter">
-                                        <td>{{::entry.compNumber}}</td>
+                                        <td >{{::entry.compNumber}}</td>
                                         <td>{{::entry.user.firstname}} {{::entry.user.surname}}</td>
                                         <td>{{::entry.value | currency:"R$":2}}</td>
                                         <td flex="10">
@@ -47,22 +47,17 @@
                                               {{::entry.status}}
                                           </span>
                                         </td>
-                                        <td align="left">
-                                          <div layout="row"  layout-wrap>
-                                            <div flex="33" >
+                                        <td >
+                                          <div layout="row" flex="50">
+                                            <div flex="50">
                                               <md-button ng-click="vm.editEntry(entry, $event)" class="md-icon-button" aria-label="Editar Inscrição">
                                                   <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                                               </md-button>
                                             </div>
-                                            <div flex="33">
+                                            <div flex="50">
                                               <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
                                                   <md-icon md-font-icon="zmdi zmdi-assignment"></md-icon>
                                               </md-button>
-                                            </div>
-                                            <div flex="33">
-                                              <!-- <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Inscrição">
-                                                  <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
-                                              </md-button> -->
                                             </div>
                                           </div>
                                         </td>
@@ -70,7 +65,7 @@
                                 </tbody>
                             </table>
                         </md-data-table-container>
-                        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.pendingEntries.length}}"></md-data-table-pagination>
+                        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.entries.length}}"></md-data-table-pagination>
                     </tri-widget>
                   </md-content>
           </form>

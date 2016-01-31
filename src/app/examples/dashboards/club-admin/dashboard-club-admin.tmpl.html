@@ -1,0 +1,78 @@
+<div class="sales-dashboard" layout="column">
+    <tri-widget title="Inscricões / Etapa" subtitle="Total de inscritos em cada etapa do seu clube" palette-background="triCyan:800" class="padding-left-40 padding-right-40 padding-top-20 padding-bottom-20 no-shadow">
+        <canvas height="300" class="chart-line" chart-data="vm.chartLineData.data" chart-labels="vm.chartLineData.labels" chart-series="vm.chartLineData.series" chart-options="vm.chartLineData.options" chart-colours="vm.chartLineData.colors"></canvas>
+    </tri-widget>
+
+    <div layout="row" layout-sm="column" layout-margin dragula='"drag-analytics-container"'>
+        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.entriesbyuser" duration="1.5" decimals="0"></p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Participação em Etapas</p>
+        </tri-widget>
+        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.clubsQtd" duration="1.5" decimals="0"></p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Total de Atletas no seu Clube</p>
+        </tri-widget>
+    </div>
+
+    <div layout="row" layout-sm="column" layout-margin>
+      <tri-widget flex="100" flex-sm="100" >
+        <form name="formComps">
+                  <md-content class="md-padding">
+                    <div layout layout-xs="column" flex>
+                      <md-input-container flex="100">
+                          <input placeholder="Filtro" ng-model="vm.queryFilter">
+                          </input>
+                          <md-icon md-font-icon="zmdi zmdi-search" class="name"></md-icon>
+                      </md-input-container>
+                    </div>
+                    <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
+                      <md-data-table-container>
+                          <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                              <thead md-order="vm.query.order" md-trigger="vm.getClubs">
+                                  <tr>
+                                      <th name="Name" order-by="firstname" ></th>
+                                      <th name="Clube" order-by="club.name" ></th>
+                                      <th name="Ativo" order-by="isActive"></th>
+                                      <th name="Ação"></th>
+                                      <!-- <th name="Exluir"></th> -->
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr ng-repeat="user in vm.clubUsers | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.queryFilter">
+                                      <td>{{::user.firstname}} {{::user.surname}} </td>
+                                      <td>{{::user.club.name}}</td>
+                                      <td>
+                                        <md-switch ng-change="vm.activateUser(user)" class="md-primary" ng-model="user.isClubAutorization"
+                                        aria-label="Usuário ativo" >
+
+                                        </md-switch></td>
+                                      <td>
+                                        <div layout="row"  layout-wrap>
+                                          <div flex="33">
+                                            <md-button ng-click="vm.openUser(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                            </md-button>
+                                          </div>
+                                          <!-- <div flex="33">
+                                            <md-button ng-click="vm.openChangePass(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                                <md-icon md-font-icon="zmdi zmdi-key"></md-icon>
+                                            </md-button>
+                                          </div>
+                                          <div flex="33">
+                                            <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Usuário">
+                                                <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                                            </md-button>
+                                          </div> -->
+                                        </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </md-data-table-container>
+                        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.clubUsers.length}}"></md-data-table-pagination>
+                    </tri-widget>
+                  </md-content>
+          </form>
+      </tri-widget>
+    </div>
+</div>

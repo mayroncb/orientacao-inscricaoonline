@@ -35,7 +35,13 @@ module.exports = function(app) {
     // }
 
     controller.getClub = function(req, res) {
-        Competition.findOne({_id: req.params.id}, function(err, data) {
+        Club.findOne({_id: req.params.id}, function(err, data) {
+            // console.log(data);
+            res.json(data);
+        })
+    }
+    controller.getClubByAdmin = function(req, res) {
+        Club.findOne({admin: req.params.id}, function(err, data) {
             // console.log(data);
             res.json(data);
         })

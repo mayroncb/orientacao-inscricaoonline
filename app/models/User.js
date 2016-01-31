@@ -13,6 +13,11 @@ module.exports = function() {
             type: Boolean
         },
 
+        isClubAutorization: {
+            type: Boolean,
+            default: false
+        },
+
         isCbo: {
             type: Boolean,
             required: true,

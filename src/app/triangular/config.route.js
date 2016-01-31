@@ -6,19 +6,57 @@
         .config(routeConfig);
 
     /* @ngInject */
-    function routeConfig($stateProvider, $compileProvider) {
+    function routeConfig($stateProvider, $compileProvider, triMenuProvider) {
         $stateProvider
         .state('triangular', {
             abstract: true,
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
               check: function($cookies, $state, $rootScope, UserInstance) {
-                if (!$rootScope.user) {
-                  UserInstance.get({id: $cookies.getAll()['u']}, function(user){
+                $rootScope.$on('$stateChangeSuccess',
+                  function(event, toState, toParams, fromState, fromParams) {
+                    if (toState.name === 'triangular.admin-default.dashboard-admin'
+                          && $rootScope.user.type !== "ADMIN") {
+                            $state.go('triangular.admin-default.dashboard')
+                    } else if (toState.name === 'triangular.admin-default.dashboard-club-admin'
+                            && $rootScope.user.type !== "CLUB_ADMIN") {
+                              $state.go('triangular.admin-default.dashboard')
+                      }
+                  })
+                  
+                  UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                     $rootScope.user = user;
                   });
-                }
-                $compileProvider.debugInfoEnabled(false);
+
+
+                  if ($rootScope.user.type === "ADMIN") {
+                      triMenuProvider.addMenu({
+                          name: 'MENU.DASHBOARDS.ANALYTICS',
+                          icon: 'zmdi zmdi-assignment-o',
+                          state: 'triangular.maintenance.dashboard-analytics',
+                          type: 'dropdown',
+                          priority: 3.1,
+                          children: [{
+                              name: 'MENU.DASHBOARDS.USERS',
+                              state: 'triangular.maintenance.maintenance-users',
+                              type: 'link'
+                          },{
+                              name: 'MENU.DASHBOARDS.COMPETITIONS',
+                              state: 'triangular.maintenance.maintenance-competitions',
+                              type: 'link'
+                          },{
+                              name: 'MENU.DASHBOARDS.STEPS',
+                              state: 'triangular.maintenance.maintenance-steps',
+                              type: 'link'
+                          },{
+                              name: 'MENU.DASHBOARDS.CLUBS',
+                              state: 'triangular.maintenance.maintenance-clubs',
+                              type: 'link'
+                          }
+                        ]
+                      })
+                    }
+
                 console.log("Ativar Proteção em produção");
                 // if(!$cookies.getAll()['connect.sid']) {
                 //     $state.go('authentication.login');

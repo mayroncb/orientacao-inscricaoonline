@@ -9,6 +9,7 @@
     function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
       CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
       SalesService, StepInstance, EntryInstance) {
+        // if($rootScope.user.type !== "ADMIN")$stete.go()
         console.log('DashboardSalesController');
         var vm = this;
         vm.loadGraph = loadGraph;

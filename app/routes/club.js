@@ -8,7 +8,10 @@ module.exports = function(app){
     app.route('/clubs/qtd')
         .get(controller.getCount) //ADD Verificação na produção
 
-   app.route('/clubs/:id')
+    app.route('/club/admin/:id')
+        .get(controller.getClubByAdmin) //ADD Verificação na produção
+
+    app.route('/clubs/:id')
         .get(controller.getClub) //ADD Verificação na produção
         .delete(controller.removeClub)
         .post(controller.updateClub);//ADD Verificação na produção

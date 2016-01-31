@@ -29,7 +29,7 @@ module.exports = function(app) {
     }
 
     controller.listUsersByClub = function(req, res) {
-        User.find({club: req.params.id}, function(err, data) {
+        User.find({club: req.params.id}).populate('club').exec(function(err, data) {
             // console.log(data);
             res.json(data);
         })

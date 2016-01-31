@@ -127,31 +127,31 @@
         //     controllerAs: 'vm'
         // });
 
-        triMenuProvider.addMenu({
-            name: 'MENU.DASHBOARDS.ANALYTICS',
-            icon: 'zmdi zmdi-assignment-o',
-            state: 'triangular.maintenance.dashboard-analytics',
-            type: 'dropdown',
-            priority: 3.1,
-            children: [{
-                name: 'MENU.DASHBOARDS.USERS',
-                state: 'triangular.maintenance.maintenance-users',
-                type: 'link'
-            },{
-                name: 'MENU.DASHBOARDS.COMPETITIONS',
-                state: 'triangular.maintenance.maintenance-competitions',
-                type: 'link'
-            },{
-                name: 'MENU.DASHBOARDS.STEPS',
-                state: 'triangular.maintenance.maintenance-steps',
-                type: 'link'
-            },{
-                name: 'MENU.DASHBOARDS.CLUBS',
-                state: 'triangular.maintenance.maintenance-clubs',
-                type: 'link'
-            }
-          ]
-        });
+        // triMenuProvider.addMenu({
+        //     name: 'MENU.DASHBOARDS.ANALYTICS',
+        //     icon: 'zmdi zmdi-assignment-o',
+        //     state: 'triangular.maintenance.dashboard-analytics',
+        //     type: 'dropdown',
+        //     priority: 3.1,
+        //     children: [{
+        //         name: 'MENU.DASHBOARDS.USERS',
+        //         state: 'triangular.maintenance.maintenance-users',
+        //         type: 'link'
+        //     },{
+        //         name: 'MENU.DASHBOARDS.COMPETITIONS',
+        //         state: 'triangular.maintenance.maintenance-competitions',
+        //         type: 'link'
+        //     },{
+        //         name: 'MENU.DASHBOARDS.STEPS',
+        //         state: 'triangular.maintenance.maintenance-steps',
+        //         type: 'link'
+        //     },{
+        //         name: 'MENU.DASHBOARDS.CLUBS',
+        //         state: 'triangular.maintenance.maintenance-clubs',
+        //         type: 'link'
+        //     }
+        //   ]
+        // });
 
     }
 })();

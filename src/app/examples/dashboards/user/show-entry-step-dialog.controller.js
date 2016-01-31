@@ -31,7 +31,6 @@
             $mdDialog.cancel();
         }
 
-
         total();
     }
 })();
