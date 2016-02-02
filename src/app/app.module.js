@@ -9,7 +9,7 @@
             'LocalStorageModule', 'googlechart', 'chart.js', 'linkify',
             'ui.calendar', 'angularMoment', 'textAngular', 'uiGmapgoogle-maps',
             'hljs', 'md.data.table', angularDragula(angular), 'ngFileUpload',
-            'ui.mask', 'ngMask',  'toastr', 
+            'ui.mask', 'ngMask',  'toastr',
             // 'seed-module'
             // uncomment above to activate the example seed module
             'app.examples'

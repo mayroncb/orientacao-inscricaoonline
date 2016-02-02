@@ -1,4 +1,5 @@
 <div class="sales-dashboard" layout="column">
+  <div flex class="loader" ng-show="vm.loading" layout="column" layout-fill layout-align="center center"><div class="loader-inner"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div><h3 class="md-headline">FOP</h3></div>
     <tri-widget title="Inscricões / Etapa" subtitle="Total de inscritos em cada etapa" palette-background="triCyan:800" class="padding-left-40 padding-right-40 padding-top-20 padding-bottom-20 no-shadow">
         <canvas height="300" class="chart-line" chart-data="vm.chartLineData.data" chart-labels="vm.chartLineData.labels" chart-series="vm.chartLineData.series" chart-options="vm.chartLineData.options" chart-colours="vm.chartLineData.colors"></canvas>
     </tri-widget>

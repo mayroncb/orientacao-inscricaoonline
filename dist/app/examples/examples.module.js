@@ -4,9 +4,11 @@
     angular
         .module('app.examples', [
             'app.examples.authentication',
+            'app.fop.dashboards',
+            'app.fop.maintenance',
             // 'app.examples.calendar',
             // 'app.examples.charts',
-            'app.examples.dashboards',
+
             // 'app.examples.elements',
             // 'app.examples.email',
             // 'app.examples.extras',

@@ -23,7 +23,7 @@
                               $state.go('triangular.admin-default.dashboard')
                       }
                   })
-                  
+
                   UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                     $rootScope.user = user;
                   });

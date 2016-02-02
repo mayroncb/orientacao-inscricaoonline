@@ -40,6 +40,7 @@ module.exports = function(app) {
     }
 
     controller.entriesByUser = function(req, res) {
+      console.log("::::::", req.params.id)
         Entry.find({user: req.params.id})
         .populate("user")
         .populate("category")

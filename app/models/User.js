@@ -10,7 +10,8 @@ module.exports = function() {
         },
 
         isFirstEntry: {
-            type: Boolean
+            type: Boolean,
+            default: true
         },
 
         isClubAutorization: {

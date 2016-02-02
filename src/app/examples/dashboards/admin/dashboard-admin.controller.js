@@ -8,10 +8,9 @@
     /* @ngInject */
     function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
       CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
-      SalesService, StepInstance, EntryInstance) {
-        // if($rootScope.user.type !== "ADMIN")$stete.go()
-        console.log('DashboardSalesController');
+      SalesService, StepInstance, EntryInstance, API_CONFIG) {
         var vm = this;
+        vm.loading = true;
         vm.loadGraph = loadGraph;
         vm.loadEntries = loadEntries;
         vm.loadCompetitions = loadCompetitions;
@@ -27,8 +26,6 @@
         LoadData.userQtd.query().$promise.then(function(data){
           vm.usersQtd = data.value
         })
-
-
         console.log('Ativar em produção');
             // $interval( function(){
             //
@@ -129,6 +126,7 @@
             if (vm.tempList.length > 0 ){
               vm.pendingEntries = vm.tempList
               }
+              vm.loading = false;
           })
         }
 

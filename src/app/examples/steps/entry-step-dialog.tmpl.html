@@ -1,4 +1,6 @@
-<md-dialog class="order-dialog mobile-fullwidth-dialog" flex="60" flex-sm="100">
+<md-dialog  class="order-dialog mobile-fullwidth-dialog" flex="60" flex-sm="100">
+  <div flex class="loader" ng-show="vm.loading" layout="column" layout-fill layout-align="center center"><div class="loader-inner"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div><h3 class="md-headline">FOP</h3></div>
+
     <md-toolbar>
         <div class="md-toolbar-tools">
             <h2 flex >
@@ -73,7 +75,7 @@
                 <strong translate>Comprovante</strong>
             </div>
             <div layout="row" flex="50">
-              <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*" ngf-max-size="3MB"
+              <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*" ngf-max-size="10MB"
               ngf-select="vm.upload($file)" ng-disabled="vm.status != 'Enviar'"   aria-label="upload">
                     {{vm.status}} <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'Enviar', 'fa fa-spinner fa-pulse': vm.status == 'Enviando', 'zmdi zmdi-check': vm.status == 'Completo'}"></md-icon>
               </md-button>
