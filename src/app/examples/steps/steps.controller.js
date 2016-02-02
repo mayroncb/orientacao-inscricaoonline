@@ -20,16 +20,7 @@
                  vm.steps = steps;
                  vm.activeSteps = $filter('filter')(vm.steps, {isActive: true });
                  vm.oldSteps = $filter('filter')(vm.steps, {isActive: false });
-                //  for (var i in vm.activeSteps) {
-                //    for (var entry in vm.activeSteps[i].entries) {
-                //      if ($rootScope.user._id === vm.activeSteps[i].entries[entry].user) {
-                //        if (vm.activeSteps[i].entries[entry].status === "Processando" || vm.activeSteps[i].entries[entry].status === "Aceita")
-                //        vm.activeSteps[i].isRegistered = true;
-                //      }
-                //    }
-                //   //  console.log(vm.activeSteps);
-                //  }
-                //  vm.isRegistered =
+
                 checkEntries();
            });
         }
@@ -45,9 +36,8 @@
                     step.isRegistered = true
                   }
                 }, null);
-                vm.loading = false;
               }, null);
-
+                vm.loading = false;
             })
             .error(function(error) {
               console.log(error);

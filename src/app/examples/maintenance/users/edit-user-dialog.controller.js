@@ -21,7 +21,7 @@
 
         LoadData.categories.query().$promise.then(function(categories){
             vm.categories = categories;
-            vm.user['category'] = $filter('filter')(vm.categories, {_id:vm.user['category']._id})[0];
+            vm.user['category'] = $filter('filter')(vm.categories, {_id:vm.user['category']})[0];
         });
 
         LoadData.clubs.query().$promise.then(function(clubs){

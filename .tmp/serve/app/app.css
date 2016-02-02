@@ -25980,10 +25980,6 @@ md-select[md-container-class="calendar-color-select"] md-select-value span {
 .calendar-color-select md-option {
   text-transform: capitalize; }
 
-table[md-data-table] > tbody > tr > td:nth-child(1) {
-  max-width: 50px;
-  word-wrap: break-word; }
-
 .dashboard-container .layout-margin {
   margin: 0px; }
 
@@ -26039,6 +26035,10 @@ table.md-data-table td {
   color: rgba(0, 0, 0, 0.87); }
   .md-data-table-toolbar input:focus {
     outline: none; }
+
+table[md-data-table] > tbody > tr > td:nth-child(1) {
+  max-width: 50px;
+  word-wrap: break-word; }
 
 .dashboard-container .layout-margin {
   margin: 0px; }
@@ -26215,6 +26215,39 @@ table.md-data-table td {
 .sales-dashboard .status-Processando {
   background-color: #F5BA0A; }
 
+.sales-dashboard .status {
+  padding: 8px 14px;
+  border-radius: 6px;
+  min-width: 60px;
+  display: inline-block;
+  text-align: center;
+  color: #fff; }
+
+.sales-dashboard .status-Cancelada {
+  background-color: #696868; }
+
+.sales-dashboard .status-Aceita {
+  background-color: #8BC34A; }
+
+.sales-dashboard .status-Processando {
+  background-color: #F5BA0A; }
+
+table[md-data-table]:not([md-row-select]) > tbody > tr > td:first-child, table[md-data-table]:not([md-row-select]) > tfoot > tr > td:first-child, table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:first-child {
+  padding: 0 10px 0 24px;
+  max-width: 70px; }
+
+table[md-data-table] > thead:not([md-table-progress]) > tr > th {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+  white-space: normal; }
+
+table[md-data-table] > tbody > tr > td:last-child, table[md-data-table] > tfoot > tr > td:last-child, table[md-data-table] > thead:not([md-table-progress]) > tr > th:last-child {
+  padding: 0 14px 0 8px; }
+
+table[md-data-table]:not([md-row-select]) > tbody > tr > td:first-child, table[md-data-table]:not([md-row-select]) > tfoot > tr > td:first-child, table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:first-child {
+  padding: 0 10px 0 24px;
+  max-width: 150px; }
+
 .order-dialog {
   box-shadow: none; }
 
@@ -26250,39 +26283,6 @@ table.md-data-table td {
 
 .sales-dashboard .status-Processando {
   background-color: #F5BA0A; }
-
-.sales-dashboard .status {
-  padding: 8px 14px;
-  border-radius: 6px;
-  min-width: 60px;
-  display: inline-block;
-  text-align: center;
-  color: #fff; }
-
-.sales-dashboard .status-Cancelada {
-  background-color: #696868; }
-
-.sales-dashboard .status-Aceita {
-  background-color: #8BC34A; }
-
-.sales-dashboard .status-Processando {
-  background-color: #F5BA0A; }
-
-table[md-data-table]:not([md-row-select]) > tbody > tr > td:first-child, table[md-data-table]:not([md-row-select]) > tfoot > tr > td:first-child, table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:first-child {
-  padding: 0 10px 0 24px;
-  max-width: 70px; }
-
-table[md-data-table] > thead:not([md-table-progress]) > tr > th {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.54);
-  white-space: normal; }
-
-table[md-data-table] > tbody > tr > td:last-child, table[md-data-table] > tfoot > tr > td:last-child, table[md-data-table] > thead:not([md-table-progress]) > tr > th:last-child {
-  padding: 0 14px 0 8px; }
-
-table[md-data-table]:not([md-row-select]) > tbody > tr > td:first-child, table[md-data-table]:not([md-row-select]) > tfoot > tr > td:first-child, table[md-data-table]:not([md-row-select]) > thead:not([md-table-progress]) > tr > th:first-child {
-  padding: 0 10px 0 24px;
-  max-width: 150px; }
 
 .order-dialog {
   box-shadow: none; }

@@ -119,7 +119,7 @@
 
           <md-input-container flex>
               <label translate>SIGNUP.CATEGORY.LABEL</label>
-              <md-select required placeholder="Category" name="category" ng-model="vm.user.category" ng-init="category = vm.user.category" >
+              <md-select required placeholder="Category" name="category" ng-model="vm.user.category" >
                 <md-option ng-value="category" ng-repeat="category in vm.categories">{{ category.name }}</md-option>
               </md-select>
               <div ng-show="true" ng-messages="profile.category.$error">
