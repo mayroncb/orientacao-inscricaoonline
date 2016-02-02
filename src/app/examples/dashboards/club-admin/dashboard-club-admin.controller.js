@@ -18,6 +18,9 @@
         vm.entries = [];
         vm.step = {}
         vm.club = {}
+
+
+
         $http.get("http://localhost:3000/club/admin/"+$rootScope.user._id)
           .success(function(res) {
             vm.club = res;
@@ -95,10 +98,13 @@
           EntryInstance.query().$promise.then(function(entries) {
             var temp = []
             angular.forEach(entries, function(value, key) {
-              if(value.user.club === vm.club._id){
+              if(value.user.club === vm.club._id
+                && value.status == "Aceita"){
                   this.push(value);
+                  console.log(value)
               }
             }, temp);
+            vm.entriesByClub = temp.length;
             vm.chartLineData = SalesService.createLineChartClub(temp);
           })
 

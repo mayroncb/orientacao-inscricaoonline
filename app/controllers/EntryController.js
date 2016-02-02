@@ -49,6 +49,16 @@ module.exports = function(app) {
         });
     }
 
+    controller.entriesByListOfUsers = function(req, res) {
+        console.log("::::::", req.query.ids)
+        Entry.conut({user: {$in:
+           [req.query.ids]}, status: "Aceita"
+         }).exec(function(err, n){
+           console.log(":::::::: ", n)
+            res.json(entries)
+        });
+    }
+
     controller.loadQtdEntriesByUser = function(req, res) {
       Entry.find({user: req.params.id, status: "Aceita"})
       .exec(function(err, entries){
