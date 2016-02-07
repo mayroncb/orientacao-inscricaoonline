@@ -1,6 +1,9 @@
 {
-  "name": "triangular",
-  "version": "0.0.0",
+  "name": "fop",
+  "version": "0.0.1",
+  "scripts": {
+    "postinstall": "bower install && gulp build"
+  },
   "devDependencies": {
     "browser-sync": "~1.7.1",
     "chalk": "~0.5.1",
