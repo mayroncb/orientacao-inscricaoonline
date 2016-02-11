@@ -8,7 +8,7 @@
     /* @ngInject */
     function DashboardUserController($state, $cookies, $scope, $q,
       CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
-      SalesService, StepInstance, EntryInstance, $rootScope, $http) {
+      SalesService, StepInstance, EntryInstance, $rootScope, $http, API_CONFIG) {
         console.log('DashboardUserController');
         var vm = this;
         // vm.loadGraph = loadGraph;
@@ -21,7 +21,7 @@
         vm.entries = [];
         vm.step = {}
 
-        $http.get("http://localhost:3000/entries/userqtd/"+$rootScope.user._id)
+        $http.get(API_CONFIG.url + "/entries/userqtd/" + $rootScope.user._id)
           .success(function(res) {
             vm.entriesbyuser = res.value;
           })
@@ -29,7 +29,7 @@
             console.log(error);
           });
 
-        $http.get("http://localhost:3000/users/club/"+$rootScope.user.club)
+        $http.get(API_CONFIG.url + "/users/club/" + $rootScope.user.club)
           .success(function(res) {
             vm.clubsQtd = res.length;
           })
@@ -61,23 +61,6 @@
            order: '-date',
            page: 1
          };
-
-        // vm.openOrder = openOrder;
-
-        /////////////////////////////////
-
-        // function openOrder(order, $event) {
-        //     $mdDialog.show({
-        //         controller: 'SalesOrderDialogController',
-        //         controllerAs: 'vm',
-        //         templateUrl: 'app/examples/dashboards/sales/order-dialog.tmpl.html',
-        //         locals: {
-        //             order: order
-        //         },
-        //         targetEvent: $event,
-        //         clickOutsideToClose: true
-        //     });
-        // }
 
         function openComp(comp, $event) {
           $mdDialog.show({
@@ -124,9 +107,8 @@
         // }
 
         function loadEntries() {
-          $http.get("http://localhost:3000/entries/user/"+$rootScope.user._id)
+          $http.get(API_CONFIG.url + "/entries/user/" + $rootScope.user._id)
             .success(function(entries) {
-              console.log(entries)
               vm.entries = entries;
             })
             .error(function(error) {

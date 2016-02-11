@@ -7,7 +7,7 @@
         AddStepDialogController);
 
     /* @ngInject */
-    function AddStepDialogController($scope, triTheming, LoadData, moment,
+    function AddStepDialogController($scope, triTheming, LoadData, moment, API_CONFIG,
       StepInstance,  toastr, $mdDialog, $rootScope, competition, $filter) {
       console.log('AddStepDialogController:::');
       var vm = this;

@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function MaintenanceUsersController($scope, $timeout, $mdToast, $rootScope,
-      $state, UserInstance, toastr, $mdDialog ) {
+      $state, UserInstance, toastr, $mdDialog, API_CONFIG) {
         var vm = this;
         vm.users = [];
         loadUsers();

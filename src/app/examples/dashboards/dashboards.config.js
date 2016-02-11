@@ -103,31 +103,6 @@
             type: 'link',
             priority: 1.1,
         });
-        // triMenuProvider.addMenu({
-        //     name: 'MENU.DASHBOARDS.ANALYTICS',
-        //     icon: 'zmdi zmdi-assignment-o',
-        //     state: 'triangular.admin-default.dashboard-adm',
-        //     type: 'dropdown',
-        //     priority: 3.1
-          //   children: [{
-          //       name: 'MENU.DASHBOARDS.USERS',
-          //       state: 'triangular.admin-default.dashboard-users',
-          //       type: 'link'
-          //   },{
-          //       name: 'MENU.DASHBOARDS.COMPETITIONS',
-          //       state: 'triangular.admin-default.dashboard-competitions',
-          //       type: 'link'
-          //   },{
-          //       name: 'MENU.DASHBOARDS.STEPS',
-          //       state: 'triangular.admin-default.dashboard-steps',
-          //       type: 'link'
-          //   },{
-          //       name: 'MENU.DASHBOARDS.CLUBS',
-          //       state: 'triangular.admin-default.dashboard-clubs',
-          //       type: 'link'
-          //   }
-          // ]
-        // });
 
     }
 })();

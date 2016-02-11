@@ -2,7 +2,8 @@ var http = require('http');
 var app = require('./config/express')();
 var passport = require('passport');
 require('./config/passport')(passport);
-require('./config/db.js')('mongodb://localhost/incricaoonline');
+var DB_URL = process.env.MONGOLAB_URI || 'mongodb://localhost/incricaoonline';
+require('./config/db.js')(DB_URL);
 
 
 

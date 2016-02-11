@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function AddUserController($scope, $state, $location, toastr, $http, $filter,
-      triSettings, $mdDialog, LoadData, UserInstance, $rootScope) {
+      triSettings, $mdDialog, LoadData, UserInstance, $rootScope, API_CONFIG) {
         var vm = this;
 
         vm.types = ['USER', 'ADMIN', 'CLUB_ADMIN']

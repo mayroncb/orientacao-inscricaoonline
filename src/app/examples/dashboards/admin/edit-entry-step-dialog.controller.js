@@ -6,7 +6,7 @@
         .controller('EditEntryDialogController', EditStepEntryDialogController);
 
     /* @ngInject */
-    function EditStepEntryDialogController($scope, step, $mdDialog, $rootScope,
+    function EditStepEntryDialogController($scope, step, $mdDialog, $rootScope, API_CONFIG,
         $timeout, EntryInstance, order, $mdToast, LoadData, $filter, $http, toastr) {
         var vm = this;
         var tmp;
@@ -34,7 +34,7 @@
 
         $http({
           method: 'GET',
-          url: 'http://localhost:3000/status'
+          url: API_CONFIG.url + '/status'
         }).then(function successCallback(response) {
             vm.statusList = response.data;
             }, function errorCallback(response) {

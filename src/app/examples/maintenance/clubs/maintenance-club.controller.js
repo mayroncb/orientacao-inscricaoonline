@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function MaintenanceClubsController($scope, $timeout, $mdMedia,
-      $mdToast, $rootScope, ClubInstance, $state, $mdDialog) {
+      $mdToast, $rootScope, ClubInstance, $state, $mdDialog, API_CONFIG) {
       var vm = this;
       vm.getClubs = getClubs;
       vm.editClub = editClub;

@@ -7,7 +7,7 @@
         EditClubDialogController);
 
     /* @ngInject */
-    function EditClubDialogController($log, $scope, triTheming, $timeout, $q,
+    function EditClubDialogController($log, $scope, triTheming, $timeout, $q, API_CONFIG,
       ClubInstance,  toastr, $mdDialog, $rootScope, LoadData, UserInstance, club) {
       console.log('EditClubDialogController');
       var vm = this;

@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function DashboardClubAdminController($state, $cookies, $scope, $q,
-      LoadData, $filter, $mdDialog, toastr, EntryInstance,
+      LoadData, $filter, $mdDialog, toastr, EntryInstance, API_CONFIG,
       SalesService, UserInstance, $rootScope, $http) {
         console.log('DashboardClubAdminController');
         var vm = this;
@@ -21,10 +21,10 @@
 
 
 
-        $http.get("http://localhost:3000/club/admin/"+$rootScope.user._id)
+        $http.get(API_CONFIG.url + "/club/admin/" + $rootScope.user._id)
           .success(function(res) {
             vm.club = res;
-            $http.get("http://localhost:3000/users/club/"+vm.club._id)
+            $http.get(API_CONFIG.url + "/users/club/" + vm.club._id)
               .success(function(users) {
                 vm.clubUsers = users;
               }).error(function(error) {
@@ -34,7 +34,7 @@
             console.log(error);
           });
 
-        $http.get("http://localhost:3000/users/club/"+$rootScope.user.club)
+        $http.get(API_CONFIG.url + "/users/club/" + $rootScope.user.club)
           .success(function(res) {
             vm.clubsQtd = res.length;
           })

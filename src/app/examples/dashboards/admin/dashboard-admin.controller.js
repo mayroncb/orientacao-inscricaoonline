@@ -51,23 +51,6 @@
            page: 1
          };
 
-        // vm.openOrder = openOrder;
-
-        /////////////////////////////////
-
-        // function openOrder(order, $event) {
-        //     $mdDialog.show({
-        //         controller: 'SalesOrderDialogController',
-        //         controllerAs: 'vm',
-        //         templateUrl: 'app/examples/dashboards/sales/order-dialog.tmpl.html',
-        //         locals: {
-        //             order: order
-        //         },
-        //         targetEvent: $event,
-        //         clickOutsideToClose: true
-        //     });
-        // }
-
         function openComp(comp, $event){
           $mdDialog.show({
               controller: 'CompDialogController',

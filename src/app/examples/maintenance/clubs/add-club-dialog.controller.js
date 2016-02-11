@@ -7,7 +7,7 @@
         AddClubDialogController);
 
     /* @ngInject */
-    function AddClubDialogController($log, $scope, triTheming, $timeout, $q,
+    function AddClubDialogController($log, $scope, triTheming, $timeout, $q, API_CONFIG,
       ClubInstance,  toastr, $mdDialog, $rootScope, LoadData, UserInstance) {
       console.log('AddClubDialogController');
       var vm = this;

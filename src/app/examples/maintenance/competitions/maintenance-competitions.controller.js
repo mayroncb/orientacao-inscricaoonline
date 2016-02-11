@@ -6,7 +6,7 @@
         .controller('MaintenanceCompetitionsController', MaintenanceCompetitionsController);
 
     /* @ngInject */
-    function MaintenanceCompetitionsController($scope, $timeout, $mdMedia,
+    function MaintenanceCompetitionsController($scope, $timeout, $mdMedia, API_CONFIG,
       $mdToast, $rootScope, CompetitionInstance, $state, $mdDialog) {
       var vm = this;
       vm.getCompetitions = getCompetitions;

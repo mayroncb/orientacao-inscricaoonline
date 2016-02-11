@@ -2,27 +2,27 @@
     'use strict';
 
 angular.module('app').
-  factory("LoadData", function($resource) {
+  factory("LoadData", function($resource, API_CONFIG) {
     return {
-      clubs: $resource('http://localhost:3000/clubs', {}, {
+      clubs: $resource(API_CONFIG.url + '/clubs', {}, {
         query: { method: 'GET', params: {}, isArray: true }
       }),
-      categories: $resource('http://localhost:3000/categories', {}, {
+      categories: $resource(API_CONFIG.url + '/categories', {}, {
         query: { method: 'GET', params: {}, isArray: true }
       }),
-      states: $resource('http://localhost:3000/states', {}, {
+      states: $resource(API_CONFIG.url + '/states', {}, {
         query: { method: 'GET', params: {}, isArray: true }
       }),
-      userByName: $resource('http://localhost:3000/users/q/:text', {}, {
+      userByName: $resource(API_CONFIG.url + '/users/q/:text', {}, {
         query: { method: 'GET', params: {text: '@text'}, isArray: true }
       }),
-      userQtd: $resource('http://localhost:3000/users/qtd', {}, {
+      userQtd: $resource(API_CONFIG.url + '/users/qtd', {}, {
         query: { method: 'GET', isArray: false }
       }),
-      clubQtd: $resource('http://localhost:3000/clubs/qtd', {}, {
+      clubQtd: $resource(API_CONFIG.url + '/clubs/qtd', {}, {
         query: { method: 'GET',  isArray: false }
       }),
-      loadComp: $resource('http://localhost:3000/entry/comp/:id', {}, {
+      loadComp: $resource(API_CONFIG.url + '/entry/comp/:id', {}, {
         query: { method: 'GET',  params:{id: '@id'}, isArray: false }
       })
     };

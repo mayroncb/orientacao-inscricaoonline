@@ -7,7 +7,7 @@
         EditCompetitionDialogController);
 
     /* @ngInject */
-    function EditCompetitionDialogController($scope, triTheming,
+    function EditCompetitionDialogController($scope, triTheming, API_CONFIG,
       CompetitionInstance,  toastr, $mdDialog, competition) {
       console.log('EditCompetitionDialogController');
       $scope.editCompetition = editCompetition;

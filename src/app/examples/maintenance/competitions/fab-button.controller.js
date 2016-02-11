@@ -6,7 +6,7 @@
         .controller('CompetitionsFabController', CompetitionsFabController);
 
     /* @ngInject */
-    function CompetitionsFabController($rootScope, $scope, $mdMedia, $mdDialog) {
+    function CompetitionsFabController($rootScope, $scope, $mdMedia, $mdDialog, API_CONFIG) {
 
       $scope.customFullscreen = $mdMedia('xs') || $mdMedia('xs');
 
@@ -32,20 +32,5 @@
             $scope.customFullscreen = (wantsFullScreen === true);
           });
       };
-
-
-    //   function DialogController($scope, $mdDialog) {
-    //     $scope.hide = function() {
-    //       $mdDialog.hide();
-    //     };
-    //     $scope.cancel = function() {
-    //       $mdDialog.cancel();
-    //     };
-    //     $scope.answer = function(answer) {
-    //       $mdDialog.hide(answer);
-    //     };
-    //
-    //
-    // }
 }
 })();

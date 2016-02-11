@@ -7,7 +7,7 @@
         ChangePassDialogController);
 
     /* @ngInject */
-    function ChangePassDialogController($scope, LoadData, moment,
+    function ChangePassDialogController($scope, LoadData, moment, API_CONFIG,
       UserInstance,  toastr, $mdDialog, $rootScope, user, $filter) {
       console.log('ChangePassDialogController:::');
       var vm = this;

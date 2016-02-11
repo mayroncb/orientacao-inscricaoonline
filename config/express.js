@@ -22,8 +22,9 @@ module.exports = function(){
         credentials: true
     };
     app.use(cors(corsOptions));
+
     //port of service
-    app.set('port', 3000);
+    app.set('port', process.env.PORT || 3000);
 
 
     //middleware

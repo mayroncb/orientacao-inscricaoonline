@@ -6,14 +6,14 @@
         .controller('CompUserDialogController', CompUserDialogController);
 
     /* @ngInject */
-    function CompUserDialogController($mdDialog, LoadData, comp, $q, $http) {
+    function CompUserDialogController($mdDialog, LoadData, comp, $q, $http, API_CONFIG ) {
         var vm = this;
         vm.comp = comp;
         vm.compImg;
         vm.closeDialog = closeDialog;
 
        function loadComp() {
-          $http.get("http://localhost:3000/entry/comp/", {params: { id : vm.comp.comp }})
+          $http.get(API_CONFIG.url + "/entry/comp/", {params: { id : vm.comp.comp }})
             .success(function(image) {
               vm.compImg = image;
             })

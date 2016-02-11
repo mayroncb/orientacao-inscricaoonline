@@ -7,7 +7,7 @@
         AddCompetitionDialogController);
 
     /* @ngInject */
-    function AddCompetitionDialogController($scope, triTheming,
+    function AddCompetitionDialogController($scope, triTheming, API_CONFIG,
       CompetitionInstance,  toastr, $mdDialog, $rootScope) {
       console.log('AddCompetitionDialogController');
       $scope.addCompetition = addCompetition;

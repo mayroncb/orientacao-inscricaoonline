@@ -7,7 +7,7 @@
         EditStepDialogController);
 
     /* @ngInject */
-    function EditStepDialogController($scope, triTheming, LoadData, moment,
+    function EditStepDialogController($scope, triTheming, LoadData, moment, API_CONFIG,
       StepInstance,  toastr, $mdDialog, $rootScope, step, $filter, competition) {
       console.log('EditStepDialogController:::');
       var vm = this;
@@ -18,8 +18,6 @@
       vm.clubs = [];
       vm.step.competition = competition;
       vm.invalidDate = false;
-
-
 
 
       $scope.$watchGroup(['vm.step.stepDate', 'vm.step.entryStartDate', 'vm.step.entryEndDate'], function(){

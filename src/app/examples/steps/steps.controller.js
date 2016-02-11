@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function StepsController($mdDialog, toastr, $state, $rootScope, Upload, triLoaderService,
-      $stateParams, CompetitionInstance, StepInstance, $filter, $http) {
+      $stateParams, CompetitionInstance, StepInstance, $filter, $http, API_CONFIG) {
         var vm = this;
         vm.stepEntry = stepEntry;
         vm.steps = [];
@@ -28,7 +28,7 @@
 
         function checkEntries() {
 
-          $http.get("http://localhost:3000/entries/user/"+$rootScope.user._id)
+          $http.get(API_CONFIG.url + "/entries/user/" + $rootScope.user._id)
             .success(function(entries) {
               angular.forEach(entries, function(entry, key) {
                 angular.forEach(vm.activeSteps, function(step, key) {

@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function StepEntryDialogController($scope, step, $mdDialog, $rootScope, triLoaderService,
-      $window, $timeout, $mdToast, Upload, LoadData, $filter, EntryInstance) {
+      $window, $timeout, $mdToast, Upload, LoadData, $filter, EntryInstance, API_CONFIG) {
         var vm = this;
         var tmp;
         vm.step = step;
@@ -62,7 +62,7 @@
           order.user = vm.user;
           order.step = vm.step;
           Upload.upload({
-             url: 'http://localhost:3000/entries/',
+             url: API_CONFIG.url + '/entries/',
              method: 'POST',
              data: {file: tmp, 'order': angular.toJson(order)}
              }).then(function (resp) {

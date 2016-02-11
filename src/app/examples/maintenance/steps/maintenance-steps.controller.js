@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function MaintenanceStepsController($scope, $timeout, $mdToast, $rootScope,
-       $state, CompetitionInstance, StepInstance, $mdDialog, $filter) {
+       $state, CompetitionInstance, StepInstance, $mdDialog, $filter, API_CONFIG) {
          var vm = this;
          vm.competitions = [];
          vm.compSelected = null;

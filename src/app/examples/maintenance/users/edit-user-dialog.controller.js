@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function EditUserController($scope, $state, $location, toastr, $http, $filter,
-       $mdDialog, LoadData, UserInstance, $rootScope, user) {
+       $mdDialog, LoadData, UserInstance, $rootScope, user, API_CONFIG) {
         var vm = this;
 
         vm.types = ['USER', 'ADMIN', 'CLUB_ADMIN']
