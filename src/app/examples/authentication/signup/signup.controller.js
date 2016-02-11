@@ -10,7 +10,7 @@
       triSettings, API_CONFIG, LoadData, UserInstance) {
         var vm = this;
 
-
+        vm.loading = false;
         vm.triSettings = triSettings;
         vm.signupClick = signupClick;
         vm.teste = teste;
@@ -40,7 +40,7 @@
             vm.user['category'] = vm.categories[17];
         });
 
-        vm.clubs = LoadData.clubs.query(function(clubs){
+        vm.clubs = LoadData.clubs.query(function(clubs) {
 
             vm.groupList = vm.clubs.reduce(function(previous, current) {
                 if (previous.indexOf(current.UF) === -1) {
@@ -56,15 +56,18 @@
         });
 
         function signupClick() {
+          vm.loading = true;
           vm.user.type = "USER";
           // delete vm.user.confirm;
           vm.user.$save().then(function(user) {
               toastr.success('Usuário cadastrado com sucesso', user.firstname);
               // $location.path('/login');
+              vm.loading = false;
               $state.go('authentication.login');
 
           }).catch(function(erro){
             console.log(erro)
+            vm.loading = false;
             if(erro.data.errors) {
               var errors = Object.keys(erro.data.errors);
               if (erro.data.fieldName){

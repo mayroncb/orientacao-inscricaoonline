@@ -1,5 +1,6 @@
 <div flex layout="row" layout-align="center center" layout-fill>
     <div flex="80" class="md-whiteframe-z1 margin-bottom-100" tri-wizard>
+      <div flex class="loader" ng-show="vm.loading" layout="column" layout-fill layout-align="center center"><div class="loader-inner"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div><h3 class="md-headline">FOP</h3></div>
         <md-toolbar class="md-primary">
             <div flex class="md-toolbar-tools" layout="row" layout-align="space-between center">
                 <h2>FOP - Cadastro</h2><h2> {{triWizard.progress}}% <span translate>SIGNUP.COMPLETE</span></h2>
