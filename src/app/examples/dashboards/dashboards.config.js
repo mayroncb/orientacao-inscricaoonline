@@ -29,6 +29,7 @@
         .state('triangular.admin-default.dashboard', {
             url: '/dashboard',
             controller: function($cookies, $state, $rootScope, UserInstance) {
+              console.log("Swith dashboard")
               switch($rootScope.user.type) {
                   case "ADMIN":
                       $state.go('triangular.admin-default.dashboard-admin')

@@ -13,8 +13,17 @@
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
               check: function($cookies, $state, $rootScope, UserInstance) {
+                UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
+                  $rootScope.user = user;
+                });
+ 
                 $rootScope.$on('$stateChangeSuccess',
                   function(event, toState, toParams, fromState, fromParams) {
+
+                    // UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
+                    //   $rootScope.user = user;
+                    // });
+
                     if (toState.name === 'triangular.admin-default.dashboard-admin'
                           && $rootScope.user.type !== "ADMIN") {
                             $state.go('triangular.admin-default.dashboard')
@@ -24,12 +33,10 @@
                       }
                   })
 
-                  UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
-                    $rootScope.user = user;
-                  });
 
 
-                  if ($rootScope.user.type === "ADMIN") {
+
+                  if ($rootScope.user && $rootScope.user.type === "ADMIN") {
                       triMenuProvider.addMenu({
                           name: 'MENU.DASHBOARDS.ANALYTICS',
                           icon: 'zmdi zmdi-assignment-o',

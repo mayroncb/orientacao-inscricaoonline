@@ -18,6 +18,7 @@
         vm.entries = [];
         vm.step = {}
         vm.club = {}
+        console.log("CLUB ADMINN dashboard")
 
 
 

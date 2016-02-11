@@ -110,6 +110,9 @@
               vm.pendingEntries = vm.tempList
               }
               vm.loading = false;
+          }).catch(function(err){
+              console.log(err);
+              vm.loading = false;
           })
         }
 
