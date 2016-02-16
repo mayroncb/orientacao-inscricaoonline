@@ -16,8 +16,7 @@
         vm.teste = teste;
         vm.checkConfirm = false;
         vm.user = {
-            firstname: '',
-            surname: '',
+            name: '',
             rg: '',
             genre: '',
             cpf: '',
@@ -60,7 +59,7 @@
           vm.user.type = "USER";
           // delete vm.user.confirm;
           vm.user.$save().then(function(user) {
-              toastr.success('Usuário cadastrado com sucesso', user.firstname);
+              toastr.success('Usuário cadastrado com sucesso', user.name);
               // $location.path('/login');
               vm.loading = false;
               $state.go('authentication.login');

@@ -3,7 +3,7 @@
         <img ng-src="{{vm.avatar}}" alt="girl-avatar" class="make-round" width="100"/>
     </div>
     <div class="text-light">
-        <h3 class="font-weight-600 margin-bottom-0 text-light">{{user.firstname}} / Perfil</h3>
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{user.name}} / Perfil</h3>
         <p class="font-weight-300 margin-top-0">Aqui você pode alterar seus dados...</p>
      </div>
 </div>
@@ -17,16 +17,9 @@
                       <div layout layout-xs="row" flex>
                         <md-input-container layout="column" flex>
                             <label for="name" translate>SIGNUP.NAME.LABEL</label>
-                            <input id="name" label="firstname" name="firstname" type="text" ng-model="vm.user.firstname" />
-                            <div ng-messages="profile.firstname.$error">
+                            <input id="name" label="name" name="name" type="text" ng-model="vm.user.name | uppercase" />
+                            <div ng-messages="profile.name.$error">
                                 <div ng-message when="required"><span translate>SIGNUP.NAME.PLEASE_ENTER</span></div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container layout="column" flex>
-                            <label for="name" translate>SIGNUP.SURNAME.LABEL</label>
-                            <input id="name" label="surname" name="surname" type="text" ng-model="vm.user.surname" />
-                            <div ng-messages="profile.surname.$error">
-                                <div ng-message when="required"><span translate>SIGNUP.SURNAME.PLEASE_ENTER</span></div>
                             </div>
                         </md-input-container>
                         <md-input-container  layout="column" flex>

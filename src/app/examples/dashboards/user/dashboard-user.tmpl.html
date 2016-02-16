@@ -40,7 +40,7 @@
                                 <tbody>
                                     <tr ng-repeat="entry in vm.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.queryFilter">
                                         <td >{{::entry.compNumber}}</td>
-                                        <td>{{::entry.user.firstname}} {{::entry.user.surname}}</td>
+                                        <td>{{::entry.user.name | uppercase}}</td>
                                         <td>{{::entry.value | currency:"R$":2}}</td>
                                         <td flex="10">
                                           <span class="status"  ng-class="'status-'+entry.status"  >

@@ -85,9 +85,9 @@
            user.$save().then(function(user) {
              console.log(user);
              if(user.isClubAutorization){
-               toastr.success('Liberado pelo clube', user.firstname);
+               toastr.success('Liberado pelo clube', user.name);
              } else {
-               toastr.error('Bloqueado pelo o clube', user.firstname);
+               toastr.error('Bloqueado pelo o clube', user.name);
              }
            }).catch(function(e){
              console.log(e);

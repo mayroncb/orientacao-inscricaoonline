@@ -15,8 +15,7 @@
         vm.addUser = addUser;
         vm.checkConfirm = false;
         vm.user = {
-            firstname: '',
-            surname: '',
+            name: '',
             rg: '',
             genre: '',
             cpf: '',
@@ -62,7 +61,7 @@
           console.log(user);
           delete vm.user.confirm;
           vm.user.$save().then(function(user) {
-              toastr.success('Usuário cadastrado com sucesso', user.firstname);
+              toastr.success('Usuário cadastrado com sucesso', user.name);
               $mdDialog.hide();
               $rootScope.$broadcast('userEvent', true);
           }).catch(function(erro){

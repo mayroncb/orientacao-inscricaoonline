@@ -6,7 +6,7 @@
               <table md-data-table class="md-data-table" md-progress="vm.deferred">
                   <thead md-order="vm.query.order" md-trigger="vm.getClubs">
                       <tr>
-                          <th name="Name" order-by="firstname" ></th>
+                          <th name="Name" order-by="name" ></th>
                           <th name="Clube" order-by="club.name" ></th>
                           <th name="Ativo" order-by="isActive"></th>
                           <th name="Ação"></th>
@@ -15,7 +15,7 @@
                   </thead>
                   <tbody>
                       <tr ng-repeat="user in vm.users | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
-                          <td>{{::user.firstname}} {{::user.surname}} </td>
+                          <td>{{::user.name}}</td>
                           <td>{{::user.club.name}}</td>
                           <td>
                             <md-switch ng-change="vm.activateUser(user)" class="md-primary" ng-model="user.isActive"

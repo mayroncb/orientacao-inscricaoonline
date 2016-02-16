@@ -15,7 +15,6 @@
         vm.editUser = editUser;
         vm.checkConfirm = false;
         vm.user = user;
-        console.log(user);
         delete vm.user.password
         vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
 
@@ -47,7 +46,7 @@
           delete vm.user.confirm;
           delete vm.user.password;
           vm.user.$save().then(function(user) {
-              toastr.success('Usuário alterado com sucesso', user.firstname);
+              toastr.success('Usuário alterado com sucesso', user.name);
               $mdDialog.hide();
               $rootScope.$broadcast('userEvent', true);
           }).catch(function(erro){

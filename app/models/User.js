@@ -35,12 +35,7 @@ module.exports = function() {
             required: true
         },
 
-        firstname: {
-            type: String,
-            required: true
-        },
-
-        surname: {
+        name: {
             type: String,
             required: true
         },

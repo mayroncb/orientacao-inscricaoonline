@@ -27,19 +27,10 @@
                               <div layout layout-sm="row" flex>
                                   <md-input-container flex>
                                       <label translate>SIGNUP.NAME.LABEL</label>
-                                      <input type="text" name="firstname" ng-model="signupController.user.firstname" required>
-                                      <div ng-if="true" ng-messages="accountForm.firstname.$error">
+                                      <input type="text" name="name" ng-model="signupController.user.name" capitalize required>
+                                      <div ng-if="true" ng-messages="accountForm.name.$error">
                                           <div ng-message when="required">
                                               <span translate>SIGNUP.NAME.PLEASE_ENTER</span>
-                                          </div>
-                                      </div>
-                                  </md-input-container>
-                                  <md-input-container flex>
-                                      <label translate>SIGNUP.SURNAME.LABEL</label>
-                                      <input type="text" name="surname" ng-model="signupController.user.surname" required>
-                                    <div ng-if="true" ng-messages="accountForm.surname.$error">
-                                          <div ng-message when="required">
-                                              <span translate>SIGNUP.SURNAME.PLEASE_ENTER</span>
                                           </div>
                                       </div>
                                   </md-input-container>

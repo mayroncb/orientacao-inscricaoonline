@@ -2,7 +2,7 @@
   <md-toolbar>
       <div   class="md-toolbar-tools">
           <h2 flex >
-              <span style="overflow: hidden">#{{vm.comp.user.firstname}} {{vm.comp.user.surname}} - {{vm.comp.category.name}} </span>
+              <span style="overflow: hidden">#{{vm.comp.user.name | uppercase}} - {{vm.comp.category.name}} </span>
           </h2>
 
           <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="cancel">

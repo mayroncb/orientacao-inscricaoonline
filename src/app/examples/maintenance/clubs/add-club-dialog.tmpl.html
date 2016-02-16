@@ -42,11 +42,11 @@
                       md-no-cache="true"
                       md-selected-item-change="vm.selectedItemChange(vm.selectedItem)"
                       md-items="user in vm.searchTextChange(vm.searchText)"
-                      md-item-text="user.firstname"
+                      md-item-text="user.name"
                       md-min-length="0"
                       placeholder="Selecione o administradar do clube" >
                     <md-item-template>
-                      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{user.firstname}} {{user.surname}}</span>
+                      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{user.name | uppercase}}</span>
                     </md-item-template>
                     <md-not-found>
                       Nenhum usuário "{{vm.searchText}}" encontrado!
@@ -63,7 +63,7 @@
              ng-show="vm.selectedItem
               && vm.selectedItem.club.name">
                  <span translate>Você selecionou o atleta
-                  {{vm.selectedItem.firstname}} {{vm.selectedItem.surname}} que
+                  {{vm.selectedItem.name}} que
                   pertence ao clube {{vm.selectedItem.club.name}}
                  </span>
         </div>

@@ -30,9 +30,9 @@
           user.$save().then(function(user) {
             console.log(user);
             if(user.isActive){
-              toastr.success('Liberado para acessar o sistema!', user.firstname);
+              toastr.success('Liberado para acessar o sistema!', user.name);
             } else {
-              toastr.error('Bloqueado para acessar o sistema', user.firstname);
+              toastr.error('Bloqueado para acessar o sistema', user.name);
             }
           }).catch(function(e){
             console.log(e);
@@ -50,7 +50,7 @@
                 });
                 $mdDialog.show(confirm).then(function() {
                     user.$delete().then(function(resp) {
-                      toastr.success('Usuário removido com sucesso', user.firstname);
+                      toastr.success('Usuário removido com sucesso', user.name);
                       loadUsers();
                     })
                 }, function() {
@@ -100,7 +100,7 @@
         vm.query = {
            filter: '',
            limit: '10',
-           order: 'firstname',
+           order: 'name',
            page: 1
          };
 

@@ -2,7 +2,7 @@
   <form name="profile">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Adicionar Etapa</h2>
+        <h2>Adicionar Usuário</h2>
         <span flex></span>
         <md-button class="md-primary md-mini   md-fab" ng-click="vm.closeDialog()">
           <md-icon  md-font-icon="zmdi zmdi-close" aria-label="Close dialog"></md-icon>
@@ -24,16 +24,10 @@
         <div layout layout-xs="row" flex>
           <md-input-container  flex>
 
-              <input required id="name" label="firstname" translate placeholder="Nome" name="firstname" type="text" ng-model="vm.user.firstname" />
-              <div ng-show="true" ng-messages="profile.firstname.$error">
+              <input required id="name" label="name" translate placeholder="Nome"
+              name="name" type="text"  ng-model="vm.user.name" capitalize />
+              <div ng-show="true" ng-messages="profile.name.$error">
                   <div ng-message when="required"><span translate>SIGNUP.NAME.PLEASE_ENTER</span></div>
-              </div>
-          </md-input-container>
-
-          <md-input-container  flex>
-              <input required id="name" label="surname" placeholder="Sobrenome" name="surname" type="text" ng-model="vm.user.surname" />
-              <div ng-show="true" ng-messages="profile.surname.$error">
-                  <div ng-message when="required"><span translate>SIGNUP.SURNAME.PLEASE_ENTER</span></div>
               </div>
           </md-input-container>
 

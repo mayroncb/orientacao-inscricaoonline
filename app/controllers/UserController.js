@@ -37,26 +37,14 @@ module.exports = function(app) {
 
     controller.getUserByName = function(req, res) {
       var text = req.params.text;
-      var entries = text.toString().split(" ");
-      if(entries.length == 1) {
-        User.find({$or:[ {"firstname": { "$regex": text, "$options": "i" }},
-                  { "surname": { "$regex": text, "$options": "i" }}]})
+        User.find({"name": { "$regex": text, "$options": "i" }})
                   .populate("club").exec( function(err, docs) {
           setTimeout(function () {
             console.log(docs);
                 res.status(200).json(docs);
           }, 100);
       });
-    } else {
-        User.find({$or:[ {"firstname": { "$regex": entries[0], "$options": "i" }},
-                  { "surname": { "$regex": entries[1], "$options": "i" }}]})
-                  .populate("club").exec( function(err, docs) {
-          setTimeout(function () {
-            console.log(docs);
-                res.status(200).json(docs);
-          }, 100);
-      });
-      }
+
     }
 
     controller.removerContato = function(req, res) {

@@ -8,7 +8,7 @@
                       <tr>
                           <th name="Name" order-by="name" ></th>
                           <th name="UF" order-by="UF" ></th>
-                          <th name="Responsável" order-by="admin.firstname"></th>
+                          <th name="Responsável" order-by="admin.name"></th>
                           <th name="Editar"></th>
                           <th name="Exluir"></th>
                       </tr>
@@ -17,7 +17,7 @@
                       <tr ng-repeat="club in vm.clubs | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
                           <td>{{::club.name}} </td>
                           <td>{{::club.UF}}</td>
-                          <td>{{::club.admin.firstname}} {{::club.admin.surname}}</td>
+                          <td>{{::club.admin.name}}</td>
                           <td>
                               <md-button ng-click="vm.editClub(club, $event)" class="md-icon-button" aria-label="Open Order">
                                   <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
