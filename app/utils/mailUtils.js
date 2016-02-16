@@ -20,7 +20,7 @@ function Mail() {
         //Specify email data
           from: 'inscricoes@orientacaoparaiba.com.br',
         //The email to contact
-          to: "paulo.liraa@gmail.com",
+          to: user.email,
         //Subject and text data
           subject: subject,
           html: template

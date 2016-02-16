@@ -96,7 +96,8 @@ module.exports = function(app) {
     controller.reset = function(req, res) {
         var email = req.params.email;
         console.log(email, " :::: ")
-        User.findOne({email: email}).exec().then(function(err, user) {
+        User.findOne({email: email}).exec().then(function(user) {
+          console.log(user)
           if(!user){
             console.log("ERR")
             res.status(404).send("Email não encontrado!");
