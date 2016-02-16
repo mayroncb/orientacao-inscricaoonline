@@ -6,7 +6,8 @@
         .controller('ForgotController', ForgotController);
 
     /* @ngInject */
-    function ForgotController($scope, $state, $mdToast, $filter, $http, triSettings, API_CONFIG) {
+    function ForgotController($scope, $state, $mdToast, $filter,
+      $http, triSettings, API_CONFIG, toastr) {
         var vm = this;
         vm.triSettings = triSettings;
         vm.user = {
@@ -14,33 +15,18 @@
         };
         vm.resetClick = resetClick;
 
-        ////////////////
-
         function resetClick() {
             $http({
-                method: 'POST',
-                url: API_CONFIG.url + 'reset',
-                data: $scope.user
+                method: 'GET',
+                url: API_CONFIG.url + '/user/reset/'+ vm.user.email
             }).
             success(function(data) {
-                $mdToast.show(
-                    $mdToast.simple()
-                    .content($filter('translate')('FORGOT.MESSAGES.RESET_SENT') + ' ' + data.email)
-                    .position('bottom right')
-                    .action($filter('translate')('FORGOT.MESSAGES.LOGIN_NOW'))
-                    .highlightAction(true)
-                    .hideDelay(0)
-                ).then(function() {
-                    $state.go('public.auth.login');
-                });
+              toastr.success('Em brave você receberá um email com as instruções');
+              $state.go('authentication.login');
             }).
             error(function(data) {
-                $mdToast.show(
-                    $mdToast.simple()
-                    .content($filter('translate')('FORGOT.MESSAGES.NO_RESET') + ' ' + data.email)
-                    .position('bottom right')
-                    .hideDelay(5000)
-                );
+              console.log(data);
+              toastr.error(data);
             });
         }
     }

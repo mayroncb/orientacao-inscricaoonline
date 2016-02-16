@@ -1,12 +1,14 @@
-
 var moment = require('moment');
-var errorHanler = require('../utils/errorHandler')
-var passHandler = require('../utils/passHandler')
+var errorHanler = require('../utils/errorHandler');
+var passHandler = require('../utils/passHandler');
+var Email = require('../utils/mailUtils.js');
+var shortid = require('shortid');
 
 module.exports = function(app) {
     var controller = {}
-
     var User = app.models.User;
+    var mail = new Email()
+
 
   controller.getCount = function(req, res) {
       User.count({}, function(err, n){
@@ -23,14 +25,12 @@ module.exports = function(app) {
 
     controller.obterContato = function(req, res) {
         User.findOne({_id: req.params.id}, function(err, data) {
-            // console.log(data);
             res.json(data);
         })
     }
 
     controller.listUsersByClub = function(req, res) {
         User.find({club: req.params.id}).populate('club').exec(function(err, data) {
-            // console.log(data);
             res.json(data);
         })
     }
@@ -69,10 +69,7 @@ module.exports = function(app) {
 
     controller.updateContato = function(req, res) {
         var userTmp = req.body;
-        if(userTmp.password){
-            console.log("WITH PASSS PICA::: ", userTmp.password);
-        }
-        console.log("UPDATE::: ", userTmp);
+
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
         if (userTmp.password) {
             console.log("with PASS")
@@ -96,6 +93,32 @@ module.exports = function(app) {
 
     }
 
+    controller.reset = function(req, res) {
+        var email = req.params.email;
+        console.log(email, " :::: ")
+        User.findOne({email: email}).exec().then(function(err, user) {
+          if(!user){
+            console.log("ERR")
+            res.status(404).send("Email não encontrado!");
+          } else {
+            mail.sendMail("Alteração de senha", user, "reset");
+            res.json(user);
+          }
+
+        })
+    }
+
+    controller.resetPass = function(req, res) {
+        var id = req.params.id;
+        var newPass = shortid.generate();
+        User.findOne({_id: id}, function(err, user) {
+          user.password = passHandler.generateHash(newPass);
+          user.save();
+          mail.sendMail("Alteração de senha", user, "resetpass", newPass);
+          res.redirect('/');
+        })
+    }
+
     controller.addContato = function(req, res) {
         var userTmp = req.body;
         userTmp.dateBirth = moment(userTmp.dateBirth, "DD-MM-YYYY");
@@ -103,6 +126,7 @@ module.exports = function(app) {
         // console.log( '???', userTmp);
         User.create(userTmp)
         .then(function(user) {
+            mail.sendMail("Bem vindo a FOP", user, "cadastro");
             res.status(201).json(user);
         }, function(erro){
             erro = errorHanler.getKeyErro(erro);
@@ -112,8 +136,8 @@ module.exports = function(app) {
     }
 
 
-    var Category = app.models.Category;
-    var Club = app.models.Club;
+    // var Category = app.models.Category;
+    // var Club = app.models.Club;
 
     // console.log(Club);
 

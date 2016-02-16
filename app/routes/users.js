@@ -13,6 +13,12 @@ module.exports = function(app){
     app.route('/users/qtd')
     .get(controller.getCount); //ADD Verificação na produção
 
+    app.route('/user/reset/:email')
+    .get(controller.reset); //ADD Verificação na produção
+
+    app.route('/user/resetpass/:id')
+    .get(controller.resetPass); //ADD Verificação na produção
+
     app.route('/users')
         .get(controller.listUsers)
         .post(controller.addContato)

@@ -1,4 +1,6 @@
 var passport = require('passport');
+
+
 function verifyCreds(req, res, next) {
     if(req.isAuthenticated()){
         return next();
@@ -22,7 +24,6 @@ module.exports = function(app){
 
 
 function _login(req, res, next) {
-
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             return next(err)
@@ -35,13 +36,6 @@ function _login(req, res, next) {
             if (err) {
                 return next(err);
             }
-            // var hour = 3600000;
-            // req.session.cookie.expires = new Date(Date.now() + hour);
-            // req.session.cookie.maxAge = hour;
-            // req.session.cookie.path = "*";
-            // req.session.save(function(err){
-            //    console.log("Session Saved", req.session);
-            //  });
             return res.json(req.user);
         });
     })(req, res, next);
