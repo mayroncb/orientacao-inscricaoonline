@@ -1,0 +1,50 @@
+<md-dialog  class="order-dialog mobile-fullwidth-dialog" flex="60" flex-sm="100">
+  <div flex class="loader" ng-show="vm.loading" layout="column" layout-fill layout-align="center center"><div class="loader-inner"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div><h3 class="md-headline">FOP</h3></div>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex >
+                <span>#{{vm.step.name}} - {{vm.step.locate}} {{vm.step.stepDate | amDateFormat:'DD/MM/YYYY' }}</span>
+            </h2>
+            <!-- <md-button class="md-icon-button" ng-click="vm.printClick()" aria-label="print">
+                <md-icon md-font-icon="zmdi zmdi-print"></md-icon>
+            </md-button> -->
+            <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="padding-20">
+      <tri-widget flex title="Atletas Inscritos" content-layout="column" content-layout-align="center">
+          <md-data-table-container>
+              <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                  <thead md-order="vm.query.order" >
+                      <tr>
+                          <th name="Nome"></th>
+                          <th name="Clube"></th>
+                          <th name="Categoria"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="entry in vm.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+                          <td>{{::entry.user.name | uppercase}}</td>
+                          <td>{{::entry.user.club.name }}</td>
+                          <td>{{::entry.category.name}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </md-data-table-container>
+          <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.entries.length}}"></md-data-table-pagination>
+      </tri-widget>
+    </md-dialog-content>
+
+    <md-dialog-actions class="" layout="row">
+        <span flex></span>
+        <md-input-container>
+        <md-button ng-click="vm.closeDialog()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="">
+          Fechar
+        </md-button>
+      </md-input-container>
+    </md-dialog-actions>
+</md-dialog>

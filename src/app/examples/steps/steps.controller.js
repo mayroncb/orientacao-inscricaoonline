@@ -10,6 +10,7 @@
       $stateParams, CompetitionInstance, StepInstance, $filter, $http, API_CONFIG) {
         var vm = this;
         vm.stepEntry = stepEntry;
+        vm.listUsersInStep = listUsersInStep;
         vm.steps = [];
         vm.activeSteps = [];
         vm.oldSteps = [];
@@ -25,6 +26,26 @@
            });
         }
 
+        function listUsersInStep($event, step){
+          $mdDialog.show({
+              controller: 'ShowEntriesDialogController',
+              controllerAs: 'vm',
+              templateUrl: 'app/examples/steps/show-entries-step-dialog.tmpl.html',
+              targetEvent: $event,
+              locals: {
+                  step: step
+              },
+              clickOutsideToClose: true
+          })
+          .then(function(step) {
+            toastr.warning('Aguarde a confirmação', 'Inscrição enviada!');
+            loadSteps();
+          }, cancelDialog);
+
+          function cancelDialog() {
+              vm.alert = 'You cancelled the dialog.';
+          }
+        }
 
         function checkEntries() {
 

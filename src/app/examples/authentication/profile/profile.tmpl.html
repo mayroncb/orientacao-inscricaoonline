@@ -17,7 +17,7 @@
                       <div layout layout-xs="row" flex>
                         <md-input-container layout="column" flex>
                             <label for="name" translate>SIGNUP.NAME.LABEL</label>
-                            <input id="name" label="name" name="name" type="text" ng-model="vm.user.name | uppercase" />
+                            <input id="name" label="name" name="name" type="text" ng-model="vm.user.name"  capitalize/>
                             <div ng-messages="profile.name.$error">
                                 <div ng-message when="required"><span translate>SIGNUP.NAME.PLEASE_ENTER</span></div>
                             </div>

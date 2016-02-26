@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var findOrCreate = require('mongoose-findorcreate')
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 module.exports = function() {
 
@@ -109,5 +110,6 @@ module.exports = function() {
 
 
     schema.plugin(findOrCreate);
+    schema.plugin(deepPopulate);
     return mongoose.model('User', schema);
 }

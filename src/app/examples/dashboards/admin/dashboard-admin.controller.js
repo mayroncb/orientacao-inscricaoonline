@@ -8,7 +8,7 @@
     /* @ngInject */
     function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
       CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
-      SalesService, StepInstance, EntryInstance, API_CONFIG) {
+      SalesService, StepInstance, EntryInstance, API_CONFIG, $http, FileSaver) {
         var vm = this;
         vm.loading = true;
         vm.loadGraph = loadGraph;
@@ -26,6 +26,11 @@
         LoadData.userQtd.query().$promise.then(function(data){
           vm.usersQtd = data.value
         })
+
+        vm.getReport = function() {
+          return API_CONFIG.url+"/entry/report/step/?"+"id="+vm.step._id;
+        }
+        
         console.log('Ativar em produção');
             // $interval( function(){
             //
@@ -102,6 +107,7 @@
           StepInstance.get({id: vm.step._id}, function(step) {
             vm.entries = []
             if (step.entries.length > 0) vm.entries = step.entries;
+            // console.log(vm.entries);
           })
           EntryInstance.query().$promise.then(function(entries) {
             vm.pendingEntries = [ ]

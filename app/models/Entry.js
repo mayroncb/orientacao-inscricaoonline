@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var findOrCreate = require('mongoose-findorcreate')
 var mongoose_deleted = require('mongoose-deleted');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var Schema = mongoose.Schema;
 module.exports = function() {
@@ -55,5 +56,6 @@ module.exports = function() {
       },
   });
   schema.plugin(findOrCreate);
+  schema.plugin(deepPopulate);
   return mongoose.model('Entry', schema);
 }

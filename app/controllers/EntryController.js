@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var Grid = require('gridfs-stream');
 var Busboy = require('busboy');
 var fs = require('fs');
-var AWS = require('aws-sdk');
+var json2xls = require('json2xls');
+
 module.exports = function(app) {
 
     var controller = {}
@@ -18,18 +19,6 @@ module.exports = function(app) {
       gfs = new Grid(db);
     });
 
-    // var s3 = new AWS.S3();
-    // s3.listBuckets(function(err, data) {
-    //   if (err) { console.log("Error:", err); }
-    //   else {
-    //     for (var index in data.Buckets) {
-    //       var bucket = data.Buckets[index];
-    //       console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
-    //     }
-    //   }
-    // });
-
-
     controller.entries = function(req, res) {
         Entry.find({})
         .populate("user")
@@ -40,7 +29,6 @@ module.exports = function(app) {
     }
 
     controller.entriesByUser = function(req, res) {
-      console.log("::::::", req.params.id)
         Entry.find({user: req.params.id})
         .populate("user")
         .populate("category")
@@ -50,7 +38,6 @@ module.exports = function(app) {
     }
 
     controller.entriesByListOfUsers = function(req, res) {
-        console.log("::::::", req.query.ids)
         Entry.conut({user: {$in:
            [req.query.ids]}, status: "Aceita"
          }).exec(function(err, n){
@@ -99,8 +86,44 @@ module.exports = function(app) {
         })
     }
 
+    controller.getEntriesByStep = function(req, res) {
+      Entry.find({
+        step: req.params.id,
+        status: "Aceita"
+      }).lean().exec(function(err, entries){
+        Entry.deepPopulate(entries, 'user.club step category', function(err, docs){
+           res.json(docs);
+        })
+      })
+    }
+    controller.getEntriesByStepReport = function(req, res) {
+
+       Entry.find({
+        step: req.query.id,
+        status: "Aceita"
+      }).lean().exec(function(err, entries) {
+        Entry.deepPopulate(entries, 'user.club step category', function(err, results) {
+          var listToReport = [];
+          results.forEach(function(value, index) {
+            var entryTmp = {};
+            entryTmp.Nome = value.user.name;
+            entryTmp.Número_CBO = value.user.cboNumber;
+            entryTmp.Número_SICard = value.user.siCardNumber;
+            entryTmp.Clube = value.user.club.name;
+            entryTmp.Valor_Inscrição = value.value;
+            entryTmp.Categoria = value.category.name;
+            listToReport.push(entryTmp);
+          })
+          if (results) {
+            res.xls(results[0].step.name+"-"+results[0].step.locate+".xlsx", listToReport)
+          } else {
+            res.status(400).end();
+          }
+        })
+      })
+    }
+
     controller.removeEntry = function(req, res) {
-        console.log("removed: ", req.params.id);
         Entry.findOne({_id: req.params.id}, function(err, data) {
             data.delete(function(err) {
               if (err) {
@@ -161,28 +184,6 @@ module.exports = function(app) {
           res.status(500).json(erro);
       })
     }
-
-    // controller.addStep = function(req, res) {
-    //     var step = req.body;
-    //
-    //     step.stepDate = moment(step.stepDate, "DD-MM-YYYY");
-    //     step.entryStartDate = moment(step.entryStartDate, "DD-MM-YYYY");
-    //     step.entryEndDate = moment(step.entryEndDate, "DD-MM-YYYY");
-    //
-    //     Step.create(req.body)
-    //     .then(function(step) {
-    //       checkOpenSteps();
-    //       Competition.findById(step.competition, function(err, comp){
-    //         comp.steps.push(step);
-    //         comp.save();
-    //       })
-    //
-    //         res.status(201).json(step);
-    //     }, function(erro){
-    //         console.log(erro);
-    //         res.status(500).json(erro);
-    //     })
-    // }
 
     return controller;
 }

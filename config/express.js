@@ -3,6 +3,8 @@ var load = require('express-load');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var busboy = require('connect-busboy');
+var json2xls = require('json2xls');
+
 
 module.exports = function() {
     process.env.AWS_ACCESS_KEY_ID = "AKIAIHCNUOOH6WBS4IVA"
@@ -25,6 +27,7 @@ module.exports = function() {
 
     //port of service
     app.set('port', process.env.PORT || 3000);
+    app.use(json2xls.middleware);
 
 
     //middleware
