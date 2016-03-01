@@ -13,19 +13,19 @@
         $stateProvider
         .state('triangular.dashboards-layout', {
             abstract: true,
-            views: {
-                sidebarLeft: {
-                    templateUrl: 'app/triangular/components/menu/menu.tmpl.html',
-                    controller: 'MenuController',
-                    controllerAs: 'vm'
-                },
-                content: {
-                    template: '<div id="admin-panel-content-view" flex ui-view></div>'
-                },
-                belowContent: {
-                    template: '<div ui-view="belowContent"></div>'
-                }
-            }
+            // views: {
+            //     sidebarLeft: {
+            //         templateUrl: 'app/triangular/components/menu/menu.tmpl.html',
+            //         controller: 'MenuController',
+            //         controllerAs: 'vm'
+            //     },
+            //     content: {
+            //         template: '<div id="admin-panel-content-view" flex ui-view></div>'
+            //     },
+            //     belowContent: {
+            //         template: '<div ui-view="belowContent"></div>'
+            //     }
+            // }
         })
         .state('triangular.admin-default.dashboard', {
             url: '/dashboard',
@@ -41,21 +41,21 @@
                    }, 3000);
                 }
               })
-
-
-              switch($rootScope.user.type) {
-                  case "ADMIN":
-                      $state.go('triangular.admin-default.dashboard-admin')
-                      break;
-                  case "USER":
-                      $state.go('triangular.admin-default.dashboard-user')
-                      break;
-                  case "CLUB_ADMIN":
-                      $state.go('triangular.admin-default.dashboard-club-admin')
-                      break;
-              }
-
-              }
+              UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
+                $rootScope.user = user;
+                switch($rootScope.user.type) {
+                    case "ADMIN":
+                        $state.go('triangular.admin-default.dashboard-admin')
+                        break;
+                    case "USER":
+                        $state.go('triangular.admin-default.dashboard-user')
+                        break;
+                    case "CLUB_ADMIN":
+                        $state.go('triangular.admin-default.dashboard-club-admin')
+                        break;
+                }
+              })
+            }
         })
         .state('triangular.admin-default.dashboard-admin', {
             url: '/dashboard/admin',
@@ -69,7 +69,7 @@
             views: {
                 '': {
                     templateUrl: 'app/examples/dashboards/admin/dashboard-admin.tmpl.html',
-                    controller: 'DashboardSalesController',
+                    controller: 'DashboardAdminController',
                     controllerAs: 'vm'
                 }
             }

@@ -6,7 +6,10 @@
         .controller('DefaultToolbarController', DefaultToolbarController);
 
     /* @ngInject */
-    function DefaultToolbarController($cookies, $scope, $rootScope, $mdMedia, $translate, $state, $element, $filter, $mdUtil, $mdSidenav, $mdToast, $timeout, triBreadcrumbsService, triSettings, triLayout) {
+    function DefaultToolbarController($cookies, $scope, $rootScope, UserInstance,
+      $mdMedia, $translate, $state, $element, $filter, $mdUtil, $mdSidenav,
+      $mdToast, $timeout, triBreadcrumbsService, triSettings, triLayout) {
+
         var vm = this;
         vm.breadcrumbs = triBreadcrumbsService.breadcrumbs;
         vm.remove = remove;
@@ -19,18 +22,19 @@
 
         // initToolbar();
 
+        UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
+          vm.user = $rootScope.user;
+          vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
+        })
 
-        vm.user = $rootScope.user;
 
-        vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
-        console.log(vm.avatar)
+
 
         $scope.$watch('$rootScope.user', function() {
             vm.user = $rootScope.user;
         });
 
         function remove(){
-          console.log(":::: adskjashjashjkd");
           console.log(":::: ", $cookies['connect.sid']);
           $cookies.remove('connect.sid');
         }
@@ -62,8 +66,6 @@
             vm.openSideNav('notifications');
         }
 
-        // $scope.$on('newMailNotification', function(){
-        //     vm.emailNew = true;
-        // });
+
     }
 })();

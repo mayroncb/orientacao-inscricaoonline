@@ -12,7 +12,8 @@
             abstract: true,
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
-              check: function($cookies, $state, $rootScope, UserInstance) {
+              check: function($cookies, $state, $rootScope, UserInstance,
+                $http, API_CONFIG) {
                 UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                   $rootScope.user = user;
                   if ($rootScope.user && $rootScope.user.type === "ADMIN") {
@@ -46,9 +47,8 @@
 
                 $rootScope.$on('$stateChangeSuccess',
                   function(event, toState, toParams, fromState, fromParams) {
-                      checkUserType(toState);                    
+                      checkUserType(toState);
                   })
-
                 var checkUserType = function(toState) {
                   if (toState.name === 'triangular.admin-default.dashboard-admin'
                         && $rootScope.user.type !== "ADMIN") {
@@ -58,10 +58,13 @@
                             $state.go('triangular.admin-default.dashboard')
                     }
                 }
-                console.log("Ativar Proteção em produção");
-                // if(!$cookies.getAll()['connect.sid']) {
-                //     $state.go('authentication.login');
-                // }
+
+                $http.get(API_CONFIG.url+"/env").success(function(data) {
+                  if (data.PORT && !$cookies.getAll()['connect.sid']) {
+                        $state.go('authentication.login');
+                  }
+                })
+
               }
             },
             controller: 'DefaultLayoutController',

@@ -3,12 +3,13 @@
 
     angular
         .module('app.fop.dashboards')
-        .controller('DashboardSalesController', DashboardSalesController);
+        .controller('DashboardAdminController', DashboardAdminController);
 
     /* @ngInject */
-    function DashboardSalesController($state, $cookies, $scope, $q, $rootScope,
-      CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog,
+    function DashboardAdminController($state, $cookies, $scope, $q, $rootScope,
+      CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog, UserInstance,
       SalesService, StepInstance, EntryInstance, API_CONFIG, $http, FileSaver) {
+        console.log("DashboardAdminController");
         var vm = this;
         vm.loading = true;
         vm.loadGraph = loadGraph;
@@ -19,7 +20,8 @@
         vm.pendingEntries = [];
         vm.queryFilter = "";
         vm.entries = [];
-        vm.step = {}
+        vm.step = {};
+
         LoadData.clubQtd.query().$promise.then(function(data){
           vm.clubsQtd = data.value
         })

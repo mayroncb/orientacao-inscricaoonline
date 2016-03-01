@@ -19,7 +19,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('triangular.admin-default.dashboard-sales');
+                    $state.go('triangular.admin-default.dashboard');
                 };
             }
         })
@@ -31,7 +31,7 @@
             controller: function($state) {
                 var vm = this;
                 vm.goHome = function() {
-                    $state.go('triangular.admin-default.dashboard-sales');
+                    $state.go('triangular.admin-default.dashboard');
                 };
             }
         });
