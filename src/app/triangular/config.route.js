@@ -13,10 +13,20 @@
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
               check: function($cookies, $state, $rootScope, UserInstance,
-                $http, API_CONFIG) {
+                $http, API_CONFIG, $filter) {
+                  $http.get(API_CONFIG.url+"/env").success(function(data) {
+                    if (data.PORT && !$cookies.getAll()['connect.sid']) {
+                          $state.go('authentication.login');
+                    }
+                  })
+
+
                 UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                   $rootScope.user = user;
-                  if ($rootScope.user && $rootScope.user.type === "ADMIN") {
+
+                  if ($rootScope.user
+                      && $rootScope.user.type === "ADMIN"
+                      && !$filter('filter')(triMenuProvider.$get().menu, {name: "MENU.DASHBOARDS.ANALYTICS"}).length > 0) {
                       triMenuProvider.addMenu({
                           name: 'MENU.DASHBOARDS.ANALYTICS',
                           icon: 'zmdi zmdi-assignment-o',
@@ -58,12 +68,6 @@
                             $state.go('triangular.admin-default.dashboard')
                     }
                 }
-
-                $http.get(API_CONFIG.url+"/env").success(function(data) {
-                  if (data.PORT && !$cookies.getAll()['connect.sid']) {
-                        $state.go('authentication.login');
-                  }
-                })
 
               }
             },
