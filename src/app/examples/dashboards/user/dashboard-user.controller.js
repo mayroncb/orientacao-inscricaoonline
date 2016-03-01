@@ -37,16 +37,6 @@
             console.log(error);
           });
 
-        console.log('Ativar em produção');
-            // $interval( function(){
-            //
-            //   if(!$cookies.getAll()['connect.sid']) {
-            //       $state.go('authentication.login');
-            //   }
-            //
-            //
-            //  }, 3000);
-
 
         vm.dateRange = {
             start: moment().startOf('week'),

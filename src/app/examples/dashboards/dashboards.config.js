@@ -6,7 +6,8 @@
         .config(moduleConfig);
 
     /* @ngInject */
-    function moduleConfig($translatePartialLoaderProvider, $stateProvider, triMenuProvider) {
+    function moduleConfig($translatePartialLoaderProvider, $stateProvider,
+      triMenuProvider) {
         $translatePartialLoaderProvider.addPart('app/examples/dashboards');
 
         $stateProvider
@@ -28,8 +29,20 @@
         })
         .state('triangular.admin-default.dashboard', {
             url: '/dashboard',
-            controller: function($cookies, $state, $rootScope, UserInstance) {
-              console.log("Swith dashboard")
+            controller: function($cookies, $state, $rootScope, UserInstance,
+              API_CONFIG, $http, $interval) {
+              console.log("Swith dashboard");
+              $http.get(API_CONFIG.url+"/env").success(function(data) {
+                if (data.PORT) {
+                  $interval( function(){
+                    if(!$cookies.getAll()['connect.sid']) {
+                        $state.go('authentication.login');
+                    }
+                   }, 3000);
+                }
+              })
+
+
               switch($rootScope.user.type) {
                   case "ADMIN":
                       $state.go('triangular.admin-default.dashboard-admin')

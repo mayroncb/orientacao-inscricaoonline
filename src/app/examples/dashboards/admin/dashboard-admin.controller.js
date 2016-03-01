@@ -30,16 +30,6 @@
         vm.getReport = function() {
           return API_CONFIG.url+"/entry/report/step/?"+"id="+vm.step._id;
         }
-        
-        console.log('Ativar em produção');
-            // $interval( function(){
-            //
-            //   if(!$cookies.getAll()['connect.sid']) {
-            //       $state.go('authentication.login');
-            //   }
-            //
-            //
-            //  }, 3000);
 
 
         vm.dateRange = {

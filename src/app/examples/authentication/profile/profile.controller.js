@@ -39,8 +39,7 @@
         }
 
         function changePass() {
-          console.log("vm.user");
-            vm.user.uf = vm.user.uf.UF
+          vm.user.uf = vm.user.uf.UF
            vm.user.$save().then(function(user) {
               toastr.success('Senha alterada com sucesso.');
               vm.user = new UserInstance(user);
@@ -79,7 +78,6 @@
          LoadData.states.query().$promise.then(function(states){
             vm.states = states
             vm.user['uf'] = $filter('filter')(states, {UF:vm.user['uf']})[0];
-            console.log('states:: ', states[0]);
           });
         }
     }

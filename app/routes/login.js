@@ -9,7 +9,7 @@ function verifyCreds(req, res, next) {
     }
 }
 
-module.exports = function(app){
+module.exports = function(app) {
 
     app.post("/login/process",  _login);
 
@@ -18,7 +18,9 @@ module.exports = function(app){
         res.redirect('/');
     });
 
-    // app.get('/status',  verifyCreds);
+    app.get('/env',  function(req, res) {
+      res.send(process.env)
+    });
 }
 
 

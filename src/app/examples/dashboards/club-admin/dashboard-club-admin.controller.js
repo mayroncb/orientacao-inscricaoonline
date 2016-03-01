@@ -44,14 +44,7 @@
           });
 
         console.log('Ativar em produção');
-            // $interval( function(){
-            //
-            //   if(!$cookies.getAll()['connect.sid']) {
-            //       $state.go('authentication.login');
-            //   }
-            //
-            //
-            //  }, 3000);
+
 
             function openUser(user, $event) {
                   $mdDialog.show({

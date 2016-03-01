@@ -1,7 +1,7 @@
 <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" ng-if="!vm.hideMenuButton()" ng-click="vm.openSideNav('left')" aria-label="side navigation">
+    <!-- <md-button class="md-icon-button" ng-if="!vm.hideMenuButton()" ng-click="vm.openSideNav('left')" aria-label="side navigation">
         <md-icon md-font-icon="zmdi zmdi-menu"></md-icon>
-    </md-button>
+    </md-button> -->
 
     <h2 hide-sm flex>
         <span ng-repeat="crumb in vm.breadcrumbs.crumbs">
@@ -26,10 +26,10 @@
         <span class="toolbar-button-badge animated" theme-background="accent" ng-class="{ 'toolbar-button-badge-new' : vm.emailNew }">5</span>
     </md-button> -->
 
-    <md-button class="md-icon-button toolbar-button" ng-click="vm.toggleNotificationsTab(1)">
+    <!-- <md-button class="md-icon-button toolbar-button" ng-click="vm.toggleNotificationsTab(1)">
         <md-icon md-font-icon="fa fa-bell-o"></md-icon>
         <span class="toolbar-button-badge" theme-background="accent">2</span>
-    </md-button>
+    </md-button> -->
 
     <md-menu>
         <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">

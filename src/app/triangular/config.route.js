@@ -15,27 +15,6 @@
               check: function($cookies, $state, $rootScope, UserInstance) {
                 UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                   $rootScope.user = user;
-                });
- 
-                $rootScope.$on('$stateChangeSuccess',
-                  function(event, toState, toParams, fromState, fromParams) {
-
-                    // UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
-                    //   $rootScope.user = user;
-                    // });
-
-                    if (toState.name === 'triangular.admin-default.dashboard-admin'
-                          && $rootScope.user.type !== "ADMIN") {
-                            $state.go('triangular.admin-default.dashboard')
-                    } else if (toState.name === 'triangular.admin-default.dashboard-club-admin'
-                            && $rootScope.user.type !== "CLUB_ADMIN") {
-                              $state.go('triangular.admin-default.dashboard')
-                      }
-                  })
-
-
-
-
                   if ($rootScope.user && $rootScope.user.type === "ADMIN") {
                       triMenuProvider.addMenu({
                           name: 'MENU.DASHBOARDS.ANALYTICS',
@@ -63,7 +42,22 @@
                         ]
                       })
                     }
+                });
 
+                $rootScope.$on('$stateChangeSuccess',
+                  function(event, toState, toParams, fromState, fromParams) {
+                      checkUserType(toState);                    
+                  })
+
+                var checkUserType = function(toState) {
+                  if (toState.name === 'triangular.admin-default.dashboard-admin'
+                        && $rootScope.user.type !== "ADMIN") {
+                          $state.go('triangular.admin-default.dashboard')
+                  } else if (toState.name === 'triangular.admin-default.dashboard-club-admin'
+                          && $rootScope.user.type !== "CLUB_ADMIN") {
+                            $state.go('triangular.admin-default.dashboard')
+                    }
+                }
                 console.log("Ativar Proteção em produção");
                 // if(!$cookies.getAll()['connect.sid']) {
                 //     $state.go('authentication.login');
