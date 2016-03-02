@@ -115,7 +115,9 @@ module.exports = function(app) {
             listToReport.push(entryTmp);
           })
           if (results) {
-            res.xls(results[0].step.name+"-"+results[0].step.locate+".xlsx", listToReport)
+            var name = results[0].step.name.split(" ").join("_");
+            var locate = results[0].step.locate.split(" ").join("_");
+            res.xls(name+"-"+locate+".xlsx", listToReport)
           } else {
             res.status(400).end();
           }
