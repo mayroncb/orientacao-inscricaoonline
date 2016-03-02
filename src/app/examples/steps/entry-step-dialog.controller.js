@@ -22,7 +22,7 @@
         vm.status = 'Anexar';  // Anexar | Anexando | Completo
         vm.upload = upload;
         vm.order.items = [{name :'Inscrição', value: vm.step.entryValue },
-                    {name:'Alugel do SICard', value: vm.step.siCardValue},
+                    {name:'Aluguel do SICard', value: vm.step.siCardValue},
                     {name: 'Anuidade', value: vm.step.annuityValue}]
         validateValue();
         $scope.
