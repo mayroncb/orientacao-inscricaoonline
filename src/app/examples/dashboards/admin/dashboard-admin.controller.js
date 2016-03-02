@@ -9,7 +9,8 @@
     function DashboardAdminController($state, $cookies, $scope, $q, $rootScope,
       CompetitionInstance, LoadData, $interval, $mdToast, $filter, $mdDialog, UserInstance,
       SalesService, StepInstance, EntryInstance, API_CONFIG, $http, FileSaver) {
-        console.log("DashboardAdminController");
+
+
         var vm = this;
         vm.loading = true;
         vm.loadGraph = loadGraph;
@@ -25,6 +26,7 @@
         LoadData.clubQtd.query().$promise.then(function(data){
           vm.clubsQtd = data.value
         })
+
         LoadData.userQtd.query().$promise.then(function(data){
           vm.usersQtd = data.value
         })
@@ -38,8 +40,6 @@
             start: moment().startOf('week'),
             end: moment().endOf('week')
         };
-
-
 
         vm.query = {
            filter: '',
@@ -121,7 +121,6 @@
         }
 
         function loadGraph() {
-          console.log("changed")
           createData();
         }
 

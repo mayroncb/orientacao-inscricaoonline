@@ -31,18 +31,9 @@
             url: '/dashboard',
             controller: function($cookies, $state, $rootScope, UserInstance,
               API_CONFIG, $http, $interval) {
+
               console.log("Swith dashboard");
-              $http.get(API_CONFIG.url+"/env").success(function(data) {
-                if (data.PORT) {
-                  $interval( function(){
-                    if(!$cookies.getAll()['connect.sid']) {
-                        $state.go('authentication.login');
-                    }
-                   }, 3000);
-                }
-              })
-              UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
-                $rootScope.user = user;
+              if($rootScope.user) {
                 switch($rootScope.user.type) {
                     case "ADMIN":
                         $state.go('triangular.admin-default.dashboard-admin')
@@ -54,7 +45,9 @@
                         $state.go('triangular.admin-default.dashboard-club-admin')
                         break;
                 }
-              })
+              } else {
+                    $state.go('authentication.login', {});
+              }
             }
         })
         .state('triangular.admin-default.dashboard-admin', {
@@ -73,6 +66,14 @@
                     controllerAs: 'vm'
                 }
             }
+            // resolve: {
+            //     security: ['$q', function($q, UserInstance, $rootScope){
+            //         if(true){
+            //           console.log($rootScope.user);
+            //           //  return $q.reject("Not Authorized");
+            //         }
+            //     }]
+            //  }
         })
         .state('triangular.admin-default.dashboard-user', {
             url: '/dashboard/user',

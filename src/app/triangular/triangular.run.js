@@ -6,12 +6,18 @@
         .run(runFunction);
 
     /* @ngInject */
-    function runFunction($rootScope, $window, amMoment, $state) {
+    function runFunction($rootScope, $window, amMoment,
+      $state, UserInstance, $cookies) {
         amMoment.changeLocale('pt-br');
-        // add a class to the body if we are on windows
+        if ($cookies.getAll()['u']) {
+          console.log("ENTROUUUU")
+          UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
+            $rootScope.user = user;
+           })
+        }
         if($window.navigator.platform.indexOf('Win') !== -1) {
             $rootScope.bodyClasses = ['os-windows'];
         }
-  
+
   }
 })();

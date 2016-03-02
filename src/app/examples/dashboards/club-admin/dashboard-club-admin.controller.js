@@ -18,19 +18,20 @@
         vm.entries = [];
         vm.step = {}
         vm.club = {}
-        console.log("CLUB ADMINN dashboard")
 
-
+        if ($rootScope.user) {
 
         $http.get(API_CONFIG.url + "/club/admin/" + $rootScope.user._id)
           .success(function(res) {
-            vm.club = res;
-            $http.get(API_CONFIG.url + "/users/club/" + vm.club._id)
-              .success(function(users) {
-                vm.clubUsers = users;
-              }).error(function(error) {
-                console.log(error);
-              });
+            if (res) {
+              vm.club = res;
+              $http.get(API_CONFIG.url + "/users/club/" + vm.club._id)
+                .success(function(users) {
+                  vm.clubUsers = users;
+                }).error(function(error) {
+                  console.log(error);
+                });
+            }
           }).error(function(error) {
             console.log(error);
           });
@@ -43,8 +44,9 @@
             console.log(error);
           });
 
-        console.log('Ativar em produção');
-
+        } else {
+          $state.go()
+        }
 
             function openUser(user, $event) {
                   $mdDialog.show({
@@ -76,7 +78,7 @@
            delete user.password;
            user = new UserInstance(user);
            user.$save().then(function(user) {
-             console.log(user);
+
              if(user.isClubAutorization){
                toastr.success('Liberado pelo clube', user.name);
              } else {
@@ -95,7 +97,6 @@
               if(value.user.club === vm.club._id
                 && value.status == "Aceita"){
                   this.push(value);
-                  console.log(value)
               }
             }, temp);
             vm.entriesByClub = temp.length;

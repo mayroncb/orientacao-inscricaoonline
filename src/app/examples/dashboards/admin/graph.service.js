@@ -123,7 +123,6 @@
             return chartData;
         }
         function createLineChartClub(entries) {
-          console.log(entries)
             var chartData = {
                 labels: [],
                 series: ['Entry'],

@@ -31,6 +31,6 @@
         // set a constant for the API we are connecting to
         .constant('API_CONFIG', {
             'url': ''
-            // 'url':  'http://localhost:3000'
+            // 'url': 'http://localhost:3000'
         });
 })();

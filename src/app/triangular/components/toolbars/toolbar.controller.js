@@ -21,12 +21,12 @@
         vm.toggleNotificationsTab = toggleNotificationsTab;
 
         // initToolbar();
-
-        UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
-          vm.user = $rootScope.user;
-          vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
-        })
-
+        if ($cookies.getAll()['u']){
+            UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
+              vm.user = $rootScope.user;
+              vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
+            })
+        }
 
 
 

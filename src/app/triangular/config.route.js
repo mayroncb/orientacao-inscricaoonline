@@ -13,14 +13,11 @@
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
               check: function($cookies, $state, $rootScope, UserInstance,
-                $http, API_CONFIG, $filter) {
-                  $http.get(API_CONFIG.url+"/env").success(function(data) {
-                    if (data.PORT && !$cookies.getAll()['connect.sid']) {
-                          $state.go('authentication.login');
-                    }
-                  })
+                $http, API_CONFIG, $filter, $location) {
 
-
+                if (API_CONFIG.url == "" && !$cookies.getAll()['connect.sid']) {
+                    $state.go('authentication.login', {});
+                } else if ($cookies.getAll()['u']) {
                 UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                   $rootScope.user = user;
 
@@ -54,21 +51,21 @@
                       })
                     }
                 });
-
+              } else {
+                $location.url('/login')
+              }
                 $rootScope.$on('$stateChangeSuccess',
                   function(event, toState, toParams, fromState, fromParams) {
-                      checkUserType(toState);
-                  })
-                var checkUserType = function(toState) {
-                  if (toState.name === 'triangular.admin-default.dashboard-admin'
+                    if (toState.name === 'triangular.admin-default.dashboard-admin'
+                        && $rootScope.user
                         && $rootScope.user.type !== "ADMIN") {
-                          $state.go('triangular.admin-default.dashboard')
-                  } else if (toState.name === 'triangular.admin-default.dashboard-club-admin'
-                          && $rootScope.user.type !== "CLUB_ADMIN") {
                             $state.go('triangular.admin-default.dashboard')
+                    } else if (toState.name === 'triangular.admin-default.dashboard-club-admin'
+                            && $rootScope.user
+                            && $rootScope.user.type !== "CLUB_ADMIN") {
+                              $state.go('triangular.admin-default.dashboard')
                     }
-                }
-
+                })
               }
             },
             controller: 'DefaultLayoutController',

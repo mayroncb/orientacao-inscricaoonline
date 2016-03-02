@@ -15,15 +15,14 @@
                 </md-tab-label>
                 <md-tab-body>
                     <md-content class="md-padding">
+                      <label>Sexo</label>
+                          <md-radio-group  layout="row" ng-change="triWizard.updateProgress()"
+                              class="md-primary" ng-model="::signupController.user.genre"
+                                required ng-init="signupController.user.genre = true">
+                            <md-radio-button   ng-value="true">Masculino</md-radio-button>
+                            <md-radio-button   ng-value="false">Feminino</md-radio-button>
+                          </md-radio-group>
                         <form name="accountForm"  tri-wizard-form novalidate>
-                              <label  >Sexo</label>
-                                  <md-radio-group  layout="row" ng-change="triWizard.updateProgress()"
-                                      class="md-primary" ng-model="::signupController.user.genre"
-                                        required ng-init="signupController.user.genre = true">
-                                    <md-radio-button   ng-value="true">Masculino</md-radio-button>
-                                    <md-radio-button   ng-value="false">Feminino</md-radio-button>
-                                  </md-radio-group>
-
                               <div layout layout-sm="row" flex>
                                   <md-input-container flex>
                                       <label translate>SIGNUP.NAME.LABEL</label>
