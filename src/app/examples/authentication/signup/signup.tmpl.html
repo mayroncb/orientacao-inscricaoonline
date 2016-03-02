@@ -38,7 +38,7 @@
                               <div layout layout-sm="row" flex>
                                 <md-input-container flex>
                                     <label translate>SIGNUP.RG.LABEL</label>
-                                    <input ui-mask="9999999999" placeholder="" type="text" name="rg" ng-model="signupController.user.rg" required>
+                                    <input ui-mask="999999?9?9?9?9" placeholder="" type="text" name="rg" ng-model="signupController.user.rg" required>
                                     <div ng-if="true" ng-messages="accountForm.rg.$error">
                                         <div ng-message when="required">
                                             <span translate>SIGNUP.RG.PLEASE_ENTER</span>
