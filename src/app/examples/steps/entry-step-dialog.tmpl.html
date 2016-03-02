@@ -71,13 +71,13 @@
             </div>
         </div>
         <div flex layout="row" class="margin-bottom-10">
-            <div flex="50">
+            <div flex="5">
                 <strong translate>Comprovante</strong>
             </div>
-            <div layout="row" flex="50">
+            <div layout="row" flex="95">
               <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*" ngf-max-size="10MB"
-              ngf-select="vm.upload($file)" ng-disabled="vm.status != 'Enviar'"   aria-label="upload">
-                    {{vm.status}} <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'Enviar', 'fa fa-spinner fa-pulse': vm.status == 'Enviando', 'zmdi zmdi-check': vm.status == 'Completo'}"></md-icon>
+              ngf-select="vm.upload($file)" ng-disabled="vm.status != 'Anexar'"   aria-label="upload">
+                    {{vm.status}} <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'Anexar', 'fa fa-spinner fa-pulse': vm.status == 'Anexando', 'zmdi zmdi-check': vm.status == 'Completo'}"></md-icon>
               </md-button>
               <div flex="70" class="thumb_div">
                 <img ngf-src="vm.comp" class="thumb">

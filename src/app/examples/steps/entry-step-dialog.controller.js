@@ -19,7 +19,7 @@
         vm.entryStep = entryStep;
         vm.order.value = 0;
         vm.user = $rootScope.user;
-        vm.status = 'Enviar';  // Enviar | Enviando | Completo
+        vm.status = 'Anexar';  // Anexar | Anexando | Completo
         vm.upload = upload;
         vm.order.items = [{name :'Inscrição', value: vm.step.entryValue },
                     {name:'Alugel do SICard', value: vm.step.siCardValue},
@@ -89,7 +89,7 @@
         }
 
         function uploadStarted() {
-            vm.status = 'Enviando';
+            vm.status = 'Anexando';
         }
 
         function uploadComplete() {
@@ -99,7 +99,7 @@
         }
 
         function uploadReset() {
-            vm.status = 'Enviar';
+            vm.status = 'Anexar';
         }
 
         total();
