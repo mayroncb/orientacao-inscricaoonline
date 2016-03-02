@@ -10,7 +10,6 @@
       $state, UserInstance, $cookies) {
         amMoment.changeLocale('pt-br');
         if ($cookies.getAll()['u']) {
-          console.log("ENTROUUUU")
           UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
             $rootScope.user = user;
            })

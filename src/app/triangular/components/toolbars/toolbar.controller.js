@@ -8,7 +8,7 @@
     /* @ngInject */
     function DefaultToolbarController($cookies, $scope, $rootScope, UserInstance,
       $mdMedia, $translate, $state, $element, $filter, $mdUtil, $mdSidenav,
-      $mdToast, $timeout, triBreadcrumbsService, triSettings, triLayout) {
+      $mdToast, $timeout, triBreadcrumbsService, triSettings, triLayout, $location) {
 
         var vm = this;
         vm.breadcrumbs = triBreadcrumbsService.breadcrumbs;
@@ -26,6 +26,8 @@
               vm.user = $rootScope.user;
               vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
             })
+        } else {
+            $location.url('/login')
         }
 
 

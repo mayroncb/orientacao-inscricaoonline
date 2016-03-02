@@ -13,14 +13,20 @@
             templateUrl: 'app/triangular/layouts/default/default.tmpl.html',
             resolve: {
               check: function($cookies, $state, $rootScope, UserInstance,
-                $http, API_CONFIG, $filter, $location) {
-
-                if (API_CONFIG.url == "" && !$cookies.getAll()['connect.sid']) {
-                    $state.go('authentication.login', {});
+                $http, API_CONFIG, $filter, $location, $interval) {
+                  if (API_CONFIG.url == ""){
+                    var time = $interval(function() {
+                      if (!$cookies.getAll()['connect.sid']) {
+                          $location.url('/login');
+                          $interval.cancel(time);
+                      }
+                    }, 1000);
+                  }
+                if (API_CONFIG.url !== "" && !$cookies.getAll()['connect.sid']) {
+                    $location.url('/login')
                 } else if ($cookies.getAll()['u']) {
                 UserInstance.get({id: $cookies.getAll()['u']}, function(user) {
                   $rootScope.user = user;
-
                   if ($rootScope.user
                       && $rootScope.user.type === "ADMIN"
                       && !$filter('filter')(triMenuProvider.$get().menu, {name: "MENU.DASHBOARDS.ANALYTICS"}).length > 0) {
