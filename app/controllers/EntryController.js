@@ -102,16 +102,26 @@ module.exports = function(app) {
         step: req.query.id,
         status: "Aceita"
       }).lean().exec(function(err, entries) {
-        Entry.deepPopulate(entries, 'user.club step category', function(err, results) {
+        Entry.deepPopulate(entries, 'user.club step category, ', function(err, results) {
           var listToReport = [];
-          results.forEach(function(value, index) {
+           results.forEach(function(value, index) {
             var entryTmp = {};
-            entryTmp.Nome = value.user.name;
-            entryTmp.Número_CBO = value.user.cboNumber;
-            entryTmp.Número_SICard = value.user.siCardNumber;
-            entryTmp.Clube = value.user.club.name;
-            entryTmp.Valor_Inscrição = value.value;
-            entryTmp.Categoria = value.category.name;
+            entryTmp.CAT = value.category.name
+            entryTmp.NOME = value.user.name;
+            entryTmp.NR = value.user.cboNumber;
+            entryTmp.SICARD = value.user.siCardNumber;
+            entryTmp.CLUBE = value.user.club.name;
+            value.items.forEach(function(item, index) {
+              if (item.name === "Inscrição") {
+                entryTmp['VL INSCRIÇÃO'] = 'R$ ' + item.value + ".00";
+              }
+              if (item.name === "Alugel do SICard") {
+                 entryTmp['VL SICARD'] = 'R$ ' + item.value + ".00";
+              }
+              if (item.name === "Anuidade") {
+                 entryTmp.ANUIDADE = 'R$ ' + item.value + ".00";
+              }
+            })
             listToReport.push(entryTmp);
           })
           if (results) {
