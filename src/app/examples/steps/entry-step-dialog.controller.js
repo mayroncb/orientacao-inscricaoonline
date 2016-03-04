@@ -6,8 +6,9 @@
         .controller('StepEntryDialogController', StepEntryDialogController);
 
     /* @ngInject */
-    function StepEntryDialogController($scope, step, $mdDialog, $rootScope, triLoaderService,
-      $window, $timeout, $mdToast, Upload, LoadData, $filter, EntryInstance, API_CONFIG) {
+    function StepEntryDialogController($scope, step, $mdDialog, $rootScope,
+      triLoaderService, UserInstance, $window, $timeout, $mdToast,
+      Upload, LoadData, $filter, EntryInstance, API_CONFIG) {
         var vm = this;
         var tmp;
         vm.step = step;
@@ -18,13 +19,16 @@
         vm.cancelClick = cancelClick;
         vm.entryStep = entryStep;
         vm.order.value = 0;
-        vm.user = $rootScope.user;
+        UserInstance.get({id: $rootScope.user._id}, function(user){
+          vm.user = user;
+          validateValue();
+        });
         vm.status = 'Anexar';  // Anexar | Anexando | Completo
         vm.upload = upload;
         vm.order.items = [{name :'Inscrição', value: vm.step.entryValue },
                     {name:'Aluguel do SICard', value: vm.step.siCardValue},
                     {name: 'Anuidade', value: vm.step.annuityValue}]
-        validateValue();
+
         $scope.
         $watch('vm.comp', function() {
           if (vm.comp) {

@@ -4,8 +4,6 @@ var ejs = require('ejs')
 var fs = require('fs')
 var path = require('path')
 
-// console.log(">>>>>", __dirname)
-// console.log(html)
 function Mail() {
 
    this.sendMail = function(subject, user, type, pass) {

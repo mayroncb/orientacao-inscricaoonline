@@ -21,7 +21,6 @@
                  vm.steps = steps;
                  vm.activeSteps = $filter('filter')(vm.steps, {isActive: true });
                  vm.oldSteps = $filter('filter')(vm.steps, {isActive: false });
-
                 checkEntries();
            });
         }
