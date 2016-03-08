@@ -10,10 +10,10 @@
         var now = new Date();
         // set app name & logo (used in loader, sidemenu, footer, login pages, etc)
         triSettingsProvider.setName('FOP');
-        triSettingsProvider.setCopyright('&copy;' + now.getFullYear() + ' fop.com.br');
+        triSettingsProvider.setCopyright('&copy;' + now.getFullYear() + ' orientacaoparaiba.com.br');
         triSettingsProvider.setLogo('assets/images/logo.png');
         // set current version of app (shown in footer)
-        triSettingsProvider.setVersion('2.3.0');
+        triSettingsProvider.setVersion('1.0.0');
 
         // setup available languages in triangular
         for (var lang = APP_LANGUAGES.length - 1; lang >= 0; lang--) {
