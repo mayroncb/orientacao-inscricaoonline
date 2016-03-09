@@ -4,11 +4,11 @@
     </tri-widget> -->
 
     <div layout="row" layout-sm="column" layout-margin dragula='"drag-analytics-container"'>
-        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+        <tri-widget palette-background="triCyan:600"  content-layout="column" content-layout-align="space-between center" content-padding>
             <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.entriesByClub" duration="1.5" decimals="0"></p>
             <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Participação do club em Etapas</p>
         </tri-widget>
-        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+        <tri-widget palette-background="triCyan:600"  content-layout="column" content-layout-align="space-between center" content-padding>
             <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0" countupto="vm.clubUsers.length" duration="1.5" decimals="0"></p>
             <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Total de Atletas no seu Clube</p>
         </tri-widget>
@@ -17,61 +17,115 @@
     <div layout="row" layout-sm="column" layout-margin>
       <tri-widget flex="100" flex-sm="100" >
         <form name="formComps">
-                  <md-content class="md-padding">
-                    <div layout layout-xs="column" flex>
-                      <md-input-container flex="100">
-                          <input placeholder="Filtro" ng-model="vm.queryFilter">
-                          </input>
-                          <md-icon md-font-icon="zmdi zmdi-search" class="name"></md-icon>
-                      </md-input-container>
-                    </div>
-                    <tri-widget flex title="Atletas do seu clube" content-layout="column" content-layout-align="center">
+          <md-tabs layout-fill flex md-dynamic-height md-no-disconnect md-stretch-tabs="always" md-no-pagination>
+              <md-tab label="ATLETAS DO SEU CLUBE">
+                <md-content class="md-padding">
+                  <div layout layout-xs="column" flex>
+                    <md-input-container flex="100">
+                        <input placeholder="Filtro" ng-model="vm.queryFilter">
+                        </input>
+                        <md-icon md-font-icon="zmdi zmdi-search" class="name"></md-icon>
+                    </md-input-container>
+                  </div>
+                  <tri-widget flex title="Atletas do seu clube" content-layout="column">
+                    <md-data-table-container>
+                        <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                            <thead  md-order="vm.query.order" md-trigger="vm.getClubs">
+                                <tr >
+                                    <th name="Name" order-by="name" ></th>
+                                    <th name="Clube" order-by="club.name" ></th>
+                                    <th name="Ativo" order-by="isActive"></th>
+                                    <th name="Ação"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in vm.clubUsers | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.queryFilter">
+                                    <td>{{::user.name | uppercase}}</td>
+                                    <td>{{::user.club.name}}</td>
+                                    <td>
+                                      <md-switch ng-change="vm.activateUser(user)" class="md-primary" ng-model="user.isClubAutorization"
+                                      aria-label="Usuário ativo" >
+
+                                      </md-switch></td>
+                                    <td>
+                                      <div layout="row" layout-align="start" layout-wrap>
+                                        <div flex="33">
+                                          <md-button ng-click="vm.openUser(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                              <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                          </md-button>
+                                        </div>
+                                      </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-data-table-container>
+                      <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.clubUsers.length}}"></md-data-table-pagination>
+                  </tri-widget>
+                </md-content>
+
+              </md-tab>
+              <md-tab label="Inscrições por etapa">
+                <md-content class="md-padding">
+                  <div layout layout-xs="column"  flex>
+                    <md-input-container flex="50">
+                        <md-select   placeholder="Campeonatos" name="competitions" ng-model="vm.competition" >
+                          <md-option ng-value="competition" ng-repeat="competition in vm.competitions">{{ competition.name }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <md-select ng-disabled="!vm.competition"
+                        placeholder="Etapas" ng-change="vm.loadEntries()" name="steps" ng-model="vm.step" >
+                          <md-option ng-value="step" ng-repeat="step in vm.competition.steps">{{ step.name }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                  </div>
+                  <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
                       <md-data-table-container>
-                          <table md-data-table class="md-data-table" md-progress="vm.deferred">
-                              <thead md-order="vm.query.order" md-trigger="vm.getClubs">
-                                  <tr>
-                                      <th name="Name" order-by="name" ></th>
-                                      <th name="Clube" order-by="club.name" ></th>
-                                      <th name="Ativo" order-by="isActive"></th>
-                                      <th name="Ação"></th>
-                                      <!-- <th name="Exluir"></th> -->
+                          <table md-table md-data-table ng-model="vm.selected"  >
+                              <thead md-head md-order="vm.query.order" md-trigger="vm.loadCompetitions">
+                                  <tr  md-head>
+                                      <th md-column name="Comprovante" order-by="compNumber" ></th>
+                                      <th md-column name="Nome"></th>
+                                      <th md-column name="Valor"></th>
+                                      <th md-column name="Estatus"></th>
+                                      <th md-column name="Ação"></th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr ng-repeat="user in vm.clubUsers | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.queryFilter">
-                                      <td>{{::user.name | uppercase}}</td>
-                                      <td>{{::user.club.name}}</td>
-                                      <td>
-                                        <md-switch ng-change="vm.activateUser(user)" class="md-primary" ng-model="user.isClubAutorization"
-                                        aria-label="Usuário ativo" >
-
-                                        </md-switch></td>
-                                      <td>
+                              <tbody md-body>
+                                  <tr md-row ng-repeat="entry in vm.entries | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit | filter:vm.compFilter">
+                                      <td md-cell>{{::entry.compNumber}}</td>
+                                      <td md-cell>{{::entry.user.name | uppercase}}</td>
+                                      <td md-cell>{{::entry.value | currency:"R$":2}}</td>
+                                      <td md-cell flex="10">
+                                        <span class="status"  ng-class="'status-'+entry.status">
+                                            {{::entry.status}}
+                                        </span>
+                                      </td>
+                                      <td md-cell >
                                         <div layout="row"  layout-wrap>
-                                          <div flex="33">
-                                            <md-button ng-click="vm.openUser(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
+                                          <div flex="40">
+                                            <md-button ng-click="vm.editEntry(entry, $event)" class="md-icon-button" aria-label="Editar Inscrição">
+                                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                            </md-button>
+                                          </div>
+                                          <div flex="40">
+                                            <md-button ng-click="vm.openComp(entry, $event)" class="md-icon-button" aria-label="Ver comprovante">
                                                 <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
                                             </md-button>
                                           </div>
-                                          <!-- <div flex="33">
-                                            <md-button ng-click="vm.openChangePass(user, $event)" class="md-icon-button" aria-label="Editar Usuário">
-                                                <md-icon md-font-icon="zmdi zmdi-key"></md-icon>
-                                            </md-button>
-                                          </div>
-                                          <div flex="33">
-                                            <md-button ng-click="vm.removeUser(user, $event)" class="md-icon-button" aria-label="Remover Usuário">
-                                                <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
-                                            </md-button>
-                                          </div> -->
                                         </div>
                                       </td>
                                   </tr>
                               </tbody>
                           </table>
                       </md-data-table-container>
-                        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.clubUsers.length}}"></md-data-table-pagination>
-                    </tri-widget>
-                  </md-content>
+                      <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.entries.length}}"></md-data-table-pagination>
+                  </tri-widget>
+                </md-content>
+              </md-tab>
+          </md-tabs>
+
           </form>
       </tri-widget>
     </div>

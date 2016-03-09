@@ -94,7 +94,7 @@
           })
         }
 
-        function loadEntries(){
+        function loadEntries() {
 
           StepInstance.get({id: vm.step._id}, function(step) {
             vm.entries = []
