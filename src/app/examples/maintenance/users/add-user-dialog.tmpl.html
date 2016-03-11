@@ -11,19 +11,17 @@
     </md-toolbar>
     <md-dialog-content>
       <div class="md-dialog-content">
-        <label  >Sexo</label>
-        <div layout layout-xs="row" flex>
-            <md-radio-group  layout="row"
-                class="md-primary" ng-model="vm.user.genre"
+        <div layout="row" >
+            <label flex="5">Sexo</label>
+            <md-radio-group style="align-items: baseline;" flex  layout="row"
+                ng-model="vm.user.genre" class="md-primary"
                   required ng-init="vm.user.genre = 'M'">
               <md-radio-button value="M">Masculino</md-radio-button>
-              <md-radio-button value="F">Feminino</md-radio-button>
+              <md-radio-button flex-offset="15" value="F">Feminino</md-radio-button>
             </md-radio-group>
-
         </div>
         <div layout layout-xs="row" flex>
           <md-input-container  flex>
-
               <input required id="name" label="name" translate placeholder="Nome"
               name="name" type="text"  ng-model="vm.user.name" capitalize />
               <div ng-show="true" ng-messages="profile.name.$error">
@@ -135,59 +133,34 @@
               </div>
           </md-input-container>
         </div>
-
-        <!-- <md-input-container class="md-block">
-          <label translate class="md-title">SIGNUP.ALERGY.LABEL</label>
-          <md-chips name="alergy"
-          ng-model="vm.user.allergy"
-          placeholder="+ Alergias"
-          readonly="false"
-          secondary-placeholder="Liste suas Alergias">
-
-          </md-chips>
-          <div ng-show="true" ng-messages="profile.allergy.$error">
-              <div ng-message when="required">
-                  <span translate>SIGNUP.ALERGY.PLEASE_ENTER</span>
-              </div>
-          </div>
-
-        </md-input-container> -->
-        <div layout="row" layout-wrap>
-          <div flex="20">
-              <md-switch flex ng-model="vm.user.isCbo">
+        <div layout="row"  layout-xs="column" >
+              <md-switch class="style-sw" flex="10" ng-model="vm.user.isCbo">
                   CBO?
                   <md-tooltip md-direction="botton">
                     Pro favor, ative apenas se realmente tiver um número CBO
                   </md-tooltip>
               </md-switch>
-            </div>
-            <div flex=30>
-              <md-input-container flex>
+              <md-input-container flex="40">
                   <label >Insira o número aqui</label>
                   <input ng-required="vm.user.isCbo" type="number" name="cbo" ng-model="vm.user.cboNumber" ng-disabled="!vm.user.isCbo">
                   <div ng-show="true"   ng-messages="profile.cbo.$error">
                       <div ng-message when="required && ng-disabled='false'">
-                          <span translate>Insira o numero CBO</span>
+                          <span translate>Insira o número CBO</span>
                       </div>
                   </div>
               </md-input-container>
-              </div>
-
-            <div flex="20">
-              <md-switch   ng-model="vm.user.siCard">
+              <md-switch  class="style-sw" flex="15" ng-model="vm.user.siCard">
                   SI CARD
                   <md-tooltip md-direction="botton">
                     Pro favor, ative apenas se realmente tiver um SI CARD
                   </md-tooltip>
               </md-switch>
-            </div>
-            <div flex="30">
-              <md-input-container>
+              <md-input-container flex="35">
                   <label>Insira o número aqui</label>
                   <input ng-required="vm.user.siCard" type="number" name="sicard" ng-model="vm.user.siCardNumber" ng-disabled="!vm.user.siCard">
                   <div ng-show="true"   ng-messages="profile.sicard.$error">
                       <div ng-message when="required">
-                          <span translate>Insira o numero do siCard</span>
+                          <span translate>Insira o número do siCard</span>
                       </div>
                   </div>
               </md-input-container>
@@ -227,8 +200,7 @@
             </md-input-container>
           </div>
 
-
-      </div>
+      
     </md-dialog-content>
     <md-dialog-actions layout="row">
 

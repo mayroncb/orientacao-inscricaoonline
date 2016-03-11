@@ -18,9 +18,11 @@
         vm.categories = [];
         vm.states = [];
         vm.clubs = [];
+        vm.loading = true;
 
         delete vm.user.password;
         function updateUser() {
+          vm.loading = true;
           delete vm.user.password
           delete vm.user.confirm
           vm.user.uf = vm.user.uf.UF;
@@ -29,16 +31,20 @@
               vm.user = new UserInstance(user);
               $rootScope.user = vm.user;
               vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
-              loadData();
-              delete vm.user.password;
           }).catch(function(erro){
               console.log(erro);
               toastr.error("Erro ao alterar usuario!");
+          }).finally(function(){
+              loadData();
+              delete vm.user.password
+              delete vm.user.confirm
+              vm.loading = false;
           });
 
         }
 
         function changePass() {
+          vm.loading = true;
           vm.user.uf = vm.user.uf.UF
            vm.user.$save().then(function(user) {
               toastr.success('Senha alterada com sucesso.');
@@ -49,6 +55,7 @@
           }).finally(function(){
               delete vm.user.password
               delete vm.user.confirm
+              vm.loading = false;
           }) ;
         }
 
@@ -72,6 +79,7 @@
                   }
                   return previous;
                 }, []);
+                vm.loading = false;
                 vm.user['club'] = $filter('filter')(clubs, {_id:vm.user['club']})[0];
           });
 

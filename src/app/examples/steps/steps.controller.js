@@ -60,6 +60,7 @@
                 vm.loading = false;
             })
             .error(function(error) {
+              vm.loading = false;
               console.log(error);
             });
         }

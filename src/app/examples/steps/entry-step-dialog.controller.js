@@ -19,9 +19,17 @@
         vm.cancelClick = cancelClick;
         vm.entryStep = entryStep;
         vm.order.value = 0;
-        UserInstance.get({id: $rootScope.user._id}, function(user){
+        UserInstance.get({id: $rootScope.user._id}, function(user) {
           vm.user = user;
           validateValue();
+          LoadData.categories.query().$promise.then(function(categories) {
+            vm.categories = categories;
+            vm.order.category =  $filter('filter')(vm.categories, {_id:vm.user['category']})[0];
+          }).catch(function(erro){
+              console.log(erro);
+          }).finally(function(){
+              vm.loading = false;
+          });
         });
         vm.status = 'Anexar';  // Anexar | Anexando | Completo
         vm.upload = upload;
@@ -33,7 +41,6 @@
         $watch('vm.comp', function() {
           if (vm.comp) {
             vm.showTootip = false;
-            // console.log(vm.showTootip);
           } else {
             vm.showTootip = true;
           }
@@ -45,12 +52,7 @@
           }
         }
 
-        LoadData.categories.query().$promise.then(function(categories) {
-          vm.categories = categories;
-          vm.order.category =  $filter('filter')(vm.categories, {_id:vm.user['category']})[0];
-          console.log(vm.user['category']);
-          vm.loading = false;
-        })
+
 
         function validateValue() {
             if (vm.user.siCard) {
