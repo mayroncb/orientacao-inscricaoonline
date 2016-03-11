@@ -47,7 +47,8 @@
 
         LoadData.categories.query().$promise.then(function(categories) {
           vm.categories = categories;
-          vm.order.category =  $filter('filter')(vm.categories, {_id:vm.user['category']._id})[0];
+          vm.order.category =  $filter('filter')(vm.categories, {_id:vm.user['category']})[0];
+          console.log(vm.user['category']);
           vm.loading = false;
         })
 
