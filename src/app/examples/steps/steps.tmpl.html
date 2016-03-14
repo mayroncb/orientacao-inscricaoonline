@@ -7,8 +7,14 @@
             </div>
         </md-toolbar>
         <md-content class="md-padding">
-            <md-grid-list class="ui-color-grid" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                <md-grid-tile md-rowspan="1" md-colspan="1" md-colspan-lg="2" ng-repeat="step in vm.activeSteps" class="mb-bg-07"   ng-click="step.isRegistered ? vm.listUsersInStep($event, step) : vm.stepEntry($event, step)">
+                <md-grid-list class="ui-color-grid" md-cols-xs="2" md-cols-sm="3"
+                md-cols-md="6" md-cols-gt-md="6" md-cols="4"
+                    md-row-height-xs="3:4"
+                    md-row-height-sm="2:3"
+                    md-row-height-gt-md="1:1"
+                    md-row-height="3:4"
+                    md-gutter-sm="4px" md-gutter-gt-xs="8px">
+                <md-grid-tile md-rowspan="1" md-colspan="2" md-colspan-lg="3" ng-repeat="step in vm.activeSteps" class="mb-bg-07"   ng-click="step.isRegistered ? vm.listUsersInStep($event, step) : vm.stepEntry($event, step)">
                     <md-grid-tile-footer>
                         <h3 ng-show="!step.isRegistered" style="font-weight:100;">
                           <strong>{{::step.name}} - {{::step.stepDate | amDateFormat:'DD/MM/YYYY'}}</strong>
@@ -29,9 +35,15 @@
             </div>
         </md-toolbar>
         <md-content class="md-padding">
-            <md-grid-list class="ui-color-grid" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                <md-grid-tile md-rowspan="1" md-colspan="1" md-colspan-lg="2" ng-repeat="oldStep in vm.oldSteps" class="mb-bg-32" ng-click="vm.selectPalette($event, name, palette)">
-                    <md-grid-tile-footer>
+            <md-grid-list class="ui-color-grid" md-cols-xs="2" md-cols-sm="3"
+            md-cols-md="6" md-cols-gt-md="6"
+                md-row-height-xs="3:4"
+                md-row-height-sm="2:3"
+                md-row-height-gt-md="1:1"
+                md-row-height="3:4"
+                md-gutter-sm="4px" md-gutter-gt-xs="8px">
+                <md-grid-tile md-rowspan="1" md-colspan="2" md-colspan-lg="3"  ng-repeat="oldStep in vm.oldSteps" class="mb-bg-32" ng-click="vm.selectPalette($event, name, palette)">
+                    <md-grid-tile-footer >
                         <h3 style="color: gray">{{::oldStep.name}} - {{::oldStep.stepDate | amDateFormat:'DD/MM/YYYY'}}</h3>
                     </md-grid-tile-footer>
                 </md-grid-tile>

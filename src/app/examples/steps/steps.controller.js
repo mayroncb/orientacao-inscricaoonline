@@ -65,7 +65,6 @@
             });
         }
         loadSteps();
-        triLoaderService.setLoaderActive(true)
 
         function stepEntry($event, step) {
             $mdDialog.show({

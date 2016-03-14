@@ -1,12 +1,11 @@
-<md-dialog  aria-label="Comprovante" flex="20">
+<md-dialog  aria-label="Comprovante" flex="40">
 <div flex class="loader" ng-show="vm.loading" layout="column" layout-fill layout-align="center center"><div class="loader-inner"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div><h3 class="md-headline">FOP</h3></div>
 
   <md-toolbar>
-      <div   class="md-toolbar-tools">
+      <div class="md-toolbar-tools">
           <h2 flex >
               <span>#{{vm.comp.user.name | uppercase}} - {{vm.comp.category.name}} </span>
           </h2>
-
           <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="cancel">
               <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
           </md-button>

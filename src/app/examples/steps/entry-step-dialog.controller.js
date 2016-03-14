@@ -8,7 +8,7 @@
     /* @ngInject */
     function StepEntryDialogController($scope, step, $mdDialog, $rootScope,
       triLoaderService, UserInstance, $window, $timeout, $mdToast,
-      Upload, LoadData, $filter, EntryInstance, API_CONFIG) {
+      Upload, LoadData, $filter, EntryInstance, API_CONFIG, toastr) {
         var vm = this;
         var tmp;
         vm.step = step;
@@ -48,6 +48,7 @@
 
         function total() {
           for (var item in vm.order.items) {
+              console.log(vm.order.items[item].value);
               vm.order.value += vm.order.items[item].value;
           }
         }
@@ -61,7 +62,7 @@
             if(!vm.user.isFirstEntry) {
                 vm.order.items.splice(2, 1);
             }
-
+            total();
         }
 
         function entryStep(order) {
@@ -75,8 +76,11 @@
              }).then(function (resp) {
                $mdDialog.hide();
                vm.loading = false;
-            }, function () {
-
+            }, function (error) {
+              if (error.status === 409){
+                toastr.error('Inconsistência nos dados!', 'Tente Novamente.');
+              }
+              vm.loading = false;
             }
         );
 
@@ -109,6 +113,6 @@
             vm.status = 'Anexar';
         }
 
-        total();
+
     }
 })();

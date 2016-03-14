@@ -6,9 +6,7 @@
             <h2 flex >
                 <span>#{{vm.step.name}} - {{vm.step.locate}} {{vm.step.stepDate | amDateFormat:'DD/MM/YYYY' }}</span>
             </h2>
-            <!-- <md-button class="md-icon-button" ng-click="vm.printClick()" aria-label="print">
-                <md-icon md-font-icon="zmdi zmdi-print"></md-icon>
-            </md-button> -->
+
             <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
                 <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
             </md-button>
@@ -76,7 +74,7 @@
             </div>
             <div layout="row" flex="50">
               <md-button class="btns md-primary md-mini md-raised "  type="file"  accept="image/*"
-              ngf-max-size="10MB" ngf-select="vm.upload($file)" ng-disabled="vm.status != 'Anexar'"   aria-label="upload">
+              ngf-max-size="10MB" ngf-select="vm.upload($file)" ngf-resize="{width: 500, height: 500, centerCrop: true}" ng-disabled="vm.status != 'Anexar'"   aria-label="upload">
                     {{vm.status}} <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'Anexar', 'fa fa-spinner fa-pulse': vm.status == 'Anexando', 'zmdi zmdi-check': vm.status == 'Completo'}"></md-icon>
               </md-button>
               <div flex="70" class="thumb_div">

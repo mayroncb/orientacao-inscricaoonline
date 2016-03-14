@@ -23,7 +23,7 @@ module.exports = function() {
         isCbo: {
             type: Boolean,
             required: true,
-            default: Date.now
+            default: false
         },
 
         genre: {
@@ -73,7 +73,7 @@ module.exports = function() {
         siCard: {
             type: Boolean,
             required: true,
-            default: Date.now
+            default: false
         },
 
         siCardNumber: {
