@@ -40,7 +40,6 @@ module.exports = function(app) {
         User.find({"name": { "$regex": text, "$options": "i" }})
                   .populate("club").exec( function(err, docs) {
           setTimeout(function () {
-            console.log(docs);
                 res.status(200).json(docs);
           }, 100);
       });

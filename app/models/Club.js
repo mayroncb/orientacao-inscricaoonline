@@ -14,6 +14,11 @@ module.exports = function() {
                 unique: true
             }
         },
+        
+        isAffiliate: {
+            type: Boolean,
+            default: false
+        },
 
         admin: {
             type: Schema.ObjectId, ref: 'User'

@@ -67,9 +67,12 @@
                   pertence ao clube {{vm.selectedItem.club.name}}
                  </span>
         </div>
-
+        <div layout="row" layout-sm="column" flex="100">
+              <md-checkbox ng-model="vm.club.isAffiliate" class="md-primary" ng-checked="" ng-click="">Filiado a FOP?</md-checkbox>
+        </div>
 
       </div>
+
     </md-dialog-content>
     <md-dialog-actions layout="row">
 
