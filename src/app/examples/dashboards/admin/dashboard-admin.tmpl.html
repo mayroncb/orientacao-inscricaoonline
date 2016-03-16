@@ -31,7 +31,8 @@
                     </div>
                     <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
                         <md-data-table-container>
-                            <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                            <table md-data-table class="md-data-table"
+                                md-progress="vm.promisePending" >
                                 <thead md-order="vm.query.order" >
                                     <tr>
                                         <th name="Comprovante" order-by="compNumber" ></th>
@@ -78,17 +79,17 @@
                 <md-content class="md-padding">
                   <div layout layout-xs="column" flex>
                     <md-input-container flex="50">
-                        <md-select   ng-change="vm.loadGraph()" placeholder="Campeonatos" name="competitions" ng-model="vm.competition" >
+                        <md-select ng-change="vm.loadGraph()" placeholder="Campeonatos" name="competitions" ng-model="vm.competition" >
                           <md-option ng-value="competition" ng-repeat="competition in vm.competitions">{{ competition.name }}</md-option>
                         </md-select>
                     </md-input-container>
                     <md-input-container flex="50">
                         <md-select ng-disabled="!vm.competition"
-                        placeholder="Etapas" ng-change="vm.loadEntries()" name="steps" ng-model="vm.step" >
+                        placeholder="Etapas" ng-change="vm.getEntries(vm.step)" ng-init="vm.getEntries(vm.step)" name="steps" ng-model="vm.step" >
                           <md-option ng-value="step" ng-repeat="step in vm.competition.steps">{{ step.name }}</md-option>
                         </md-select>
                     </md-input-container>
-                    <md-button ng-href="{{vm.getReport()}}" target="" ng-href="test" class="md-fab md-mini  md-primary md-fab-bottom-right">
+                    <md-button ng-href="{{vm.getReport()}}" target="" ng-href="test" class="md-fab md-mini  md-primary md-fab-bottom-right" aria-label="Relatorio">
                       <md-icon md-font-icon="zmdi zmdi-cloud-download"></md-icon>
                     </md-button>
 
@@ -105,7 +106,8 @@
                   </div>
                   <tri-widget flex title="Inscrições por etapa" content-layout="column" content-layout-align="center">
                       <md-data-table-container>
-                          <table md-table md-data-table ng-model="vm.selected"  >
+                          <table md-table md-data-table ng-model="vm.selected"
+                            md-progress="vm.promise" >
                               <thead md-head md-order="vm.query.order" md-trigger="vm.loadCompetitions">
                                   <tr  md-head>
                                       <th md-column name="Comprovante" order-by="compNumber" ></th>

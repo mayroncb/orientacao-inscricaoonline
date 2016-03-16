@@ -14,7 +14,7 @@
         var vm = this;
         vm.loading = true;
         vm.loadGraph = loadGraph;
-        vm.loadEntries = loadEntries;
+        vm.getEntries = getEntries;
         vm.loadCompetitions = loadCompetitions;
         vm.openComp = openComp;
         vm.editEntry = editEntry;
@@ -35,20 +35,48 @@
           return API_CONFIG.url+"/entry/report/step/?"+"id="+vm.step._id;
         }
 
+        function loadCompetitions() {
+          CompetitionInstance.query().$promise.then(function(comps) {
+            vm.competitions = comps;
+            vm.competition = vm.competitions[0]
+            vm.step = vm.competition.steps[0]
+            getPendingEntries();
+            createData();
+          })
+        }
 
-        vm.dateRange = {
-            start: moment().startOf('week'),
-            end: moment().endOf('week')
-        };
+        function getEntries(step) {
+          if (step) vm.promise = StepInstance.get({id: step._id}, success).$promise;
+        }
 
-        vm.query = {
-           filter: '',
-           limit: '5',
-           order: '-date',
-           page: 1
-         };
+        function success(step) {
+          vm.entries = step.entries;
+        }
 
-        function openComp(comp, $event){
+        function getPendingEntries() {
+          vm.promisePending = EntryInstance.query(successPendingEntries).$promise;
+        }
+
+        function successPendingEntries(entries) {
+          vm.pendingEntries = [ ]
+          vm.tempList = $filter('filter')(entries, {status: "!Aceita"})
+          if (vm.tempList.length > 0 ) {
+            vm.pendingEntries = vm.tempList
+          }
+           vm.loading = false;
+        }
+
+        loadCompetitions();
+
+        function createData() {
+            vm.chartLineData = SalesService.createLineChartData(vm.competition);
+        }
+
+        function loadGraph() {
+          createData();
+        }
+
+        function openComp(comp, $event) {
           $mdDialog.show({
               controller: 'CompDialogController',
               controllerAs: 'vm',
@@ -83,49 +111,12 @@
                 vm.alert = 'You cancelled the dialog.';
             }
         }
-
-        function loadCompetitions() {
-          CompetitionInstance.query().$promise.then(function(comps){
-            vm.competitions = comps;
-            vm.competition = vm.competitions[0]
-            vm.step = vm.competition.steps[0]
-            loadEntries();
-            createData();
-          })
-        }
-
-        function loadEntries() {
-
-          StepInstance.get({id: vm.step._id}, function(step) {
-            vm.entries = []
-            if (step.entries.length > 0) vm.entries = step.entries;
-            // console.log(vm.entries);
-          })
-          EntryInstance.query().$promise.then(function(entries) {
-            vm.pendingEntries = [ ]
-            vm.tempList = $filter('filter')(entries, {status: "!Aceita"})
-            if (vm.tempList.length > 0 ){
-              vm.pendingEntries = vm.tempList
-              }
-              vm.loading = false;
-          }).catch(function(err){
-              console.log(err);
-              vm.loading = false;
-          })
-        }
-
-        loadCompetitions();
-
-        function createData() {
-            vm.chartLineData = SalesService.createLineChartData(vm.competition);
-        }
-
-        function loadGraph() {
-          createData();
-        }
-
-
-
-
+        
+        vm.query = {
+           filter: '',
+           limit: '5',
+           order: '-date',
+           page: 1
+         };
     }
 })();
