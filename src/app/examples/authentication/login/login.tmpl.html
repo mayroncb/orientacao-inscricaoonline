@@ -11,7 +11,7 @@
             </md-toolbar>
 
             <md-content class="md-padding">
-                <form name="login">
+                <form  name="login">
                     <md-input-container class="md-block">
                         <label for="email" translate>LOGIN.EMAIL.LABEL</label>
                         <input id="email" label="email" name="email" type="email" ng-model="vm.user.email" required/>
@@ -30,7 +30,7 @@
 
                     <div layout="row" layout-align="space-between center">
                         <md-input-container>
-                            <md-checkbox ng-model="vm.user.rememberMe">
+                            <md-checkbox   ng-model="vm.user.rememberMe">
                                 <span translate>LOGIN.REMEMBER</span>
                             </md-checkbox>
                         </md-input-container>
@@ -40,7 +40,7 @@
                         </md-input-container>
                     </div>
 
-                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"  ng-click="vm.loginClick()" ng-disabled="login.$invalid" translate="LOGIN.BUTTON" aria-label="{{'LOGIN.BUTTON' | translate}}"></md-button>
+                    <md-button type="submit" class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"  ng-click="vm.loginClick()" ng-disabled="login.$invalid" translate="LOGIN.BUTTON" aria-label="{{'LOGIN.BUTTON' | translate}}"></md-button>
 
                     <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" href="#/signup" translate="LOGIN.SIGNUP_LINK" aria-label="{{'LOGIN.SIGNUP_LINK' | translate}}"></md-button>
 

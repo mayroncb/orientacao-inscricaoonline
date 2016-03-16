@@ -6,7 +6,8 @@
         .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function LoginController($cookies, $state, toastr, $rootScope, triSettings, LoginService) {
+    function LoginController($cookies, $state, toastr, $rootScope,
+      triSettings, LoginService, $scope, $timeout) {
         var vm = this;
         vm.loginClick = loginClick;
         vm.socialLogins = [{
@@ -33,14 +34,11 @@
             password: ''
         };
 
-        ////////////////
-
         function loginClick() {
           var promise = LoginService.login({'name': vm.user.email, 'pass': vm.user.password }).$promise;
 
           promise.then(function(user) {
             $cookies.put("u", user._id );
-              // dataService.addData(data);
               $rootScope.user = user;
               $state.go('triangular.admin-default.dashboard')
           }, function(erro){
