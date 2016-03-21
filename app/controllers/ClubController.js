@@ -25,14 +25,7 @@ module.exports = function(app) {
       })
     }
 
-    // controller.listCompetitions = function(req, res) {
-    //     Competition.find({})
-    //     .populate({path: "steps", populate: {path: "club"}})
-    //     .exec(function(err, competitions){
-    //         res.json(competitions);
-    //     });
-    //
-    // }
+     
 
     controller.getClub = function(req, res) {
         Club.findOne({_id: req.params.id}, function(err, data) {

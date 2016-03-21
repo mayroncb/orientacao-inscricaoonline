@@ -10,6 +10,7 @@ module.exports = function(app) {
   var controller = {}
   var Entry = app.models.Entry;
   var Step = app.models.Step;
+  var User = app.models.User;
   var gfs;
 
   mongoose.connection.on('connected', function() {
@@ -209,8 +210,12 @@ module.exports = function(app) {
 
   function checkEntryTotal(order) {
     var totalCheck = 0;
+    console.log(order.user);
     if (order.user.siCard) {
       order.step.siCardValue = 1;
+    }
+    if (!order.user.club.isAffiliate) {
+      order.step.annuityValue = 15;
     }
     if (!order.user.isFirstEntry) {
       order.step.annuityValue = 0;
@@ -235,6 +240,12 @@ module.exports = function(app) {
             if (entry.status === "Aceita" && step.entries.indexOf(entry._id) == -1) {
               step.entries.push(entry._id);
               step.save();
+              User.findOne({_id: entry.user, isFirstEntry: true}, function(err, user) {
+                console.log(entry.user);
+                console.log(user);
+                user.isFirstEntry = false;
+                user.save();
+              })
             } else if (entry.status !== "Aceita") {
               step.entries.pull(entry._id);
               step.save();

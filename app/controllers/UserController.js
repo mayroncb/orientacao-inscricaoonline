@@ -23,14 +23,14 @@ module.exports = function(app) {
 
     }
 
-    controller.obterContato = function(req, res) {
-        User.findOne({_id: req.params.id}, function(err, data) {
+    controller.getUser = function(req, res) {
+        User.findOne({_id: req.params.id}).populate('club').exec(function(err, data) {
             res.json(data);
         })
     }
 
     controller.listUsersByClub = function(req, res) {
-        User.find({club: req.params.id}).populate('club').exec(function(err, data) {
+         User.find({club: req.params.id}).populate('club').exec(function(err, data) {
             res.json(data);
         })
     }

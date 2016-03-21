@@ -21,6 +21,7 @@
         vm.order.value = 0;
         UserInstance.get({id: $rootScope.user._id}, function(user) {
           vm.user = user;
+          console.log(user);
           validateValue();
           LoadData.categories.query().$promise.then(function(categories) {
             vm.categories = categories;
@@ -48,16 +49,16 @@
 
         function total() {
           for (var item in vm.order.items) {
-              console.log(vm.order.items[item].value);
               vm.order.value += vm.order.items[item].value;
           }
         }
 
-
-
         function validateValue() {
             if (vm.user.siCard) {
               vm.order.items[1].value = 1;
+            }
+            if (!vm.user.club.isAffiliate) {
+              vm.order.items[2].value = 15;
             }
             if(!vm.user.isFirstEntry) {
                 vm.order.items.splice(2, 1);

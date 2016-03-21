@@ -17,16 +17,13 @@ module.exports = function(passport) {
         passReqToCallback : false // allows us to pass back the entire request to the callback
     },
     function(name, pass, done) {
-			User.findOne({ 'email' :  name },
+			User.findOne({ 'email' :  name }).populate('club').exec(
             function(err, user) {
                 if(err || !user) {
                     console.log('error:: ', err);
                     return done(err);
                 } else {
                    if (passHandler.validPassword(pass, user.password)) {
-                    // console.log("before::, ", moment("2014-02-02T15:00:00-0800").format("DD/MM/YYYY"));
-                    // user['dateBirth'] = moment("2014-02-02T15:00:00-0800").format("DD/MM/YYYY");
-                    // console.log("after::, ", user.dateBirth);
                        return done(null, user);
                    } else {
                        console.log('error:: ', err);

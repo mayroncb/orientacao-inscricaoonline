@@ -24,12 +24,12 @@
         $http.get(API_CONFIG.url + "/entries/userqtd/" + $rootScope.user._id)
           .success(function(res) {
             vm.entriesbyuser = res.value;
+
           })
           .error(function(error) {
             console.log(error);
           });
-
-        $http.get(API_CONFIG.url + "/users/club/" + $rootScope.user.club)
+        $http.get(API_CONFIG.url + "/users/club/" + $rootScope.user.club._id)
           .success(function(res) {
             vm.clubsQtd = res.length;
           })
@@ -38,10 +38,10 @@
           });
 
 
-        vm.dateRange = {
-            start: moment().startOf('week'),
-            end: moment().endOf('week')
-        };
+        // vm.dateRange = {
+        //     start: moment().startOf('week'),
+        //     end: moment().endOf('week')
+        // };
 
 
 

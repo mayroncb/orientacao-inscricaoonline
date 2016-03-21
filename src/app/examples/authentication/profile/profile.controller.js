@@ -80,7 +80,7 @@
                   return previous;
                 }, []);
                 vm.loading = false;
-                vm.user['club'] = $filter('filter')(clubs, {_id:vm.user['club']})[0];
+                vm.user['club'] = $filter('filter')(clubs, {_id:vm.user['club']._id})[0];
           });
 
          LoadData.states.query().$promise.then(function(states){

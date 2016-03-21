@@ -27,7 +27,7 @@ module.exports = function(app){
         .get(controller.listUsersByClub)
 
     app.route('/users/:id')
-        .get(controller.obterContato) //ADD Verificação na produção
+        .get(controller.getUser) //ADD Verificação na produção
         .delete(controller.removerContato)
         .post(controller.updateContato)
 
