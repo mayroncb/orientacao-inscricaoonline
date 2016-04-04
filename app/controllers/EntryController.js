@@ -186,9 +186,6 @@ module.exports = function(app) {
   controller.addEntry = function(req, res) {
     var file = req.files.file;
     var order = JSON.parse(req.body.order);
-    if (!checkEntryTotal(order)) {
-      res.status(409).json("erro");
-    } else {
       var writestream = gfs.createWriteStream({
         filename: file.name,
         contentType: file.type
@@ -205,7 +202,6 @@ module.exports = function(app) {
             res.status(500).json(erro);
           })
       });
-    }
   }
 
   function checkEntryTotal(order) {
