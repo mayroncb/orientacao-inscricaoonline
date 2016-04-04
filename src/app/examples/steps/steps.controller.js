@@ -25,7 +25,8 @@
            });
         }
 
-        function listUsersInStep($event, step){
+        function listUsersInStep($event, step) {
+          console.log(step);
           $mdDialog.show({
               controller: 'ShowEntriesDialogController',
               controllerAs: 'vm',

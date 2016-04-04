@@ -58,7 +58,7 @@
         }
 
         function addUser(user) {
-          console.log(user);
+
           delete vm.user.confirm;
           vm.user.$save().then(function(user) {
               toastr.success('Usuário cadastrado com sucesso', user.name);

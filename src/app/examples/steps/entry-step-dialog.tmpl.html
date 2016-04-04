@@ -127,7 +127,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in vm.order.items">
-                    <td>{{item.name}}</td>
+                    <td>{{item.name}}<span style="color: red" class="md-caption" ng-if="item.name === 'Anuidade'"> (Ignorar caso já tenha pago)</span></td>
                     <td class="text-right padding-right-10">{{item.value | currency:'R$':2}}</td>
                 </tr>
             </tbody>
