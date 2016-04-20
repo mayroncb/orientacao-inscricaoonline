@@ -6,8 +6,8 @@
     "ADMIN": {
         "TOOLBAR": {
             "SETTINGS": "Settings",
-            "PROFILE": "Profile",
-            "LOGOUT": "Logout",
+            "PROFILE": "Perfil",
+            "LOGOUT": "Sair",
             "SIDEBAR_TOGGLE": "Toggle Menu"
         },
         "NOTIFICATIONS": {

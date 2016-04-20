@@ -26,7 +26,7 @@
         "REMEMBER": "Lembrar-Me",
         "FORGOT": "Esqueceu a Senha",
         "BUTTON": "Entrar",
-        "SIGNUP_LINK": "Não tem uma conta? Crie um agora",
+        "SIGNUP_LINK": "Não tem uma conta? Crie uma agora!",
         "SOCIAL": {
             "OR": "ou faça o login com"
         },
@@ -86,7 +86,7 @@
         },
         "UF": {
             "LABEL": "UF",
-            "PLEASE_ENTER": "Por favor, insira seu estado"
+            "PLEASE_ENTER": "Por favor, insira seu Estado"
         },
         "BIRTHDATE": {
             "LABEL": "Nascimento",
@@ -94,7 +94,7 @@
         },
         "ALERGY": {
             "LABEL": "Alergia",
-            "PLEASE_ENTER": "Por favor, insira a data de Nascimento"
+            "PLEASE_ENTER": "Por favor, insira sua alergia"
         },
         "CLUB": {
             "LABEL": "Clube",
