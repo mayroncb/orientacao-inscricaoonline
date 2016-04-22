@@ -139,10 +139,11 @@ module.exports = function(app) {
           entryTmp.SICARD = value.user.siCardNumber;
           entryTmp.CLUBE = value.user.club.name;
           value.items.forEach(function(item, index) {
+
             if (item.name === "Inscrição") {
               entryTmp['VL INSCRIÇÃO'] = 'R$ ' + item.value + ".00";
             }
-            if (item.name === "Alugel do SICard") {
+            if (item.name === "Aluguel do SICard") {
               entryTmp['VL SICARD'] = 'R$ ' + item.value + ".00";
             }
             if (item.name === "Anuidade") {
@@ -239,8 +240,11 @@ module.exports = function(app) {
               User.findOne({_id: entry.user, isFirstEntry: true}, function(err, user) {
                 console.log(entry.user);
                 console.log(user);
-                user.isFirstEntry = false;
-                user.save();
+                if(user){
+                    user.isFirstEntry = false;
+                    user.save();
+                }
+
               })
             } else if (entry.status !== "Aceita") {
               step.entries.pull(entry._id);
