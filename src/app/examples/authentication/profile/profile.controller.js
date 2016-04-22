@@ -10,17 +10,22 @@
       toastr, UserInstance, $cookies ) {
         console.log('ProfileController');
         var vm = this;
-        vm.user =  new UserInstance($rootScope.user);
-        vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
-        vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
-        vm.updateUser = updateUser;
-        vm.changePass = changePass;
+        vm.user = {};
+        vm.user.allergy = [];
+        vm.loading = true;
         vm.categories = [];
         vm.states = [];
         vm.clubs = [];
-        vm.loading = true;
+        UserInstance.get({id: $rootScope.user._id}).$promise.then(function(user) {
+          vm.user = user;
+          vm.avatar = vm.user.genre ? "assets/images/avatars/avatar-5.png":"assets/images/avatars/avatar-2.png"
+          vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
+          vm.updateUser = updateUser;
+          vm.changePass = changePass;
+          delete vm.user.password;
+          loadData();
+      })
 
-        delete vm.user.password;
         function updateUser() {
           vm.loading = true;
           delete vm.user.password
@@ -29,6 +34,7 @@
           vm.user.$save().then(function(user) {
               toastr.success('Usuário alterado com sucesso.');
               vm.user = new UserInstance(user);
+              console.log("updated User", user);
               $rootScope.user = vm.user;
               vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
           }).catch(function(erro){
@@ -38,8 +44,7 @@
               loadData();
               delete vm.user.password
               delete vm.user.confirm
-              vm.loading = false;
-          });
+           });
 
         }
 
@@ -64,11 +69,14 @@
         //     vm.user.dateBirth = $filter('date')(  vm.user.dateBirth, "dd/MM/yyyy");
         //     $rootScope.user = vm.user;
         // });
-        loadData()
+
         function loadData() {
           LoadData.categories.query().$promise.then(function(categories) {
               vm.categories = categories;
               vm.user['category'] = $filter('filter')(categories, {_id:vm.user['category']})[0];
+              console.log("User>>" , vm.user)
+              console.log("categoriess>>" , categories)
+              console.log("category>>" ,vm.user['category'])
           });
 
            LoadData.clubs.query().$promise.then(function(clubs) {
@@ -86,6 +94,7 @@
          LoadData.states.query().$promise.then(function(states){
             vm.states = states
             vm.user['uf'] = $filter('filter')(states, {UF:vm.user['uf']})[0];
+            console.log("UFFFF>>" ,vm.user['uf'])
           });
         }
     }
